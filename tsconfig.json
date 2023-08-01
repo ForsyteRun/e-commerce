@@ -24,6 +24,9 @@
   "include": [
     ".eslintrc.cjs",
     "vite.config.ts",
+    "babel.config.cjs",
+    "setup-jest.ts",
+    "jest.config.ts",
     "src"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
