@@ -23,9 +23,7 @@
     "noImplicitAny": true
   },
   "include": [
-    ".eslintrc.cjs",
     "vite.config.ts",
-    ".babelrc.cjs",
     "setup-jest.ts",
     "jest.config.ts",
     "src"
