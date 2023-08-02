@@ -25,7 +25,7 @@
   "include": [
     ".eslintrc.cjs",
     "vite.config.ts",
-    "babel.config.cjs",
+    ".babelrc.cjs",
     "setup-jest.ts",
     "jest.config.ts",
     "src"
