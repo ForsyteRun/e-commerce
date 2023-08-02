@@ -12,7 +12,9 @@
     "format:check": "prettier . --check",
     "format:fix": "prettier . --write",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest --config ./jest.config.ts",
+    "test:coverage": "jest --coverage --config ./jest.config.ts",
+    "test:watch": "jest --watch --config ./jest.config.ts"
   },
   "dependencies": {
     "react": "^18.2.0",

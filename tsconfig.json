@@ -26,7 +26,7 @@
     "vite.config.ts",
     "babel.config.cjs",
     "setup-jest.ts",
-    "jest.config.ts",
+    "jest.config.js",
     "src"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
