@@ -6,6 +6,8 @@
 
   Reorganized the codebase into separate modules, where each module focuses on a specific functionality or feature.
   Each module resides in its own directory, containing the necessary files and resources related to that module.
+
+  Remove .gitkeep after using directory
   
 ## Reasons for Changes
 
