@@ -1,15 +1,18 @@
 ## Task link
   
-  [link to the task]
+  https://github.com/rolling-scopes-school/tasks/blob/master/tasks/eCommerce-Application/Sprints/Sprint1/RSS-ECOMM-1_02.md
 
 ## Description of Changes
 
-  [Briefly describe what has been done in this Pull Request]
+  Reorganized the codebase into separate modules, where each module focuses on a specific functionality or feature.
+  Each module resides in its own directory, containing the necessary files and resources related to that module.
+
+  Remove .gitkeep after using directory
   
 ## Reasons for Changes
 
-  [Briefly explain why these changes are necessary]
+  The goal was to improve code maintainability, reusability, and readability by breaking down our application into smaller, modular pieces.
 
 ## Additional Information
 
-  [Any additional information you want to add]
+  The modular architecture provides a solid foundation for future expansions and ensures a more organized development process. It also fosters collaboration among developers, as they can work independently on different modules without interfering with each other's code. As a result, our application becomes more scalable and adaptable to changes, offering a better experience for both developers and end-users.
