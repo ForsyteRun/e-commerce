@@ -17,17 +17,16 @@ The ultimate objective is to create a fully functional and aesthetically pleasin
 
 ## Built With
 - [React](https://react.dev)
-- [Vite](https://vitejs.dev)
-- [Redux](https://redux.js.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Jest](https://jestjs.io/ru/)
-- [SASS](https://sass-lang.com)
-- [Husky](https://typicode.github.io/husky/)
 - [CommersTools](https://commercetools.com)
+- [TypeScript](https://www.typescriptlang.org)
+- [Redux](https://redux.js.org)
+- [Vite](https://vitejs.dev)
+- [SASS](https://sass-lang.com)
+- [Jest](https://jestjs.io/ru/)
 
 ## Features
 - Product Catalog: Browse through a wide range of products with detailed descriptions and images.
-- Product Search: Search for specific products by name, category, or keywords.
+- Product Search: Search for specific products by name or keywords.
 - User Authentication: Allow users to sign up, sign in, and manage their accounts securely.
 - Shopping Cart: Add products to the cart, adjust quantities, and proceed to checkout.
 
