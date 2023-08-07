@@ -16,13 +16,13 @@ The project aims to implement a responsive design, ensuring optimal viewing and 
 The ultimate objective is to create a fully functional and aesthetically pleasing e-commerce platform that offers a wide variety of products, exceptional user experience, and innovative features
 
 ## Built With
-- [React](https://react.dev)
-- [CommersTools](https://commercetools.com)
-- [TypeScript](https://www.typescriptlang.org)
-- [Redux](https://redux.js.org)
-- [Vite](https://vitejs.dev)
-- [SASS](https://sass-lang.com)
-- [Jest](https://jestjs.io/ru/)
+- ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+- ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+- ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+- ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+- ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
+- ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
+- [CommerceTools](https://commercetools.com)
 
 ## Features
 - Product Catalog: Browse through a wide range of products with detailed descriptions and images.
