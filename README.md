@@ -29,7 +29,7 @@ The ultimate objective is to create a fully functional and aesthetically pleasin
 - Product Search: Search for specific products by name or keywords.
 - User Authentication: Allow users to sign up, sign in, and manage their accounts securely.
 - Shopping Cart: Add products to the cart, adjust quantities, and proceed to checkout.
-=======
+  
 ## Set up and run project locally
 To set up and run project locally you need to clone repository from `develop` branch, install all dependencies:  
 With NPM:  
