@@ -29,6 +29,21 @@ The ultimate objective is to create a fully functional and aesthetically pleasin
 - Product Search: Search for specific products by name or keywords.
 - User Authentication: Allow users to sign up, sign in, and manage their accounts securely.
 - Shopping Cart: Add products to the cart, adjust quantities, and proceed to checkout.
+=======
+## Set up and run project locally
+To set up and run project locally you need to clone repository from `develop` branch, install all dependencies:  
+With NPM:  
+```
+npm install
+```
+With Yarn:  
+```
+yarn install
+```
+
+After all dependencies will be installed, run `prepare` script once to prepare `husky` hooks.  
+Now you can run application locally, using `start` script, or build production (`build`) or development (`build:dev`) builds and run them using `preview` script.  
+Info about all available scripts you can see below.
 
 ## Scripts usage
 ### Common application scripts
