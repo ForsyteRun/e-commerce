@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Formik, Form, Field } from 'formik';
 import s from './registration.module.scss';
+import Select from '../select/select';
 
 function validateEmail(value: string) {
   let error;
@@ -106,35 +107,7 @@ function Registration() {
                 <div className={s.errorValid}>{errors.password}</div>
               )}
             </div>
-            <div className={s.select__container}>
-              <Field
-                as="select"
-                name="date"
-                onChange={(e: string) => console.log(e)}
-                className={s.select}
-              >
-                <option value="">1</option>
-                <option value="">2</option>
-              </Field>
-              <Field
-                as="select"
-                name="month"
-                onChange={(e: string) => console.log(e)}
-                className={s.select}
-              >
-                <option value="">1</option>
-                <option value="">2</option>
-              </Field>
-              <Field
-                as="select"
-                name="year"
-                onChange={(e: string) => console.log(e)}
-                className={s.select}
-              >
-                <option value="">1</option>
-                <option value="">2</option>
-              </Field>
-            </div>
+            <Select />
             <button type="submit">Submit</button>
           </Form>
         )}
