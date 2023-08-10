@@ -108,7 +108,7 @@ function Registration() {
               )}
             </div>
             <Select />
-            <button type="submit">Submit</button>
+            <button type="submit">Register</button>
           </Form>
         )}
       </Formik>
