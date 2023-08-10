@@ -2,16 +2,27 @@
   background-color: #5e96fc;
   border-radius: 10px;
   color: #fff;
-  cursor: pointer;
-  font-weight: 700;
-  margin-top: 1rem;
-  padding: 0.75rem;
+  cursor: pointer;  
+  display: inline-block;
+  padding: 0.625rem;
   text-decoration: none;
   transition: background-color 200ms linear;
+  width: fit-content;
 
   @media (hover: hover) {
     &:hover {
       background-color: #256df3;
+    }
+  }
+
+  &_active {
+    background-color: #9cbdfa;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: #9fb9eb;
+        cursor: default;
+      }
     }
   }
 }
