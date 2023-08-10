@@ -1,0 +1,15 @@
+.select {
+  height: 40px;
+  flex-grow: 1;
+  border-radius: 7px;
+  &__container {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
