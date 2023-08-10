@@ -1,0 +1,21 @@
+@use './../../styles/global.scss';
+
+.routingError,
+.oops {
+  user-select: none;
+}
+
+.routingError {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.oops {
+  font-size: 4rem;
+  margin: 0;
+  margin-bottom: 1rem;
+}

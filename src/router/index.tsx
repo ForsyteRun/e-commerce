@@ -1,11 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
+import RoutingError from '../pages/RoutingError';
 import { PathNames } from '../types';
 
 const router = createBrowserRouter([
   {
     path: PathNames.index,
-    errorElement: <h2>Something went wrong</h2>,
+    errorElement: <RoutingError />,
     element: <App />,
     children: [
       {
