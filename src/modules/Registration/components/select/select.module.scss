@@ -3,6 +3,9 @@
   flex-grow: 1;
   border-radius: 7px;
   &__container {
+    height: 100px;
+  }
+  &__options {
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -12,4 +15,8 @@
     font-size: 16px;
     font-weight: 600;
   }
+}
+
+.errorValid {
+  color: red;
 }
