@@ -1,47 +1,11 @@
 import { Field } from 'formik';
-import s from './select.module.scss';
 import { END_DAYS, END_YEAR, START_DAYS, START_YEAR } from '../../constants';
-
-const getDays = (startDays: number, endDays: number): number[] => {
-  const days: number[] = [];
-
-  for (let i = startDays; i <= endDays; i += 1) {
-    days.push(i);
-  }
-
-  return days;
-};
-
-const getMonths = (): string[] => {
-  return [
-    'Январь',
-    'Февраль',
-    'Март',
-    'Апрель',
-    'Май',
-    'Июнь',
-    'Июль',
-    'Август',
-    'Сентябрь',
-    'Октябрь',
-    'Ноябрь',
-    'Декабрь',
-  ];
-};
-
-const getYears = (startYear: number, endYear: number) => {
-  const years: number[] = [];
-
-  for (let year = startYear; year <= endYear; year += 1) {
-    years.push(year);
-  }
-
-  return years;
-};
+import s from './select.module.scss';
+import { getDays, getMonths, getYears } from './helpers';
 
 function Select() {
-  const daysArray = getDays(START_DAYS, END_DAYS);
-  const yearsArray = getYears(START_YEAR, END_YEAR);
+  const daysArray = getDays<number>(START_DAYS, END_DAYS);
+  const yearsArray = getYears<number>(START_YEAR, END_YEAR);
   const monthsArray = getMonths();
 
   return (
@@ -51,7 +15,9 @@ function Select() {
         <Field
           as="select"
           name="date"
-          onChange={(e: string) => console.log(e)}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            console.log(e.target.value)
+          }
           className={s.select}
         >
           {daysArray.map((day: number) => (
