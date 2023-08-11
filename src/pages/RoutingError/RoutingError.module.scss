@@ -8,9 +8,10 @@
 .routingError {
   align-items: center;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  height: 100%;
   justify-content: center;
-  height: 100vh;
   text-align: center;
 }
 
