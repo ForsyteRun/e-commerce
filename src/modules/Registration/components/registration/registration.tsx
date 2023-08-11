@@ -3,43 +3,38 @@ import { Formik, Form, Field } from 'formik';
 import s from './registration.module.scss';
 import Select from '../select/select';
 
-function validateEmail(value: string) {
+const validateEmail = (value: string): string | undefined => {
   let error;
   if (!value) {
     error = 'Required';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    error = 'Invalid firstName address';
+    error = 'Invalid Email';
   }
   return error;
-}
+};
 
-function validateFirstName(value: string) {
+const validateName = (name: string): string | undefined => {
   let error;
-  if (!value) {
-    error = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    error = 'Invalid firstName address';
-  }
-  return error;
-}
-
-function validateLastName(value: string) {
-  let error;
-  if (!value) {
-    error = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    error = 'Invalid firstName address';
-  }
-  return error;
-}
-
-function validatePassword(value: string) {
-  let error;
-  if (!value) {
+  if (name.trim() === '') {
     error = 'Required';
   }
+
   return error;
-}
+};
+
+const validatePassword = (password: string): string | undefined => {
+  let error;
+  if (password.length < 8) {
+    error = 'Min length 8 items';
+  }
+
+  const hasNumber = /\d/.test(password);
+  if (!hasNumber) {
+    error = 'You need at least one number';
+  }
+
+  return error;
+};
 
 function Registration() {
   return (
@@ -62,7 +57,7 @@ function Registration() {
               </label>
               <Field
                 name="firstName"
-                validate={validateFirstName}
+                validate={validateName}
                 className={s.input}
                 placeholder="First Name*"
               />
@@ -74,7 +69,7 @@ function Registration() {
               <label htmlFor="lastName">LastName</label>
               <Field
                 name="lastName"
-                validate={validateLastName}
+                validate={validateName}
                 placeholder="Last Name*"
                 className={s.input}
               />
