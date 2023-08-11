@@ -2,52 +2,27 @@
 import { Formik, Form, Field } from 'formik';
 import s from './registration.module.scss';
 import Select from '../select/select';
+import { validateEmail, validateName, validatePassword } from './validation';
+import { InitialValue } from './types';
+import { START_DAYS, START_YEAR, allMonths } from '../../constants';
 
-const validateEmail = (value: string): string | undefined => {
-  let error;
-  if (!value) {
-    error = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    error = 'Invalid Email';
-  }
-  return error;
-};
-
-const validateName = (name: string): string | undefined => {
-  let error;
-  if (name.trim() === '') {
-    error = 'Required';
-  }
-
-  return error;
-};
-
-const validatePassword = (password: string): string | undefined => {
-  let error;
-  if (password.length < 8) {
-    error = 'Min length 8 items';
-  }
-
-  const hasNumber = /\d/.test(password);
-  if (!hasNumber) {
-    error = 'You need at least one number';
-  }
-
-  return error;
+const initialValues: InitialValue = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  date: START_DAYS.toString(),
+  month: allMonths[0],
+  year: START_YEAR.toString(),
 };
 
 function Registration() {
   return (
     <div className={s.register}>
       <h2 className={s.title}>I’m new here</h2>
-      <Formik
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          email: '',
-          password: '',
-        }}
-        onSubmit={(values) => console.log(values)}
+      <Formik<InitialValue>
+        initialValues={initialValues}
+        onSubmit={(value: InitialValue) => console.log(value)}
       >
         {({ errors, touched }) => (
           <Form method="post" action="register" className={s.form}>
