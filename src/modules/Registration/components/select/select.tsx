@@ -22,16 +22,7 @@ function Select(): JSX.Element {
   // TODO: s -> styles
   // TODO: remove BEM
   // TODO: remove /* eslint-disable jsx-a11y/label-has-associated-control */ in registr
-  const changeDate = (value: string) => {
-    formikProps.setFieldValue('date', value);
-  };
-  const changeMonth = (value: string) => {
-    formikProps.setFieldValue('month', value);
-  };
-  const changeYear = (value: string) => {
-    formikProps.setFieldValue('year', value);
-    getClick();
-  };
+  // TODO: remove validateYear to another file
 
   const validateYear = (year: number): string | undefined => {
     let error;
@@ -51,7 +42,7 @@ function Select(): JSX.Element {
           as="select"
           name="date"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            changeDate(e.target.value)
+            formikProps.setFieldValue('date', e.target.value)
           }
           className={s.select}
         >
@@ -65,7 +56,7 @@ function Select(): JSX.Element {
           as="select"
           name="month"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            changeMonth(e.target.value)
+            formikProps.setFieldValue('month', e.target.value)
           }
           className={s.select}
         >
@@ -78,9 +69,10 @@ function Select(): JSX.Element {
         <Field
           as="select"
           name="year"
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            changeYear(e.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+            formikProps.setFieldValue('year', e.target.value);
+            getClick();
+          }}
           validate={validateYear}
           className={s.select}
         >
