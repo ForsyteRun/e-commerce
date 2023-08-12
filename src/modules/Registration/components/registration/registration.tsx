@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Formik, Form, Field } from 'formik';
 import s from './registration.module.scss';
-import Select from '../select/select';
 import { validateEmail, validateName, validatePassword } from './validation';
 import { InitialValue } from './types';
 import { START_DAYS, START_YEAR, allMonths } from '../../constants';
+import Adress from '../adress/adress';
+import Select from '../select/select';
 
 const initialValues: InitialValue = {
   firstName: '',
@@ -78,6 +79,7 @@ function Registration(): JSX.Element {
               )}
             </div>
             <Select />
+            <Adress />
             <button type="submit">Register</button>
           </Form>
         )}
