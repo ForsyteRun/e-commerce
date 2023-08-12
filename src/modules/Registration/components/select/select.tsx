@@ -1,5 +1,5 @@
 import { Field, FormikValues, useFormikContext } from 'formik';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import {
   AVAILABLE_AGE,
   END_DAYS,
@@ -7,10 +7,7 @@ import {
   START_DAYS,
   START_YEAR,
   allMonths,
-  setEndDaysByFebruary,
 } from '../../constants';
-import { getClick, getDays, getYears } from './helpers';
-import s from './select.module.scss';
 import {
   IS_LEAP_YEAR,
   MIDDLE_OF_THE_YEAR,
@@ -19,33 +16,16 @@ import {
   ODER_LEAP_YEAR_HUNDRED,
   setLeapYear,
 } from './constants';
+import { getClick, getDays, getYears } from './helpers';
+import s from './select.module.scss';
+
+let daysArray: number[];
 
 function Select(): JSX.Element {
   const formikProps = useFormikContext<FormikValues>();
 
-  const [shortMonth, setShortMonth] = useState(false);
-  // const [finishDays, setFinishDays] = useState<number[]>([]);
-  // const [isLeapFebruary, setIsLeapFebruary] = useState(false);
-
   const days = getDays<number>(START_DAYS, END_DAYS);
   const yearsArray = getYears<number>(START_YEAR, END_YEAR);
-
-  // useEffect(() => {
-  //   const startIndex = 0;
-  //   const endIndex = days.length - 1;
-
-  //   const daysArray = days.slice(startIndex, endIndex);
-  //   setFinishDays(daysArray);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [shortMonth]);
-  // useEffect(() => {}, [isLeapFebruary]);
-  // TODO: scss to REM & mixins
-  // TODO: s -> styles
-  // TODO: remove BEM
-  // TODO: remove /* eslint-disable jsx-a11y/label-has-associated-control */ in registr
-  // TODO: remove validateYear to another file
-  // TODO: make Country as select
-  // TODO: validate fn to separete files
 
   const validateYear = (year: number): string | undefined => {
     let error;
@@ -67,30 +47,31 @@ function Select(): JSX.Element {
   };
 
   const getShortMonth = (value: string): void => {
-    let isShortMonth = false;
-    // const isLeapFebruary = false;
-
     const index = allMonths.indexOf(value);
 
-    if (index === 1 && IS_LEAP_YEAR) {
-      // setIsLeapFebruary(true);
-      return;
-      // setEndDaysByFebruary(3);
-      // isLeapFebruary = true;
-    }
-    if (index === 1) {
-      // setIsLeapFebruary(false);
-      return;
-      // setEndDaysByFebruary(2);
-      // isLeapFebruary = false;
-    }
-    if (index + 1 > MIDDLE_OF_THE_YEAR) {
-      isShortMonth = (index + 1) % 2 !== 0;
-    } else {
-      isShortMonth = (index + 1) % 2 === 0;
-    }
-
-    setShortMonth(isShortMonth);
+    do {
+      if (index === 1 && IS_LEAP_YEAR) {
+        daysArray = days.slice(0, days.length - 3);
+        break;
+      } else if (index === 1) {
+        daysArray = days.slice(0, days.length - 2);
+        break;
+      } else if ((index + 1) % 2 !== 0) {
+        if (index + 1 <= MIDDLE_OF_THE_YEAR) {
+          daysArray = days.slice(0, days.length);
+        } else {
+          daysArray = days.slice(0, days.length - 1);
+        }
+        break;
+      } else if ((index + 1) % 2 === 0) {
+        if (index + 1 <= MIDDLE_OF_THE_YEAR) {
+          daysArray = days.slice(0, days.length - 1);
+        } else {
+          daysArray = days.slice(0, days.length);
+        }
+        break;
+      }
+    } while (false);
   };
 
   return (
@@ -105,17 +86,17 @@ function Select(): JSX.Element {
           }
           className={s.select}
         >
-          {days.map((day: number) =>
-            shortMonth ? (
-              <option value={+day - 1} key={day}>
-                {+day - 1}
-              </option>
-            ) : (
-              <option value={day} key={day}>
-                {day}
-              </option>
-            )
-          )}
+          {daysArray
+            ? daysArray.map((day: number) => (
+                <option value={day} key={day}>
+                  {day}
+                </option>
+              ))
+            : days.map((day: number) => (
+                <option value={day} key={day}>
+                  {day}
+                </option>
+              ))}
         </Field>
         <Field
           as="select"
