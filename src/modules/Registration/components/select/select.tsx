@@ -1,5 +1,5 @@
 import { Field, FormikValues, useFormikContext } from 'formik';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import {
   AVAILABLE_AGE,
   END_DAYS,
@@ -10,9 +10,17 @@ import {
 } from '../../constants';
 import { getClick, getDays, getYears } from './helpers';
 import s from './select.module.scss';
+import {
+  ODER_LEAP_YEAR_FOUR,
+  ODER_LEAP_YEAR_FOUR_HUNDRED,
+  ODER_LEAP_YEAR_HUNDRED,
+  setLeapYear,
+} from './constants';
 
 function Select(): JSX.Element {
   const formikProps = useFormikContext<FormikValues>();
+
+  const [shortMonth, setShortMonth] = useState(false);
 
   const daysArray = getDays<number>(START_DAYS, END_DAYS);
   const yearsArray = getYears<number>(START_YEAR, END_YEAR);
@@ -23,15 +31,34 @@ function Select(): JSX.Element {
   // TODO: remove /* eslint-disable jsx-a11y/label-has-associated-control */ in registr
   // TODO: remove validateYear to another file
   // TODO: make Country as select
+  // TODO: validate fn to separete files
 
   const validateYear = (year: number): string | undefined => {
     let error;
+
+    if (
+      (year % ODER_LEAP_YEAR_FOUR === 0 &&
+        year % ODER_LEAP_YEAR_HUNDRED !== 0) ||
+      year % ODER_LEAP_YEAR_FOUR_HUNDRED === 0
+    ) {
+      setLeapYear(true);
+    }
+
     if (year > AVAILABLE_AGE) {
       error = 'You are too young';
       formikProps.setFieldError('year', error);
     }
 
     return error;
+  };
+
+  const getShortMonth = (value: string): void => {
+    let IS_SHORT_MONTH = false;
+
+    const index = allMonths.indexOf(value);
+    IS_SHORT_MONTH = index !== -1 && index % 2 === 0;
+
+    setShortMonth(IS_SHORT_MONTH);
   };
 
   return (
@@ -46,18 +73,25 @@ function Select(): JSX.Element {
           }
           className={s.select}
         >
-          {daysArray.map((day: number) => (
-            <option value={day} key={day}>
-              {day}
-            </option>
-          ))}
+          {daysArray.map((day: number) =>
+            shortMonth ? (
+              <option value={+day - 1} key={day}>
+                {+day - 1}
+              </option>
+            ) : (
+              <option value={day} key={day}>
+                {day}
+              </option>
+            )
+          )}
         </Field>
         <Field
           as="select"
           name="month"
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            formikProps.setFieldValue('month', e.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+            formikProps.setFieldValue('month', e.target.value);
+            getShortMonth(e.target.value);
+          }}
           className={s.select}
         >
           {allMonths.map((month: string) => (
