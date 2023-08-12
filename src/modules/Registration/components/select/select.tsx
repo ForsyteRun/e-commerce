@@ -18,11 +18,11 @@ function Select(): JSX.Element {
   const yearsArray = getYears<number>(START_YEAR, END_YEAR);
 
   // TODO: scss to REM & mixins
-  // TODO: dry
   // TODO: s -> styles
   // TODO: remove BEM
   // TODO: remove /* eslint-disable jsx-a11y/label-has-associated-control */ in registr
   // TODO: remove validateYear to another file
+  // TODO: make Country as select
 
   const validateYear = (year: number): string | undefined => {
     let error;
