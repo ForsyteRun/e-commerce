@@ -1,3 +1,3 @@
-import Registration from './components/registration/Registration';
+import Registration from './components/registration/registration';
 
 export default Registration;
