@@ -4,8 +4,8 @@ import s from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
 import { InitialValue } from './types';
 import { START_DAYS, START_YEAR, allMonths } from '../../constants';
-import Select from '../select/Select';
 import Adress from '../adress/Adress';
+import Select from '../select/select';
 
 const initialValues: InitialValue = {
   firstName: '',
