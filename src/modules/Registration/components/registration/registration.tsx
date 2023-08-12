@@ -4,8 +4,8 @@ import s from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
 import { InitialValue } from './types';
 import { START_DAYS, START_YEAR, allMonths } from '../../constants';
-import Adress from '../adress/adress';
-import Select from '../select/select';
+import Select from '../select/Select';
+import Adress from '../adress/Adress';
 
 const initialValues: InitialValue = {
   firstName: '',
@@ -15,6 +15,10 @@ const initialValues: InitialValue = {
   date: START_DAYS.toString(),
   month: allMonths[0],
   year: START_YEAR.toString(),
+  country: '',
+  city: '',
+  street: '',
+  postCode: '',
 };
 
 function Registration(): JSX.Element {

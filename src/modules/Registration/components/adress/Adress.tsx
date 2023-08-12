@@ -1,66 +1,74 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Field } from 'formik';
+import { Field, FormikValues, useFormikContext } from 'formik';
+import { ReactNode } from 'react';
 import style from './adress.module.scss';
-import validateAdress from './validation';
+import {
+  validateCity,
+  validateCountry,
+  validatePostCode,
+  validateStreet,
+} from './validation';
 
 function Adress(): JSX.Element {
+  const { errors, touched } = useFormikContext<FormikValues>();
+
   return (
     <div className={style.container}>
       <div className={style.input__container}>
-        <label htmlFor="City" className={style.label}>
+        <label htmlFor="city" className={style.label}>
           City
         </label>
         <Field
-          name="City"
-          validate={validateAdress}
+          name="city"
+          validate={validateCity}
           placeholder="City*"
           className={style.input}
         />
-        {/* {errors.lastName && touched.lastName && (
-        <div className={s.errorValid}>{errors.lastName}</div>
-      )} */}
+        {errors.city && touched.city && (
+          <div className={style.errorValid}>{errors.city as ReactNode}</div>
+        )}
       </div>
       <div className={style.input__container}>
-        <label htmlFor="Street" className={style.label}>
+        <label htmlFor="street" className={style.label}>
           Street
         </label>
         <Field
-          name="Street"
-          validate={validateAdress}
+          name="street"
+          validate={validateStreet}
           placeholder="Street*"
           className={style.input}
         />
-        {/* {errors.lastName && touched.lastName && (
-        <div className={s.errorValid}>{errors.lastName}</div>
-      )} */}
+        {errors.street && touched.street && (
+          <div className={style.errorValid}>{errors.street as ReactNode}</div>
+        )}
       </div>
       <div className={style.input__container}>
-        <label htmlFor="Country" className={style.label}>
+        <label htmlFor="country" className={style.label}>
           Country
         </label>
         <Field
-          name="Country"
-          validate={validateAdress}
+          name="country"
+          validate={validateCountry}
           placeholder="Country*"
           className={style.input}
         />
-        {/* {errors.lastName && touched.lastName && (
-        <div className={s.errorValid}>{errors.lastName}</div>
-      )} */}
+        {errors.country && touched.country && (
+          <div className={style.errorValid}>{errors.country as ReactNode}</div>
+        )}
       </div>
       <div className={style.input__container}>
-        <label htmlFor="PostCode" className={style.label}>
+        <label htmlFor="postCode" className={style.label}>
           PostCode
         </label>
         <Field
-          name="PostCode"
-          validate={validateAdress}
+          name="postCode"
+          validate={validatePostCode}
           placeholder="PostCode*"
           className={style.input}
         />
-        {/* {errors.lastName && touched.lastName && (
-        <div className={s.errorValid}>{errors.lastName}</div>
-      )} */}
+        {errors.postCode && touched.postCode && (
+          <div className={style.errorValid}>{errors.postCode as ReactNode}</div>
+        )}
       </div>
     </div>
   );

@@ -6,4 +6,8 @@ export interface InitialValue {
   date: string;
   month: string;
   year: string;
+  country: string;
+  city: string;
+  street: string;
+  postCode: string;
 }
