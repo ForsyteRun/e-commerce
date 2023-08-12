@@ -8,15 +8,9 @@ import {
   START_YEAR,
   allMonths,
 } from '../../constants';
-import {
-  IS_LEAP_YEAR,
-  MIDDLE_OF_THE_YEAR,
-  ODER_LEAP_YEAR_FOUR,
-  ODER_LEAP_YEAR_FOUR_HUNDRED,
-  ODER_LEAP_YEAR_HUNDRED,
-  setLeapYear,
-} from './constants';
+import { IS_LEAP_YEAR, MIDDLE_OF_THE_YEAR, setLeapYear } from './constants';
 import { getClick, getDays, getYears } from './helpers';
+import checkLeapYear from './helpers/checkLeapYear/checkLeapYear';
 import s from './select.module.scss';
 
 let daysArray: number[];
@@ -28,18 +22,12 @@ function Select(): JSX.Element {
   const days = getDays<number>(START_DAYS, END_DAYS);
   const yearsArray = getYears<number>(START_YEAR, END_YEAR);
 
+  // TODO:how export formikProps?
   const validateYear = (value: number): string | undefined => {
     let error;
 
-    if (
-      (value % ODER_LEAP_YEAR_FOUR === 0 &&
-        value % ODER_LEAP_YEAR_HUNDRED !== 0) ||
-      value % ODER_LEAP_YEAR_FOUR_HUNDRED === 0
-    ) {
-      setLeapYear(true);
-    } else {
-      setLeapYear(false);
-    }
+    const isLeapYear = checkLeapYear(Number(value));
+    setLeapYear(isLeapYear);
 
     if (value > AVAILABLE_AGE) {
       error = 'You are too young';
@@ -51,30 +39,17 @@ function Select(): JSX.Element {
 
   const getShortMonth = (value: string): void => {
     const index = allMonths.indexOf(value);
+    let daysToRemove = 0;
 
-    do {
-      if (index === 1 && IS_LEAP_YEAR) {
-        daysArray = days.slice(0, days.length - 3);
-        break;
-      } else if (index === 1) {
-        daysArray = days.slice(0, days.length - 2);
-        break;
-      } else if ((index + 1) % 2 !== 0) {
-        if (index + 1 <= MIDDLE_OF_THE_YEAR) {
-          daysArray = days.slice(0, days.length);
-        } else {
-          daysArray = days.slice(0, days.length - 1);
-        }
-        break;
-      } else if ((index + 1) % 2 === 0) {
-        if (index + 1 <= MIDDLE_OF_THE_YEAR) {
-          daysArray = days.slice(0, days.length - 1);
-        } else {
-          daysArray = days.slice(0, days.length);
-        }
-        break;
-      }
-    } while (false);
+    if (index === 1) {
+      daysToRemove = IS_LEAP_YEAR ? 2 : 3;
+    } else if ((index + 1) % 2 !== 0) {
+      daysToRemove = index + 1 <= MIDDLE_OF_THE_YEAR ? 0 : 1;
+    } else {
+      daysToRemove = index + 1 <= MIDDLE_OF_THE_YEAR ? 1 : 0;
+    }
+
+    daysArray = days.slice(0, days.length - daysToRemove);
   };
 
   useEffect(() => {
