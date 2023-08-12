@@ -1,8 +1,13 @@
 export const START_DAYS = 1;
-export const END_DAYS = 31;
+// eslint-disable-next-line import/no-mutable-exports
+export let END_DAYS = 31;
 export const START_YEAR = 1905;
 export const END_YEAR = 2023;
 export const AVAILABLE_AGE = 2010;
+
+export const setEndDaysByFebruary = (days: number) => {
+  END_DAYS = -days;
+};
 
 export const allMonths = [
   'January',
