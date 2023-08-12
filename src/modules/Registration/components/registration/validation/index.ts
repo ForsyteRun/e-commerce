@@ -28,6 +28,16 @@ const validatePassword = (password: string): string | undefined => {
     error = 'You need at least one number';
   }
 
+  const hasUppercase = /[A-Z]/.test(password);
+  if (!hasUppercase) {
+    error = 'You need at least one uppercase letter';
+  }
+
+  const hasLowercase = /[a-z]/.test(password);
+  if (!hasLowercase) {
+    error = 'You need at least one lowercase letter';
+  }
+
   return error;
 };
 
