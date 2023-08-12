@@ -16,7 +16,7 @@ const initialValues: InitialValue = {
   year: START_YEAR.toString(),
 };
 
-function Registration() {
+function Registration(): JSX.Element {
   return (
     <div className={s.register}>
       <h2 className={s.title}>I’m new here</h2>

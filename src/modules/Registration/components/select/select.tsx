@@ -35,7 +35,7 @@ function Select(): JSX.Element {
 
   const validateYear = (year: number): string | undefined => {
     let error;
-    if (year < AVAILABLE_AGE) {
+    if (year > AVAILABLE_AGE) {
       error = 'You are too young';
       formikProps.setFieldError('year', error);
     }
