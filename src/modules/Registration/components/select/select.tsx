@@ -8,7 +8,7 @@ import {
   START_YEAR,
   allMonths,
 } from '../../constants';
-import { getDays, getYears } from './helpers';
+import { getClick, getDays, getYears } from './helpers';
 import s from './select.module.scss';
 
 function Select(): JSX.Element {
@@ -30,6 +30,7 @@ function Select(): JSX.Element {
   };
   const changeYear = (value: string) => {
     formikProps.setFieldValue('year', value);
+    getClick();
   };
 
   const validateYear = (year: number): string | undefined => {
