@@ -1,5 +1,5 @@
 import { Field, FormikValues, useFormikContext } from 'formik';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import {
   AVAILABLE_AGE,
   END_DAYS,
@@ -23,22 +23,25 @@ let daysArray: number[];
 
 function Select(): JSX.Element {
   const formikProps = useFormikContext<FormikValues>();
+  const { month, year } = formikProps.values;
 
   const days = getDays<number>(START_DAYS, END_DAYS);
   const yearsArray = getYears<number>(START_YEAR, END_YEAR);
 
-  const validateYear = (year: number): string | undefined => {
+  const validateYear = (value: number): string | undefined => {
     let error;
 
     if (
-      (year % ODER_LEAP_YEAR_FOUR === 0 &&
-        year % ODER_LEAP_YEAR_HUNDRED !== 0) ||
-      year % ODER_LEAP_YEAR_FOUR_HUNDRED === 0
+      (value % ODER_LEAP_YEAR_FOUR === 0 &&
+        value % ODER_LEAP_YEAR_HUNDRED !== 0) ||
+      value % ODER_LEAP_YEAR_FOUR_HUNDRED === 0
     ) {
       setLeapYear(true);
+    } else {
+      setLeapYear(false);
     }
 
-    if (year > AVAILABLE_AGE) {
+    if (value > AVAILABLE_AGE) {
       error = 'You are too young';
       formikProps.setFieldError('year', error);
     }
@@ -74,6 +77,11 @@ function Select(): JSX.Element {
     } while (false);
   };
 
+  useEffect(() => {
+    getShortMonth(month);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [month, year]);
+
   return (
     <div className={s.select__container}>
       <div className={s.select__title}>Date of Birth</div>
@@ -107,9 +115,9 @@ function Select(): JSX.Element {
           }}
           className={s.select}
         >
-          {allMonths.map((month: string) => (
-            <option value={month} key={month}>
-              {month}
+          {allMonths.map((value: string) => (
+            <option value={value} key={value}>
+              {value}
             </option>
           ))}
         </Field>
@@ -123,9 +131,9 @@ function Select(): JSX.Element {
           validate={validateYear}
           className={s.select}
         >
-          {yearsArray.map((year: number) => (
-            <option value={year} key={year}>
-              {year}
+          {yearsArray.map((value: number) => (
+            <option value={value} key={value}>
+              {value}
             </option>
           ))}
         </Field>
