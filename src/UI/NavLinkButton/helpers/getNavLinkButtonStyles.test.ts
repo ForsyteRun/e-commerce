@@ -1,13 +1,13 @@
 import getNavLinkButtonStyles from './getNavLinkButtonStyles';
 
-test('Getting active styles', () => {
+test('Get active style', () => {
   const props = {
     isActive: true,
   };
-  expect(getNavLinkButtonStyles(props)).toBe('button button_active');
+  expect(getNavLinkButtonStyles(props)).toBe('button_active');
 });
 
-test('Getting not active styles', () => {
+test('Get not active style', () => {
   const props = {
     isActive: false,
   };
