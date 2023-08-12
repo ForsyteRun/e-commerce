@@ -5,13 +5,13 @@
   display: inline-block;
   padding: 0.625rem;
   text-decoration: none;
+  transition: background-color 200ms linear;
   width: fit-content;
 }
 
 .button {
   background-color: #5e96fc;
-  cursor: pointer;  
-  transition: background-color 200ms linear;
+  cursor: pointer;
 
   @media (hover: hover) {
     &:hover {
