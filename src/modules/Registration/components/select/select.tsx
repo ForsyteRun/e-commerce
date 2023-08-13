@@ -1,5 +1,5 @@
 import { Field, FormikValues, useFormikContext } from 'formik';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import {
   AVAILABLE_AGE,
   END_DAYS,
@@ -8,14 +8,15 @@ import {
   START_YEAR,
   allMonths,
 } from '../../constants';
-import { IS_LEAP_YEAR, MIDDLE_OF_THE_YEAR, setLeapYear } from './constants';
+import { setLeapYear } from './constants';
 import { getClick, getDays, getYears } from './helpers';
 import checkLeapYear from './helpers/checkLeapYear';
-import s from './select.module.scss';
-
-let daysArray: number[];
+import getDaysOfMonth from './helpers/getDaysOfMonth';
+import styles from './select.module.scss';
 
 function Select(): JSX.Element {
+  const [newDays, setNewDays] = useState<number[]>([]);
+
   const formikProps = useFormikContext<FormikValues>();
   const { month, year } = formikProps.values;
 
@@ -37,39 +38,28 @@ function Select(): JSX.Element {
     return error;
   };
 
-  const getDaysOfMonth = (value: string): void => {
-    const index = allMonths.indexOf(value);
-    let daysToRemove = 0;
-
-    if (index === 1) {
-      daysToRemove = IS_LEAP_YEAR ? 2 : 3;
-    } else if ((index + 1) % 2 !== 0) {
-      daysToRemove = index + 1 <= MIDDLE_OF_THE_YEAR ? 0 : 1;
-    } else {
-      daysToRemove = index + 1 <= MIDDLE_OF_THE_YEAR ? 1 : 0;
-    }
-
-    daysArray = days.slice(0, days.length - daysToRemove);
+  const changeDaysOfMonth = (value: string) => {
+    setNewDays(getDaysOfMonth(value, days));
   };
 
   useEffect(() => {
-    getDaysOfMonth(month);
+    setNewDays(getDaysOfMonth(month, days));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [month, year]);
 
   return (
-    <div className={s.select__container}>
-      <div className={s.select__title}>Date of Birth</div>
-      <div className={s.select__options}>
+    <div className={styles.select__container}>
+      <div className={styles.select__title}>Date of Birth</div>
+      <div className={styles.select__options}>
         <Field
           as="select"
           name="date"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
             formikProps.setFieldValue('date', e.target.value)
           }
-          className={s.select}
+          className={styles.select}
         >
-          {(daysArray || days).map((day: number) => (
+          {newDays.map((day: number) => (
             <option value={day} key={day}>
               {day}
             </option>
@@ -80,9 +70,9 @@ function Select(): JSX.Element {
           name="month"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             formikProps.setFieldValue('month', e.target.value);
-            getDaysOfMonth(e.target.value);
+            changeDaysOfMonth(e.target.value);
           }}
-          className={s.select}
+          className={styles.select}
         >
           {allMonths.map((value: string) => (
             <option value={value} key={value}>
@@ -98,7 +88,7 @@ function Select(): JSX.Element {
             getClick();
           }}
           validate={validateYear}
-          className={s.select}
+          className={styles.select}
         >
           {yearsArray.map((value: number) => (
             <option value={value} key={value}>
@@ -108,7 +98,7 @@ function Select(): JSX.Element {
         </Field>
       </div>
       {formikProps.errors.year && (
-        <div className={s.errorValid}>
+        <div className={styles.errorValid}>
           {formikProps.errors.year as ReactNode}
         </div>
       )}

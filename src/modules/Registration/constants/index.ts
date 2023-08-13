@@ -9,6 +9,11 @@ export const setEndDaysByFebruary = (days: number) => {
   END_DAYS = -days;
 };
 
+// export let COUNT_DAYS: number[] = [];
+// export const setCountDays = (arr: number[]) => {
+//   COUNT_DAYS = arr;
+// };
+
 export const allMonths = [
   'January',
   'February',

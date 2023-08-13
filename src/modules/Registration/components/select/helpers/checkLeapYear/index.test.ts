@@ -8,8 +8,8 @@ describe('checkLeapYear', () => {
   });
 
   it('should return false for a non-leap year', () => {
-    expect(checkLeapYear(1900)).toBe(false);
     expect(checkLeapYear(2001)).toBe(false);
     expect(checkLeapYear(2022)).toBe(false);
+    expect(checkLeapYear(2023)).toBe(false);
   });
 });

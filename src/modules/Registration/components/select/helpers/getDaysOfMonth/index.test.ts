@@ -1,15 +1,13 @@
-import checkLeapYear from '../checkLeapYear';
+import getDaysOfMonth from '.';
 
-describe('checkLeapYear', () => {
-  it('should return true for a leap year', () => {
-    expect(checkLeapYear(2000)).toBe(true);
-    expect(checkLeapYear(2004)).toBe(true);
-    expect(checkLeapYear(2020)).toBe(true);
-  });
+describe('getDaysOfMonth', () => {
+  it('number of days for a given month', () => {
+    const days = Array.from({ length: 31 }, (_, i) => i + 1);
+    const month = 'March';
+    const daysCount = 31;
 
-  it('should return false for a non-leap year', () => {
-    expect(checkLeapYear(1900)).toBe(false);
-    expect(checkLeapYear(2001)).toBe(false);
-    expect(checkLeapYear(2022)).toBe(false);
+    const daysOfMonth = getDaysOfMonth(month, days);
+
+    expect(daysOfMonth).toHaveLength(daysCount);
   });
 });
