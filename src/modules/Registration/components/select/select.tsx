@@ -69,17 +69,11 @@ function Select(): JSX.Element {
           }
           className={s.select}
         >
-          {daysArray
-            ? daysArray.map((day: number) => (
-                <option value={day} key={day}>
-                  {day}
-                </option>
-              ))
-            : days.map((day: number) => (
-                <option value={day} key={day}>
-                  {day}
-                </option>
-              ))}
+          {(daysArray || days).map((day: number) => (
+            <option value={day} key={day}>
+              {day}
+            </option>
+          ))}
         </Field>
         <Field
           as="select"
