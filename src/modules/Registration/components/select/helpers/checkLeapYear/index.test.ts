@@ -1,4 +1,4 @@
-import checkLeapYear from './checkLeapYear';
+import checkLeapYear from '.';
 
 describe('checkLeapYear', () => {
   it('should return true for a leap year', () => {

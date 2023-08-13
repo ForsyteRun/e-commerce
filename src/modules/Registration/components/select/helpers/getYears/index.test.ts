@@ -1,4 +1,4 @@
-import getYears from './getYears';
+import getYears from '.';
 
 describe('getYears test', () => {
   it('Years between startYears and endYears', () => {

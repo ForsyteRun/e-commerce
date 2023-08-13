@@ -10,7 +10,7 @@ import {
 } from '../../constants';
 import { IS_LEAP_YEAR, MIDDLE_OF_THE_YEAR, setLeapYear } from './constants';
 import { getClick, getDays, getYears } from './helpers';
-import checkLeapYear from './helpers/checkLeapYear/checkLeapYear';
+import checkLeapYear from './helpers/checkLeapYear';
 import s from './select.module.scss';
 
 let daysArray: number[];
@@ -37,7 +37,7 @@ function Select(): JSX.Element {
     return error;
   };
 
-  const getShortMonth = (value: string): void => {
+  const getDaysOfMonth = (value: string): void => {
     const index = allMonths.indexOf(value);
     let daysToRemove = 0;
 
@@ -53,7 +53,7 @@ function Select(): JSX.Element {
   };
 
   useEffect(() => {
-    getShortMonth(month);
+    getDaysOfMonth(month);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [month, year]);
 
@@ -86,7 +86,7 @@ function Select(): JSX.Element {
           name="month"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             formikProps.setFieldValue('month', e.target.value);
-            getShortMonth(e.target.value);
+            getDaysOfMonth(e.target.value);
           }}
           className={s.select}
         >

@@ -1,4 +1,4 @@
-import getClick from './getClick';
+import getClick from '.';
 
 describe('getClick', () => {
   it('dispatch click', () => {

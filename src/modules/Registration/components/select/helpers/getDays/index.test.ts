@@ -1,4 +1,4 @@
-import getDays from './getDays';
+import getDays from '.';
 
 describe('getDays test', () => {
   it('Days between startDays and endDays', () => {
