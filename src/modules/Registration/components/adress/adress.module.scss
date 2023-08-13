@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  padding-bottom: 10px;
 }
 
 .label {
@@ -15,7 +16,7 @@
   padding: 10px;
   &__container {
     flex-grow: 1;
-    height: 100px;
+    height: 90px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
