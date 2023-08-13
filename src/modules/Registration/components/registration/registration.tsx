@@ -6,6 +6,7 @@ import Select from '../select/select';
 import styles from './registration.module.scss';
 import { InitialValue } from './types';
 import { validateEmail, validateName, validatePassword } from './validation';
+import NavigateToLogin from '../../../../components/Header/components/NavigateToLogin';
 
 const initialValues: InitialValue = {
   firstName: '',
@@ -24,7 +25,6 @@ const initialValues: InitialValue = {
 function Registration(): JSX.Element {
   return (
     <div className={styles.register}>
-      <h2 className={styles.title}>I’m new here</h2>
       <Formik<InitialValue>
         initialValues={initialValues}
         onSubmit={(value: InitialValue) => console.log(value)}
@@ -88,6 +88,7 @@ function Registration(): JSX.Element {
           </Form>
         )}
       </Formik>
+      <NavigateToLogin />
     </div>
   );
 }
