@@ -5,9 +5,8 @@ import styles from './NavigateToLogin.module.scss';
 function NavigateToLogin() {
   return (
     <h3 className={styles.title}>
-      Do you have an account?
+      <span>Do you have an account? </span>
       <NavLink to={PathNames.login} className={styles.login}>
-        <br />
         LOG IN
       </NavLink>
     </h3>
