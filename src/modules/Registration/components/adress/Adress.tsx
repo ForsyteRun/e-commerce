@@ -2,8 +2,10 @@
 import { Field, FormikValues, useFormikContext } from 'formik';
 import { ReactNode } from 'react';
 import styles from './adress.module.scss';
-import { validateCity, validatePostCode, validateStreet } from './validation';
 import validCountries from './constants';
+import validateCity from './validation/validateCity';
+import validateStreet from './validation/validateStreet';
+import validatePostCode from './validation/validatePostCode';
 
 function Adress(): JSX.Element {
   const { errors, touched } = useFormikContext<FormikValues>();
