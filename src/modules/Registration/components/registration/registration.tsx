@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Formik, Form, Field } from 'formik';
-import s from './registration.module.scss';
-import { validateEmail, validateName, validatePassword } from './validation';
-import { InitialValue } from './types';
-import { START_DAYS, START_YEAR, allMonths } from '../../constants';
+import { Field, Form, Formik } from 'formik';
+import { END_YEAR, START_DAYS, allMonths } from '../../constants';
 import Adress from '../adress/Adress';
 import Select from '../select/select';
+import s from './registration.module.scss';
+import { InitialValue } from './types';
+import { validateEmail, validateName, validatePassword } from './validation';
 
 const initialValues: InitialValue = {
   firstName: '',
@@ -14,7 +14,7 @@ const initialValues: InitialValue = {
   password: '',
   date: START_DAYS.toString(),
   month: allMonths[0],
-  year: START_YEAR.toString(),
+  year: END_YEAR.toString(),
   country: '',
   city: '',
   street: '',
