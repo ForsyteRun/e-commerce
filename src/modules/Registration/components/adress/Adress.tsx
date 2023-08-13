@@ -54,9 +54,6 @@ function Adress(): JSX.Element {
             </option>
           ))}
         </Field>
-        {errors.country && touched.country && (
-          <div className={styles.errorValid}>{errors.country as ReactNode}</div>
-        )}
       </div>
       <div className={styles.input__container}>
         <label htmlFor="postCode" className={styles.label}>
