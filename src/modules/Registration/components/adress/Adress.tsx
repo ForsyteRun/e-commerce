@@ -2,12 +2,8 @@
 import { Field, FormikValues, useFormikContext } from 'formik';
 import { ReactNode } from 'react';
 import styles from './adress.module.scss';
-import {
-  validateCity,
-  validateCountry,
-  validatePostCode,
-  validateStreet,
-} from './validation';
+import { validateCity, validatePostCode, validateStreet } from './validation';
+import validCountries from './constants';
 
 function Adress(): JSX.Element {
   const { errors, touched } = useFormikContext<FormikValues>();
@@ -47,11 +43,17 @@ function Adress(): JSX.Element {
           Country
         </label>
         <Field
+          as="select"
           name="country"
-          validate={validateCountry}
           placeholder="Country*"
           className={styles.input}
-        />
+        >
+          {validCountries.map((day: string) => (
+            <option value={day} key={day}>
+              {day}
+            </option>
+          ))}
+        </Field>
         {errors.country && touched.country && (
           <div className={styles.errorValid}>{errors.country as ReactNode}</div>
         )}
@@ -66,6 +68,7 @@ function Adress(): JSX.Element {
           placeholder="PostCode*"
           className={styles.input}
         />
+
         {errors.postCode && touched.postCode && (
           <div className={styles.errorValid}>
             {errors.postCode as ReactNode}

@@ -1,4 +1,4 @@
-import { validCountries } from '../../../constants';
+import validCountries from '../constants';
 
 const validateCity = (name: string): string | undefined => {
   let error;
