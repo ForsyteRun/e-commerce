@@ -13,7 +13,7 @@ function PasswordField({
 }: LoginPasswordFieldProps): JSX.Element {
   return (
     <div className={styles.inputContainer}>
-      <label htmlFor="password">
+      <label htmlFor="password" className={styles.label}>
         <span>Password</span>
       </label>
       <div className={styles.inputFieldContainer}>

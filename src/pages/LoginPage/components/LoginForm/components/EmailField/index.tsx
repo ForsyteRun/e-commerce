@@ -10,7 +10,7 @@ function EmailField({
 }: LoginEmailFieldProps): JSX.Element {
   return (
     <div className={styles.inputContainer}>
-      <label htmlFor="email">
+      <label htmlFor="email" className={styles.label}>
         <span>Email</span>
       </label>
       <Field
