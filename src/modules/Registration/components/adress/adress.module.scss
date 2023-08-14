@@ -3,6 +3,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   padding-bottom: 10px;
+  column-gap: 15px;
 }
 
 .label {
@@ -11,7 +12,7 @@
 }
 
 .input {
-  width: 95%;
+  width: 100%;
   border-radius: 7px;
   padding: 10px;
   &__container {
