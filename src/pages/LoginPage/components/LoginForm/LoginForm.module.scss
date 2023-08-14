@@ -1,0 +1,32 @@
+.login {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.form {
+  padding: 40px;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #EAEBED;
+}
+
+.buttonLogin {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #5E96FC;
+  border-radius: 10px;
+  color: #FFFFFF;
+  appearance: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 200ms linear;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: #256df3;
+    }
+  }
+}
+
