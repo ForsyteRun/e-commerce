@@ -17,7 +17,7 @@ function Adress(): JSX.Element {
           City
         </label>
         <Field
-          name="city"
+          name="addresses[0].city"
           validate={validateCity}
           placeholder="City*"
           className={styles.input}
@@ -31,7 +31,7 @@ function Adress(): JSX.Element {
           Street
         </label>
         <Field
-          name="street"
+          name="addresses[0].streetName"
           validate={validateStreet}
           placeholder="Street*"
           className={styles.input}
@@ -46,7 +46,7 @@ function Adress(): JSX.Element {
         </label>
         <Field
           as="select"
-          name="country"
+          name="addresses[0].country"
           placeholder="Country*"
           className={styles.input}
         >
@@ -58,13 +58,13 @@ function Adress(): JSX.Element {
         </Field>
       </div>
       <div className={styles.input__container}>
-        <label htmlFor="postCode" className={styles.label}>
+        <label htmlFor="postalCode" className={styles.label}>
           PostCode
         </label>
         <Field
-          name="postCode"
+          name="addresses[0].postalCode"
           validate={validatePostCode}
-          placeholder="PostCode*"
+          placeholder="postalCode*"
           className={styles.input}
         />
 

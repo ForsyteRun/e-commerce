@@ -1,13 +1,13 @@
 import {
   ClientResponse,
+  CustomerDraft,
   CustomerSignInResult,
   _ErrorResponse,
 } from '@commercetools/platform-sdk';
 import apiRoot from '../../../services/sdkClient/apiRoot';
-import { InitialValue } from '../components/registration/types';
 import { RequestStatusCode } from '../../../types';
 
-const createCustomer = (data: InitialValue) => {
+const createCustomer = (data: CustomerDraft) => {
   apiRoot
     .customers()
     .post({

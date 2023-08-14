@@ -1,34 +1,29 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
-import { END_YEAR, START_DAYS, allMonths } from '../../constants';
+import createCustomer from '../../api/createCustomer';
+import NavigateToLogin from '../NavigateToLogin';
 import Adress from '../adress/Adress';
 import Select from '../select/select';
 import styles from './registration.module.scss';
-import { InitialValue } from './types';
+// import { InitialValue } from './types';
 import { validateEmail, validateName, validatePassword } from './validation';
-import NavigateToLogin from '../NavigateToLogin';
-import createCustomer from '../../api/createCustomer';
 
-const initialValues: InitialValue = {
+const initialValues: CustomerDraft = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
-  date: START_DAYS.toString(),
-  month: allMonths[0],
-  year: END_YEAR.toString(),
-  country: '',
-  city: '',
-  street: '',
-  postCode: '',
+  dateOfBirth: '',
+  addresses: [{ country: 'US', city: '', postalCode: '', streetName: '' }],
 };
 
 function Registration(): JSX.Element {
   return (
     <div className={styles.register}>
-      <Formik<InitialValue>
+      <Formik<CustomerDraft>
         initialValues={initialValues}
-        onSubmit={(value: InitialValue) => createCustomer(value)}
+        onSubmit={(value: CustomerDraft) => createCustomer(value)}
       >
         {({ errors, touched }) => (
           <Form method="post" action="register" className={styles.form}>
@@ -37,10 +32,11 @@ function Registration(): JSX.Element {
                 FirstName
               </label>
               <Field
+                id="firstName"
                 name="firstName"
                 validate={validateName}
-                className={styles.input}
                 placeholder="First Name*"
+                className={styles.input}
               />
               {errors.firstName && touched.firstName && (
                 <div className={styles.errorValid}>{errors.firstName}</div>
