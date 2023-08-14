@@ -10,6 +10,7 @@ export const authMiddlewareOptions: AuthMiddlewareOptions = {
     clientId: import.meta.env.VITE_CLIENT_ID,
     clientSecret: import.meta.env.VITE_CLIENT_SECRET,
   },
+  oauthUri: `/oauth/${import.meta.env.VITE_PROJECT_KEY}/anonymous/token`,
   scopes: [import.meta.env.SCOPES],
 };
 
