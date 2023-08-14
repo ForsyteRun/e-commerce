@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Field, FormikValues, useFormikContext } from 'formik';
 import { ReactNode } from 'react';
 import styles from './adress.module.scss';

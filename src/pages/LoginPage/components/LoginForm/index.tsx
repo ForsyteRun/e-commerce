@@ -29,6 +29,7 @@ function LoginForm(): JSX.Element {
         password: '',
       }}
       onSubmit={(values: LoginFormValues) => {
+        // eslint-disable-next-line no-console
         console.log(values);
       }}
     >

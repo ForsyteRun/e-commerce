@@ -5,7 +5,7 @@ import Header from './components/Header';
 
 function App() {
   // apiRoot
-  //   .products()
+  //   .productProjections()
   //   .get()
   //   .execute()
   //   .then((data) => console.log(data))
