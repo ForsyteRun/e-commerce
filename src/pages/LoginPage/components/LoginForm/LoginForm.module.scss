@@ -21,10 +21,18 @@
   outline: none;
   border: none;
   cursor: pointer;
+  transition: background-color 200ms linear;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: #256df3;
+    }
+  }
 }
 
 .accountText {
   text-align: center;
+  margin: 0;
 }
 
 .createAccount {
