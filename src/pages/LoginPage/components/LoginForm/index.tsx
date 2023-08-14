@@ -1,23 +1,29 @@
 import { useState } from 'react';
 import { Formik, Form, FormikProps } from 'formik';
-import { LoginFormValues } from '../../../../types';
-import PasswordHideIcon from './components/PasswordIcons/passwordHideIcon';
-import PasswordShowIcon from './components/PasswordIcons/passwordShowIcon';
+import { NavLink } from 'react-router-dom';
+import {
+  InputType,
+  LoginFormValues,
+  PathNames,
+  VoidFunction,
+} from '../../../../types';
+import { ReactComponent as PasswordHideIcon } from '../../../../assets/images/svg/eye-password-hide.svg';
+import { ReactComponent as PasswordShowIcon } from '../../../../assets/images/svg/eye-password-show.svg';
 import EmailField from './components/EmailField';
 import PasswordField from './components/PasswordField';
 import styles from './LoginForm.module.scss';
 
 function LoginForm(): JSX.Element {
-  const [type, setType] = useState('password');
-  const [icon, setIcon] = useState(PasswordShowIcon);
+  const [inputType, setInputType] = useState(InputType.Password);
+  const [icon, setIcon] = useState(<PasswordShowIcon />);
 
-  const togglePasswordVisibility: () => void = () => {
-    if (type === 'password') {
-      setIcon(PasswordHideIcon);
-      setType('text');
+  const togglePasswordVisibility: VoidFunction = () => {
+    if (inputType === InputType.Password) {
+      setIcon(<PasswordHideIcon />);
+      setInputType(InputType.Text);
     } else {
-      setIcon(PasswordShowIcon);
-      setType('password');
+      setIcon(<PasswordShowIcon />);
+      setInputType(InputType.Password);
     }
   };
 
@@ -46,7 +52,7 @@ function LoginForm(): JSX.Element {
                 handleBlur={handleBlur}
               />
               <PasswordField
-                type={type}
+                type={inputType}
                 values={values}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
@@ -59,9 +65,9 @@ function LoginForm(): JSX.Element {
             </Form>
             <p className={styles.accountText}>
               Don&#39;t have an account?
-              <a href="/register" className={styles.createAccount}>
+              <NavLink className={styles.createAccount} to={PathNames.register}>
                 Create new account
-              </a>
+              </NavLink>
             </p>
           </div>
         </div>
