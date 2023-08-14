@@ -1,13 +1,11 @@
 import regex from '../../../constants/regex';
 
-function validateEmail(email: string) {
-  let errorMessage: string;
+function validateEmail(email: string): string | undefined {
+  let errorMessage: string | undefined;
   if (!email) {
     errorMessage = 'This field is required';
   } else if (!regex.email.test(email)) {
     errorMessage = 'Please enter a valid email address';
-  } else {
-    errorMessage = '';
   }
   return errorMessage;
 }
