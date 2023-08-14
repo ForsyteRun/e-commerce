@@ -1,0 +1,17 @@
+.container {
+  text-align: center;
+}
+
+.registrationLink {
+  padding-left: 5px;
+  text-align: center;
+  color: #5E96FC;
+  text-decoration: none;
+  transition: color 200ms linear;
+
+  @media (hover: hover) {
+    &:hover {
+      color: #256df3;
+    }
+  }
+}
