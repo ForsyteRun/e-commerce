@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Field, Form, Formik } from 'formik';
 import { END_YEAR, START_DAYS, allMonths } from '../../constants';
 import Adress from '../adress/Adress';
