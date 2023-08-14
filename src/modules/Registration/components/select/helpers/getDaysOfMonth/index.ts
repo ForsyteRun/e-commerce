@@ -1,7 +1,7 @@
 import { allMonths } from '../../../../constants';
 import { IS_LEAP_YEAR, MIDDLE_OF_THE_YEAR } from '../../constants';
 
-const getDaysOfMonth = (value: string, days: number[]): number[] => {
+const getDaysOfMonth = (days: number[], value = 'January'): number[] => {
   const index = allMonths.indexOf(value);
   let daysToRemove = 0;
 
@@ -12,6 +12,8 @@ const getDaysOfMonth = (value: string, days: number[]): number[] => {
   } else {
     daysToRemove = index + 1 <= MIDDLE_OF_THE_YEAR ? 1 : 0;
   }
+
+  // console.log(days.slice(0, days.length - daysToRemove), value);
 
   return days.slice(0, days.length - daysToRemove);
 };

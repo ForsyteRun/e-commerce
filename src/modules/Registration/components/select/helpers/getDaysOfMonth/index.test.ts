@@ -6,7 +6,7 @@ describe('getDaysOfMonth', () => {
     const month = 'March';
     const daysCount = 31;
 
-    const daysOfMonth = getDaysOfMonth(month, days);
+    const daysOfMonth = getDaysOfMonth(days, month);
 
     expect(daysOfMonth).toHaveLength(daysCount);
   });

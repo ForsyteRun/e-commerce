@@ -6,16 +6,16 @@ import NavigateToLogin from '../NavigateToLogin';
 import Adress from '../adress/Adress';
 import Select from '../select/select';
 import styles from './registration.module.scss';
-// import { InitialValue } from './types';
 import { validateEmail, validateName, validatePassword } from './validation';
+import BIRTH_INIT_DATA from './constant';
 
 const initialValues: CustomerDraft = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
-  dateOfBirth: '',
-  addresses: [{ country: 'US', city: '', postalCode: '', streetName: '' }],
+  dateOfBirth: BIRTH_INIT_DATA,
+  addresses: [{ country: '', city: '', postalCode: '', streetName: '' }],
 };
 
 function Registration(): JSX.Element {
