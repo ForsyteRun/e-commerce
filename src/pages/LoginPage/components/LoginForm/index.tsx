@@ -1,12 +1,6 @@
 import { useState } from 'react';
 import { Formik, Form, FormikProps } from 'formik';
-import { NavLink } from 'react-router-dom';
-import {
-  InputType,
-  LoginFormValues,
-  PathNames,
-  VoidFunction,
-} from '../../../../types';
+import { InputType, LoginFormValues, VoidFunction } from '../../../../types';
 import { ReactComponent as PasswordHideIcon } from '../../../../assets/images/svg/eye-password-hide.svg';
 import { ReactComponent as PasswordShowIcon } from '../../../../assets/images/svg/eye-password-show.svg';
 import EmailField from './components/EmailField';
@@ -63,12 +57,6 @@ function LoginForm(): JSX.Element {
                 LOG IN
               </button>
             </Form>
-            <p className={styles.accountText}>
-              Don&#39;t have an account?
-              <NavLink className={styles.createAccount} to={PathNames.register}>
-                Create new account
-              </NavLink>
-            </p>
           </div>
         </div>
       )}
