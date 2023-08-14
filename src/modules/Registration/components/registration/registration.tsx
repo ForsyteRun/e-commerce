@@ -6,7 +6,7 @@ import Select from '../select/select';
 import styles from './registration.module.scss';
 import { InitialValue } from './types';
 import { validateEmail, validateName, validatePassword } from './validation';
-import NavigateToLogin from '../../../../components/NavigateToLogin';
+import NavigateToLogin from '../NavigateToLogin';
 
 const initialValues: InitialValue = {
   firstName: '',
