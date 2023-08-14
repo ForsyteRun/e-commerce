@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Field, FormikValues, useFormikContext } from 'formik';
 import { ReactNode, useEffect, useState } from 'react';
 import {
@@ -8,44 +9,50 @@ import {
   START_YEAR,
   allMonths,
 } from '../../constants';
-import { setLeapYear } from './constants';
 import { getClick, getDays, getYears } from './helpers';
+import { INIT_MONTH } from './constants';
 import checkLeapYear from './helpers/checkLeapYear';
 import getDaysOfMonth from './helpers/getDaysOfMonth';
 import styles from './select.module.scss';
+import convertDataToDateOfBirth from './helpers/convertDataToDateOfBirth';
 
 function Select(): JSX.Element {
-  const [newDays, setNewDays] = useState<number[]>([]);
-
-  const formikProps = useFormikContext<FormikValues>();
-  const { month, year } = formikProps.values;
-
   const days = getDays<number>(START_DAYS, END_DAYS);
   const yearsArray = getYears<number>(START_YEAR, END_YEAR);
 
-  // TODO:how export formikProps?
-  const validateYear = (value: number): string | undefined => {
+  const [newDays, setNewDays] = useState<number[]>(days);
+
+  const [dayOfBirthDay, setDayOfBirthDay] = useState<string>('');
+  const [yearOfBirthDay, setYearOfBirthDay] = useState<string>('');
+  const [monthOfBirthDay, setMonthOfBirthDay] = useState<string>(INIT_MONTH);
+
+  const [chackLeapYear, setChackLeapYear] = useState<boolean>(false);
+
+  const formikProps = useFormikContext<FormikValues>();
+
+  // // TODO:how export formikProps?
+  const validateYear = (): string | undefined => {
     let error;
 
-    const isLeapYear = checkLeapYear(Number(value));
-    setLeapYear(isLeapYear);
+    const isLeapYear = checkLeapYear(Number(yearOfBirthDay[0]));
+    setChackLeapYear(isLeapYear);
 
-    if (value > AVAILABLE_AGE) {
+    if (Number(yearOfBirthDay) > AVAILABLE_AGE) {
       error = 'You are too young';
-      formikProps.setFieldError('year', error);
+      formikProps.setFieldError('dateOfBirth', error);
     }
 
     return error;
   };
 
-  const changeDaysOfMonth = (value: string) => {
-    setNewDays(getDaysOfMonth(value, days));
-  };
-
   useEffect(() => {
-    setNewDays(getDaysOfMonth(month, days));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [month, year]);
+    setNewDays(getDaysOfMonth(days, monthOfBirthDay, chackLeapYear));
+
+    const data = { dayOfBirthDay, monthOfBirthDay, yearOfBirthDay };
+    const getDateOfBirth = convertDataToDateOfBirth(data);
+
+    formikProps.setFieldValue('dateOfBirth', getDateOfBirth);
+  }, [dayOfBirthDay, monthOfBirthDay, yearOfBirthDay, chackLeapYear]);
 
   return (
     <div className={styles.select__container}>
@@ -54,8 +61,9 @@ function Select(): JSX.Element {
         <Field
           as="select"
           name="date"
+          value={dayOfBirthDay}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            formikProps.setFieldValue('date', e.target.value)
+            setDayOfBirthDay(e.target.value)
           }
           className={styles.select}
         >
@@ -68,9 +76,9 @@ function Select(): JSX.Element {
         <Field
           as="select"
           name="month"
+          value={monthOfBirthDay}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            formikProps.setFieldValue('month', e.target.value);
-            changeDaysOfMonth(e.target.value);
+            setMonthOfBirthDay(e.target.value);
           }}
           className={styles.select}
         >
@@ -82,9 +90,10 @@ function Select(): JSX.Element {
         </Field>
         <Field
           as="select"
-          name="year"
+          name="dateOfBirth"
+          value={yearOfBirthDay}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            formikProps.setFieldValue('year', e.target.value);
+            setYearOfBirthDay(e.target.value);
             getClick();
           }}
           validate={validateYear}
@@ -97,9 +106,9 @@ function Select(): JSX.Element {
           ))}
         </Field>
       </div>
-      {formikProps.errors.year && (
+      {formikProps.errors.dateOfBirth && (
         <div className={styles.errorValid}>
-          {formikProps.errors.year as ReactNode}
+          {formikProps.errors.dateOfBirth as ReactNode}
         </div>
       )}
     </div>

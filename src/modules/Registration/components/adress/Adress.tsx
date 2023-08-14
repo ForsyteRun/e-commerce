@@ -1,5 +1,7 @@
-import { Field, FormikValues, useFormikContext } from 'formik';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { Field, FormikErrors, FormikValues, useFormikContext } from 'formik';
 import { ReactNode } from 'react';
+import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './adress.module.scss';
 import validCountries from './constants';
 import validateCity from './validation/validateCity';
@@ -8,6 +10,8 @@ import validatePostCode from './validation/validatePostCode';
 
 function Adress(): JSX.Element {
   const { errors, touched } = useFormikContext<FormikValues>();
+  const errorAddresses = errors.addresses as FormikErrors<BaseAddress[]>;
+  const touchedAddresses = touched.addresses as FormikErrors<BaseAddress[]>;
 
   return (
     <div className={styles.container}>
@@ -16,13 +20,16 @@ function Adress(): JSX.Element {
           City
         </label>
         <Field
-          name="city"
+          id="city"
+          name="addresses[0].city"
           validate={validateCity}
           placeholder="City*"
           className={styles.input}
         />
-        {errors.city && touched.city && (
-          <div className={styles.errorValid}>{errors.city as ReactNode}</div>
+        {errorAddresses && touchedAddresses && touchedAddresses[0]?.city && (
+          <div className={styles.errorValid}>
+            {errorAddresses[0]?.city as ReactNode}{' '}
+          </div>
         )}
       </div>
       <div className={styles.input__container}>
@@ -30,14 +37,19 @@ function Adress(): JSX.Element {
           Street
         </label>
         <Field
-          name="street"
+          id="street"
+          name="addresses[0].streetName"
           validate={validateStreet}
           placeholder="Street*"
           className={styles.input}
         />
-        {errors.street && touched.street && (
-          <div className={styles.errorValid}>{errors.street as ReactNode}</div>
-        )}
+        {errorAddresses &&
+          touchedAddresses &&
+          touchedAddresses[0]?.streetName && (
+            <div className={styles.errorValid}>
+              {errorAddresses[0]?.streetName as ReactNode}{' '}
+            </div>
+          )}
       </div>
       <div className={styles.input__container}>
         <label htmlFor="country" className={styles.label}>
@@ -45,7 +57,7 @@ function Adress(): JSX.Element {
         </label>
         <Field
           as="select"
-          name="country"
+          name="addresses[0].country"
           placeholder="Country*"
           className={styles.input}
         >
@@ -57,21 +69,24 @@ function Adress(): JSX.Element {
         </Field>
       </div>
       <div className={styles.input__container}>
-        <label htmlFor="postCode" className={styles.label}>
+        <label htmlFor="postalCode" className={styles.label}>
           PostCode
         </label>
         <Field
-          name="postCode"
+          id="postalCode"
+          name="addresses[0].postalCode"
           validate={validatePostCode}
-          placeholder="PostCode*"
+          placeholder="postalCode*"
           className={styles.input}
         />
 
-        {errors.postCode && touched.postCode && (
-          <div className={styles.errorValid}>
-            {errors.postCode as ReactNode}
-          </div>
-        )}
+        {errorAddresses &&
+          touchedAddresses &&
+          touchedAddresses[0]?.postalCode && (
+            <div className={styles.errorValid}>
+              {errorAddresses[0]?.postalCode as ReactNode}{' '}
+            </div>
+          )}
       </div>
     </div>
   );

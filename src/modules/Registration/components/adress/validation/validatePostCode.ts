@@ -1,6 +1,5 @@
 const validatePostCode = (street: string): string | undefined => {
   let error;
-
   if (street.trim() === '') {
     error = 'Required';
   } else if (street === 'US' && !/^\d{5}$/.test(street)) {
