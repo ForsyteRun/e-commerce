@@ -15,7 +15,7 @@ interface GetNavLinkButtonStylesProps {
 
 export type GetNavLinkButtonStyles = ({
   isActive,
-}: GetNavLinkButtonStylesProps) => 'button button_active' | 'button';
+}: GetNavLinkButtonStylesProps) => 'button_active' | 'button';
 
 export interface LoginFormValues {
   email: string;

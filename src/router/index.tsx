@@ -3,6 +3,7 @@ import App from '../App';
 import Login from '../pages/LoginPage';
 import RoutingError from '../pages/RoutingError';
 import { PathNames } from '../types';
+import Registration from '../modules/Registration';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
       },
       {
         path: PathNames.register,
-        element: <h1>Registration Page</h1>,
+        element: <Registration />,
       },
       {
         path: PathNames.login,
