@@ -42,7 +42,7 @@ function LoginForm(): JSX.Element {
       }: FormikProps<LoginFormValues>) => (
         <div className={styles.login}>
           <div className={styles.form}>
-            <Form onSubmit={handleSubmit}>
+            <Form noValidate onSubmit={handleSubmit}>
               <EmailField
                 values={values}
                 errors={errors}
