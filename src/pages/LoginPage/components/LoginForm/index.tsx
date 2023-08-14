@@ -34,21 +34,27 @@ function LoginForm(): JSX.Element {
     >
       {({
         values,
+        errors,
+        touched,
         handleChange,
         handleBlur,
         handleSubmit,
       }: FormikProps<LoginFormValues>) => (
         <div className={styles.login}>
           <div className={styles.form}>
-            <Form onSubmit={handleSubmit}>
+            <Form noValidate onSubmit={handleSubmit}>
               <EmailField
                 values={values}
+                errors={errors}
+                touched={touched}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
               />
               <PasswordField
                 type={inputType}
                 values={values}
+                errors={errors}
+                touched={touched}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
                 togglePasswordVisibility={togglePasswordVisibility}

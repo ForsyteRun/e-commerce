@@ -6,6 +6,8 @@ import styles from './PasswordField.module.scss';
 function PasswordField({
   type,
   values,
+  errors,
+  touched,
   handleChange,
   handleBlur,
   togglePasswordVisibility,
@@ -38,6 +40,9 @@ function PasswordField({
           </button>
         </div>
       </div>
+      {errors.password && touched.password && (
+        <div className={styles.error}>{errors.password}</div>
+      )}
     </div>
   );
 }

@@ -5,6 +5,8 @@ import styles from './EmailField.module.scss';
 
 function EmailField({
   values,
+  errors,
+  touched,
   handleChange,
   handleBlur,
 }: LoginEmailFieldProps): JSX.Element {
@@ -24,6 +26,9 @@ function EmailField({
         className={styles.inputEmail}
         validate={validateEmail}
       />
+      {errors.email && touched.email && (
+        <div className={styles.error}>{errors.email}</div>
+      )}
     </div>
   );
 }
