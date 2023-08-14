@@ -5,6 +5,7 @@ import { ReactComponent as PasswordHideIcon } from '../../../../assets/images/sv
 import { ReactComponent as PasswordShowIcon } from '../../../../assets/images/svg/eye-password-show.svg';
 import EmailField from './components/EmailField';
 import PasswordField from './components/PasswordField';
+import RegistrationLink from './components/RegistrationLink';
 import styles from './LoginForm.module.scss';
 
 function LoginForm(): JSX.Element {
@@ -57,6 +58,7 @@ function LoginForm(): JSX.Element {
                 LOG IN
               </button>
             </Form>
+            <RegistrationLink />
           </div>
         </div>
       )}
