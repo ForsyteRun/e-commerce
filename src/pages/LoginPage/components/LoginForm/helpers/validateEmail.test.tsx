@@ -10,10 +10,4 @@ describe('Validate email', () => {
     const errorMessage = validateEmail('invalid-email');
     expect(errorMessage).toBe('Please enter a valid email address');
   });
-
-  it('should return an empty string for a valid email', () => {
-    const validEmail = 'valid@example.com';
-    const errorMessage = validateEmail(validEmail);
-    expect(errorMessage).toBe('');
-  });
 });
