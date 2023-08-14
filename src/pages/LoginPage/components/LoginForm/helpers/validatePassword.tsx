@@ -1,24 +1,29 @@
 import regex from '../../../constants/regex';
 
-function validatePassword(password: string) {
-  let errorMessage: string;
+function validatePassword(password: string): string | undefined {
+  let errorMessage: string | undefined;
+
+  const passwordRequirements = [
+    { regex: regex.passwordLength },
+    { regex: regex.number },
+    { regex: regex.upperCase },
+    { regex: regex.lowerCase },
+    { regex: regex.specialCharacter },
+    { regex: regex.noLeadingTrailingSpace },
+  ];
+
   if (!password) {
     errorMessage = 'This field is required';
-  } else if (!regex.passwordLength.test(password)) {
-    errorMessage = 'Password must contain at least 8 characters long';
-  } else if (!regex.number.test(password)) {
-    errorMessage = 'Password must contain at least one digit';
-  } else if (!regex.upperCase.test(password)) {
-    errorMessage = 'Password must contain at least one uppercase letter';
-  } else if (!regex.lowerCase.test(password)) {
-    errorMessage = 'Password must contain at least one lowercase letter';
-  } else if (!regex.specialCharacter.test(password)) {
-    errorMessage = 'Password must contain at least one special character';
-  } else if (!regex.noLeadingTrailingSpace.test(password)) {
-    errorMessage = 'Password must not contain leading or trailing whitespace';
   } else {
-    errorMessage = '';
+    const hasErrors = passwordRequirements.some(
+      (req) => !req.regex.test(password)
+    );
+    if (hasErrors) {
+      errorMessage =
+        'Password must be at least 8 characters long and contain at least 1 lowercase, 1 uppercase letters, 1 digit and 1 special character, also, not contain leading or trailing whitespace.';
+    }
   }
+
   return errorMessage;
 }
 
