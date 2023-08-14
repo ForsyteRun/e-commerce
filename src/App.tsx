@@ -8,6 +8,7 @@ function App() {
     .customers()
     .get()
     .execute()
+    // eslint-disable-next-line no-console
     .then((data) => console.log(data));
 
   return (
