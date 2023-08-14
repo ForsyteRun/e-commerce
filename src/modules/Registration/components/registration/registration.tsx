@@ -27,6 +27,7 @@ function Registration(): JSX.Element {
     <div className={styles.register}>
       <Formik<InitialValue>
         initialValues={initialValues}
+        // eslint-disable-next-line no-console
         onSubmit={(value: InitialValue) => console.log(value)}
       >
         {({ errors, touched }) => (
