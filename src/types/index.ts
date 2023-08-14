@@ -40,3 +40,10 @@ export interface LoginPasswordFieldProps {
   togglePasswordVisibility: () => void;
   icon: JSX.Element;
 }
+
+export enum InputType {
+  Password = 'password',
+  Text = 'text',
+}
+
+export type VoidFunction = () => void;
