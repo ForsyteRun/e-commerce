@@ -7,6 +7,7 @@ import styles from './registration.module.scss';
 import { InitialValue } from './types';
 import { validateEmail, validateName, validatePassword } from './validation';
 import NavigateToLogin from '../NavigateToLogin';
+import createCustomer from '../../api/createCustomer';
 
 const initialValues: InitialValue = {
   firstName: '',
@@ -27,8 +28,7 @@ function Registration(): JSX.Element {
     <div className={styles.register}>
       <Formik<InitialValue>
         initialValues={initialValues}
-        // eslint-disable-next-line no-console
-        onSubmit={(value: InitialValue) => console.log(value)}
+        onSubmit={(value: InitialValue) => createCustomer(value)}
       >
         {({ errors, touched }) => (
           <Form method="post" action="register" className={styles.form}>
