@@ -34,6 +34,8 @@ function LoginForm(): JSX.Element {
     >
       {({
         values,
+        errors,
+        touched,
         handleChange,
         handleBlur,
         handleSubmit,
@@ -43,12 +45,16 @@ function LoginForm(): JSX.Element {
             <Form onSubmit={handleSubmit}>
               <EmailField
                 values={values}
+                errors={errors}
+                touched={touched}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
               />
               <PasswordField
                 type={inputType}
                 values={values}
+                errors={errors}
+                touched={touched}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
                 togglePasswordVisibility={togglePasswordVisibility}
