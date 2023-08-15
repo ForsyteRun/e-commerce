@@ -7,7 +7,7 @@ import {
 import apiRoot from '../../../services/sdkClient/apiRoot';
 import { RequestStatusCode } from '../../../types';
 
-const createCustomer = (data: CustomerDraft) => {
+const createCustomer = (data: CustomerDraft): void => {
   apiRoot
     .customers()
     .post({

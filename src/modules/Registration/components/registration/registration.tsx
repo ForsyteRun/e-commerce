@@ -7,7 +7,7 @@ import Select from '../select/select';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
 import BIRTH_INIT_DATA from './constant';
-import Adress from '../adress/Adress';
+import Adress from '../adress/adress';
 
 const initialValues: CustomerDraft = {
   firstName: '',
