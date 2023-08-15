@@ -3,11 +3,11 @@ import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
 import createCustomer from '../../api/createCustomer';
 import NavigateToLogin from '../NavigateToLogin';
-import Adress from '../adress/Adress';
 import Select from '../select/select';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
 import BIRTH_INIT_DATA from './constant';
+import Adress from '../adress/Adress';
 
 const initialValues: CustomerDraft = {
   firstName: '',

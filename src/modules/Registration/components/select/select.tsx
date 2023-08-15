@@ -31,15 +31,13 @@ function Select(): JSX.Element {
   const formikProps = useFormikContext<FormikValues>();
 
   // // TODO:how export formikProps?
-  const validateYear = (value: number): string | undefined => {
+  const validateYear = (): string | undefined => {
     let error;
 
-    const splitDateOfBirth = value.toString().split('-');
-
-    const isLeapYear = checkLeapYear(Number(+splitDateOfBirth[0]));
+    const isLeapYear = checkLeapYear(Number(yearOfBirthDay[0]));
     setChackLeapYear(isLeapYear);
 
-    if (Number(splitDateOfBirth) > AVAILABLE_AGE) {
+    if (Number(yearOfBirthDay) > AVAILABLE_AGE) {
       error = 'You are too young';
       formikProps.setFieldError('dateOfBirth', error);
     }
