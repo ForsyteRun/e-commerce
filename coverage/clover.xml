@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1692079082794" clover="3.2.0">
-  <project timestamp="1692079082795" name="All files">
-    <metrics statements="43" coveredstatements="43" conditionals="15" coveredconditionals="13" methods="8" coveredmethods="8" elements="66" coveredelements="64" complexity="0" loc="43" ncloc="43" packages="8" files="8" classes="8"/>
+<coverage generated="1692083499764" clover="3.2.0">
+  <project timestamp="1692083499764" name="All files">
+    <metrics statements="49" coveredstatements="49" conditionals="15" coveredconditionals="13" methods="9" coveredmethods="9" elements="73" coveredelements="71" complexity="0" loc="49" ncloc="49" packages="9" files="9" classes="9"/>
     <package name="UI.NavLinkButton.helpers">
       <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="getNavLinkButtonStyles.ts" path="C:\Users\Маруся\Desktop\e-commerce\src\UI\NavLinkButton\helpers\getNavLinkButtonStyles.ts">
@@ -32,6 +32,18 @@
         <line num="9" count="6" type="cond" truecount="3" falsecount="0"/>
         <line num="13" count="6" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.Registration.components.select.helpers.convertDataToDateOfBirth">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.ts" path="C:\Users\Маруся\Desktop\e-commerce\src\modules\Registration\components\select\helpers\convertDataToDateOfBirth\index.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
       </file>
     </package>
     <package name="modules.Registration.components.select.helpers.getClick">
@@ -85,12 +97,12 @@
       <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="index.ts" path="C:\Users\Маруся\Desktop\e-commerce\src\modules\Registration\constants\index.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
       </file>
     </package>
   </project>
