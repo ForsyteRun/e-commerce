@@ -45,6 +45,7 @@ function Registration(): JSX.Element {
             <div className={styles.input__container}>
               <label htmlFor="lastName">LastName</label>
               <Field
+                id="lastName"
                 name="lastName"
                 validate={validateName}
                 placeholder="Last Name*"
@@ -57,6 +58,7 @@ function Registration(): JSX.Element {
             <div className={styles.input__container}>
               <label htmlFor="email">Email</label>
               <Field
+                id="email"
                 name="email"
                 validate={validateEmail}
                 placeholder="email*"
@@ -69,6 +71,7 @@ function Registration(): JSX.Element {
             <div className={styles.input__container}>
               <label htmlFor="password">Password</label>
               <Field
+                id="password"
                 type="password"
                 name="password"
                 validate={validatePassword}

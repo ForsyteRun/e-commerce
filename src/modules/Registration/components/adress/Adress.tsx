@@ -20,6 +20,7 @@ function Adress(): JSX.Element {
           City
         </label>
         <Field
+          id="city"
           name="addresses[0].city"
           validate={validateCity}
           placeholder="City*"
@@ -36,6 +37,7 @@ function Adress(): JSX.Element {
           Street
         </label>
         <Field
+          id="street"
           name="addresses[0].streetName"
           validate={validateStreet}
           placeholder="Street*"
@@ -71,6 +73,7 @@ function Adress(): JSX.Element {
           PostCode
         </label>
         <Field
+          id="postalCode"
           name="addresses[0].postalCode"
           validate={validatePostCode}
           placeholder="postalCode*"
