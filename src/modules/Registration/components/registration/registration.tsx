@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
 import createCustomer from '../../api/createCustomer';
@@ -7,7 +6,8 @@ import Select from '../select/select';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
 import BIRTH_INIT_DATA from './constant';
-import Adress from '../adress/adress';
+import Adress from '../adress/Adress';
+import SnackBar from '../../../../components/SnackBar';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -18,7 +18,7 @@ const initialValues: CustomerDraft = {
   addresses: [{ country: '', city: '', postalCode: '', streetName: '' }],
 };
 
-function Registration(): JSX.Element {
+const Registration: React.FC = () => {
   return (
     <div className={styles.register}>
       <Formik<CustomerDraft>
@@ -89,8 +89,9 @@ function Registration(): JSX.Element {
         )}
       </Formik>
       <NavigateToLogin />
+      <SnackBar title="success" disabled />
     </div>
   );
-}
+};
 
 export default Registration;
