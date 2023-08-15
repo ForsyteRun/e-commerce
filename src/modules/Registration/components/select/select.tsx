@@ -16,7 +16,7 @@ import getDaysOfMonth from './helpers/getDaysOfMonth';
 import styles from './select.module.scss';
 import convertDataToDateOfBirth from './helpers/convertDataToDateOfBirth';
 
-function Select(): JSX.Element {
+const Select = (): JSX.Element => {
   const days = getDays<number>(START_DAYS, END_DAYS);
   const yearsArray = getYears<number>(START_YEAR, END_YEAR);
 
@@ -113,6 +113,6 @@ function Select(): JSX.Element {
       )}
     </div>
   );
-}
+};
 
 export default Select;

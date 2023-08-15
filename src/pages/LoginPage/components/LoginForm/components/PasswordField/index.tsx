@@ -3,7 +3,7 @@ import { LoginPasswordFieldProps } from '../../../../../../types';
 import validatePassword from '../../helpers/validatePassword';
 import styles from './PasswordField.module.scss';
 
-function PasswordField({
+const PasswordField = ({
   type,
   values,
   errors,
@@ -12,7 +12,7 @@ function PasswordField({
   handleBlur,
   togglePasswordVisibility,
   icon,
-}: LoginPasswordFieldProps): JSX.Element {
+}: LoginPasswordFieldProps): JSX.Element => {
   return (
     <div className={styles.inputContainer}>
       <label htmlFor="password" className={styles.label}>
@@ -45,6 +45,6 @@ function PasswordField({
       )}
     </div>
   );
-}
+};
 
 export default PasswordField;

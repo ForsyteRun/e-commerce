@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { PathNames } from '../../../../types';
 import styles from './NavigateToLogin.module.scss';
 
-function NavigateToLogin() {
+const NavigateToLogin = () => {
   return (
     <h3 className={styles.title}>
       <span>Do you have an account? </span>
@@ -11,6 +11,6 @@ function NavigateToLogin() {
       </NavLink>
     </h3>
   );
-}
+};
 
 export default NavigateToLogin;

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { PathNames } from '../../../../../../types';
 import styles from './RegistrationLink.module.scss';
 
-function RegistrationLink() {
+const RegistrationLink = () => {
   return (
     <div className={styles.container}>
       <span>Don&#39;t have an account?</span>
@@ -11,6 +11,6 @@ function RegistrationLink() {
       </NavLink>
     </div>
   );
-}
+};
 
 export default RegistrationLink;

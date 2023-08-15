@@ -8,7 +8,7 @@ import PasswordField from './components/PasswordField';
 import RegistrationLink from './components/RegistrationLink';
 import styles from './LoginForm.module.scss';
 
-function LoginForm(): JSX.Element {
+const LoginForm = (): JSX.Element => {
   const [inputType, setInputType] = useState(InputType.Password);
   const [icon, setIcon] = useState(<PasswordShowIcon />);
 
@@ -71,6 +71,6 @@ function LoginForm(): JSX.Element {
       )}
     </Formik>
   );
-}
+};
 
 export default LoginForm;

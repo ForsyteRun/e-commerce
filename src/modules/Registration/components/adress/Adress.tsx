@@ -7,7 +7,7 @@ import validateCity from './validation/validateCity';
 import validateStreet from './validation/validateStreet';
 import validatePostCode from './validation/validatePostCode';
 
-function Adress(): JSX.Element {
+const Adress = (): JSX.Element => {
   const { errors, touched } = useFormikContext<FormikValues>();
   const errorAddresses = errors.addresses as FormikErrors<BaseAddress[]>;
   const touchedAddresses = touched.addresses as FormikErrors<BaseAddress[]>;
@@ -89,6 +89,6 @@ function Adress(): JSX.Element {
       </div>
     </div>
   );
-}
+};
 
 export default Adress;
