@@ -9,20 +9,21 @@ import {
   START_YEAR,
   allMonths,
 } from '../../constants';
-// import { setLeapYear } from './constants';
 import { getClick, getDays, getYears } from './helpers';
-// import checkLeapYear from './helpers/checkLeapYear';
+import { INIT_MONTH } from './constants';
+import checkLeapYear from './helpers/checkLeapYear';
 import getDaysOfMonth from './helpers/getDaysOfMonth';
 import styles from './select.module.scss';
-import checkLeapYear from './helpers/checkLeapYear';
-import { setLeapYear } from './constants';
 
 function Select(): JSX.Element {
   const days = getDays<number>(START_DAYS, END_DAYS);
 
   const [newDays, setNewDays] = useState<number[]>(days);
+
+  // const [dayOfBirthDay, setDayOfBirthDay] = useState<string>('');
   const [yearOfBirthDay, setYearOfBirthDay] = useState<string>('');
-  const [monthOfBirthDay, setMonthOfBirthDay] = useState<string>('');
+  const [monthOfBirthDay, setMonthOfBirthDay] = useState<string>(INIT_MONTH);
+  const [chackLeapYear, setChackLeapYear] = useState<boolean>(false);
 
   const formikProps = useFormikContext<FormikValues>();
   const { dateOfBirth } = formikProps.values;
@@ -39,21 +40,21 @@ function Select(): JSX.Element {
     const splitDateOfBirth = value.toString().split('-');
 
     const isLeapYear = checkLeapYear(Number(+splitDateOfBirth[0]));
-    setLeapYear(isLeapYear);
+    setChackLeapYear(isLeapYear);
 
     if (Number(splitDateOfBirth) > AVAILABLE_AGE) {
       error = 'You are too young';
-      formikProps.setFieldError('firstName', error);
+      formikProps.setFieldError('dateOfBirth', error);
     }
 
     return error;
   };
 
   useEffect(() => {
-    setNewDays(getDaysOfMonth(days, monthOfBirthDay));
+    setNewDays(getDaysOfMonth(days, monthOfBirthDay, chackLeapYear));
 
     formikProps.setFieldValue('dateOfBirth', yearOfBirthDay);
-  }, [monthOfBirthDay, yearOfBirthDay]);
+  }, [monthOfBirthDay, yearOfBirthDay, chackLeapYear]);
 
   return (
     <div className={styles.select__container}>

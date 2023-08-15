@@ -1,12 +1,16 @@
 import { allMonths } from '../../../../constants';
-import { IS_LEAP_YEAR, MIDDLE_OF_THE_YEAR } from '../../constants';
+import { MIDDLE_OF_THE_YEAR } from '../../constants';
 
-const getDaysOfMonth = (days: number[], value = 'January'): number[] => {
+const getDaysOfMonth = (
+  days: number[],
+  value: string,
+  leapYear: boolean
+): number[] => {
   const index = allMonths.indexOf(value);
   let daysToRemove = 0;
 
   if (index === 1) {
-    daysToRemove = IS_LEAP_YEAR ? 2 : 3;
+    daysToRemove = leapYear ? 2 : 3;
   } else if ((index + 1) % 2 !== 0) {
     daysToRemove = index + 1 <= MIDDLE_OF_THE_YEAR ? 0 : 1;
   } else {
