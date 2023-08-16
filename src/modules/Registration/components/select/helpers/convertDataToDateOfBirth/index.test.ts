@@ -3,9 +3,9 @@ import convertDataToDateOfBirth from '.';
 describe('convertDataToDateOfBirth', () => {
   it('convert data to dateOfBirth', () => {
     const data = {
-      dayOfBirthDay: '15',
-      monthOfBirthDay: 'August',
-      yearOfBirthDay: '2023',
+      day: '15',
+      month: 'August',
+      year: '2023',
     };
 
     const result = convertDataToDateOfBirth(data);
