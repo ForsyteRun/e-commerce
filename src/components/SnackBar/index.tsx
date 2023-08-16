@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SnackBar.module.scss';
-import { ISnackBar } from './types';
+import { ISnackBar, Timeout } from './types';
 import { PathNames } from '../../types';
 
 const SnackBar: React.FC<ISnackBar> = ({ title, color, isOk, setStatus }) => {
@@ -10,13 +10,18 @@ const SnackBar: React.FC<ISnackBar> = ({ title, color, isOk, setStatus }) => {
 
   useEffect(() => {
     document.body.classList.add(styles.hidden);
+    let timer: Timeout;
 
-    const timer = setTimeout(() => {
-      if (isOk) {
+    if (isOk) {
+      timer = setTimeout(() => {
         navigate(PathNames.index);
-      }
-      setStatus('');
-    }, 4000);
+        setStatus('');
+      }, 2000);
+    } else {
+      timer = setTimeout(() => {
+        setStatus('');
+      }, 4000);
+    }
 
     return () => {
       document.body.classList.remove(styles.hidden);
