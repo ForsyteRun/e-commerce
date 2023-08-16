@@ -4,7 +4,7 @@
   top: -100%;
   right: 0;
   animation-name: appear;
-  animation-duration: 8s;
+  animation-duration: 4s;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
 }
@@ -23,7 +23,7 @@
   border-top-right-radius: 5px;
   background-color: #9ddb15;
   animation-name: move;
-  animation-duration: 2.5s;
+  animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-delay: 1.5s;
   animation-fill-mode: forwards;
@@ -43,7 +43,7 @@
     top: 100%;
   }
   50% {
-    top: 90%;
+    top: 91%;
   }
   100% {
     top: 100%;

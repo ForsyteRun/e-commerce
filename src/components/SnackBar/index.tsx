@@ -16,7 +16,7 @@ const SnackBar: React.FC<ISnackBar> = ({ title, color, isOk, setStatus }) => {
         navigate(PathNames.index);
       }
       setStatus({ isError: false, isOk: false });
-    }, 7000);
+    }, 4000);
 
     return () => {
       document.body.classList.remove(styles.hidden);
