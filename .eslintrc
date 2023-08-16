@@ -32,25 +32,23 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "react", "prettier"],
   "rules": {
     "react/react-in-jsx-scope": 0,
-    "jsx-a11y/label-has-associated-control": [ 2, {
-      "labelComponents": [
-        "label"
-      ],
-      "labelAttributes": [
-        "htmlFor"
-      ],
-      "controlComponents": [
-        "Field"
-      ],
-      "depth": 2
-    }],
-    "no-param-reassign": 0
-  }
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": ["label"],
+        "labelAttributes": ["htmlFor"],
+        "controlComponents": ["Field"],
+        "depth": 2
+      }
+    ],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
 }

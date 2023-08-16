@@ -5,7 +5,7 @@ import RoutingErrorMessage from './components/RoutingErrorMessage';
 import { PathNames } from '../../types';
 import styles from './RoutingError.module.scss';
 
-function RoutingError() {
+const RoutingError = () => {
   const error = useRouteError();
   const message = RoutingErrorMessage(error);
 
@@ -19,6 +19,6 @@ function RoutingError() {
       </main>
     </>
   );
-}
+};
 
 export default RoutingError;

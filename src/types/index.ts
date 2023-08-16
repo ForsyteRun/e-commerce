@@ -11,6 +11,23 @@ export enum PathNames {
   login = '/login',
 }
 
+export enum RequestStatusCode {
+  OK = 200,
+  Created = 201,
+  BadRequest = 400,
+  Unauthorized = 401,
+}
+
+export enum RequestStatusAnswer {
+  exist = 'user exist',
+  success = 'success',
+}
+
+export enum RequestStatusColor {
+  exist = 'red',
+  success = 'green',
+}
+
 export interface NavLinkButtonProps {
   children: string;
   path: PathNames;

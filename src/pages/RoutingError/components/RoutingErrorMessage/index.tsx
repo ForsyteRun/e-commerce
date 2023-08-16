@@ -1,7 +1,7 @@
 import { isRouteErrorResponse } from 'react-router-dom';
 import styles from './RoutingErrorMessage.module.scss';
 
-function RoutingErrorMessage(error: unknown): JSX.Element {
+const RoutingErrorMessage = (error: unknown): JSX.Element => {
   let message = 'Something went wrong...';
 
   if (isRouteErrorResponse(error)) {
@@ -16,6 +16,6 @@ function RoutingErrorMessage(error: unknown): JSX.Element {
   }
 
   return <h2 className={styles.errorMessage}>{message.toUpperCase()}</h2>;
-}
+};
 
 export default RoutingErrorMessage;

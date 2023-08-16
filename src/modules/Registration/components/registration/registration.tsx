@@ -1,33 +1,61 @@
+import {
+  ClientResponse,
+  CustomerDraft,
+  CustomerSignInResult,
+  _ErrorResponse,
+} from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
-import { END_YEAR, START_DAYS, allMonths } from '../../constants';
-import Adress from '../adress/Adress';
-import Select from '../select/select';
-import styles from './registration.module.scss';
-import { InitialValue } from './types';
-import { validateEmail, validateName, validatePassword } from './validation';
+import React, { useState } from 'react';
+import renderSnackBar from '../../../../components/SnackBar/helpers';
+import apiRoot from '../../../../services/sdkClient/apiRoot';
+import { RequestStatusCode } from '../../../../types';
 import NavigateToLogin from '../NavigateToLogin';
+import Adress from '../adress/Adress';
+import validCountries from '../adress/constants';
+import Select from '../select/select';
+import { BIRTH_INIT_DATA } from './constant';
+import styles from './registration.module.scss';
+import { validateEmail, validateName, validatePassword } from './validation';
 
-const initialValues: InitialValue = {
+const initialValues: CustomerDraft = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
-  date: START_DAYS.toString(),
-  month: allMonths[0],
-  year: END_YEAR.toString(),
-  country: '',
-  city: '',
-  street: '',
-  postCode: '',
+  dateOfBirth: BIRTH_INIT_DATA,
+  addresses: [
+    { country: validCountries[0], city: '', postalCode: '', streetName: '' },
+  ],
 };
 
-function Registration(): JSX.Element {
+const Registration: React.FC = () => {
+  const [status, setStatus] = useState<string>('');
+
+  // TODO: remove to separate file when REDUX appear
+  const createCustomer = (data: CustomerDraft) => {
+    apiRoot
+      .customers()
+      .post({
+        body: data,
+      })
+      .execute()
+      .then((res: ClientResponse<CustomerSignInResult>) => {
+        setStatus('isOk');
+        // eslint-disable-next-line no-console
+        console.log(res);
+      })
+      .catch((error: _ErrorResponse) => {
+        if (error.statusCode === RequestStatusCode.BadRequest) {
+          setStatus('isError');
+        }
+      });
+  };
+
   return (
     <div className={styles.register}>
-      <Formik<InitialValue>
+      <Formik<CustomerDraft>
         initialValues={initialValues}
-        // eslint-disable-next-line no-console
-        onSubmit={(value: InitialValue) => console.log(value)}
+        onSubmit={(value: CustomerDraft) => createCustomer(value)}
       >
         {({ errors, touched }) => (
           <Form method="post" action="register" className={styles.form}>
@@ -36,10 +64,11 @@ function Registration(): JSX.Element {
                 FirstName
               </label>
               <Field
+                id="firstName"
                 name="firstName"
                 validate={validateName}
-                className={styles.input}
                 placeholder="First Name*"
+                className={styles.input}
               />
               {errors.firstName && touched.firstName && (
                 <div className={styles.errorValid}>{errors.firstName}</div>
@@ -48,6 +77,7 @@ function Registration(): JSX.Element {
             <div className={styles.input__container}>
               <label htmlFor="lastName">LastName</label>
               <Field
+                id="lastName"
                 name="lastName"
                 validate={validateName}
                 placeholder="Last Name*"
@@ -60,6 +90,7 @@ function Registration(): JSX.Element {
             <div className={styles.input__container}>
               <label htmlFor="email">Email</label>
               <Field
+                id="email"
                 name="email"
                 validate={validateEmail}
                 placeholder="email*"
@@ -72,6 +103,7 @@ function Registration(): JSX.Element {
             <div className={styles.input__container}>
               <label htmlFor="password">Password</label>
               <Field
+                id="password"
                 type="password"
                 name="password"
                 validate={validatePassword}
@@ -89,8 +121,9 @@ function Registration(): JSX.Element {
         )}
       </Formik>
       <NavigateToLogin />
+      {status && renderSnackBar(status, setStatus)}
     </div>
   );
-}
+};
 
 export default Registration;

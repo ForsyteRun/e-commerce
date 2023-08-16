@@ -3,13 +3,13 @@ import { LoginEmailFieldProps } from '../../../../../../types';
 import validateEmail from '../../helpers/validateEmail';
 import styles from './EmailField.module.scss';
 
-function EmailField({
+const EmailField = ({
   values,
   errors,
   touched,
   handleChange,
   handleBlur,
-}: LoginEmailFieldProps): JSX.Element {
+}: LoginEmailFieldProps): JSX.Element => {
   return (
     <div className={styles.inputContainer}>
       <label htmlFor="email" className={styles.label}>
@@ -31,6 +31,6 @@ function EmailField({
       )}
     </div>
   );
-}
+};
 
 export default EmailField;
