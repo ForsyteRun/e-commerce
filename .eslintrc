@@ -50,6 +50,7 @@
         "Field"
       ],
       "depth": 2
-    }]
+    }],
+    "no-param-reassign": 0
   }
 }
