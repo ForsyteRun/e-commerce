@@ -10,7 +10,7 @@ import {
   allMonths,
 } from '../../constants';
 import { getClick, getDays, getYears } from './helpers';
-import { INIT_MONTH } from './constants';
+import { INIT_DAY, INIT_MONTH, INIT_YEAR } from './constants';
 import checkLeapYear from './helpers/checkLeapYear';
 import getDaysOfMonth from './helpers/getDaysOfMonth';
 import styles from './select.module.scss';
@@ -22,9 +22,9 @@ const Select = (): JSX.Element => {
 
   const [newDays, setNewDays] = useState<number[]>(days);
 
-  const [dayOfBirthDay, setDayOfBirthDay] = useState<string>('');
-  const [yearOfBirthDay, setYearOfBirthDay] = useState<string>('');
+  const [dayOfBirthDay, setDayOfBirthDay] = useState<string>(INIT_DAY);
   const [monthOfBirthDay, setMonthOfBirthDay] = useState<string>(INIT_MONTH);
+  const [yearOfBirthDay, setYearOfBirthDay] = useState<string>(INIT_YEAR);
 
   const [chackLeapYear, setChackLeapYear] = useState<boolean>(false);
 

@@ -42,9 +42,6 @@ const Registration: React.FC = () => {
     apiRoot
       .customers()
       .post({
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: data,
       })
       .execute()
