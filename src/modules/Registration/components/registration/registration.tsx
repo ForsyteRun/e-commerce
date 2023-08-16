@@ -6,20 +6,16 @@ import {
 } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import SnackBar from '../../../../components/SnackBar';
+import renderSnackBar from '../../../../components/SnackBar/helpers';
 import apiRoot from '../../../../services/sdkClient/apiRoot';
-import {
-  RequestStatusAnswer,
-  RequestStatusCode,
-  RequestStatusColor,
-} from '../../../../types';
+import { RequestStatusCode } from '../../../../types';
 import NavigateToLogin from '../NavigateToLogin';
 import Adress from '../adress/Adress';
+import validCountries from '../adress/constants';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
-import validCountries from '../adress/constants';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -130,21 +126,8 @@ const Registration: React.FC = () => {
         )}
       </Formik>
       <NavigateToLogin />
-      {isError && (
-        <SnackBar
-          title={RequestStatusAnswer.exist}
-          color={RequestStatusColor.exist}
-          setStatus={setStatus}
-        />
-      )}
-      {isOk && (
-        <SnackBar
-          title={RequestStatusAnswer.success}
-          color={RequestStatusColor.success}
-          isOk={isOk}
-          setStatus={setStatus}
-        />
-      )}
+      {isError && renderSnackBar('isError', setStatus)}
+      {isOk && renderSnackBar('isOk', setStatus)}
     </div>
   );
 };
