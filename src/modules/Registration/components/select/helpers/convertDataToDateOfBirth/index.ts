@@ -2,11 +2,11 @@ import { allMonths } from '../../../../constants';
 import { ConvertDataToDateOfBirthType } from './types';
 
 const convertDataToDateOfBirth = (data: ConvertDataToDateOfBirthType) => {
-  const { dayOfBirthDay, monthOfBirthDay, yearOfBirthDay } = data;
+  const { day, month, year } = data;
 
-  const getMonthIndex = allMonths.indexOf(monthOfBirthDay);
+  const getMonthIndex = allMonths.indexOf(month);
 
-  return `${yearOfBirthDay}-${getMonthIndex + 1}-${dayOfBirthDay}`;
+  return `${year}-${getMonthIndex + 1}-${day}`;
 };
 
 export default convertDataToDateOfBirth;

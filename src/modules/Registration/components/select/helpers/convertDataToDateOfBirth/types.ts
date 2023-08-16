@@ -1,4 +1,4 @@
 export type ConvertDataToDateOfBirthType = Record<
-  'yearOfBirthDay' | 'monthOfBirthDay' | 'dayOfBirthDay',
+  'day' | 'month' | 'year',
   string
 >;

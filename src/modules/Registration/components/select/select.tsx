@@ -15,18 +15,22 @@ import checkLeapYear from './helpers/checkLeapYear';
 import getDaysOfMonth from './helpers/getDaysOfMonth';
 import styles from './select.module.scss';
 import convertDataToDateOfBirth from './helpers/convertDataToDateOfBirth';
+import { DateOfBirth } from './types';
 
 const Select = (): JSX.Element => {
   const days = getDays<number>(START_DAYS, END_DAYS);
   const yearsArray = getYears<number>(START_YEAR, END_YEAR);
 
   const [newDays, setNewDays] = useState<number[]>(days);
-
-  const [dayOfBirthDay, setDayOfBirthDay] = useState<string>(INIT_DAY);
-  const [monthOfBirthDay, setMonthOfBirthDay] = useState<string>(INIT_MONTH);
-  const [yearOfBirthDay, setYearOfBirthDay] = useState<string>(INIT_YEAR);
-
   const [chackLeapYear, setChackLeapYear] = useState<boolean>(false);
+
+  const [birthDay, setBirthDay] = useState<DateOfBirth>({
+    day: INIT_DAY,
+    month: INIT_MONTH,
+    year: INIT_YEAR,
+  });
+
+  const { day, month, year } = birthDay;
 
   const formikProps = useFormikContext<FormikValues>();
 
@@ -34,10 +38,11 @@ const Select = (): JSX.Element => {
   const validateYear = (): string | undefined => {
     let error;
 
-    const isLeapYear = checkLeapYear(Number(yearOfBirthDay[0]));
+    const isLeapYear = checkLeapYear(Number(year));
+
     setChackLeapYear(isLeapYear);
 
-    if (Number(yearOfBirthDay) > AVAILABLE_AGE) {
+    if (Number(year) > AVAILABLE_AGE) {
       error = 'You are too young';
       formikProps.setFieldError('dateOfBirth', error);
     }
@@ -46,13 +51,13 @@ const Select = (): JSX.Element => {
   };
 
   useEffect(() => {
-    setNewDays(getDaysOfMonth(days, monthOfBirthDay, chackLeapYear));
+    setNewDays(getDaysOfMonth(days, month, chackLeapYear));
 
-    const data = { dayOfBirthDay, monthOfBirthDay, yearOfBirthDay };
+    const data = { day, month, year };
     const getDateOfBirth = convertDataToDateOfBirth(data);
 
     formikProps.setFieldValue('dateOfBirth', getDateOfBirth);
-  }, [dayOfBirthDay, monthOfBirthDay, yearOfBirthDay, chackLeapYear]);
+  }, [day, month, year, chackLeapYear]);
 
   return (
     <div className={styles.select__container}>
@@ -61,24 +66,24 @@ const Select = (): JSX.Element => {
         <Field
           as="select"
           name="date"
-          value={dayOfBirthDay}
+          value={day}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            setDayOfBirthDay(e.target.value)
+            setBirthDay({ ...birthDay, day: e.target.value })
           }
           className={styles.select}
         >
-          {newDays.map((day: number) => (
-            <option value={day} key={day}>
-              {day}
+          {newDays.map((value: number) => (
+            <option value={value} key={value}>
+              {value}
             </option>
           ))}
         </Field>
         <Field
           as="select"
           name="month"
-          value={monthOfBirthDay}
+          value={month}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            setMonthOfBirthDay(e.target.value);
+            setBirthDay({ ...birthDay, month: e.target.value });
           }}
           className={styles.select}
         >
@@ -91,9 +96,9 @@ const Select = (): JSX.Element => {
         <Field
           as="select"
           name="dateOfBirth"
-          value={yearOfBirthDay}
+          value={year}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            setYearOfBirthDay(e.target.value);
+            setBirthDay({ ...birthDay, year: e.target.value });
             getClick();
           }}
           validate={validateYear}

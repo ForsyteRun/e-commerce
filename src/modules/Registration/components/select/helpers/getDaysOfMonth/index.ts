@@ -8,7 +8,6 @@ const getDaysOfMonth = (
 ): number[] => {
   const index = allMonths.indexOf(value);
   let daysToRemove = 0;
-
   if (index === 1) {
     daysToRemove = leapYear ? 2 : 3;
   } else if ((index + 1) % 2 !== 0) {
