@@ -19,6 +19,7 @@ import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
+import validCountries from '../adress/constants';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -26,7 +27,9 @@ const initialValues: CustomerDraft = {
   email: '',
   password: '',
   dateOfBirth: BIRTH_INIT_DATA,
-  addresses: [{ country: '', city: '', postalCode: '', streetName: '' }],
+  addresses: [
+    { country: validCountries[0], city: '', postalCode: '', streetName: '' },
+  ],
 };
 
 const Registration: React.FC = () => {
