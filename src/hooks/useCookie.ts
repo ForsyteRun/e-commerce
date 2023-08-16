@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
 import Cookies from 'js-cookie';
-import { UpdateCookie } from '../types';
+import { UpdateCookie, VoidFunction } from '../types';
 
 function useCookie(
   name: string,
   defaultValue: string = ''
-): [string, UpdateCookie, () => void] {
+): [string, UpdateCookie, VoidFunction] {
   const [value, setValue] = useState(() => {
     const cookie = Cookies.get(name);
     return cookie || defaultValue;
@@ -19,7 +19,7 @@ function useCookie(
     [name]
   );
 
-  const removeCookie = useCallback((): void => {
+  const removeCookie: VoidFunction = useCallback(() => {
     Cookies.remove(name);
     setValue('');
   }, [name]);
