@@ -15,7 +15,7 @@ const SnackBar: React.FC<ISnackBar> = ({ title, color, isOk, setStatus }) => {
       if (isOk) {
         navigate(PathNames.index);
       }
-      setStatus({ isError: false, isOk: false });
+      setStatus('');
     }, 4000);
 
     return () => {

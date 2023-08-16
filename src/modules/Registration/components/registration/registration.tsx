@@ -29,12 +29,7 @@ const initialValues: CustomerDraft = {
 };
 
 const Registration: React.FC = () => {
-  const [status, setStatus] = useState<{ isError: boolean; isOk: boolean }>({
-    isError: false,
-    isOk: false,
-  });
-
-  const { isError, isOk } = status;
+  const [status, setStatus] = useState<string>('');
 
   // TODO: remove to separate file when REDUX appear
   const createCustomer = (data: CustomerDraft) => {
@@ -45,13 +40,13 @@ const Registration: React.FC = () => {
       })
       .execute()
       .then((res: ClientResponse<CustomerSignInResult>) => {
-        setStatus({ ...status, isOk: true });
+        setStatus('isOk');
         // eslint-disable-next-line no-console
         console.log(res);
       })
       .catch((error: _ErrorResponse) => {
         if (error.statusCode === RequestStatusCode.BadRequest) {
-          setStatus({ ...status, isError: true });
+          setStatus('isError');
         }
       });
   };
@@ -126,8 +121,7 @@ const Registration: React.FC = () => {
         )}
       </Formik>
       <NavigateToLogin />
-      {isError && renderSnackBar('isError', setStatus)}
-      {isOk && renderSnackBar('isOk', setStatus)}
+      {status && renderSnackBar(status, setStatus)}
     </div>
   );
 };

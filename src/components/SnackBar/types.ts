@@ -4,5 +4,7 @@ export interface ISnackBar {
   title: string;
   color: string;
   isOk?: boolean;
-  setStatus: Dispatch<SetStateAction<{ isError: boolean; isOk: boolean }>>;
+  setStatus: Dispatch<SetStateAction<string>>;
 }
+
+export type StatusUpdater = React.Dispatch<React.SetStateAction<string>>;

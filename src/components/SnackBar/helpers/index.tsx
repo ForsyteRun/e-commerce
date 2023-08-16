@@ -1,15 +1,15 @@
 import SnackBar from '..';
 import { RequestStatusAnswer, RequestStatusColor } from '../../../types';
+import { StatusUpdater } from '../types';
 
 const renderSnackBar = (
   statusType: string,
-  setStatus: React.Dispatch<
-    React.SetStateAction<{
-      isError: boolean;
-      isOk: boolean;
-    }>
-  >
-) => {
+  setStatus: StatusUpdater
+): JSX.Element | null => {
+  if (statusType === '') {
+    return null;
+  }
+
   const title =
     statusType === 'isError'
       ? RequestStatusAnswer.exist
@@ -29,5 +29,4 @@ const renderSnackBar = (
     />
   );
 };
-
 export default renderSnackBar;
