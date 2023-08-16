@@ -1,19 +1,19 @@
 .container {
-  width: 80%;
-  margin: 0 auto;
-  transform: translate(0, 100%);
+  width: 30%;
+  position: absolute;
+  top: -100%;
+  right: 0;
   animation-name: appear;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
+  animation-duration: 8s;
+  animation-timing-function: ease;
   animation-fill-mode: forwards;
 }
 
 .title {
+  height: 90px;
   text-align: center;
-  background-color: #18934d;
+  background-color: #18934d96;
   font-size: 50px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
 }
 
 .loading {
@@ -23,9 +23,9 @@
   border-top-right-radius: 5px;
   background-color: #9ddb15;
   animation-name: move;
-  animation-duration: 3s;
+  animation-duration: 2.5s;
   animation-timing-function: ease-out;
-  animation-delay: 0.5s;
+  animation-delay: 1.5s;
   animation-fill-mode: forwards;
 }
 
@@ -40,9 +40,16 @@
 
 @keyframes appear {
   0% {
-    transform: translate(0, 100%);
+    top: 100%;
+  }
+  50% {
+    top: 90%;
   }
   100% {
-    transform: translate(0, 0);
+    top: 100%;
   }
+}
+
+.hidden {
+  overflow: hidden;
 }

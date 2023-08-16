@@ -1,3 +1,8 @@
-const BIRTH_INIT_DATA = '1905-01-01';
+export const BIRTH_INIT_DATA = '1905-01-01';
+// eslint-disable-next-line import/no-mutable-exports
+export let SUCCESS_REGISTR = false;
 
-export default BIRTH_INIT_DATA;
+// for REDUX
+export const setSuccessRegistr = (value: boolean) => {
+  SUCCESS_REGISTR = value;
+};

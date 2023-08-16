@@ -1,4 +1,7 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface ISnackBar {
   title: string;
-  disabled: boolean;
+  color: string;
+  setStatus: Dispatch<SetStateAction<{ isError: boolean; isOk: boolean }>>;
 }

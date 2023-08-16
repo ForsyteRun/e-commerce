@@ -1,13 +1,24 @@
-import { CustomerDraft } from '@commercetools/platform-sdk';
+import {
+  ClientResponse,
+  CustomerDraft,
+  CustomerSignInResult,
+  _ErrorResponse,
+} from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
-import createCustomer from '../../api/createCustomer';
+import React, { useState } from 'react';
+import SnackBar from '../../../../components/SnackBar';
+import apiRoot from '../../../../services/sdkClient/apiRoot';
+import {
+  RequestStatusAnswer,
+  RequestStatusCode,
+  RequestStatusColor,
+} from '../../../../types';
 import NavigateToLogin from '../NavigateToLogin';
+import Adress from '../adress/Adress';
 import Select from '../select/select';
+import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
-import BIRTH_INIT_DATA from './constant';
-import Adress from '../adress/Adress';
-import SnackBar from '../../../../components/SnackBar';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -19,6 +30,36 @@ const initialValues: CustomerDraft = {
 };
 
 const Registration: React.FC = () => {
+  const [status, setStatus] = useState<{ isError: boolean; isOk: boolean }>({
+    isError: false,
+    isOk: false,
+  });
+
+  const { isError, isOk } = status;
+
+  // TODO: remove to separate file when REDUX appear
+  const createCustomer = (data: CustomerDraft) => {
+    apiRoot
+      .customers()
+      .post({
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: data,
+      })
+      .execute()
+      .then((res: ClientResponse<CustomerSignInResult>) => {
+        setStatus({ ...status, isOk: true });
+        // eslint-disable-next-line no-console
+        console.log(res);
+      })
+      .catch((error: _ErrorResponse) => {
+        if (error.statusCode === RequestStatusCode.BadRequest) {
+          setStatus({ ...status, isError: true });
+        }
+      });
+  };
+
   return (
     <div className={styles.register}>
       <Formik<CustomerDraft>
@@ -89,7 +130,20 @@ const Registration: React.FC = () => {
         )}
       </Formik>
       <NavigateToLogin />
-      <SnackBar title="success" disabled />
+      {isError && (
+        <SnackBar
+          title={RequestStatusAnswer.exist}
+          color={RequestStatusColor.exist}
+          setStatus={setStatus}
+        />
+      )}
+      {isOk && (
+        <SnackBar
+          title={RequestStatusAnswer.success}
+          color={RequestStatusColor.success}
+          setStatus={setStatus}
+        />
+      )}
     </div>
   );
 };
