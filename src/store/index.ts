@@ -1,11 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './userSlice';
-import registrationAccessCodeSlice from './registration/registrationAccess.slice';
+import registrationAccessCodeSlice from './registration/registrationAccess';
 
-const reducer = combineReducers({
-  userSlice,
-  registrationAccessCodeSlice,
-});
+const reducer = { userSlice, registrationAccessCodeSlice };
 
 const store = configureStore({
   reducer,

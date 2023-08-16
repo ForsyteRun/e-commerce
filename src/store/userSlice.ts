@@ -13,7 +13,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserLoginState(state: IUserState, action: PayloadAction<boolean>) {
-      state.isLogged = action.payload;
+      return {
+        ...state,
+        isLogged: action.payload,
+      };
     },
   },
 });

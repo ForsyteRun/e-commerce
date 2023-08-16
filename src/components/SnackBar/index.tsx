@@ -10,7 +10,7 @@ import {
   RequestStatusCode,
   RootState,
 } from '../../types';
-import { getRegistrationAccessCode } from '../../store/registration/registrationAccess.slice';
+import { getRegistrationAccessCode } from '../../store/registration/registrationAccess';
 
 const SnackBar: React.FC<ISnackBar> = ({ title, color }) => {
   const navigate = useNavigate();
