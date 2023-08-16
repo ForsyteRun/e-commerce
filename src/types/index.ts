@@ -1,3 +1,5 @@
+import { CookieAttributes } from 'js-cookie';
+
 export enum PathNames {
   index = '/',
   register = '/register',
@@ -59,3 +61,10 @@ export enum InputType {
 }
 
 export type VoidFunction = () => void;
+
+export type UpdateRefreshToken = (value: string) => void;
+
+export type UpdateCookie = (
+  newValue: string,
+  options: CookieAttributes
+) => void;
