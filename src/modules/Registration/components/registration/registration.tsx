@@ -138,6 +138,7 @@ const Registration: React.FC = () => {
         <SnackBar
           title={RequestStatusAnswer.success}
           color={RequestStatusColor.success}
+          isOk={isOk}
           setStatus={setStatus}
         />
       )}

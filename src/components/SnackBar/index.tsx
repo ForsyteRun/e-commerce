@@ -1,18 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './SnackBar.module.scss';
 import { ISnackBar } from './types';
+import { PathNames } from '../../types';
 
-const SnackBar: React.FC<ISnackBar> = ({ title, color, setStatus }) => {
+const SnackBar: React.FC<ISnackBar> = ({ title, color, isOk, setStatus }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.body.classList.add(styles.hidden);
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
+      if (isOk) {
+        navigate(PathNames.index);
+      }
       setStatus({ isError: false, isOk: false });
     }, 7000);
 
     return () => {
       document.body.classList.remove(styles.hidden);
+      clearTimeout(timer);
     };
   }, []);
 
