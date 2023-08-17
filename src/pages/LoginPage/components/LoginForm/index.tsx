@@ -35,7 +35,7 @@ const LoginForm = (): JSX.Element => {
         email: '',
         password: '',
       }}
-      onSubmit={async (values: LoginFormValues) => {
+      onSubmit={(values: LoginFormValues) => {
         logIn(values);
       }}
     >
