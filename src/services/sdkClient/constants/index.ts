@@ -3,17 +3,27 @@ import {
   HttpMiddlewareOptions,
 } from '@commercetools/sdk-client-v2';
 
+const {
+  VITE_REGION,
+  VITE_PROJECT_KEY,
+  VITE_CLIENT_ID,
+  VITE_CLIENT_SECRET,
+  VITE_SCOPES,
+} = import.meta.env;
+
+const credentials = {
+  clientId: VITE_CLIENT_ID,
+  clientSecret: VITE_CLIENT_SECRET,
+};
+const scopes = [VITE_SCOPES];
+
 export const authMiddlewareOptions: AuthMiddlewareOptions = {
-  host: `https://auth.${import.meta.env.VITE_REGION}`,
-  projectKey: import.meta.env.VITE_PROJECT_KEY,
-  credentials: {
-    clientId: import.meta.env.VITE_CLIENT_ID,
-    clientSecret: import.meta.env.VITE_CLIENT_SECRET,
-  },
-  scopes: [import.meta.env.VITE_SCOPES],
+  host: `https://auth.${VITE_REGION}`,
+  projectKey: VITE_PROJECT_KEY,
+  credentials,
+  scopes,
 };
 
-// Configure httpMiddlewareOptions
 export const httpMiddlewareOptions: HttpMiddlewareOptions = {
-  host: `https://api.${import.meta.env.VITE_REGION}`,
+  host: `https://api.${VITE_REGION}`,
 };
