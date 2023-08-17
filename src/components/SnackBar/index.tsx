@@ -10,7 +10,7 @@ import {
   RequestStatusCode,
   RootState,
 } from '../../types';
-import { getRegistrationAccessCode } from '../../store/registration/registrationAccess';
+import { getRegistrationAccessCode } from '../../store/registration/registrationAccess.slice';
 
 const SnackBar: React.FC<ISnackBar> = ({ title, color }) => {
   const navigate = useNavigate();
@@ -31,11 +31,11 @@ const SnackBar: React.FC<ISnackBar> = ({ title, color }) => {
       timer = setTimeout(() => {
         navigate(PathNames.index);
         dispatch(getRegistrationAccessCode(null));
-      }, 2000);
+      }, 3300);
     } else {
       timer = setTimeout(() => {
         dispatch(getRegistrationAccessCode(null));
-      }, 4000);
+      }, 4500);
     }
 
     return () => {

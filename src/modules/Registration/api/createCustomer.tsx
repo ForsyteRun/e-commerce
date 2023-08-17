@@ -6,7 +6,7 @@ import {
   _ErrorResponse,
 } from '@commercetools/platform-sdk';
 import apiRoot from '../../../services/sdkClient/apiRoot';
-import { getRegistrationAccessCode } from '../../../store/registration/registrationAccess';
+import { getRegistrationAccessCode } from '../../../store/registration/registrationAccess.slice';
 import { AppDispatch, RequestStatusCode } from '../../../types';
 
 const createCustomer = (data: CustomerDraft, dispatch: AppDispatch): void => {

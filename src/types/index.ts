@@ -20,12 +20,14 @@ export enum RequestStatusCode {
 }
 
 export enum RequestStatusAnswer {
-  exist = 'user exist',
+  exist = 'User exist. Login or enter another email',
   success = 'success',
+  serverError = 'Internal server error. Try later',
+  badRequest = 'Wrong data',
 }
 
 export enum RequestStatusColor {
-  exist = 'red',
+  error = 'red',
   success = 'green',
 }
 
