@@ -1,13 +1,17 @@
+import { BaseAddress } from '@commercetools/platform-sdk';
 import { Field, FormikErrors, FormikValues, useFormikContext } from 'formik';
 import { ReactNode } from 'react';
-import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './adress.module.scss';
 import validCountries from './constants';
 import validateCity from './validation/validateCity';
-import validateStreet from './validation/validateStreet';
 import validatePostCode from './validation/validatePostCode';
+import validateStreet from './validation/validateStreet';
 
-const Adress = (): JSX.Element => {
+interface IAdress {
+  blockTitle: string;
+}
+
+const Adress: React.FC<IAdress> = ({ blockTitle }: IAdress): JSX.Element => {
   const { errors, touched } = useFormikContext<FormikValues>();
   const errorAddresses = errors.addresses as FormikErrors<BaseAddress[]>;
   const touchedAddresses = touched.addresses as FormikErrors<BaseAddress[]>;
@@ -15,11 +19,11 @@ const Adress = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <div className={styles.input__container}>
-        <label htmlFor="city" className={styles.label}>
+        {/* <label htmlFor="city" className={styles.label}>
           City
-        </label>
+        </label> */}
         <Field
-          id="city"
+          // id="city"
           name="addresses[0].city"
           validate={validateCity}
           placeholder="City*"
@@ -32,11 +36,11 @@ const Adress = (): JSX.Element => {
         )}
       </div>
       <div className={styles.input__container}>
-        <label htmlFor="street" className={styles.label}>
+        {/* <label htmlFor="street" className={styles.label}>
           Street
-        </label>
+        </label> */}
         <Field
-          id="street"
+          // id="street"
           name="addresses[0].streetName"
           validate={validateStreet}
           placeholder="Street*"
@@ -51,9 +55,9 @@ const Adress = (): JSX.Element => {
           )}
       </div>
       <div className={styles.input__container}>
-        <label htmlFor="country" className={styles.label}>
+        {/* <label htmlFor="country" className={styles.label}>
           Country
-        </label>
+        </label> */}
         <Field
           as="select"
           name="addresses[0].country"
@@ -68,11 +72,11 @@ const Adress = (): JSX.Element => {
         </Field>
       </div>
       <div className={styles.input__container}>
-        <label htmlFor="postalCode" className={styles.label}>
+        {/* <label htmlFor="postalCode" className={styles.label}>
           PostCode
-        </label>
+        </label> */}
         <Field
-          id="postalCode"
+          // id="postalCode"
           name="addresses[0].postalCode"
           validate={validatePostCode}
           placeholder="postalCode*"
@@ -87,6 +91,7 @@ const Adress = (): JSX.Element => {
             </div>
           )}
       </div>
+      <div className={styles.title}>{blockTitle}</div>
     </div>
   );
 };
