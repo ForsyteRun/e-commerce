@@ -7,8 +7,15 @@ import EmailField from './components/EmailField';
 import PasswordField from './components/PasswordField';
 import RegistrationLink from './components/RegistrationLink';
 import styles from './LoginForm.module.scss';
+import useLogIn from '../../../../hooks/useLogIn';
+import LoginError from './components/LoginError';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
+import { setLoginError } from '../../../../store/userSlice';
 
 const LoginForm = (): JSX.Element => {
+  const { logIn } = useLogIn();
+  const dispatch = useAppDispatch();
+  const loginError = useAppSelector((state) => state.userSlice.loginError);
   const [inputType, setInputType] = useState(InputType.Password);
   const [icon, setIcon] = useState(<PasswordShowIcon />);
 
@@ -28,9 +35,8 @@ const LoginForm = (): JSX.Element => {
         email: '',
         password: '',
       }}
-      onSubmit={(values: LoginFormValues) => {
-        // eslint-disable-next-line no-console
-        console.log(values);
+      onSubmit={async (values: LoginFormValues) => {
+        logIn(values);
       }}
     >
       {({
@@ -43,12 +49,16 @@ const LoginForm = (): JSX.Element => {
       }: FormikProps<LoginFormValues>) => (
         <div className={styles.login}>
           <div className={styles.form}>
+            {loginError && <LoginError message={loginError} />}
             <Form noValidate onSubmit={handleSubmit}>
               <EmailField
                 values={values}
                 errors={errors}
                 touched={touched}
-                handleChange={handleChange}
+                handleChange={(e) => {
+                  handleChange(e);
+                  dispatch(setLoginError(null));
+                }}
                 handleBlur={handleBlur}
               />
               <PasswordField
@@ -56,7 +66,10 @@ const LoginForm = (): JSX.Element => {
                 values={values}
                 errors={errors}
                 touched={touched}
-                handleChange={handleChange}
+                handleChange={(e) => {
+                  handleChange(e);
+                  dispatch(setLoginError(null));
+                }}
                 handleBlur={handleBlur}
                 togglePasswordVisibility={togglePasswordVisibility}
                 icon={icon}
