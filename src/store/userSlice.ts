@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IUserState {
   isLogged: boolean;
+  isUpdated: boolean;
 }
 
 const initialState: IUserState = {
   isLogged: false,
+  isUpdated: false,
 };
 
 const userSlice = createSlice({
@@ -14,6 +16,7 @@ const userSlice = createSlice({
   reducers: {
     setUserLoginState(state: IUserState, action: PayloadAction<boolean>) {
       state.isLogged = action.payload;
+      state.isUpdated = true;
     },
   },
 });

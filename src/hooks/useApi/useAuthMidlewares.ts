@@ -16,10 +16,12 @@ function useAuthMidlewares() {
     ...authMiddlewareOptions,
     tokenCache,
   };
+
   const refreshAuthMiddlewareOptions: RefreshAuthMiddlewareOptions = {
     ...anonymousAuthMiddlewareOptions,
     refreshToken,
   };
+
   function getPasswordAuthMiddlewareOptions(
     userData: LoginFormValues
   ): PasswordAuthMiddlewareOptions {
