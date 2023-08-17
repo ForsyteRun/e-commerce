@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import useCookie from './useCookie';
-import { VoidFunction, UpdateRefreshToken } from '../types';
+import { UpdateRefreshToken } from '../types';
 
-function useRefreshToken(): [string, UpdateRefreshToken, VoidFunction] {
-  const [cookieValue, updateCookieValue, removeCookieValue] =
+function useRefreshToken() {
+  const [cookieValue, updateCookieValue, removeRefreshToken] =
     useCookie('refreshToken');
 
   const [refreshToken, setRefreshToken] = useState(
@@ -20,7 +20,7 @@ function useRefreshToken(): [string, UpdateRefreshToken, VoidFunction] {
     });
   };
 
-  return [refreshToken, updateRefreshToken, removeCookieValue];
+  return { refreshToken, updateRefreshToken, removeRefreshToken };
 }
 
 export default useRefreshToken;
