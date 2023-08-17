@@ -1,32 +1,29 @@
 import SnackBar from '..';
-import { RequestStatusAnswer, RequestStatusColor } from '../../../types';
-import { StatusUpdater } from '../types';
+import {
+  RequestStatusAnswer,
+  RequestStatusCode,
+  RequestStatusColor,
+} from '../../../types';
 
-const renderSnackBar = (
-  statusType: string,
-  setStatus: StatusUpdater
-): JSX.Element | null => {
-  if (statusType === '') {
+const renderSnackBar = (statusType: number | null): JSX.Element | null => {
+  if (statusType === null) {
     return null;
   }
 
-  const title =
-    statusType === 'isError'
-      ? RequestStatusAnswer.exist
-      : RequestStatusAnswer.success;
+  let title;
+  let color;
 
-  const color =
-    statusType === 'isError'
-      ? RequestStatusColor.exist
-      : RequestStatusColor.success;
+  if (statusType === RequestStatusCode.Created) {
+    title = RequestStatusAnswer.success;
+    color = RequestStatusColor.success;
+  } else if (statusType === RequestStatusCode.InternalServerError) {
+    title = RequestStatusAnswer.serverError;
+    color = RequestStatusColor.error;
+  } else {
+    title = RequestStatusAnswer.exist;
+    color = RequestStatusColor.error;
+  }
 
-  return (
-    <SnackBar
-      title={title}
-      color={color}
-      setStatus={setStatus}
-      isOk={statusType === 'isOk'}
-    />
-  );
+  return <SnackBar title={title} color={color} />;
 };
 export default renderSnackBar;

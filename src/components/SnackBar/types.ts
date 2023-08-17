@@ -1,10 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export interface ISnackBar {
-  title: string;
-  color: string;
-  isOk?: boolean;
-  setStatus: Dispatch<SetStateAction<string>>;
+  title?: string;
+  color?: string;
 }
 
 export type StatusUpdater = React.Dispatch<React.SetStateAction<string>>;
