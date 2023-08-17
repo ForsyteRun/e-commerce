@@ -1,16 +1,16 @@
 import { CustomerDraft } from '@commercetools/platform-sdk';
-import { Field, Form, Formik } from 'formik';
-import React from 'react';
+import { Field, Formik } from 'formik';
+import { Form } from 'react-router-dom';
 import renderSnackBar from '../../../../components/SnackBar/helpers';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 import createCustomer from '../../api/createCustomer';
 import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
+import NavigateToLogin from '../navigateToLogin';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
-import NavigateToLogin from '../navigateToLogin';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 
 const initialValues: CustomerDraft = {
   firstName: '',
