@@ -13,6 +13,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserLoginState(state: IUserState, action: PayloadAction<boolean>) {
+      // eslint-disable-next-line no-param-reassign
       state.isLogged = action.payload;
     },
   },
