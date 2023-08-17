@@ -1,14 +1,21 @@
 .container {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  padding-bottom: 10px;
+  padding: 20px 10px;
   column-gap: 15px;
+  border: 1px solid #999;
+  border-radius: 10px;
+  margin-bottom: 40px;
 }
 
-.label {
-  font-size: 16px;
-  font-weight: 600;
+.title {
+  width: 40%;
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background-color: #fff;
 }
 
 .input {
