@@ -1,14 +1,10 @@
-import {
-  ClientResponse,
-  CustomerDraft,
-  CustomerSignInResult,
-  _ErrorResponse,
-} from '@commercetools/platform-sdk';
+import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import renderSnackBar from '../../../../components/SnackBar/helpers';
-import apiRoot from '../../../../services/sdkClient/apiRoot';
-import { RequestStatusCode } from '../../../../types';
+import { AppDispatch, RootState } from '../../../../types';
+import createCustomer from '../../api/createCustomer';
 import NavigateToLogin from '../NavigateToLogin';
 import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
@@ -29,33 +25,15 @@ const initialValues: CustomerDraft = {
 };
 
 const Registration: React.FC = () => {
-  const [status, setStatus] = useState<string>('');
-
-  // TODO: remove to separate file when REDUX appear
-  const createCustomer = (data: CustomerDraft) => {
-    apiRoot
-      .customers()
-      .post({
-        body: data,
-      })
-      .execute()
-      .then((res: ClientResponse<CustomerSignInResult>) => {
-        setStatus('isOk');
-        // eslint-disable-next-line no-console
-        console.log(res);
-      })
-      .catch((error: _ErrorResponse) => {
-        if (error.statusCode === RequestStatusCode.BadRequest) {
-          setStatus('isError');
-        }
-      });
-  };
-
+  const { registrationAccessCode } = useSelector(
+    (state: RootState) => state.registrationAccessCodeSlice
+  );
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <div className={styles.register}>
       <Formik<CustomerDraft>
         initialValues={initialValues}
-        onSubmit={(value: CustomerDraft) => createCustomer(value)}
+        onSubmit={(value: CustomerDraft) => createCustomer(value, dispatch)}
       >
         {({ errors, touched }) => (
           <Form method="post" action="register" className={styles.form}>
@@ -121,7 +99,7 @@ const Registration: React.FC = () => {
         )}
       </Formik>
       <NavigateToLogin />
-      {status && renderSnackBar(status, setStatus)}
+      {registrationAccessCode && renderSnackBar(registrationAccessCode)}
     </div>
   );
 };

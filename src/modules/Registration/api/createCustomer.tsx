@@ -1,30 +1,38 @@
-// import {
-//   ClientResponse,
-//   CustomerDraft,
-//   CustomerSignInResult,
-//   _ErrorResponse,
-// } from '@commercetools/platform-sdk';
-// import apiRoot from '../../../services/sdkClient/apiRoot';
-// import { RequestStatusCode } from '../../../types';
+/* eslint-disable no-console */
+import {
+  ClientResponse,
+  CustomerDraft,
+  CustomerSignInResult,
+  _ErrorResponse,
+} from '@commercetools/platform-sdk';
+import apiRoot from '../../../services/sdkClient/apiRoot';
+import { getRegistrationAccessCode } from '../../../store/registration/registrationAccess.slice';
+import { AppDispatch, RequestStatusCode } from '../../../types';
 
-// const createCustomer = (data: CustomerDraft): void => {
-//   apiRoot
-//     .customers()
-//     .post({
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: data,
-//     })
-//     .execute()
-//     .then((res: ClientResponse<CustomerSignInResult>) =>
-//       // eslint-disable-next-line no-alert
-//       alert(`Created ${res}`)
-//     )
-//     .catch((error: _ErrorResponse) => {
-//       if (error.statusCode === RequestStatusCode.BadRequest) {
-//       }
-//     });
-// };
+const createCustomer = (data: CustomerDraft, dispatch: AppDispatch): void => {
+  apiRoot
+    .customers()
+    .post({
+      body: data,
+    })
+    .execute()
+    .then((res: ClientResponse<CustomerSignInResult>) => {
+      dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
+      console.log(res);
+    })
+    .catch((error: _ErrorResponse) => {
+      const { statusCode } = error;
 
-// export default createCustomer;
+      if (statusCode === RequestStatusCode.BadRequest) {
+        dispatch(getRegistrationAccessCode(RequestStatusCode.BadRequest));
+      } else if (statusCode === RequestStatusCode.Unauthorized) {
+        dispatch(getRegistrationAccessCode(RequestStatusCode.Unauthorized));
+      } else if (statusCode === RequestStatusCode.InternalServerError) {
+        dispatch(
+          getRegistrationAccessCode(RequestStatusCode.InternalServerError)
+        );
+      }
+    });
+};
+
+export default createCustomer;
