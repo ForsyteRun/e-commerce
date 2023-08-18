@@ -76,7 +76,7 @@ export interface LoginPasswordFieldProps {
   };
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-  togglePasswordVisibility: () => void;
+  togglePasswordVisibility: VoidFunction;
   icon: JSX.Element;
 }
 
@@ -93,3 +93,7 @@ export type UpdateCookie = (
   newValue: string,
   options: CookieAttributes
 ) => void;
+
+export interface LoginErrorProps {
+  message: string;
+}
