@@ -3,9 +3,8 @@ import { _ErrorResponse } from '@commercetools/platform-sdk';
 import createAnonymousUser from './thunks/createAnonymousUser';
 import fetchUserDataByRefreshToken from './thunks/fetchUserDataByRefreshToken';
 import fetchUserLoginData from './thunks/fetchUserLoginData';
-import { IUserState } from '../../types';
+import { IUserState, RequestStatusCode } from '../../types';
 import ERROR_MESSAGES from '../../pages/LoginPage/components/LoginForm/components/LoginError/constants';
-import { RequestStatusCode } from '../../types';
 
 const initialState: IUserState = {
   data: {
