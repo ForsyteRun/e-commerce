@@ -1,23 +1,30 @@
 import {
-  RefreshAuthMiddlewareOptions,
   ClientBuilder,
+  PasswordAuthMiddlewareOptions,
   TokenCache,
 } from '@commercetools/sdk-client-v2';
 import { authMiddlewareOptions, httpMiddlewareOptions } from './constants';
+import { LoginFormValues } from '../../types';
 import createTokenCache from './helpers/createTokenCache';
 import createApi from './helpers/createApi';
 
-function createRefreshTokenClientApi(refreshToken: string) {
+function createPasswordFlowClientApi(userData: LoginFormValues) {
   const tokenCache: TokenCache = createTokenCache();
 
-  const options: RefreshAuthMiddlewareOptions = {
+  const options: PasswordAuthMiddlewareOptions = {
     ...authMiddlewareOptions,
+    credentials: {
+      ...authMiddlewareOptions.credentials,
+      user: {
+        username: userData.email,
+        password: userData.password,
+      },
+    },
     tokenCache,
-    refreshToken,
   };
 
   const client = new ClientBuilder()
-    .withRefreshTokenFlow(options)
+    .withPasswordFlow(options)
     .withHttpMiddleware(httpMiddlewareOptions)
     // .withLoggerMiddleware()
     .build();
@@ -25,4 +32,4 @@ function createRefreshTokenClientApi(refreshToken: string) {
   return createApi(client);
 }
 
-export default createRefreshTokenClientApi;
+export default createPasswordFlowClientApi;

@@ -5,7 +5,7 @@ import {
 } from '@commercetools/sdk-client-v2';
 import { authMiddlewareOptions, httpMiddlewareOptions } from './constants';
 import createTokenCache from './helpers/createTokenCache';
-import createApi from './createApi';
+import createApi from './helpers/createApi';
 
 function createAnonymousClientApi() {
   const tokenCache: TokenCache = createTokenCache();

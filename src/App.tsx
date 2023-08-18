@@ -13,6 +13,7 @@ const App = () => {
 
   useEffect(() => {
     const refreshToken = getRefreshTokenCookie();
+
     if (refreshToken) {
       dispatch(fetchUserDataByRefreshToken(refreshToken));
     } else {

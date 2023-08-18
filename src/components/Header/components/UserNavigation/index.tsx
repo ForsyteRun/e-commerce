@@ -5,10 +5,9 @@ import { PathNames } from '../../../../types';
 import styles from './UserNavigation.module.scss';
 
 const UserNavigation = () => {
-  const { loading, data } = useAppSelector((state) => state.userDataSlice);
-  const isLoadingSuceeded = loading === 'succeeded';
-  const isAnomynousUser = isLoadingSuceeded && data.type === 'anonymous';
-  const isRegistered = isLoadingSuceeded && data.type === 'registered';
+  const { data } = useAppSelector((state) => state.userDataSlice);
+  const isAnomynousUser = data.type === 'anonymous';
+  const isRegistered = data.type === 'registered';
 
   return (
     <nav className={styles.userNavigation}>

@@ -16,8 +16,6 @@ const getDaysOfMonth = (
     daysToRemove = index + 1 <= MIDDLE_OF_THE_YEAR ? 1 : 0;
   }
 
-  // console.log(days.slice(0, days.length - daysToRemove), value);
-
   return days.slice(0, days.length - daysToRemove);
 };
 export default getDaysOfMonth;

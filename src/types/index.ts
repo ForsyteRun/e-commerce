@@ -1,9 +1,4 @@
 import { CookieAttributes } from 'js-cookie';
-import store from '../store';
-
-export type AppDispatch = typeof store.dispatch;
-
-export type RootState = ReturnType<typeof store.getState>;
 
 export enum PathNames {
   index = '/',
@@ -96,4 +91,16 @@ export type UpdateCookie = (
 
 export interface LoginErrorProps {
   message: string;
+}
+
+export interface IUserDataState {
+  type: 'anonymous' | 'registered' | null;
+  id: string | null | undefined;
+  cartId: string | null | undefined;
+}
+
+export interface IUserState {
+  data: IUserDataState;
+  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+  error: string | null;
 }

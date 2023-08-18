@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import createRefreshTokenClientApi from '../../../services/sdkClient/createRefreshTokenClientApi';
-import { IUserDataState } from '../interfaces';
 import createAnonymousUser from './createAnonymousUser';
+import { IUserDataState } from '../../../types';
 
 const fetchUserDataByRefreshToken = createAsyncThunk(
   'userData/fetchUserDataByRefreshToken',
@@ -37,7 +37,7 @@ const fetchUserDataByRefreshToken = createAsyncThunk(
         dispatch(createAnonymousUser());
       }
 
-      return rejectWithValue({ statusCode, message });
+      return rejectWithValue({ message, statusCode });
     }
   }
 );

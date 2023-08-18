@@ -7,15 +7,17 @@ import EmailField from './components/EmailField';
 import PasswordField from './components/PasswordField';
 import RegistrationLink from './components/RegistrationLink';
 import styles from './LoginForm.module.scss';
-import useLogIn from '../../../../hooks/useLogIn';
 import LoginError from './components/LoginError';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-import { setLoginError } from '../../../../store/userSlice';
+
+import {
+  fetchUserLoginData,
+  resetUserDataError,
+} from '../../../../store/userDataSlice';
 
 const LoginForm = (): JSX.Element => {
-  const { logIn } = useLogIn();
   const dispatch = useAppDispatch();
-  const loginError = useAppSelector((state) => state.userSlice.loginError);
+  const loginError = useAppSelector((state) => state.userDataSlice.error);
   const [inputType, setInputType] = useState(InputType.Password);
   const [icon, setIcon] = useState(<PasswordShowIcon />);
 
@@ -36,7 +38,7 @@ const LoginForm = (): JSX.Element => {
         password: '',
       }}
       onSubmit={(values: LoginFormValues) => {
-        logIn(values);
+        dispatch(fetchUserLoginData(values));
       }}
     >
       {({
@@ -57,7 +59,7 @@ const LoginForm = (): JSX.Element => {
                 touched={touched}
                 handleChange={(e) => {
                   handleChange(e);
-                  dispatch(setLoginError(null));
+                  dispatch(resetUserDataError());
                 }}
                 handleBlur={handleBlur}
               />
@@ -68,7 +70,7 @@ const LoginForm = (): JSX.Element => {
                 touched={touched}
                 handleChange={(e) => {
                   handleChange(e);
-                  dispatch(setLoginError(null));
+                  dispatch(resetUserDataError());
                 }}
                 handleBlur={handleBlur}
                 togglePasswordVisibility={togglePasswordVisibility}
