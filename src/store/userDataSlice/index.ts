@@ -3,8 +3,10 @@ import { _ErrorResponse } from '@commercetools/platform-sdk';
 import createAnonymousUser from './thunks/createAnonymousUser';
 import fetchUserDataByRefreshToken from './thunks/fetchUserDataByRefreshToken';
 import fetchUserLoginData from './thunks/fetchUserLoginData';
-import { IUserState, RequestStatusCode } from '../../types';
 import ERROR_MESSAGES from '../../pages/LoginPage/components/LoginForm/components/LoginError/constants';
+import setPendingStatus from './helpers/setPendingStatus';
+import setUserData from './helpers/setUserData';
+import { IUserState, RequestStatusCode } from '../../types';
 
 const initialState: IUserState = {
   data: {
@@ -27,39 +29,21 @@ const userDataSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createAnonymousUser.pending, (state) => {
-        state.loading = 'pending';
-        state.error = null;
-      })
-      .addCase(createAnonymousUser.fulfilled, (state, { payload }) => {
-        state.data = payload;
-        state.loading = 'succeeded';
-      })
+      .addCase(createAnonymousUser.pending, setPendingStatus)
+      .addCase(createAnonymousUser.fulfilled, setUserData)
       .addCase(createAnonymousUser.rejected, (state) => {
         state.loading = 'failed';
         state.error = 'Something went wrong...';
       })
-      .addCase(fetchUserDataByRefreshToken.pending, (state) => {
-        state.loading = 'pending';
-        state.error = null;
-      })
-      .addCase(fetchUserDataByRefreshToken.fulfilled, (state, { payload }) => {
-        state.data = payload;
-        state.loading = 'succeeded';
-      })
+      .addCase(fetchUserDataByRefreshToken.pending, setPendingStatus)
+      .addCase(fetchUserDataByRefreshToken.fulfilled, setUserData)
       .addCase(fetchUserDataByRefreshToken.rejected, (state, { payload }) => {
         state.loading = 'failed';
         const error = payload as _ErrorResponse;
         state.error = error.message;
       })
-      .addCase(fetchUserLoginData.pending, (state) => {
-        state.loading = 'pending';
-        state.error = null;
-      })
-      .addCase(fetchUserLoginData.fulfilled, (state, { payload }) => {
-        state.data = payload;
-        state.loading = 'succeeded';
-      })
+      .addCase(fetchUserLoginData.pending, setPendingStatus)
+      .addCase(fetchUserLoginData.fulfilled, setUserData)
       .addCase(fetchUserLoginData.rejected, (state, { payload }) => {
         state.loading = 'failed';
         const error = payload as _ErrorResponse;
