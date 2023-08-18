@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import createAnonymousUser from './thunks/createAnonymousUser';
+import fetchUserDataByRefreshToken from './thunks/fetchUserDataByRefreshToken';
 import { IUserState } from './interfaces';
 
 const initialState: IUserState = {
@@ -28,9 +29,20 @@ const userDataSlice = createSlice({
       })
       .addCase(createAnonymousUser.rejected, (state) => {
         state.loading = 'failed';
+      })
+      .addCase(fetchUserDataByRefreshToken.pending, (state) => {
+        state.loading = 'pending';
+        state.error = null;
+      })
+      .addCase(fetchUserDataByRefreshToken.fulfilled, (state, { payload }) => {
+        state.data = payload;
+        state.loading = 'succeeded';
+      })
+      .addCase(fetchUserDataByRefreshToken.rejected, (state) => {
+        state.loading = 'failed';
       });
   },
 });
 
-export { createAnonymousUser };
+export { createAnonymousUser, fetchUserDataByRefreshToken };
 export default userDataSlice.reducer;

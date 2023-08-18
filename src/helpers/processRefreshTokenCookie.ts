@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 
 export const getRefreshTokenCookie = (): string => {
   const cookie = Cookies.get('refreshToken');
-  return cookie || '';
+  return cookie ? `${import.meta.env.VITE_PROJECT_KEY}:${cookie}` : '';
 };
 
 export const updateRefreshTokenCookie = (value: string): void => {

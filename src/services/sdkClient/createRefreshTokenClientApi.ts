@@ -1,5 +1,5 @@
 import {
-  AnonymousAuthMiddlewareOptions,
+  RefreshAuthMiddlewareOptions,
   ClientBuilder,
   TokenCache,
 } from '@commercetools/sdk-client-v2';
@@ -7,16 +7,17 @@ import { authMiddlewareOptions, httpMiddlewareOptions } from './constants';
 import createTokenCache from './helpers/createTokenCache';
 import createApi from './createApi';
 
-function createAnonymousClientApi() {
+function createRefreshTokenClientApi(refreshToken: string) {
   const tokenCache: TokenCache = createTokenCache();
 
-  const options: AnonymousAuthMiddlewareOptions = {
+  const options: RefreshAuthMiddlewareOptions = {
     ...authMiddlewareOptions,
     tokenCache,
+    refreshToken,
   };
 
   const client = new ClientBuilder()
-    .withAnonymousSessionFlow(options)
+    .withRefreshTokenFlow(options)
     .withHttpMiddleware(httpMiddlewareOptions)
     // .withLoggerMiddleware()
     .build();
@@ -24,4 +25,4 @@ function createAnonymousClientApi() {
   return createApi(client);
 }
 
-export default createAnonymousClientApi;
+export default createRefreshTokenClientApi;
