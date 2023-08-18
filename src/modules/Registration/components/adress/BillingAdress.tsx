@@ -7,11 +7,7 @@ import validateCity from './validation/validateCity';
 import validatePostCode from './validation/validatePostCode';
 import validateStreet from './validation/validateStreet';
 
-interface IAdress {
-  blockTitle: string;
-}
-
-const Adress: React.FC<IAdress> = ({ blockTitle }: IAdress): JSX.Element => {
+const BillingAdress: React.FC = (): JSX.Element => {
   const { errors, touched } = useFormikContext<FormikValues>();
   const errorAddresses = errors.addresses as FormikErrors<BaseAddress[]>;
   const touchedAddresses = touched.addresses as FormikErrors<BaseAddress[]>;
@@ -76,9 +72,9 @@ const Adress: React.FC<IAdress> = ({ blockTitle }: IAdress): JSX.Element => {
             </div>
           )}
       </div>
-      <div className={styles.title}>{blockTitle}</div>
+      <div className={styles.title}>Billing adress</div>
     </div>
   );
 };
 
-export default Adress;
+export default BillingAdress;

@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import renderSnackBar from '../../../../components/SnackBar/helpers';
 import { AppDispatch, RootState } from '../../../../types';
 import createCustomer from '../../api/createCustomer';
-import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
 import NavigateToLogin from '../navigateToLogin';
+import BillingAdress from '../adress/BillingAdress';
+import ShippingAdress from '../adress/ShippingAdress';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -20,6 +21,7 @@ const initialValues: CustomerDraft = {
   password: '',
   dateOfBirth: BIRTH_INIT_DATA,
   addresses: [
+    { country: validCountries[0], city: '', postalCode: '', streetName: '' },
     { country: validCountries[0], city: '', postalCode: '', streetName: '' },
   ],
 };
@@ -99,8 +101,9 @@ const Registration: React.FC = () => {
             </div>
             <Select />
             <div className={styles.adress__container}>
-              <Adress blockTitle="Shipping adress" />
-              <Adress blockTitle="Billing adress" />
+              <BillingAdress />
+              <ShippingAdress />
+              {/* <Adress blockTitle="Shipping adress" /> */}
             </div>
             <button type="submit">Register</button>
           </Form>
