@@ -3,9 +3,7 @@ import { _ErrorResponse } from '@commercetools/platform-sdk';
 import createAnonymousUser from './thunks/createAnonymousUser';
 import fetchUserDataByRefreshToken from './thunks/fetchUserDataByRefreshToken';
 import fetchUserLoginData from './thunks/fetchUserLoginData';
-import setPendingStatus from './helpers/setPendingStatus';
-import setUserData from './helpers/setUserData';
-import handleLoginError from './helpers/handleLoginError';
+import { setUserData, setPendingStatus, handleLoginError } from './helpers';
 import { IUserState } from '../../types';
 
 const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
