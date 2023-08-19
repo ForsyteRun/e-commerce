@@ -1,4 +1,3 @@
-import { BaseAddress } from '@commercetools/platform-sdk';
 import { Field, FormikErrors, FormikValues, useFormikContext } from 'formik';
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 import styles from './adress.module.scss';

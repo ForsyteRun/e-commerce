@@ -3,7 +3,6 @@ import { Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import renderSnackBar from '../../../../components/SnackBar/helpers';
-import { AppDispatch, RootState } from '../../../../types';
 import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
 import NavigateToLogin from '../navigateToLogin';
