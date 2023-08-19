@@ -1,5 +1,6 @@
 import { Field, FormikErrors, FormikValues, useFormikContext } from 'formik';
 import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './adress.module.scss';
 import validCountries from './constants';
 import validateCity from './validation/validateCity';
