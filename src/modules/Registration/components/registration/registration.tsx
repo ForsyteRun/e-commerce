@@ -1,18 +1,17 @@
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import renderSnackBar from '../../../../components/SnackBar/helpers';
 import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
-import NavigateToLogin from '../navigateToLogin';
+import NavigateToLogin from '../NavigateToLogin';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
-import createCustomer from '../../api/createCustomer';
-import { IDefaultAdress } from './types';
-import { AppDispatch, RootState } from '../../../../store';
+// import { IDefaultAdress } from './types';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
+import { registerUser } from '../../../../store/userDataSlice/thunks';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -31,24 +30,31 @@ const Registration: React.FC = () => {
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
   const [billingField, setBillingField] = useState<boolean>(true);
 
-  const updateAdress: IDefaultAdress = {
-    isSameBillingFieldAsShipping: billingField,
-    defaulShippingAdress: shippingAdress,
-    defaultBillingAdress: billingAdress,
-  };
+  // const updateAdress: IDefaultAdress = {
+  //   isSameBillingFieldAsShipping: billingField,
+  //   defaulShippingAdress: shippingAdress,
+  //   defaultBillingAdress: billingAdress,
+  // };
 
-  const { registrationAccessCode } = useSelector(
-    (state: RootState) => state.registrationAccessCodeSlice
+  const { registrationAccessCode } = useAppSelector(
+    (state) => state.registrationAccessCodeSlice
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
+  const anonymousCartId = useAppSelector(
+    (state) => state.userDataSlice.data.cartId
+  );
   return (
     <div className={styles.register}>
       <h1 className={styles.title}>REGISTRATION</h1>
       <Formik<CustomerDraft>
         initialValues={initialValues}
-        onSubmit={(value: CustomerDraft) =>
-          createCustomer(value, updateAdress, dispatch)
-        }
+        onSubmit={(value: CustomerDraft) => {
+          const data: CustomerDraft = {
+            ...value,
+            anonymousCartId,
+          };
+          dispatch(registerUser(data));
+        }}
       >
         {({ errors, touched }) => (
           <Form method="post" action="register" className={styles.form}>
@@ -137,7 +143,7 @@ const Registration: React.FC = () => {
                   setBillingAdress(false);
                 }}
               />
-              <span>same shipping anf billind adresses </span>
+              <span>same shipping and billind adresses</span>
             </div>
             <button type="submit">Register</button>
           </Form>
