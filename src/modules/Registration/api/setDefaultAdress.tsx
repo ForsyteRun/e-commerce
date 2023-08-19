@@ -1,7 +1,11 @@
 import apiRoot from '../../../services/sdkClient/apiRoot';
 import UpdateCustomerActions from './types';
 
-const setDefaultShippingAdress = (customerID: string, type: string): void => {
+const setDefaultAdress = (
+  customerID: string,
+  shippingAdressId?: string,
+  billingAdressId?: string
+): void => {
   apiRoot
     .customers()
     .withId({ ID: customerID })
@@ -11,7 +15,11 @@ const setDefaultShippingAdress = (customerID: string, type: string): void => {
         actions: [
           {
             action: UpdateCustomerActions.setDefaultShipping,
-            addressId: type,
+            addressId: shippingAdressId,
+          },
+          {
+            action: UpdateCustomerActions.setDefaultBilling,
+            addressId: billingAdressId,
           },
         ],
       },
@@ -19,4 +27,4 @@ const setDefaultShippingAdress = (customerID: string, type: string): void => {
     .execute();
 };
 
-export default setDefaultShippingAdress;
+export default setDefaultAdress;
