@@ -1,9 +1,7 @@
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import renderSnackBar from '../../../../components/SnackBar/helpers';
-import { AppDispatch, RootState } from '../../../../types';
 import createCustomer from '../../api/createCustomer';
 import NavigateToLogin from '../NavigateToLogin';
 import Adress from '../adress/Adress';
@@ -12,6 +10,7 @@ import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -25,10 +24,10 @@ const initialValues: CustomerDraft = {
 };
 
 const Registration: React.FC = () => {
-  const { registrationAccessCode } = useSelector(
-    (state: RootState) => state.registrationAccessCodeSlice
+  const { registrationAccessCode } = useAppSelector(
+    (state) => state.registrationAccessCodeSlice
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   return (
     <div className={styles.register}>
       <Formik<CustomerDraft>

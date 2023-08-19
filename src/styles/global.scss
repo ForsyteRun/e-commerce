@@ -1,5 +1,6 @@
 .button,
 .button_active {
+  border: 0;
   border-radius: 10px;
   color: #fff;
   display: inline-block;
@@ -12,6 +13,10 @@
 .button {
   background-color: #5e96fc;
   cursor: pointer;
+
+  &:active {
+    transform: translate(1px, 1px);
+  }
 
   @media (hover: hover) {
     &:hover {
