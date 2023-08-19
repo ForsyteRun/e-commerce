@@ -10,6 +10,7 @@ import { getRegistrationAccessCode } from '../../../store/registration/registrat
 import { AppDispatch, RequestStatusCode } from '../../../types';
 import { IDefaultAdress } from '../components/registration/types';
 import getUpdateAction from './helpers.ts/getUpdateAction';
+import addCustomerAdress from './addAdress';
 
 const createCustomer = (
   data: CustomerDraft,
@@ -36,156 +37,9 @@ const createCustomer = (
     .execute()
     .then((res: ClientResponse<CustomerSignInResult>) => {
       const actions = getUpdateAction(res.body, setAdress);
-      console.log(res, actions);
 
-      // addCustomerAdress(res, setAdress);
-      // dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
-      // const setAction: CustomerUpdateAction[] = [
-      //   {
-      //     action: UpdateCustomerActions.addShippingAddress,
-      //     addressId: res.body.customer.addresses[0].id,
-      //   },
-      //   {
-      //     action: UpdateCustomerActions.addBillingAddress,
-      //     addressId: res.body.customer.addresses[1].id,
-      //   },
-      //   {
-      //     action: UpdateCustomerActions.setDefaultShipping,
-      //     addressId: res.body.customer.addresses[0].id,
-      //   },
-      // ];
-
-      // addAdress(res.body.customer.id, setAction);
-      // if (setAdress.isSameBillingFieldAsShipping) {
-      //   if (setAdress.defaulShippingAdress) {
-      //     const setAction: CustomerUpdateAction[] = [
-      //       {
-      //         action: UpdateCustomerActions.addShippingAddress,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.addBillingAddress,
-      //         addressId: res.body.customer.addresses[1].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.setDefaultShipping,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //     ];
-
-      //     addAdress(res.body.customer.id, setAction);
-      //     dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
-      //   } else {
-      //     const setAction: CustomerUpdateAction[] = [
-      //       {
-      //         action: UpdateCustomerActions.addShippingAddress,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.addBillingAddress,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //     ];
-
-      //     addAdress(res.body.customer.id, setAction);
-      //   }
-      // } else {
-      //   // eslint-disable-next-line no-lonely-if
-      //   if (setAdress.defaultBillingAdress && setAdress.defaulShippingAdress) {
-      //     const setAction: CustomerUpdateAction[] = [
-      //       {
-      //         action: UpdateCustomerActions.addShippingAddress,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.addBillingAddress,
-      //         addressId: res.body.customer.addresses[1].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.setDefaultShipping,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.setDefaultBilling,
-      //         addressId: res.body.customer.addresses[1].id,
-      //       },
-      //     ];
-      //     addAdress(res.body.customer.id, setAction);
-      //   } else if (setAdress.defaultBillingAdress) {
-      //     const setAction: CustomerUpdateAction[] = [
-      //       {
-      //         action: UpdateCustomerActions.addShippingAddress,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.addBillingAddress,
-      //         addressId: res.body.customer.addresses[1].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.setDefaultBilling,
-      //         addressId: res.body.customer.addresses[1].id,
-      //       },
-      //     ];
-      //     addAdress(res.body.customer.id, setAction);
-      //   } else if (setAdress.defaulShippingAdress) {
-      //     const setAction: CustomerUpdateAction[] = [
-      //       {
-      //         action: UpdateCustomerActions.addShippingAddress,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.addBillingAddress,
-      //         addressId: res.body.customer.addresses[1].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.setDefaultShipping,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //     ];
-      //     addAdress(res.body.customer.id, setAction);
-      //   } else {
-      //     const setAction: CustomerUpdateAction[] = [
-      //       {
-      //         action: UpdateCustomerActions.addShippingAddress,
-      //         addressId: res.body.customer.addresses[0].id,
-      //       },
-      //       {
-      //         action: UpdateCustomerActions.addBillingAddress,
-      //         addressId: res.body.customer.addresses[1].id,
-      //       },
-      //     ];
-      //     addAdress(res.body.customer.id, setAction);
-      //   }
-
-      //   // if (
-      //   //   defaultAdress.defaulShippingtAdress &&
-      //   //   defaultAdress.defaultBillingAdress
-      //   // ) {
-      //   //   setDefaultAdress(
-      //   //     res.body.customer.id,
-      //   //     res.body.customer.addresses[0].id as string,
-      //   //     res.body.customer.addresses[1].id as string
-      //   //   );
-      //   // } else if (defaultAdress.defaulShippingtAdress) {
-      //   //   setDefaultAdress(
-      //   //     res.body.customer.id,
-      //   //     res.body.customer.addresses[0].id as string,
-      //   //     res.body.customer.addresses[1].id as string
-      //   //   );
-      //   // } else if (defaultAdress.defaultBillingAdress) {
-      //   //   setDefaultAdress(
-      //   //     res.body.customer.id,
-      //   //     res.body.customer.addresses[0].id as string,
-      //   //     res.body.customer.addresses[1].id as string
-      //   //   );
-      //   // } else if (defaultAdress.isSameBillingFieldAsShipping) {
-      //   //   setDefaultAdress(
-      //   //     res.body.customer.id,
-      //   //     res.body.customer.addresses[0].id as string,
-      //   //     res.body.customer.addresses[1].id as string
-      //   //   );
-      //   // }
-      // }
+      addCustomerAdress(res.body.customer.id, actions);
+      dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
     })
     .catch((error: _ErrorResponse) => {
       const { statusCode } = error;

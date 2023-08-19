@@ -1,29 +1,20 @@
-// import { ClientResponse } from '@commercetools/sdk-client-v2';
-// import {
-//   CustomerSignInResult,
-//   CustomerUpdateAction,
-// } from '@commercetools/platform-sdk';
-// import apiRoot from '../../../services/sdkClient/apiRoot';
-// import { IDefaultAdress } from '../components/registration/types';
-// import getUpdateAction from './helpers.ts/getUpdateAction';
+import { CustomerUpdateAction } from '@commercetools/platform-sdk';
+import apiRoot from '../../../services/sdkClient/apiRoot';
 
-// const addCustomerAdress = (
-//   customerInfo: ClientResponse<CustomerSignInResult>,
-//   setAdress: IDefaultAdress
-// ): void => {
-//   const data = getUpdateAction(customerInfo, setAdress);
-//   console.log(data);
+const addCustomerAdress = (
+  customerId: string,
+  actions: CustomerUpdateAction[]
+): void => {
+  apiRoot
+    .customers()
+    .withId({ ID: customerId })
+    .post({
+      body: {
+        version: 1,
+        actions,
+      },
+    })
+    .execute();
+};
 
-//   apiRoot
-//     .customers()
-//     .withId({ ID: customer && (customer.id as string) })
-//     .post({
-//       body: {
-//         version: 1,
-//         actions: data as CustomerUpdateAction[],
-//       },
-//     })
-//     .execute();
-// };
-
-// export default addCustomerAdress;
+export default addCustomerAdress;
