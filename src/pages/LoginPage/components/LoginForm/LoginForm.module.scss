@@ -28,5 +28,11 @@
       background-color: #256df3;
     }
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
 }
 
