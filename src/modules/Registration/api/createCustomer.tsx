@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {
   ClientResponse,
   CustomerDraft,
@@ -7,8 +6,9 @@ import {
 } from '@commercetools/platform-sdk';
 import apiRoot from '../../../services/sdkClient/apiRoot';
 import { getRegistrationAccessCode } from '../../../store/registration/registrationAccess.slice';
-import { AppDispatch } from '../../../store';
 import { RequestStatusCode } from '../../../types';
+import { AppDispatch } from '../../../store';
+import setDefaultBillingAdress from './setDefaultBillingAdress';
 
 const createCustomer = (data: CustomerDraft, dispatch: AppDispatch): void => {
   apiRoot
@@ -19,7 +19,10 @@ const createCustomer = (data: CustomerDraft, dispatch: AppDispatch): void => {
     .execute()
     .then((res: ClientResponse<CustomerSignInResult>) => {
       dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
-      console.log(res);
+      setDefaultBillingAdress(
+        res.body.customer.id,
+        res.body.customer.addresses[0].id as string
+      );
     })
     .catch((error: _ErrorResponse) => {
       const { statusCode } = error;

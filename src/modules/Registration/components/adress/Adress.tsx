@@ -9,47 +9,58 @@ import validateStreet from './validation/validateStreet';
 
 interface IAdress {
   blockTitle: string;
+  field: number;
 }
 
-const Adress: React.FC<IAdress> = ({ blockTitle }: IAdress): JSX.Element => {
+const Adress: React.FC<IAdress> = ({
+  blockTitle,
+  field,
+}: IAdress): JSX.Element => {
   const { errors, touched } = useFormikContext<FormikValues>();
   const errorAddresses = errors.addresses as FormikErrors<BaseAddress[]>;
   const touchedAddresses = touched.addresses as FormikErrors<BaseAddress[]>;
+
+  const fieldName = `addresses[${field}].city`;
+  const fieldStreetName = `addresses[${field}].streetName`;
+  const fieldCountry = `addresses[${field}].country`;
+  const fieldPostalCode = `addresses[${field}].postalCode`;
 
   return (
     <div className={styles.container}>
       <div className={styles.input__container}>
         <Field
-          name="addresses[0].city"
+          name={fieldName}
           validate={validateCity}
           placeholder="City*"
           className={styles.input}
         />
-        {errorAddresses && touchedAddresses && touchedAddresses[0]?.city && (
-          <div className={styles.errorValid}>
-            {errorAddresses[0]?.city as ReactNode}
-          </div>
-        )}
+        {errorAddresses &&
+          touchedAddresses &&
+          touchedAddresses[field]?.city && (
+            <div className={styles.errorValid}>
+              {errorAddresses[field]?.city as ReactNode}
+            </div>
+          )}
       </div>
       <div className={styles.input__container}>
         <Field
-          name="addresses[0].streetName"
+          name={fieldStreetName}
           validate={validateStreet}
           placeholder="Street*"
           className={styles.input}
         />
         {errorAddresses &&
           touchedAddresses &&
-          touchedAddresses[0]?.streetName && (
+          touchedAddresses[field]?.streetName && (
             <div className={styles.errorValid}>
-              {errorAddresses[0]?.streetName as ReactNode}
+              {errorAddresses[field]?.streetName as ReactNode}
             </div>
           )}
       </div>
       <div className={styles.input__container}>
         <Field
           as="select"
-          name="addresses[0].country"
+          name={fieldCountry}
           placeholder="Country*"
           className={styles.input}
         >
@@ -62,7 +73,7 @@ const Adress: React.FC<IAdress> = ({ blockTitle }: IAdress): JSX.Element => {
       </div>
       <div className={styles.input__container}>
         <Field
-          name="addresses[0].postalCode"
+          name={fieldPostalCode}
           validate={validatePostCode}
           placeholder="postalCode*"
           className={styles.input}
@@ -70,9 +81,9 @@ const Adress: React.FC<IAdress> = ({ blockTitle }: IAdress): JSX.Element => {
 
         {errorAddresses &&
           touchedAddresses &&
-          touchedAddresses[0]?.postalCode && (
+          touchedAddresses[field]?.postalCode && (
             <div className={styles.errorValid}>
-              {errorAddresses[0]?.postalCode as ReactNode}
+              {errorAddresses[field]?.postalCode as ReactNode}
             </div>
           )}
       </div>
