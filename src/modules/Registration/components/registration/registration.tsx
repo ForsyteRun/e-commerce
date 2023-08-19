@@ -1,9 +1,7 @@
+/* eslint-disable import/no-cycle */
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Formik } from 'formik';
 import { Form } from 'react-router-dom';
-import renderSnackBar from '../../../../components/SnackBar/helpers';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-import createCustomer from '../../api/createCustomer';
 import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
 import NavigateToLogin from '../navigateToLogin';
@@ -11,6 +9,9 @@ import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
+import setDefaultAdress from '../../api/setDefaultAdress';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
+import createCustomer from '../../api/createCustomer';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -24,6 +25,11 @@ const initialValues: CustomerDraft = {
   ],
 };
 
+export interface IDefaultAdress {
+  defaulShippingtAdress: boolean;
+  defaultBillingAdress: boolean;
+}
+
 const Registration: React.FC = () => {
   const { registrationAccessCode } = useAppSelector(
     (state) => state.registrationAccessCodeSlice
@@ -34,7 +40,9 @@ const Registration: React.FC = () => {
       <h1 className={styles.title}>REGISTRATION</h1>
       <Formik<CustomerDraft>
         initialValues={initialValues}
-        onSubmit={(value: CustomerDraft) => createCustomer(value, dispatch)}
+        onSubmit={(value: CustomerDraft) =>
+          createCustomer(value, setDefaultAdress, dispatch)
+        }
       >
         {({ errors, touched }) => (
           <Form method="post" action="register" className={styles.form}>
@@ -99,8 +107,18 @@ const Registration: React.FC = () => {
             </div>
             <Select />
             <div className={styles.adress__container}>
-              <Adress blockTitle="Billiing adress" field={0} />
-              <Adress blockTitle="Shipping adress" field={1} />
+              <Adress
+                blockTitle="Shipping adress"
+                field={1}
+                adress={shippingAdress}
+                setAdress={setShippingAdress}
+              />
+              <Adress
+                blockTitle="Billiing adress"
+                field={0}
+                adress={billingAdress}
+                setAdress={setBillingAdress}
+              />
             </div>
             <button type="submit">Register</button>
           </Form>

@@ -32,6 +32,15 @@
   }
 }
 
+.checkbox {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  input {
+    width: 30px;
+  }
+}
+
 .errorValid {
   color: red;
 }
