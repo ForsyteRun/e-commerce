@@ -28,7 +28,9 @@ const Registration: React.FC = () => {
   const { registrationAccessCode } = useAppSelector(
     (state) => state.registrationAccessCodeSlice
   );
-  const { cartId } = useAppSelector((state) => state.userDataSlice.data);
+  const anonymousCartId = useAppSelector(
+    (state) => state.userDataSlice.data.cartId
+  );
   const dispatch = useAppDispatch();
 
   return (
@@ -39,7 +41,7 @@ const Registration: React.FC = () => {
           // createCustomer(value, dispatch);
           const data: CustomerDraft = {
             ...value,
-            anonymousCartId: cartId,
+            anonymousCartId,
           };
           dispatch(registerUser(data));
         }}
