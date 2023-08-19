@@ -7,10 +7,11 @@ import {
 } from '@commercetools/platform-sdk';
 import apiRoot from '../../../services/sdkClient/apiRoot';
 import { getRegistrationAccessCode } from '../../../store/registration/registrationAccess.slice';
-import { AppDispatch, RequestStatusCode } from '../../../types';
 import { IDefaultAdress } from '../components/registration/types';
 import getUpdateAction from './helpers.ts/getUpdateAction';
 import addCustomerAdress from './addAdress';
+import { AppDispatch } from '../../../store';
+import { RequestStatusCode } from '../../../types';
 
 const createCustomer = (
   data: CustomerDraft,
@@ -37,7 +38,6 @@ const createCustomer = (
     .execute()
     .then((res: ClientResponse<CustomerSignInResult>) => {
       const actions = getUpdateAction(res.body, setAdress);
-
       addCustomerAdress(res.body.customer.id, actions);
       dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
     })
