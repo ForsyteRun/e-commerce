@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Formik, Form, FormikProps } from 'formik';
-import { InputType, LoginFormValues, VoidFunction } from '../../../../types';
-import { ReactComponent as PasswordHideIcon } from '../../../../assets/images/svg/eye-password-hide.svg';
-import { ReactComponent as PasswordShowIcon } from '../../../../assets/images/svg/eye-password-show.svg';
+import { InputType, LoginFormValues, VoidFunction } from 'types';
+import { ReactComponent as PasswordHideIcon } from 'assets/images/svg/eye-password-hide.svg';
+import { ReactComponent as PasswordShowIcon } from 'assets/images/svg/eye-password-show.svg';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { fetchUserLoginData } from 'store/userDataSlice/thunks';
+import { resetUserDataError } from 'store/userDataSlice';
 import EmailField from './components/EmailField';
 import PasswordField from './components/PasswordField';
 import RegistrationLink from './components/RegistrationLink';
 import styles from './LoginForm.module.scss';
 import LoginError from './components/LoginError';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-import { fetchUserLoginData } from '../../../../store/userDataSlice/thunks';
-import { resetUserDataError } from '../../../../store/userDataSlice';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useAppDispatch();

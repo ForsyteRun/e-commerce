@@ -1,4 +1,4 @@
-import regex from '../../../constants/regex';
+import regex from 'pages/LoginPage/constants/regex';
 
 function validatePassword(password: string): string | undefined {
   let errorMessage: string | undefined;

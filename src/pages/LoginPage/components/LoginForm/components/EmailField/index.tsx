@@ -1,5 +1,5 @@
 import { Field } from 'formik';
-import { LoginEmailFieldProps } from '../../../../../../types';
+import { LoginEmailFieldProps } from 'types';
 import validateEmail from '../../helpers/validateEmail';
 import styles from './EmailField.module.scss';
 
