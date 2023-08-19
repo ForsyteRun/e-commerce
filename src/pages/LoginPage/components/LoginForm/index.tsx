@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Formik, Form, FormikProps } from 'formik';
-import { InputType, LoginFormValues, VoidFunction } from '../../../../types';
-import { ReactComponent as PasswordHideIcon } from '../../../../assets/images/svg/eye-password-hide.svg';
-import { ReactComponent as PasswordShowIcon } from '../../../../assets/images/svg/eye-password-show.svg';
+import { InputType, LoginFormValues, VoidFunction } from 'types';
+import { ReactComponent as PasswordHideIcon } from 'assets/images/svg/eye-password-hide.svg';
+import { ReactComponent as PasswordShowIcon } from 'assets/images/svg/eye-password-show.svg';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { fetchUserLoginData } from 'store/userDataSlice/thunks';
+import { resetUserDataError } from 'store/userDataSlice';
 import EmailField from './components/EmailField';
 import PasswordField from './components/PasswordField';
 import RegistrationLink from './components/RegistrationLink';
 import styles from './LoginForm.module.scss';
 import LoginError from './components/LoginError';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-import { fetchUserLoginData } from '../../../../store/userDataSlice/thunks';
-import { resetUserDataError } from '../../../../store/userDataSlice';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -34,8 +34,9 @@ const LoginForm = (): JSX.Element => {
         email: '',
         password: '',
       }}
-      onSubmit={(values: LoginFormValues) => {
-        dispatch(fetchUserLoginData(values));
+      onSubmit={async (values: LoginFormValues, { setSubmitting }) => {
+        setSubmitting(true);
+        await dispatch(fetchUserLoginData(values));
       }}
     >
       {({
@@ -45,6 +46,7 @@ const LoginForm = (): JSX.Element => {
         handleChange,
         handleBlur,
         handleSubmit,
+        isSubmitting,
       }: FormikProps<LoginFormValues>) => (
         <div className={styles.login}>
           <div className={styles.form}>
@@ -73,8 +75,12 @@ const LoginForm = (): JSX.Element => {
                 togglePasswordVisibility={togglePasswordVisibility}
                 icon={icon}
               />
-              <button type="submit" className={styles.buttonLogin}>
-                LOG IN
+              <button
+                type="submit"
+                className={styles.buttonLogin}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Loading...' : 'LOG IN'}
               </button>
             </Form>
             <RegistrationLink />

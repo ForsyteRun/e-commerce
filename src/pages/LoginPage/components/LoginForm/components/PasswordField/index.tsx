@@ -1,5 +1,5 @@
 import { Field } from 'formik';
-import { LoginPasswordFieldProps } from '../../../../../../types';
+import { LoginPasswordFieldProps } from 'types';
 import validatePassword from '../../helpers/validatePassword';
 import styles from './PasswordField.module.scss';
 

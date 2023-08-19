@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { PathNames } from '../../../../../../types';
+import { PathNames } from 'types';
 import styles from './RegistrationLink.module.scss';
 
 const RegistrationLink = () => {
