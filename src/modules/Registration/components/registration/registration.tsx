@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Formik } from 'formik';
 import { Form } from 'react-router-dom';
@@ -12,6 +11,7 @@ import { validateEmail, validateName, validatePassword } from './validation';
 import setDefaultAdress from '../../api/setDefaultAdress';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 import createCustomer from '../../api/createCustomer';
+import { IDefaultAdress } from './types';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -25,17 +25,13 @@ const initialValues: CustomerDraft = {
   ],
 };
 
-export interface IDefaultAdress {
-  defaulShippingtAdress: boolean;
-  defaultBillingAdress: boolean;
-}
-
 const Registration: React.FC = () => {
   const [shippingAdress, setShippingAdress] = useState<boolean>(false);
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
 
-  const defaultAdress: IDefaultAdress = {
-    defaulShippingtAdress: shippingAdress,
+  const updateAdress: IDefaultAdress = {
+    isSameBillingFieldAsShipping: billingField,
+    defaulShippingAdress: shippingAdress,
     defaultBillingAdress: billingAdress,
   };
 
@@ -49,7 +45,7 @@ const Registration: React.FC = () => {
       <Formik<CustomerDraft>
         initialValues={initialValues}
         onSubmit={(value: CustomerDraft) =>
-          createCustomer(value, setDefaultAdress, dispatch)
+          createCustomer(value, defaultAdress, dispatch)
         }
       >
         {({ errors, touched }) => (
@@ -117,14 +113,14 @@ const Registration: React.FC = () => {
             <div className={styles.adress__container}>
               <Adress
                 blockTitle="Shipping adress"
-                field={1}
+                field={0}
                 adress={shippingAdress}
                 setAdress={setShippingAdress}
               />
               {!billingField && (
                 <Adress
                   blockTitle="Billiing adress"
-                  field={0}
+                  field={1}
                   adress={billingAdress}
                   setAdress={setBillingAdress}
                 />
