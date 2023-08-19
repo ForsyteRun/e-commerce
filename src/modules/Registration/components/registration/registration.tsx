@@ -48,7 +48,7 @@ const Registration: React.FC = () => {
       navigate(PathNames.index, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userType]);
 
   return (
     <div className={styles.register}>
