@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
@@ -13,6 +12,7 @@ import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
 import createCustomer from '../../api/createCustomer';
+import { IDefaultAdress } from './types';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -26,18 +26,14 @@ const initialValues: CustomerDraft = {
   ],
 };
 
-export interface IDefaultAdress {
-  defaulShippingtAdress: boolean;
-  defaultBillingAdress: boolean;
-}
-
 const Registration: React.FC = () => {
   const [shippingAdress, setShippingAdress] = useState<boolean>(false);
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
   const [billingField, setBillingField] = useState<boolean>(true);
 
-  const defaultAdress: IDefaultAdress = {
-    defaulShippingtAdress: shippingAdress,
+  const updateAdress: IDefaultAdress = {
+    isSameBillingFieldAsShipping: billingField,
+    defaulShippingAdress: shippingAdress,
     defaultBillingAdress: billingAdress,
   };
 
@@ -51,7 +47,7 @@ const Registration: React.FC = () => {
       <Formik<CustomerDraft>
         initialValues={initialValues}
         onSubmit={(value: CustomerDraft) =>
-          createCustomer(value, defaultAdress, dispatch)
+          createCustomer(value, updateAdress, dispatch)
         }
       >
         {({ errors, touched }) => (
@@ -119,14 +115,14 @@ const Registration: React.FC = () => {
             <div className={styles.adress__container}>
               <Adress
                 blockTitle="Shipping adress"
-                field={1}
+                field={0}
                 adress={shippingAdress}
                 setAdress={setShippingAdress}
               />
               {!billingField && (
                 <Adress
                   blockTitle="Billiing adress"
-                  field={0}
+                  field={1}
                   adress={billingAdress}
                   setAdress={setBillingAdress}
                 />

@@ -1,4 +1,5 @@
 import {
+  Address,
   ClientResponse,
   CustomerDraft,
   CustomerSignInResult,
@@ -7,46 +8,184 @@ import {
 import apiRoot from '../../../services/sdkClient/apiRoot';
 import { getRegistrationAccessCode } from '../../../store/registration/registrationAccess.slice';
 import { AppDispatch, RequestStatusCode } from '../../../types';
-// eslint-disable-next-line import/no-cycle
-import { IDefaultAdress } from '../components/registration/registration';
-import setDefaultAdress from './setDefaultAdress';
+import { IDefaultAdress } from '../components/registration/types';
+import getUpdateAction from './helpers.ts/getUpdateAction';
 
 const createCustomer = (
   data: CustomerDraft,
-  defaultAdress: IDefaultAdress,
+  setAdress: IDefaultAdress,
   dispatch: AppDispatch
 ): void => {
+  let splitData;
+  if (setAdress.isSameBillingFieldAsShipping) {
+    splitData = data.addresses?.filter((el: Address) => el.city !== '');
+  } else {
+    splitData = data.addresses;
+  }
+
+  const updatedData = {
+    ...data,
+    addresses: splitData,
+  };
+
   apiRoot
     .customers()
     .post({
-      body: data,
+      body: updatedData,
     })
     .execute()
     .then((res: ClientResponse<CustomerSignInResult>) => {
-      dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
+      const actions = getUpdateAction(res.body, setAdress);
+      console.log(res, actions);
 
-      if (
-        defaultAdress.defaulShippingtAdress &&
-        defaultAdress.defaultBillingAdress
-      ) {
-        setDefaultAdress(
-          res.body.customer.id,
-          res.body.customer.addresses[0].id,
-          res.body.customer.addresses[1].id
-        );
-      } else if (defaultAdress.defaulShippingtAdress) {
-        setDefaultAdress(
-          res.body.customer.id,
-          res.body.customer.addresses[0].id,
-          undefined
-        );
-      } else if (defaultAdress.defaultBillingAdress) {
-        setDefaultAdress(
-          res.body.customer.id,
-          undefined,
-          res.body.customer.addresses[1].id
-        );
-      }
+      // addCustomerAdress(res, setAdress);
+      // dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
+      // const setAction: CustomerUpdateAction[] = [
+      //   {
+      //     action: UpdateCustomerActions.addShippingAddress,
+      //     addressId: res.body.customer.addresses[0].id,
+      //   },
+      //   {
+      //     action: UpdateCustomerActions.addBillingAddress,
+      //     addressId: res.body.customer.addresses[1].id,
+      //   },
+      //   {
+      //     action: UpdateCustomerActions.setDefaultShipping,
+      //     addressId: res.body.customer.addresses[0].id,
+      //   },
+      // ];
+
+      // addAdress(res.body.customer.id, setAction);
+      // if (setAdress.isSameBillingFieldAsShipping) {
+      //   if (setAdress.defaulShippingAdress) {
+      //     const setAction: CustomerUpdateAction[] = [
+      //       {
+      //         action: UpdateCustomerActions.addShippingAddress,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.addBillingAddress,
+      //         addressId: res.body.customer.addresses[1].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.setDefaultShipping,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //     ];
+
+      //     addAdress(res.body.customer.id, setAction);
+      //     dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
+      //   } else {
+      //     const setAction: CustomerUpdateAction[] = [
+      //       {
+      //         action: UpdateCustomerActions.addShippingAddress,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.addBillingAddress,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //     ];
+
+      //     addAdress(res.body.customer.id, setAction);
+      //   }
+      // } else {
+      //   // eslint-disable-next-line no-lonely-if
+      //   if (setAdress.defaultBillingAdress && setAdress.defaulShippingAdress) {
+      //     const setAction: CustomerUpdateAction[] = [
+      //       {
+      //         action: UpdateCustomerActions.addShippingAddress,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.addBillingAddress,
+      //         addressId: res.body.customer.addresses[1].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.setDefaultShipping,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.setDefaultBilling,
+      //         addressId: res.body.customer.addresses[1].id,
+      //       },
+      //     ];
+      //     addAdress(res.body.customer.id, setAction);
+      //   } else if (setAdress.defaultBillingAdress) {
+      //     const setAction: CustomerUpdateAction[] = [
+      //       {
+      //         action: UpdateCustomerActions.addShippingAddress,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.addBillingAddress,
+      //         addressId: res.body.customer.addresses[1].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.setDefaultBilling,
+      //         addressId: res.body.customer.addresses[1].id,
+      //       },
+      //     ];
+      //     addAdress(res.body.customer.id, setAction);
+      //   } else if (setAdress.defaulShippingAdress) {
+      //     const setAction: CustomerUpdateAction[] = [
+      //       {
+      //         action: UpdateCustomerActions.addShippingAddress,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.addBillingAddress,
+      //         addressId: res.body.customer.addresses[1].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.setDefaultShipping,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //     ];
+      //     addAdress(res.body.customer.id, setAction);
+      //   } else {
+      //     const setAction: CustomerUpdateAction[] = [
+      //       {
+      //         action: UpdateCustomerActions.addShippingAddress,
+      //         addressId: res.body.customer.addresses[0].id,
+      //       },
+      //       {
+      //         action: UpdateCustomerActions.addBillingAddress,
+      //         addressId: res.body.customer.addresses[1].id,
+      //       },
+      //     ];
+      //     addAdress(res.body.customer.id, setAction);
+      //   }
+
+      //   // if (
+      //   //   defaultAdress.defaulShippingtAdress &&
+      //   //   defaultAdress.defaultBillingAdress
+      //   // ) {
+      //   //   setDefaultAdress(
+      //   //     res.body.customer.id,
+      //   //     res.body.customer.addresses[0].id as string,
+      //   //     res.body.customer.addresses[1].id as string
+      //   //   );
+      //   // } else if (defaultAdress.defaulShippingtAdress) {
+      //   //   setDefaultAdress(
+      //   //     res.body.customer.id,
+      //   //     res.body.customer.addresses[0].id as string,
+      //   //     res.body.customer.addresses[1].id as string
+      //   //   );
+      //   // } else if (defaultAdress.defaultBillingAdress) {
+      //   //   setDefaultAdress(
+      //   //     res.body.customer.id,
+      //   //     res.body.customer.addresses[0].id as string,
+      //   //     res.body.customer.addresses[1].id as string
+      //   //   );
+      //   // } else if (defaultAdress.isSameBillingFieldAsShipping) {
+      //   //   setDefaultAdress(
+      //   //     res.body.customer.id,
+      //   //     res.body.customer.addresses[0].id as string,
+      //   //     res.body.customer.addresses[1].id as string
+      //   //   );
+      //   // }
+      // }
     })
     .catch((error: _ErrorResponse) => {
       const { statusCode } = error;
