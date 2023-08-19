@@ -22,9 +22,6 @@ const Adress: React.FC<IAdress> = ({
 }: IAdress): JSX.Element => {
   const { errors, touched } = useFormikContext<FormikValues>();
 
-  // const { shippingAdress, setShippingAdress } = useState(false);
-  // const { BillingAdress, setBillingAdress } = useState(false);
-
   const errorAddresses = errors.addresses as FormikErrors<BaseAddress[]>;
   const touchedAddresses = touched.addresses as FormikErrors<BaseAddress[]>;
 

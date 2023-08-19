@@ -34,6 +34,7 @@ export interface IDefaultAdress {
 const Registration: React.FC = () => {
   const [shippingAdress, setShippingAdress] = useState<boolean>(false);
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
+  const [billingField, setBillingField] = useState<boolean>(true);
 
   const defaultAdress: IDefaultAdress = {
     defaulShippingtAdress: shippingAdress,
@@ -122,12 +123,22 @@ const Registration: React.FC = () => {
                 adress={shippingAdress}
                 setAdress={setShippingAdress}
               />
-              <Adress
-                blockTitle="Billiing adress"
-                field={0}
-                adress={billingAdress}
-                setAdress={setBillingAdress}
+              {!billingField && (
+                <Adress
+                  blockTitle="Billiing adress"
+                  field={0}
+                  adress={billingAdress}
+                  setAdress={setBillingAdress}
+                />
+              )}
+            </div>
+            <div className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={billingField}
+                onChange={() => setBillingField(!billingField)}
               />
+              <span>same shipping anf billind adresses </span>
             </div>
             <button type="submit">Register</button>
           </Form>
