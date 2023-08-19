@@ -1,7 +1,7 @@
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import renderSnackBar from '../../../../components/SnackBar/helpers';
 import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
@@ -9,10 +9,12 @@ import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
-import { AppDispatch, RootState } from '../../../../store';
-import createCustomer from '../../api/createCustomer';
-import NavigateToLogin from '../navigateToLogin';
+import NavigateToLogin from '../NavigateToLogin';
 import { IDefaultAdress } from './types';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
+import { registerUser } from '../../../../store/userDataSlice/thunks';
+import validateAdresses from './validation/validateAdresses';
+import { PathNames } from '../../../../types';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -27,39 +29,44 @@ const initialValues: CustomerDraft = {
 };
 
 const Registration: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [shippingAdress, setShippingAdress] = useState<boolean>(false);
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
   const [billingField, setBillingField] = useState<boolean>(true);
 
-  const updateAdress: IDefaultAdress = {
-    isSameBillingFieldAsShipping: billingField,
-    defaulShippingAdress: shippingAdress,
-    defaultBillingAdress: billingAdress,
-  };
-
-  const { registrationAccessCode } = useSelector(
-    (state: RootState) => state.registrationAccessCodeSlice
+  const userType = useAppSelector((state) => state.userDataSlice.data.type);
+  const { registrationAccessCode } = useAppSelector(
+    (state) => state.registrationAccessCodeSlice
   );
-  const dispatch = useDispatch<AppDispatch>();
-  // const { registrationAccessCode } = useAppSelector(
-  //   (state) => state.registrationAccessCodeSlice
-  // );
-  // const dispatch = useAppDispatch();
-  // const anonymousCartId = useAppSelector(
-  //   (state) => state.userDataSlice.data.cartId
-  // );
+  const anonymousCartId = useAppSelector(
+    (state) => state.userDataSlice.data.cartId
+  );
+
+  useEffect(() => {
+    if (userType === 'registered') {
+      navigate(PathNames.index, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={styles.register}>
       <h1 className={styles.title}>REGISTRATION</h1>
       <Formik<CustomerDraft>
         initialValues={initialValues}
         onSubmit={(value: CustomerDraft) => {
-          // const data: CustomerDraft = {
-          //   ...value,
-          //   anonymousCartId,
-          // };
-          createCustomer(value, updateAdress, dispatch);
-          // dispatch(registerUser(data));
+          const updateAdress: IDefaultAdress = {
+            isSameBillingFieldAsShipping: billingField,
+            defaultShippingAdress: shippingAdress,
+            defaultBillingAdress: billingAdress,
+          };
+          const formData = validateAdresses(value, updateAdress);
+          const data: CustomerDraft = {
+            ...formData,
+            anonymousCartId,
+          };
+          dispatch(registerUser(data));
         }}
       >
         {({ errors, touched }) => (

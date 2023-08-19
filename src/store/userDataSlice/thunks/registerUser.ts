@@ -18,7 +18,11 @@ const registerUser = createAsyncThunk(
         .post({ body: registrationData })
         .execute();
 
-      if (response.statusCode === RequestStatusCode.Created) {
+      const isUserCreated =
+        response.statusCode &&
+        response.statusCode === RequestStatusCode.Created;
+
+      if (isUserCreated) {
         dispatch(getRegistrationAccessCode(response.statusCode!));
 
         const loginData: LoginFormValues = {

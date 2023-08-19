@@ -12,18 +12,20 @@ const fetchUserDataByRefreshToken = createAsyncThunk(
     try {
       const response = await api.me().activeCart().get().execute();
 
+      const { anonymousId, customerId, id } = response.body;
+
       const data: IUserDataState = {
         type: null,
         id: null,
-        cartId: response.body.id,
+        cartId: id,
       };
 
-      if (response.body.anonymousId) {
+      if (anonymousId && !customerId) {
         data.type = 'anonymous';
-        data.id = response.body.anonymousId;
-      } else if (response.body.customerId) {
+        data.id = anonymousId;
+      } else if (customerId) {
         data.type = 'registered';
-        data.id = response.body.customerId;
+        data.id = customerId;
       }
 
       return data;
