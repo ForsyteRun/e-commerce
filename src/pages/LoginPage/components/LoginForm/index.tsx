@@ -59,7 +59,7 @@ const LoginForm = (): JSX.Element => {
                 touched={touched}
                 handleChange={(e) => {
                   handleChange(e);
-                  dispatch(resetUserDataError());
+                  if (loginError) dispatch(resetUserDataError());
                 }}
                 handleBlur={handleBlur}
               />
@@ -70,7 +70,7 @@ const LoginForm = (): JSX.Element => {
                 touched={touched}
                 handleChange={(e) => {
                   handleChange(e);
-                  dispatch(resetUserDataError());
+                  if (loginError) dispatch(resetUserDataError());
                 }}
                 handleBlur={handleBlur}
                 togglePasswordVisibility={togglePasswordVisibility}
