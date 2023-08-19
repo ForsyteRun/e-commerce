@@ -1,6 +1,9 @@
 import { CustomerDraft } from '@commercetools/platform-sdk';
-import { Field, Formik } from 'formik';
-import { Form } from 'react-router-dom';
+import { Field, Form, Formik } from 'formik';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import renderSnackBar from '../../../../components/SnackBar/helpers';
+import { AppDispatch, RootState } from '../../../../types';
 import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
 import NavigateToLogin from '../navigateToLogin';
@@ -8,8 +11,6 @@ import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
-import setDefaultAdress from '../../api/setDefaultAdress';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 import createCustomer from '../../api/createCustomer';
 import { IDefaultAdress } from './types';
 
@@ -28,6 +29,7 @@ const initialValues: CustomerDraft = {
 const Registration: React.FC = () => {
   const [shippingAdress, setShippingAdress] = useState<boolean>(false);
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
+  const [billingField, setBillingField] = useState<boolean>(true);
 
   const updateAdress: IDefaultAdress = {
     isSameBillingFieldAsShipping: billingField,
@@ -38,14 +40,14 @@ const Registration: React.FC = () => {
   const { registrationAccessCode } = useSelector(
     (state: RootState) => state.registrationAccessCodeSlice
   );
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <div className={styles.register}>
       <h1 className={styles.title}>REGISTRATION</h1>
       <Formik<CustomerDraft>
         initialValues={initialValues}
         onSubmit={(value: CustomerDraft) =>
-          createCustomer(value, defaultAdress, dispatch)
+          createCustomer(value, updateAdress, dispatch)
         }
       >
         {({ errors, touched }) => (
