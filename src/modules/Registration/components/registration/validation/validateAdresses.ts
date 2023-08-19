@@ -25,25 +25,20 @@ function validateAdresses(data: CustomerDraft, adressesFlags: IDefaultAdress) {
     validatedAdresses = [];
   }
 
-  let defaultShippingAddressIndex: number | undefined;
-  let defaultBillingAddressIndex: number | undefined;
-
-  if (defaultShippingAdress) {
-    defaultShippingAddressIndex = 0;
-  }
-
-  if (defaultBillingAdress) {
-    defaultBillingAddressIndex = isSameBillingFieldAsShipping ? 0 : 1;
-  }
-
-  const shippingAddresses = [0];
-  const billingAddresses = validatedAdresses.length === 2 ? [1] : [];
+  const shippingAdressIndex = 0;
+  const billingAdressIndex = isSameBillingFieldAsShipping ? 0 : 1;
+  const defaultShippingAddressIndex = defaultShippingAdress
+    ? shippingAdressIndex
+    : undefined;
+  const defaultBillingAddressIndex = defaultBillingAdress
+    ? billingAdressIndex
+    : undefined;
 
   const formData: CustomerDraft = {
     ...data,
     addresses: validatedAdresses,
-    shippingAddresses,
-    billingAddresses,
+    shippingAddresses: [shippingAdressIndex],
+    billingAddresses: [billingAdressIndex],
     defaultBillingAddress: defaultBillingAddressIndex,
     defaultShippingAddress: defaultShippingAddressIndex,
   };
