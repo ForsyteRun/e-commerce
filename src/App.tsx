@@ -4,7 +4,7 @@ import { useAppDispatch } from './hooks/useRedux';
 import {
   createAnonymousUser,
   fetchUserDataByRefreshToken,
-} from './store/userDataSlice';
+} from './store/userDataSlice/thunks';
 import { getRefreshTokenCookie } from './helpers/processRefreshTokenCookie';
 import Header from './components/Header';
 

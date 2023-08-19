@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../../../../hooks/useRedux';
-import { createAnonymousUser } from '../../../../../store/userDataSlice';
+import { createAnonymousUser } from '../../../../../store/userDataSlice/thunks';
 
 const LogOut = () => {
   const dispatch = useAppDispatch();
