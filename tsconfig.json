@@ -21,7 +21,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+
+    /* Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "*": ["./src/*"],
+    }
   },
   "include": [
     "vite.config.ts",
