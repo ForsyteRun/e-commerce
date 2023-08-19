@@ -132,7 +132,10 @@ const Registration: React.FC = () => {
               <input
                 type="checkbox"
                 checked={billingField}
-                onChange={() => setBillingField(!billingField)}
+                onChange={() => {
+                  setBillingField(!billingField);
+                  setBillingAdress(false);
+                }}
               />
               <span>same shipping anf billind adresses </span>
             </div>
