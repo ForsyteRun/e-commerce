@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {
   ClientResponse,
   CustomerDraft,
@@ -8,6 +7,7 @@ import {
 import apiRoot from '../../../services/sdkClient/apiRoot';
 import { getRegistrationAccessCode } from '../../../store/registration/registrationAccess.slice';
 import { AppDispatch, RequestStatusCode } from '../../../types';
+import setDefaultAdress from './setDefaultShippingAdress';
 
 const createCustomer = (data: CustomerDraft, dispatch: AppDispatch): void => {
   apiRoot
@@ -18,7 +18,10 @@ const createCustomer = (data: CustomerDraft, dispatch: AppDispatch): void => {
     .execute()
     .then((res: ClientResponse<CustomerSignInResult>) => {
       dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
-      console.log(res);
+      setDefaultAdress(
+        res.body.customer.id,
+        res.body.customer.addresses[0].id as string
+      );
     })
     .catch((error: _ErrorResponse) => {
       const { statusCode } = error;
