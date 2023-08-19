@@ -2,7 +2,7 @@ import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
 import renderSnackBar from '../../../../components/SnackBar/helpers';
-import createCustomer from '../../api/createCustomer';
+// import createCustomer from '../../api/createCustomer';
 import NavigateToLogin from '../NavigateToLogin';
 import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
@@ -11,6 +11,7 @@ import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
+import { registerUser } from '../../../../store/userDataSlice/thunks';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -27,12 +28,21 @@ const Registration: React.FC = () => {
   const { registrationAccessCode } = useAppSelector(
     (state) => state.registrationAccessCodeSlice
   );
+  const { cartId } = useAppSelector((state) => state.userDataSlice.data);
   const dispatch = useAppDispatch();
+
   return (
     <div className={styles.register}>
       <Formik<CustomerDraft>
         initialValues={initialValues}
-        onSubmit={(value: CustomerDraft) => createCustomer(value, dispatch)}
+        onSubmit={(value: CustomerDraft) => {
+          // createCustomer(value, dispatch);
+          const data: CustomerDraft = {
+            ...value,
+            anonymousCartId: cartId,
+          };
+          dispatch(registerUser(data));
+        }}
       >
         {({ errors, touched }) => (
           <Form method="post" action="register" className={styles.form}>

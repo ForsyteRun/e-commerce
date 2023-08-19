@@ -9,11 +9,8 @@ import RegistrationLink from './components/RegistrationLink';
 import styles from './LoginForm.module.scss';
 import LoginError from './components/LoginError';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-
-import {
-  fetchUserLoginData,
-  resetUserDataError,
-} from '../../../../store/userDataSlice';
+import { fetchUserLoginData } from '../../../../store/userDataSlice/thunks';
+import { resetUserDataError } from '../../../../store/userDataSlice';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
