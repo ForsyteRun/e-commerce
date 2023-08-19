@@ -12,6 +12,7 @@ import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
 import createCustomer from '../../api/createCustomer';
 import { IDefaultAdress } from './types';
+import { AppDispatch, RootState } from '../../../../store';
 
 const initialValues: CustomerDraft = {
   firstName: '',
