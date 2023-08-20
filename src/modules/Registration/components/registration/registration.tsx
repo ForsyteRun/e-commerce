@@ -9,12 +9,12 @@ import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { validateEmail, validateName, validatePassword } from './validation';
-import NavigateToLogin from '../NavigateToLogin';
 import { IDefaultAdress } from './types';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 import { registerUser } from '../../../../store/userDataSlice/thunks';
 import validateAdresses from './validation/validateAdresses';
 import { PathNames } from '../../../../types';
+import NavigateToLogin from '../navigateToLogin';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -33,7 +33,7 @@ const Registration: React.FC = () => {
   const navigate = useNavigate();
   const [shippingAdress, setShippingAdress] = useState<boolean>(false);
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
-  const [billingField, setBillingField] = useState<boolean>(true);
+  const [billingField, setBillingField] = useState<boolean>(false);
 
   const userType = useAppSelector((state) => state.userDataSlice.data.type);
   const { registrationAccessCode } = useAppSelector(
