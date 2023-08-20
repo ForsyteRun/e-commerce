@@ -1,8 +1,8 @@
 import { useRouteError } from 'react-router-dom';
-import Header from '../../components/Header';
-import NavLinkButton from '../../UI/NavLinkButton';
+import Header from 'components/Header';
+import NavLinkButton from 'UI/NavLinkButton';
+import { PathNames } from 'types';
 import RoutingErrorMessage from './components/RoutingErrorMessage';
-import { PathNames } from '../../types';
 import styles from './RoutingError.module.scss';
 
 const RoutingError = () => {

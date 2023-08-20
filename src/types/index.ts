@@ -33,11 +33,12 @@ export interface NavLinkButtonProps {
 
 interface GetNavLinkButtonStylesProps {
   isActive: boolean;
+  isPending: boolean;
 }
 
-export type GetNavLinkButtonStyles = ({
-  isActive,
-}: GetNavLinkButtonStylesProps) => 'button_active' | 'button';
+export type GetNavLinkButtonStyles = (
+  props: GetNavLinkButtonStylesProps
+) => 'button_active' | 'button';
 
 export interface LoginFormValues {
   email: string;

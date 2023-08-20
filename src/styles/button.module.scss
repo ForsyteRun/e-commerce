@@ -1,0 +1,44 @@
+@import './variables.scss';
+
+.button {
+  background-color: $blue-color;
+  border: 0;
+  border-radius: 10px;
+  color: $white-color;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.625rem;
+  text-decoration: none;
+  transition: background-color 200ms linear,
+    opacity 200ms linear,
+    transform 100ms linear;
+  user-select: none;
+  width: fit-content;
+
+  &:active {
+    transform: translate(1px, 1px);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: $dark-blue-color;
+    }
+  }
+
+  &[aria-current=page],
+  &_disabled,
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: $blue-color;
+      }
+    }
+
+    &:active {
+      transform: none;
+    }
+  }
+}
