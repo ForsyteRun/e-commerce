@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IUserState } from 'types';
 import extraReducers from './extraReducers';
-import { IUserState } from '../../types';
 
 const initialState: IUserState = {
   data: {

@@ -1,4 +1,4 @@
-import { IUserState } from '../../../types';
+import { IUserState } from 'types';
 
 const setCommonError = (state: IUserState) => {
   state.loading = 'failed';

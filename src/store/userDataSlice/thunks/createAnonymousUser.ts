@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import createAnonymousClientApi from '../../../services/sdkClient/createAnonymousClientApi';
-import { IUserDataState } from '../../../types';
+import createAnonymousClientApi from 'services/sdkClient/createAnonymousClientApi';
+import { IUserDataState } from 'types';
 
 const createAnonymousUser = createAsyncThunk(
   'userData/createAnonymousUser',

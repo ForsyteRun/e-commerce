@@ -33,11 +33,12 @@ export interface NavLinkButtonProps {
 
 interface GetNavLinkButtonStylesProps {
   isActive: boolean;
+  isPending: boolean;
 }
 
-export type GetNavLinkButtonStyles = ({
-  isActive,
-}: GetNavLinkButtonStylesProps) => 'button_active' | 'button';
+export type GetNavLinkButtonStyles = (
+  props: GetNavLinkButtonStylesProps
+) => 'button_active' | 'button';
 
 export interface LoginFormValues {
   email: string;
@@ -93,8 +94,10 @@ export interface LoginErrorProps {
   message: string;
 }
 
+export type UserType = 'anonymous' | 'registered' | null;
+
 export interface IUserDataState {
-  type: 'anonymous' | 'registered' | null;
+  type: UserType;
   id: string | null | undefined;
   cartId?: string;
 }

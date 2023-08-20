@@ -1,5 +1,6 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
+import { IUserState } from 'types';
 import {
   createAnonymousUser,
   fetchUserDataByRefreshToken,
@@ -12,7 +13,6 @@ import {
   handleLoginError,
   setCommonError,
 } from './helpers';
-import { IUserState } from '../../types';
 
 const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
   builder

@@ -6,6 +6,7 @@ import { ReactComponent as PasswordShowIcon } from 'assets/images/svg/eye-passwo
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { fetchUserLoginData } from 'store/userDataSlice/thunks';
 import { resetUserDataError } from 'store/userDataSlice';
+import { noRefreshTokenMessage } from 'constants/';
 import EmailField from './components/EmailField';
 import PasswordField from './components/PasswordField';
 import RegistrationLink from './components/RegistrationLink';
@@ -50,7 +51,9 @@ const LoginForm = (): JSX.Element => {
       }: FormikProps<LoginFormValues>) => (
         <div className={styles.login}>
           <div className={styles.form}>
-            {loginError && <LoginError message={loginError} />}
+            {loginError && loginError !== noRefreshTokenMessage && (
+              <LoginError message={loginError} />
+            )}
             <Form noValidate onSubmit={handleSubmit}>
               <EmailField
                 values={values}

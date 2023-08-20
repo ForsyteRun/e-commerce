@@ -1,24 +1,15 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from './components/Header';
-import { useAppDispatch } from './hooks/useRedux';
-import {
-  createAnonymousUser,
-  fetchUserDataByRefreshToken,
-} from './store/userDataSlice/thunks';
-import { getRefreshTokenCookie } from './helpers/processRefreshTokenCookie';
+import identificateUserOnAppStart from 'helpers/identificateUserOnAppStart';
+import Header from 'components/Header';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const userType = useAppSelector((state) => state.userDataSlice.data.type);
 
   useEffect(() => {
-    const refreshToken = getRefreshTokenCookie();
-
-    if (refreshToken) {
-      dispatch(fetchUserDataByRefreshToken(refreshToken));
-    } else {
-      dispatch(createAnonymousUser());
-    }
+    identificateUserOnAppStart(dispatch, userType);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

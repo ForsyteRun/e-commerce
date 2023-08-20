@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
-import createRefreshTokenClientApi from '../../../services/sdkClient/createRefreshTokenClientApi';
+import { noRefreshTokenMessage } from 'constants/';
+import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
+import { IUserDataState } from 'types';
 import createAnonymousUser from './createAnonymousUser';
-import { IUserDataState } from '../../../types';
 
 const fetchUserDataByRefreshToken = createAsyncThunk(
   'userData/fetchUserDataByRefreshToken',
@@ -31,9 +32,6 @@ const fetchUserDataByRefreshToken = createAsyncThunk(
       return data;
     } catch (err) {
       const { message, statusCode } = err as _ErrorResponse;
-
-      const noRefreshTokenMessage =
-        'The refresh token was not found. It may have expired.';
 
       if (message === noRefreshTokenMessage) {
         dispatch(createAnonymousUser());

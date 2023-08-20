@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { IUserDataState, IUserState } from '../../../types';
+import { IUserDataState, IUserState } from 'types';
 
 const setUserData = (
   state: IUserState,
@@ -7,6 +7,7 @@ const setUserData = (
 ) => {
   state.data = payload;
   state.loading = 'succeeded';
+  state.error = null;
 };
 
 export default setUserData;
