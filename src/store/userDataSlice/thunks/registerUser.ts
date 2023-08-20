@@ -1,10 +1,10 @@
 import { CustomerDraft, _ErrorResponse } from '@commercetools/platform-sdk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getRefreshTokenCookie } from '../../../helpers/processRefreshTokenCookie';
-import createRefreshTokenClientApi from '../../../services/sdkClient/createRefreshTokenClientApi';
-import { LoginFormValues, RequestStatusCode } from '../../../types';
+import { getRefreshTokenCookie } from 'helpers/processRefreshTokenCookie';
+import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
+import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
+import { LoginFormValues, RequestStatusCode } from 'types';
 import fetchUserLoginData from './fetchUserLoginData';
-import { getRegistrationAccessCode } from '../../registration/registrationAccess.slice';
 
 const registerUser = createAsyncThunk(
   'userData/registerUser',

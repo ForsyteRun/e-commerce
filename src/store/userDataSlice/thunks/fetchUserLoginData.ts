@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
-import createPasswordFlowClientApi from '../../../services/sdkClient/createPasswordFlowClientApi';
+import createPasswordFlowClientApi from 'services/sdkClient/createPasswordFlowClientApi';
+import { getRefreshTokenCookie } from 'helpers/processRefreshTokenCookie';
+import { IUserDataState, LoginFormValues } from 'types';
 import fetchUserDataByRefreshToken from './fetchUserDataByRefreshToken';
-import { getRefreshTokenCookie } from '../../../helpers/processRefreshTokenCookie';
-import { IUserDataState, LoginFormValues } from '../../../types';
 
 const fetchUserLoginData = createAsyncThunk(
   'userData/fetchUserLoginData',

@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useRouteError } from 'react-router-dom';
 import Header from 'components/Header';
 import NavLinkButton from 'UI/NavLinkButton';
-import { PathNames } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import identificateUserOnAppStart from 'helpers/identificateUserOnAppStart';
+import { PathNames } from 'types';
 import RoutingErrorMessage from './components/RoutingErrorMessage';
 import styles from './RoutingError.module.scss';
 

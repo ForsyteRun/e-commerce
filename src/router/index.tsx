@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
+import Login from 'pages/LoginPage';
+import RoutingError from 'pages/RoutingError';
+import Registration from 'modules/Registration';
+import { PathNames } from 'types';
 import App from '../App';
-import Login from '../pages/LoginPage';
-import RoutingError from '../pages/RoutingError';
-import { PathNames } from '../types';
-import Registration from '../modules/Registration';
 
 const router = createBrowserRouter([
   {

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import identificateUserOnAppStart from 'helpers/identificateUserOnAppStart';
-import Header from './components/Header';
-import { useAppDispatch, useAppSelector } from './hooks/useRedux';
+import Header from 'components/Header';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const App = () => {
   const dispatch = useAppDispatch();
