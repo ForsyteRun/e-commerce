@@ -44,11 +44,11 @@ const Registration: React.FC = () => {
   );
 
   useEffect(() => {
-    if (userType === 'registered') {
+    if (userType === 'registered' && !registrationAccessCode) {
       navigate(PathNames.index, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userType]);
+  }, [userType, registrationAccessCode]);
 
   return (
     <div className={styles.register}>
