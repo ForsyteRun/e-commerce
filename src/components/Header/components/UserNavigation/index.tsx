@@ -6,13 +6,13 @@ import styles from './UserNavigation.module.scss';
 
 const UserNavigation = () => {
   const { data } = useAppSelector((state) => state.userDataSlice);
-  const isAnomynousUser = data.type === 'anonymous';
+  const isAnonymousUser = data.type === 'anonymous';
   const isRegistered = data.type === 'registered';
 
   return (
     <nav className={styles.userNavigation}>
       {isRegistered && <LogOut />}
-      {isAnomynousUser && (
+      {isAnonymousUser && (
         <>
           <NavLinkButton path={PathNames.register}>Register</NavLinkButton>
           <NavLinkButton path={PathNames.login}>Login</NavLinkButton>
