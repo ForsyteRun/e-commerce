@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import registrationAccessCodeSlice from './registration/registrationAccess.slice';
+
 import userDataSlice from './userDataSlice';
 
 const reducer = {

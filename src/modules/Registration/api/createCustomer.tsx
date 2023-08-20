@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 import {
+  Address,
   ClientResponse,
   CustomerDraft,
   CustomerSignInResult,
@@ -7,19 +7,39 @@ import {
 } from '@commercetools/platform-sdk';
 import apiRoot from '../../../services/sdkClient/apiRoot';
 import { getRegistrationAccessCode } from '../../../store/registration/registrationAccess.slice';
+import { IDefaultAdress } from '../components/registration/types';
+import getUpdateAction from './helpers.ts/getUpdateAction';
+import addCustomerAdress from './addAdress';
 import { AppDispatch } from '../../../store';
 import { RequestStatusCode } from '../../../types';
 
-const createCustomer = (data: CustomerDraft, dispatch: AppDispatch): void => {
+const createCustomer = (
+  data: CustomerDraft,
+  setAdress: IDefaultAdress,
+  dispatch: AppDispatch
+): void => {
+  let splitData;
+  if (setAdress.isSameBillingFieldAsShipping) {
+    splitData = data.addresses?.filter((el: Address) => el.city !== '');
+  } else {
+    splitData = data.addresses;
+  }
+
+  const updatedData = {
+    ...data,
+    addresses: splitData,
+  };
+
   apiRoot
     .customers()
     .post({
-      body: data,
+      body: updatedData,
     })
     .execute()
     .then((res: ClientResponse<CustomerSignInResult>) => {
+      const actions = getUpdateAction(res.body, setAdress);
+      addCustomerAdress(res.body.customer.id, actions);
       dispatch(getRegistrationAccessCode(RequestStatusCode.Created));
-      console.log(res);
     })
     .catch((error: _ErrorResponse) => {
       const { statusCode } = error;

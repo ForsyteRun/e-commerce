@@ -2,16 +2,26 @@
   overflow: hidden;
 }
 
+.name__container {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
 .title {
   text-align: center;
+  font-size: 26px;
 }
 
 .form {
-  max-width: 50%;
+  max-width: 70%;
   display: flex;
   flex-direction: column;
+  border: 1px solid #99999980;
+  border-radius: 10px;
+  gap: 10px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 35px;
 }
 
 label {
@@ -24,6 +34,7 @@ label {
   border-radius: 7px;
   padding: 10px;
   &__container {
+    width: 50%;
     height: 90px;
     display: flex;
     flex-direction: column;
@@ -49,6 +60,20 @@ button {
   cursor: pointer;
   &:active {
     transform: translate(1px, 1px);
+  }
+}
+.adress__container {
+  display: flex;
+  justify-content: space-around;
+  gap: 25px;
+}
+
+.checkbox {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  input {
+    width: 30px;
   }
 }
 

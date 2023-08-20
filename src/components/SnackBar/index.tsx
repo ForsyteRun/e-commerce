@@ -18,7 +18,9 @@ const SnackBar: React.FC<ISnackBar> = ({ title, color }) => {
 
     if (
       registrationAccessCodeSlice.registrationAccessCode ===
-      RequestStatusCode.Created
+        RequestStatusCode.Created ||
+      registrationAccessCodeSlice.registrationAccessCode ===
+        RequestStatusCode.OK
     ) {
       timer = setTimeout(() => {
         navigate(PathNames.index);

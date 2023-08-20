@@ -1,62 +1,71 @@
 import { Field, FormikErrors, FormikValues, useFormikContext } from 'formik';
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './adress.module.scss';
 import validCountries from './constants';
 import validateCity from './validation/validateCity';
-import validateStreet from './validation/validateStreet';
 import validatePostCode from './validation/validatePostCode';
+import validateStreet from './validation/validateStreet';
 
-const Adress = (): JSX.Element => {
+interface IAdress {
+  blockTitle: string;
+  field: number;
+  adress: boolean;
+  setAdress: Dispatch<SetStateAction<boolean>>;
+}
+
+const Adress: React.FC<IAdress> = ({
+  blockTitle,
+  field,
+  setAdress,
+  adress,
+}: IAdress): JSX.Element => {
   const { errors, touched } = useFormikContext<FormikValues>();
+
   const errorAddresses = errors.addresses as FormikErrors<BaseAddress[]>;
   const touchedAddresses = touched.addresses as FormikErrors<BaseAddress[]>;
+
+  const fieldName = `addresses[${field}].city`;
+  const fieldStreetName = `addresses[${field}].streetName`;
+  const fieldCountry = `addresses[${field}].country`;
+  const fieldPostalCode = `addresses[${field}].postalCode`;
 
   return (
     <div className={styles.container}>
       <div className={styles.input__container}>
-        <label htmlFor="city" className={styles.label}>
-          City
-        </label>
         <Field
-          id="city"
-          name="addresses[0].city"
+          name={fieldName}
           validate={validateCity}
           placeholder="City*"
           className={styles.input}
         />
-        {errorAddresses && touchedAddresses && touchedAddresses[0]?.city && (
-          <div className={styles.errorValid}>
-            {errorAddresses[0]?.city as ReactNode}{' '}
-          </div>
-        )}
+        {errorAddresses &&
+          touchedAddresses &&
+          touchedAddresses[field]?.city && (
+            <div className={styles.errorValid}>
+              {errorAddresses[field]?.city as ReactNode}
+            </div>
+          )}
       </div>
       <div className={styles.input__container}>
-        <label htmlFor="street" className={styles.label}>
-          Street
-        </label>
         <Field
-          id="street"
-          name="addresses[0].streetName"
+          name={fieldStreetName}
           validate={validateStreet}
           placeholder="Street*"
           className={styles.input}
         />
         {errorAddresses &&
           touchedAddresses &&
-          touchedAddresses[0]?.streetName && (
+          touchedAddresses[field]?.streetName && (
             <div className={styles.errorValid}>
-              {errorAddresses[0]?.streetName as ReactNode}{' '}
+              {errorAddresses[field]?.streetName as ReactNode}
             </div>
           )}
       </div>
       <div className={styles.input__container}>
-        <label htmlFor="country" className={styles.label}>
-          Country
-        </label>
         <Field
           as="select"
-          name="addresses[0].country"
+          name={fieldCountry}
           placeholder="Country*"
           className={styles.input}
         >
@@ -68,12 +77,8 @@ const Adress = (): JSX.Element => {
         </Field>
       </div>
       <div className={styles.input__container}>
-        <label htmlFor="postalCode" className={styles.label}>
-          PostCode
-        </label>
         <Field
-          id="postalCode"
-          name="addresses[0].postalCode"
+          name={fieldPostalCode}
           validate={validatePostCode}
           placeholder="postalCode*"
           className={styles.input}
@@ -81,11 +86,16 @@ const Adress = (): JSX.Element => {
 
         {errorAddresses &&
           touchedAddresses &&
-          touchedAddresses[0]?.postalCode && (
+          touchedAddresses[field]?.postalCode && (
             <div className={styles.errorValid}>
-              {errorAddresses[0]?.postalCode as ReactNode}{' '}
+              {errorAddresses[field]?.postalCode as ReactNode}
             </div>
           )}
+      </div>
+      <div className={styles.title}>{blockTitle}</div>
+      <div className={styles.checkbox}>
+        <input type="checkbox" onChange={() => setAdress(!adress)} />
+        <span>set as default {blockTitle}</span>
       </div>
     </div>
   );
