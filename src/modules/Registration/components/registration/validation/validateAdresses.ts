@@ -3,15 +3,12 @@ import {
   BaseAddress,
   CustomerDraft,
 } from '@commercetools/platform-sdk';
+import getAdressesFlags from './helpers/getAdressesFlags';
 import { IDefaultAdress } from '../types';
 
 function validateAdresses(data: CustomerDraft, adressesFlags: IDefaultAdress) {
   let validatedAdresses: BaseAddress[];
-  const {
-    isSameBillingFieldAsShipping,
-    defaultShippingAdress,
-    defaultBillingAdress,
-  } = adressesFlags;
+  const { isSameBillingFieldAsShipping } = adressesFlags;
 
   if (data.addresses) {
     if (isSameBillingFieldAsShipping) {
@@ -25,23 +22,12 @@ function validateAdresses(data: CustomerDraft, adressesFlags: IDefaultAdress) {
     validatedAdresses = [];
   }
 
-  const shippingAdressIndex = 0;
-  const billingAdressIndex = isSameBillingFieldAsShipping ? 0 : 1;
-  const defaultShippingAddressIndex = defaultShippingAdress
-    ? shippingAdressIndex
-    : undefined;
-  const defaultBillingAddressIndex = defaultBillingAdress
-    ? billingAdressIndex
-    : undefined;
+  const flags = getAdressesFlags(adressesFlags);
 
   const formData: CustomerDraft = {
     ...data,
+    ...flags,
     addresses: validatedAdresses,
-    shippingAddresses: [shippingAdressIndex],
-    billingAddresses: [billingAdressIndex],
-    defaultBillingAddress:
-      defaultBillingAddressIndex || defaultShippingAddressIndex,
-    defaultShippingAddress: defaultShippingAddressIndex,
   };
 
   return formData;
