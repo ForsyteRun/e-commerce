@@ -94,8 +94,10 @@ export interface LoginErrorProps {
   message: string;
 }
 
+export type UserType = 'anonymous' | 'registered' | null;
+
 export interface IUserDataState {
-  type: 'anonymous' | 'registered' | null;
+  type: UserType;
   id: string | null | undefined;
   cartId?: string;
 }
