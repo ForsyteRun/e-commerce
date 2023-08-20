@@ -39,7 +39,8 @@ function validateAdresses(data: CustomerDraft, adressesFlags: IDefaultAdress) {
     addresses: validatedAdresses,
     shippingAddresses: [shippingAdressIndex],
     billingAddresses: [billingAdressIndex],
-    defaultBillingAddress: defaultBillingAddressIndex,
+    defaultBillingAddress:
+      defaultBillingAddressIndex || defaultShippingAddressIndex,
     defaultShippingAddress: defaultShippingAddressIndex,
   };
 
