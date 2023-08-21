@@ -5,7 +5,6 @@ import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenCl
 import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
 import { LoginFormValues, RequestStatusCode } from 'types';
 import fetchUserLoginData from './fetchUserLoginData';
-import { getRegistrationAccessCode } from '../../registration/registrationAccess.slice';
 import { RegisterUserProps } from './types';
 
 const registerUser = createAsyncThunk(
