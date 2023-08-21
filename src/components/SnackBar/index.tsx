@@ -1,54 +1,46 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './SnackBar.module.scss';
-import { ISnackBar, Timeout } from './types';
-import { getRegistrationAccessCode } from '../../store/registration/registrationAccess.slice';
-import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { PathNames, RequestStatusCode } from '../../types';
+// // import { AlertProps, Snackbar, Stack } from '@mui/material';
+// // import MuiAlert from '@mui/material/Alert';
+// // import * as React from 'react';
 
-const SnackBar: React.FC<ISnackBar> = ({ title, color }) => {
-  const navigate = useNavigate();
+// import { SnackBarProps } from './types';
 
-  const { registrationAccessCodeSlice } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
+// const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+//   function Alert(props, ref) {
+//     // eslint-disable-next-line react/jsx-props-no-spreading
+//     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+//   }
+// );
 
-  useEffect(() => {
-    document.body.classList.add(styles.hidden);
-    let timer: Timeout;
+// const AlertSnackBar: React.FC<SnackBarProps> = ({ open, error, setOpen }) => {
+//   // const navigate = useNavigate();
 
-    if (
-      registrationAccessCodeSlice.registrationAccessCode ===
-        RequestStatusCode.Created ||
-      registrationAccessCodeSlice.registrationAccessCode ===
-        RequestStatusCode.OK
-    ) {
-      timer = setTimeout(() => {
-        navigate(PathNames.index);
-        dispatch(getRegistrationAccessCode(null));
-      }, 3300);
-    } else {
-      timer = setTimeout(() => {
-        dispatch(getRegistrationAccessCode(null));
-      }, 4500);
-    }
+//   const handleClose = () => {
+//     setOpen(false);
+//   };
 
-    return () => {
-      document.body.classList.remove(styles.hidden);
-      clearTimeout(timer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+//   return (
+//     <Stack spacing={2} sx={{ width: '100%' }}>
+//       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+//         {error ? (
+//           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+//             User exist!
+//           </Alert>
+//         ) : (
+//           <Alert
+//             onClose={handleClose}
+//             severity="success"
+//             sx={{ width: '100%' }}
+//           >
+//             Success!
+//           </Alert>
+//         )}
+//       </Snackbar>
+//       {/* <Alert severity="error">This is an error message!</Alert>
+//       <Alert severity="warning">This is a warning message!</Alert>
+//       <Alert severity="info">This is an information message!</Alert>
+//       <Alert severity="success">This is a success message!</Alert> */}
+//     </Stack>
+//   );
+// };
 
-  return (
-    <div>
-      <div className={styles.container}>
-        <div className={styles.loading} />
-        <div className={styles.title} style={{ backgroundColor: color }}>
-          {title}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default SnackBar;
+// export default AlertSnackBar;
