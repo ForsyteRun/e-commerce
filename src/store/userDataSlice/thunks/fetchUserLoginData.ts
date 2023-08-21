@@ -1,33 +1,33 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
-import createPasswordFlowClientApi from 'services/sdkClient/createPasswordFlowClientApi';
 import { getRefreshTokenCookie } from 'helpers/processRefreshTokenCookie';
 import { IUserDataState, LoginFormValues } from 'types';
-import fetchUserDataByRefreshToken from './fetchUserDataByRefreshToken';
+import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 
 const fetchUserLoginData = createAsyncThunk(
   'userData/fetchUserLoginData',
-  async (userData: LoginFormValues, { dispatch, rejectWithValue }) => {
-    const api = createPasswordFlowClientApi(userData);
+  async (userData: LoginFormValues, { rejectWithValue }) => {
+    const refreshToken = getRefreshTokenCookie();
+    const api = createRefreshTokenClientApi(refreshToken);
 
-    try {
-      const response = await api.login().post({ body: userData }).execute();
+    const response = await api
+      .login()
+      .post({ body: userData })
+      .execute()
+      .then((res) => {
+        const data: IUserDataState = {
+          type: 'registered',
+          id: res.body.customer.id,
+          cartId: res.body.cart?.id,
+        };
 
-      const data: IUserDataState = {
-        type: 'registered',
-        id: response.body.customer.id,
-        cartId: response.body.cart?.id,
-      };
+        return data;
+      })
+      .catch((err: _ErrorResponse) => {
+        return rejectWithValue({ ...err });
+      });
 
-      return data;
-    } catch (err) {
-      const { message, statusCode } = err as _ErrorResponse;
-
-      const refreshToken = getRefreshTokenCookie();
-      dispatch(fetchUserDataByRefreshToken(refreshToken));
-
-      return rejectWithValue({ message, statusCode });
-    }
+    return response;
   }
 );
 
