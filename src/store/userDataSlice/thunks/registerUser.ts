@@ -40,7 +40,7 @@ const registerUser = createAsyncThunk(
       .catch((err: _ErrorResponse) => {
         dispatch(getRegistrationAccessCode(err.statusCode));
       });
-    
+
     return request;
   }
 );
