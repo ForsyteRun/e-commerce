@@ -1,0 +1,21 @@
+@import './styles/normalize.css';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background-color: #f7f7f8;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1280px;
+  min-height: 100vh;
+  padding: 0 1rem;
+}

@@ -1,0 +1,10 @@
+@import 'styles/variables.scss';
+
+.logo {
+  color: $blue-color;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+  user-select: none;
+}

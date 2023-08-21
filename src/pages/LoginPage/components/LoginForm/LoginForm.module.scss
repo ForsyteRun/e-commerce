@@ -1,0 +1,13 @@
+@import 'styles/variables.scss';
+
+.login {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form {
+  padding: 40px;
+  border-radius: 20px;
+  background-color: $white-color;
+  border: 1px solid #EAEBED;
+}
