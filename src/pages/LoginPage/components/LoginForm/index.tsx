@@ -1,96 +1,104 @@
 import { useState } from 'react';
-import { Formik, Form, FormikProps } from 'formik';
-import { InputType, LoginFormValues, VoidFunction } from 'types';
-import { ReactComponent as PasswordHideIcon } from 'assets/images/svg/eye-password-hide.svg';
-import { ReactComponent as PasswordShowIcon } from 'assets/images/svg/eye-password-show.svg';
+import { useFormik } from 'formik';
+import { InputType, LoginFormValues } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { fetchUserLoginData } from 'store/userDataSlice/thunks';
 import { resetUserDataError } from 'store/userDataSlice';
+import { Box, Button, IconButton, TextField } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { noRefreshTokenMessage } from 'constants/';
-import EmailField from './components/EmailField';
-import PasswordField from './components/PasswordField';
-import RegistrationLink from './components/RegistrationLink';
 import styles from './LoginForm.module.scss';
 import LoginError from './components/LoginError';
+import validationSchema from './helpers/validationSchema';
+import RegistrationLink from './components/RegistrationLink';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const loginError = useAppSelector((state) => state.userDataSlice.error);
-  const [inputType, setInputType] = useState(InputType.Password);
-  const [icon, setIcon] = useState(<PasswordShowIcon />);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const togglePasswordVisibility: VoidFunction = () => {
-    if (inputType === InputType.Password) {
-      setIcon(<PasswordHideIcon />);
-      setInputType(InputType.Text);
-    } else {
-      setIcon(<PasswordShowIcon />);
-      setInputType(InputType.Password);
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: async (values: LoginFormValues, { setSubmitting }) => {
+      setSubmitting(true);
+      await dispatch(fetchUserLoginData(values));
+    },
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    formik.handleChange(e);
+    if (loginError) {
+      dispatch(resetUserDataError());
     }
   };
 
   return (
-    <Formik
-      initialValues={{
-        email: '',
-        password: '',
-      }}
-      onSubmit={async (values: LoginFormValues, { setSubmitting }) => {
-        setSubmitting(true);
-        await dispatch(fetchUserLoginData(values));
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }: FormikProps<LoginFormValues>) => (
-        <div className={styles.login}>
-          <div className={styles.form}>
-            {loginError && loginError !== noRefreshTokenMessage && (
-              <LoginError message={loginError} />
-            )}
-            <Form noValidate onSubmit={handleSubmit}>
-              <EmailField
-                values={values}
-                errors={errors}
-                touched={touched}
-                handleChange={(e) => {
-                  handleChange(e);
-                  if (loginError) dispatch(resetUserDataError());
-                }}
-                handleBlur={handleBlur}
-              />
-              <PasswordField
-                type={inputType}
-                values={values}
-                errors={errors}
-                touched={touched}
-                handleChange={(e) => {
-                  handleChange(e);
-                  if (loginError) dispatch(resetUserDataError());
-                }}
-                handleBlur={handleBlur}
-                togglePasswordVisibility={togglePasswordVisibility}
-                icon={icon}
-              />
-              <button
-                type="submit"
-                className={styles.buttonLogin}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Loading...' : 'LOG IN'}
-              </button>
-            </Form>
-            <RegistrationLink />
-          </div>
-        </div>
-      )}
-    </Formik>
+    <div className={styles.login}>
+      <div className={styles.form}>
+        {loginError && loginError !== noRefreshTokenMessage && (
+          <LoginError message={loginError} />
+        )}
+        <form noValidate onSubmit={formik.handleSubmit}>
+          <Box mb={2}>
+            <TextField
+              fullWidth
+              id="email"
+              name="email"
+              label="Email"
+              placeholder="user@example.com"
+              value={formik.values.email}
+              onChange={handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              margin="normal"
+            />
+          </Box>
+          <Box mb={2}>
+            <TextField
+              fullWidth
+              id="password"
+              name="password"
+              label="Password"
+              placeholder="Password"
+              type={showPassword ? InputType.Text : InputType.Password}
+              value={formik.values.password}
+              onChange={handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              InputProps={{
+                endAdornment: (
+                  <IconButton onClick={handleClickShowPassword} edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                ),
+              }}
+              margin="normal"
+            />
+          </Box>
+          <Box mb={2}>
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              type="submit"
+              size="large"
+              disabled={formik.isSubmitting}
+            >
+              {formik.isSubmitting ? 'Loading...' : 'LOG IN'}
+            </Button>
+          </Box>
+        </form>
+        <RegistrationLink />
+      </div>
+    </div>
   );
 };
 

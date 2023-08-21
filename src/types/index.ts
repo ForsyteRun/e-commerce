@@ -45,37 +45,6 @@ export interface LoginFormValues {
   password: string;
 }
 
-export interface LoginEmailFieldProps {
-  values: {
-    email: string;
-  };
-  errors: {
-    email?: string;
-  };
-  touched: {
-    email?: boolean;
-  };
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-}
-
-export interface LoginPasswordFieldProps {
-  type: string;
-  values: {
-    password: string;
-  };
-  errors: {
-    password?: string;
-  };
-  touched: {
-    password?: boolean;
-  };
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-  togglePasswordVisibility: VoidFunction;
-  icon: JSX.Element;
-}
-
 export enum InputType {
   Password = 'password',
   Text = 'text',
