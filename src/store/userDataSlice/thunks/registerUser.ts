@@ -13,35 +13,35 @@ const registerUser = createAsyncThunk(
     const refreshToken = getRefreshTokenCookie();
     const api = createRefreshTokenClientApi(refreshToken);
 
-    try {
-      const response = await api
-        .customers()
-        .post({ body: registrationData })
-        .execute();
+    const request = await api
+      .customers()
+      .post({ body: registrationData })
+      .execute()
+      .then((res) => {
+        const isUserCreated =
+          res.statusCode && res.statusCode === RequestStatusCode.Created;
 
-      const isUserCreated =
-        response.statusCode &&
-        response.statusCode === RequestStatusCode.Created;
+        if (isUserCreated) {
+          dispatch(getRegistrationAccessCode(res.statusCode!));
 
-      if (isUserCreated) {
-        dispatch(getRegistrationAccessCode(response.statusCode!));
+          const loginData: LoginFormValues = {
+            email: registrationData.email,
+            password: registrationData.password!,
+          };
 
-        const loginData: LoginFormValues = {
-          email: registrationData.email,
-          password: registrationData.password!,
-        };
-
-        dispatch(fetchUserLoginData(loginData));
-        dispatch(
-          getRegistrationAccessCode(
-            RequestStatusCode.Created && RequestStatusCode.OK
-          )
-        );
-      }
-    } catch (err) {
-      const error = err as _ErrorResponse;
-      dispatch(getRegistrationAccessCode(error.statusCode));
-    }
+          dispatch(fetchUserLoginData(loginData));
+          dispatch(
+            getRegistrationAccessCode(
+              RequestStatusCode.Created && RequestStatusCode.OK
+            )
+          );
+        }
+      })
+      .catch((err: _ErrorResponse) => {
+        dispatch(getRegistrationAccessCode(err.statusCode));
+      });
+    
+    return request;
   }
 );
 

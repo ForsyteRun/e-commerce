@@ -19,7 +19,6 @@ function createRefreshTokenClientApi(refreshToken: string) {
   const client = new ClientBuilder()
     .withRefreshTokenFlow(options)
     .withHttpMiddleware(httpMiddlewareOptions)
-    // .withLoggerMiddleware()
     .build();
 
   return createApi(client);

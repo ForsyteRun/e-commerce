@@ -1,6 +1,7 @@
+import { Button } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { createAnonymousUser } from 'store/userDataSlice/thunks';
-import styles from 'styles/button.module.scss';
+import navButtonStyles from 'UI/NavLinkButton/navButtonStyles';
 
 const LogOut = () => {
   const dispatch = useAppDispatch();
@@ -12,14 +13,14 @@ const LogOut = () => {
   };
 
   return (
-    <button
-      className={styles.button}
+    <Button
       disabled={isPending}
       onClick={logoutHandler}
-      type="button"
+      sx={navButtonStyles}
+      variant="contained"
     >
       Logout
-    </button>
+    </Button>
   );
 };
 

@@ -26,7 +26,6 @@ function createPasswordFlowClientApi(userData: LoginFormValues) {
   const client = new ClientBuilder()
     .withPasswordFlow(options)
     .withHttpMiddleware(httpMiddlewareOptions)
-    // .withLoggerMiddleware()
     .build();
 
   return createApi(client);
