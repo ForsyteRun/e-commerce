@@ -1,6 +1,6 @@
 export interface SnackBarProps {
   open: boolean;
-  error: boolean;
+  access: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
