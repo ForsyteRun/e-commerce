@@ -1,14 +1,18 @@
-import { CustomerDraft, _ErrorResponse } from '@commercetools/platform-sdk';
+import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getRefreshTokenCookie } from 'helpers/processRefreshTokenCookie';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
 import { LoginFormValues, RequestStatusCode } from 'types';
 import fetchUserLoginData from './fetchUserLoginData';
+import { RegisterUserProps } from './types';
 
 const registerUser = createAsyncThunk(
   'userData/registerUser',
-  async (registrationData: CustomerDraft, { dispatch }) => {
+  async (
+    { registrationData, setOpen, setAccess }: RegisterUserProps,
+    { dispatch }
+  ) => {
     const refreshToken = getRefreshTokenCookie();
     const api = createRefreshTokenClientApi(refreshToken);
 

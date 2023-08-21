@@ -1,54 +1,44 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './SnackBar.module.scss';
-import { ISnackBar, Timeout } from './types';
-import { getRegistrationAccessCode } from '../../store/registration/registrationAccess.slice';
-import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { PathNames, RequestStatusCode } from '../../types';
+import { AlertProps, Snackbar, Stack } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
+import * as React from 'react';
 
-const SnackBar: React.FC<ISnackBar> = ({ title, color }) => {
+import { useNavigate } from 'react-router-dom';
+import { PathNames } from 'types';
+import { SnackBarProps } from './types';
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+  function Alert(props, ref) {
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  }
+);
+
+const AlertSnackBar: React.FC<SnackBarProps> = ({ open, access, setOpen }) => {
   const navigate = useNavigate();
 
-  const { registrationAccessCodeSlice } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-  useEffect(() => {
-    document.body.classList.add(styles.hidden);
-    let timer: Timeout;
-
-    if (
-      registrationAccessCodeSlice.registrationAccessCode ===
-        RequestStatusCode.Created ||
-      registrationAccessCodeSlice.registrationAccessCode ===
-        RequestStatusCode.OK
-    ) {
-      timer = setTimeout(() => {
-        navigate(PathNames.index);
-        dispatch(getRegistrationAccessCode(null));
-      }, 3300);
-    } else {
-      timer = setTimeout(() => {
-        dispatch(getRegistrationAccessCode(null));
-      }, 4500);
-    }
-
-    return () => {
-      document.body.classList.remove(styles.hidden);
-      clearTimeout(timer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  if (access) {
+    setTimeout(() => {
+      navigate(PathNames.index);
+    }, 1500);
+  }
 
   return (
-    <div>
-      <div className={styles.container}>
-        <div className={styles.loading} />
-        <div className={styles.title} style={{ backgroundColor: color }}>
-          {title}
-        </div>
-      </div>
-    </div>
+    <Stack spacing={2} sx={{ width: '100%' }}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity={access ? 'success' : 'error'}
+          sx={{ width: '100%' }}
+        >
+          {access ? 'Success!' : 'User exist!'}
+        </Alert>
+      </Snackbar>
+    </Stack>
   );
 };
 
-export default SnackBar;
+export default AlertSnackBar;

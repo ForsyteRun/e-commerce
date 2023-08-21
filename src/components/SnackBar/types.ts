@@ -1,6 +1,7 @@
-export interface ISnackBar {
-  title?: string;
-  color?: string;
+export interface SnackBarProps {
+  open: boolean;
+  access: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type StatusUpdater = React.Dispatch<React.SetStateAction<string>>;

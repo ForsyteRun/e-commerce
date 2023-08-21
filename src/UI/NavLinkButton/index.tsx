@@ -1,27 +1,27 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { Button } from '@mui/material';
 import { useAppSelector } from 'hooks/useRedux';
-import { NavLinkButtonProps, PathNames } from 'types';
-import styles from 'styles/button.module.scss';
+import { NavLinkButtonProps } from 'types';
+import navButtonStyles from './navButtonStyles';
 
 const NavLinkButton = ({ children, path }: NavLinkButtonProps): JSX.Element => {
   const userData = useAppSelector((state) => state.userDataSlice);
+  const { pathname } = useLocation();
 
   const isPending = userData.loading === 'pending';
   const userType = userData.data.type;
   const isNotUserOrPending = !userType || isPending;
-  const isLoginPage = path === PathNames.login;
-  const isRegisterPage = path === PathNames.register;
-  const isLoginOrRegisterPage = isLoginPage || isRegisterPage;
-
-  const buttonClasses =
-    isLoginOrRegisterPage && isNotUserOrPending
-      ? `${styles.button} ${styles.button_disabled}`
-      : styles.button;
 
   return (
-    <NavLink className={buttonClasses} to={path}>
+    <Button
+      component={NavLink}
+      disabled={isNotUserOrPending || pathname === path}
+      sx={navButtonStyles}
+      to={path}
+      variant="contained"
+    >
       {children}
-    </NavLink>
+    </Button>
   );
 };
 
