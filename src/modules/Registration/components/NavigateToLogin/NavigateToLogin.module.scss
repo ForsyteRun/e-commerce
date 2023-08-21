@@ -1,5 +1,8 @@
 .title {
   text-align: center;
+  @media (max-width: 768px) {
+    font-size: calc(0.3rem + 14 * (100vw / 768));
+  }
 }
 
 .login {
