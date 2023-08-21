@@ -7,7 +7,6 @@ const setUserData = (
 ) => {
   state.data = payload;
   state.loading = 'succeeded';
-  // state.error = null;
 };
 
 export default setUserData;

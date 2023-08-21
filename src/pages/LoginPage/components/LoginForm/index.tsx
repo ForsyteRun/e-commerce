@@ -7,7 +7,6 @@ import { resetUserDataError } from 'store/userDataSlice';
 import { Box, Button, IconButton, TextField } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { noRefreshTokenMessage } from 'constants/';
 import styles from './LoginForm.module.scss';
 import LoginError from './components/LoginError';
 import validationSchema from './helpers/validationSchema';
@@ -41,9 +40,7 @@ const LoginForm = (): JSX.Element => {
   return (
     <div className={styles.login}>
       <div className={styles.form}>
-        {loginError && loginError !== noRefreshTokenMessage && (
-          <LoginError message={loginError} />
-        )}
+        {loginError && <LoginError message={loginError} />}
         <form noValidate onSubmit={formik.handleSubmit}>
           <Box mb={2}>
             <TextField

@@ -11,15 +11,17 @@ const createAnonymousUser = createAsyncThunk(
       .me()
       .carts()
       .post({ body: { currency: 'EUR' } })
-      .execute();
+      .execute()
+      .then((res) => {
+        const data: IUserDataState = {
+          type: 'anonymous',
+          id: res.body.anonymousId,
+        };
 
-    const data: IUserDataState = {
-      type: 'anonymous',
-      id: response.body.anonymousId,
-      cartId: response.body.id,
-    };
+        return data;
+      });
 
-    return data;
+    return response;
   }
 );
 
