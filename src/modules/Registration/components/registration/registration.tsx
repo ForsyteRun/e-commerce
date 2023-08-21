@@ -1,19 +1,18 @@
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Field, Form, Formik } from 'formik';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import renderSnackBar from '../../../../components/SnackBar/helpers';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
+import { registerUser } from '../../../../store/userDataSlice/thunks';
+import { PathNames } from '../../../../types';
 import Adress from '../adress/Adress';
 import validCountries from '../adress/constants';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
-import { validateEmail, validateName, validatePassword } from './validation';
 import { IDefaultAdress } from './types';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-import { registerUser } from '../../../../store/userDataSlice/thunks';
+import { validateEmail, validateName, validatePassword } from './validation';
 import validateAdresses from './validation/validateAdresses';
-import { PathNames } from '../../../../types';
 import NavigateToLogin from '../navigateToLogin';
 
 const initialValues: CustomerDraft = {
@@ -31,9 +30,11 @@ const initialValues: CustomerDraft = {
 const Registration: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
   const [shippingAdress, setShippingAdress] = useState<boolean>(false);
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
-  const [billingField, setBillingField] = useState<boolean>(false);
+  const [billingField, setBillingField] = useState<boolean>(true);
 
   const userType = useAppSelector((state) => state.userDataSlice.data.type);
   const { registrationAccessCode } = useAppSelector(
@@ -66,7 +67,7 @@ const Registration: React.FC = () => {
             ...formData,
             anonymousCartId,
           };
-          dispatch(registerUser(data));
+          dispatch(registerUser({ registrationData: data, setOpen, setError }));
         }}
       >
         {({ errors, touched }) => (
@@ -159,11 +160,12 @@ const Registration: React.FC = () => {
               <span>same shipping and billind adresses</span>
             </div>
             <button type="submit">Register</button>
+            <AlertSnackBar open={open} error={error} setOpen={setOpen} />
           </Form>
         )}
       </Formik>
       <NavigateToLogin />
-      {registrationAccessCode && renderSnackBar(registrationAccessCode)}
+      {/* {registrationAccessCode && renderSnackBar(registrationAccessCode)} */}
     </div>
   );
 };
