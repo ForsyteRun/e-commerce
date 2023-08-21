@@ -18,7 +18,6 @@ function createAnonymousClientApi() {
   const client = new ClientBuilder()
     .withAnonymousSessionFlow(options)
     .withHttpMiddleware(httpMiddlewareOptions)
-    // .withLoggerMiddleware()
     .build();
 
   return createApi(client);
