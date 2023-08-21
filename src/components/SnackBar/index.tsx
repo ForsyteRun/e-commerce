@@ -45,12 +45,8 @@ const AlertSnackBar: React.FC = () => {
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
       {data && (
-        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-          <Alert
-            onClose={handleClose}
-            severity={data.severity}
-            sx={{ width: '100%' }}
-          >
+        <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+          <Alert severity={data.severity} sx={{ width: '100%' }}>
             {data.access}
           </Alert>
         </Snackbar>
