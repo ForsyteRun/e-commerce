@@ -21,10 +21,8 @@ const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
     .addCase(createAnonymousUser.rejected, setCommonError)
     .addCase(fetchUserDataByRefreshToken.pending, setPendingStatus)
     .addCase(fetchUserDataByRefreshToken.fulfilled, setUserData)
-    .addCase(fetchUserDataByRefreshToken.rejected, (state, { payload }) => {
+    .addCase(fetchUserDataByRefreshToken.rejected, (state) => {
       state.loading = 'failed';
-      const error = payload as _ErrorResponse;
-      state.error = error.message;
     })
     .addCase(fetchUserLoginData.pending, setPendingStatus)
     .addCase(fetchUserLoginData.fulfilled, setUserData)
