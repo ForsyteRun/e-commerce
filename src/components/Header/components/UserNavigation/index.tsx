@@ -7,16 +7,17 @@ import styles from './UserNavigation.module.scss';
 const UserNavigation = () => {
   const userType = useAppSelector((state) => state.userDataSlice.data.type);
   const isRegistered = userType === 'registered';
+  const notRegisteredButtons = (
+    <>
+      <NavLinkButton path={PathNames.register}>Register</NavLinkButton>
+      <NavLinkButton path={PathNames.login}>Login</NavLinkButton>
+    </>
+  );
 
   return (
     <nav className={styles.userNavigation}>
       {isRegistered && <LogOut />}
-      {!isRegistered && (
-        <>
-          <NavLinkButton path={PathNames.register}>Register</NavLinkButton>
-          <NavLinkButton path={PathNames.login}>Login</NavLinkButton>
-        </>
-      )}
+      {!isRegistered && notRegisteredButtons}
     </nav>
   );
 };
