@@ -11,23 +11,13 @@ const fetchUserDataByRefreshToken = createAsyncThunk(
 
     const response = await api
       .me()
-      .activeCart()
       .get()
       .execute()
       .then((res) => {
-        const { anonymousId, customerId } = res.body;
         const data: IUserDataState = {
-          type: null,
-          id: null,
+          type: 'registered',
+          id: res.body.id,
         };
-
-        if (anonymousId && !customerId) {
-          data.type = 'anonymous';
-          data.id = anonymousId;
-        } else if (customerId) {
-          data.type = 'registered';
-          data.id = customerId;
-        }
 
         return data;
       })
@@ -35,7 +25,7 @@ const fetchUserDataByRefreshToken = createAsyncThunk(
         const isNoRefreshToken =
           err.message ===
           'The refresh token was not found. It may have expired.';
-        if (isNoRefreshToken) {
+        if (isNoRefreshToken || err.statusCode === 403) {
           dispatch(createAnonymousUser());
         }
         return rejectWithValue({ ...err });
