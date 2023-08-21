@@ -31,8 +31,6 @@ const initialValues: CustomerDraft = {
 const Registration: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const [access, setAccess] = useState(false);
   const [shippingAdress, setShippingAdress] = useState<boolean>(false);
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
   const [billingField, setBillingField] = useState<boolean>(true);
@@ -68,9 +66,7 @@ const Registration: React.FC = () => {
             ...formData,
             anonymousCartId,
           };
-          dispatch(
-            registerUser({ registrationData: data, setOpen, setAccess })
-          );
+          dispatch(registerUser({ registrationData: data }));
         }}
       >
         {({ errors, touched }) => (
@@ -163,7 +159,7 @@ const Registration: React.FC = () => {
               <span>same shipping and billind adresses</span>
             </div>
             <button type="submit">Register</button>
-            <AlertSnackBar open={open} access={access} setOpen={setOpen} />
+            <AlertSnackBar />
           </Form>
         )}
       </Formik>

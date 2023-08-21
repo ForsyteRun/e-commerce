@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: InitialState = {
-  registrationAccessCode: null,
+  registrationAccessCode: 0,
 };
 
 interface InitialState {
-  registrationAccessCode: number | null;
+  registrationAccessCode: number;
 }
 
 const registrationAccessCodeSlice = createSlice({
@@ -14,7 +14,7 @@ const registrationAccessCodeSlice = createSlice({
   reducers: {
     getRegistrationAccessCode: (
       state: InitialState,
-      action: PayloadAction<number | null>
+      action: PayloadAction<number>
     ) => {
       return {
         ...state,

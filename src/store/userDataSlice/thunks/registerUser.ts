@@ -9,10 +9,7 @@ import { RegisterUserProps } from './types';
 
 const registerUser = createAsyncThunk(
   'userData/registerUser',
-  async (
-    { registrationData, setOpen, setAccess }: RegisterUserProps,
-    { dispatch }
-  ) => {
+  async ({ registrationData }: RegisterUserProps, { dispatch }) => {
     const refreshToken = getRefreshTokenCookie();
     const api = createRefreshTokenClientApi(refreshToken);
 
@@ -35,14 +32,15 @@ const registerUser = createAsyncThunk(
         };
 
         dispatch(fetchUserLoginData(loginData));
-        setOpen(true);
-        setAccess(true);
+        dispatch(
+          getRegistrationAccessCode(
+            RequestStatusCode.Created && RequestStatusCode.OK
+          )
+        );
       }
     } catch (err) {
       const error = err as _ErrorResponse;
       dispatch(getRegistrationAccessCode(error.statusCode));
-      setOpen(true);
-      setAccess(false);
     }
   }
 );

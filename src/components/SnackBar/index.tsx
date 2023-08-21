@@ -1,10 +1,12 @@
-import { AlertProps, Snackbar, Stack } from '@mui/material';
-import MuiAlert from '@mui/material/Alert';
+import { Snackbar, Stack } from '@mui/material';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import * as React from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { PathNames } from 'types';
-import { SnackBarProps } from './types';
+import { PathNames, RequestStatusCode } from 'types';
+import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
+import getErrorSnackBar from './helpers';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   function Alert(props, ref) {
@@ -13,30 +15,46 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   }
 );
 
-const AlertSnackBar: React.FC<SnackBarProps> = ({ open, access, setOpen }) => {
+const AlertSnackBar: React.FC = () => {
+  const [open, setOpen] = React.useState(false);
+  const { registrationAccessCode } = useAppSelector(
+    (state) => state.registrationAccessCodeSlice
+  );
+
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  if (access) {
-    setTimeout(() => {
-      navigate(PathNames.index);
-    }, 1500);
-  }
+  const data = getErrorSnackBar(registrationAccessCode);
+
+  React.useEffect(() => {
+    setOpen(true);
+
+    if (registrationAccessCode === RequestStatusCode.OK) {
+      setTimeout(() => {
+        navigate(PathNames.index);
+        dispatch(getRegistrationAccessCode(0));
+      }, 1500);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert
-          onClose={handleClose}
-          severity={access ? 'success' : 'error'}
-          sx={{ width: '100%' }}
-        >
-          {access ? 'Success!' : 'User exist!'}
-        </Alert>
-      </Snackbar>
+      {data && (
+        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity={data.severity}
+            sx={{ width: '100%' }}
+          >
+            {data.access}
+          </Alert>
+        </Snackbar>
+      )}
     </Stack>
   );
 };

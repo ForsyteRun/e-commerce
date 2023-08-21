@@ -7,6 +7,7 @@ export enum PathNames {
 }
 
 export enum RequestStatusCode {
+  Unnown = 0,
   OK = 200,
   Created = 201,
   BadRequest = 400,
