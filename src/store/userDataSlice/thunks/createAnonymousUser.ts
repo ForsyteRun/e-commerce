@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import createAnonymousClientApi from 'services/sdkClient/createAnonymousClientApi';
-import { IUserDataState } from 'types';
+import { IAnonymousUserData } from 'types';
 
 const createAnonymousUser = createAsyncThunk(
   'userData/createAnonymousUser',
@@ -13,7 +13,7 @@ const createAnonymousUser = createAsyncThunk(
       .post({ body: { currency: 'EUR' } })
       .execute()
       .then((res) => {
-        const data: IUserDataState = {
+        const data: IAnonymousUserData = {
           authenticationMode: 'Anonymous',
           id: res.body.anonymousId,
         };

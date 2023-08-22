@@ -65,19 +65,28 @@ export interface LoginErrorProps {
   message: string;
 }
 
-export interface IUserDataState {
+export interface IAnonymousUserData {
   authenticationMode: AuthenticationMode;
   id: string | null | undefined;
 }
 
-export interface IRegisteredUserData
-  extends Omit<
-    Customer,
-    'version' | 'createdAt' | 'lastModifiedAt' | 'isEmailVerified'
-  > {}
+type RegisteredUserDataFields =
+  | 'id'
+  | 'email'
+  | 'firstName'
+  | 'lastName'
+  | 'dateOfBirth'
+  | 'addresses'
+  | 'defaultBillingAddressId'
+  | 'defaultShippingAddressId'
+  | 'shippingAddressIds'
+  | 'billingAddressIds'
+  | 'authenticationMode';
+
+export type RegisteredUserData = Pick<Customer, RegisteredUserDataFields>;
 
 export interface IUserState {
-  data: IUserDataState;
+  data: IAnonymousUserData | RegisteredUserData;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
   error: string | null;
 }

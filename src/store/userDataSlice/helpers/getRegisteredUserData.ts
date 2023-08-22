@@ -1,7 +1,7 @@
 import { Customer } from '@commercetools/platform-sdk';
-import { IRegisteredUserData } from 'types';
+import { RegisteredUserData } from 'types';
 
-const getRegisteredUserData = (data: Customer): IRegisteredUserData => {
+const getRegisteredUserData = (data: Customer): RegisteredUserData => {
   const {
     id,
     email,
