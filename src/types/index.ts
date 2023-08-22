@@ -1,3 +1,4 @@
+import { AuthenticationMode, Customer } from '@commercetools/platform-sdk';
 import { CookieAttributes } from 'js-cookie';
 
 export enum PathNames {
@@ -64,13 +65,16 @@ export interface LoginErrorProps {
   message: string;
 }
 
-export type UserType = 'anonymous' | 'registered' | null;
-
 export interface IUserDataState {
-  type: UserType;
+  authenticationMode: AuthenticationMode;
   id: string | null | undefined;
-  cartId?: string;
 }
+
+export interface IRegisteredUserData
+  extends Omit<
+    Customer,
+    'version' | 'createdAt' | 'lastModifiedAt' | 'isEmailVerified'
+  > {}
 
 export interface IUserState {
   data: IUserDataState;

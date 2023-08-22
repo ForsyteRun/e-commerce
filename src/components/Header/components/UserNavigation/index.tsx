@@ -5,8 +5,10 @@ import { PathNames } from '../../../../types';
 import styles from './UserNavigation.module.scss';
 
 const UserNavigation = () => {
-  const userType = useAppSelector((state) => state.userDataSlice.data.type);
-  const isRegistered = userType === 'registered';
+  const { authenticationMode } = useAppSelector(
+    (state) => state.userDataSlice.data
+  );
+  const isRegistered = authenticationMode === 'Password';
   const notRegisteredButtons = (
     <>
       <NavLinkButton path={PathNames.register}>Register</NavLinkButton>

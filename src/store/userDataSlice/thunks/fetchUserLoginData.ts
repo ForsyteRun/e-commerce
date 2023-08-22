@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { getRefreshTokenCookie } from 'helpers/processRefreshTokenCookie';
-import { IUserDataState, LoginFormValues } from 'types';
+import { LoginFormValues } from 'types';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 import createPasswordFlowClientApi from 'services/sdkClient/createPasswordFlowClientApi';
+import { getRegisteredUserData } from '../helpers';
 
 const fetchUserLoginData = createAsyncThunk(
   'userData/fetchUserLoginData',
@@ -21,11 +22,8 @@ const fetchUserLoginData = createAsyncThunk(
           .me()
           .get()
           .execute()
-          .then((resp) => {
-            const data: IUserDataState = {
-              type: 'registered',
-              id: resp.body.id,
-            };
+          .then((customerData) => {
+            const data = getRegisteredUserData(customerData.body);
 
             return data;
           });

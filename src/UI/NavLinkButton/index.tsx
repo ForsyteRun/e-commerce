@@ -11,8 +11,8 @@ const NavLinkButton = ({ children, path }: NavLinkButtonProps): JSX.Element => {
   const { register, login } = PathNames;
   const isLoginOrRegisterPage = path === login || path === register;
   const isPending = userData.loading === 'pending';
-  const userType = userData.data.type;
-  const isNotUserOrPending = !userType || isPending;
+  const { authenticationMode } = userData.data;
+  const isNotUserOrPending = !authenticationMode || isPending;
   const isDisabled =
     (isNotUserOrPending || pathname === path) && isLoginOrRegisterPage;
 

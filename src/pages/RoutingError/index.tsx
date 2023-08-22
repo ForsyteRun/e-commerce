@@ -10,12 +10,14 @@ import styles from './RoutingError.module.scss';
 
 const RoutingError = () => {
   const dispatch = useAppDispatch();
-  const userType = useAppSelector((state) => state.userDataSlice.data.type);
+  const { authenticationMode } = useAppSelector(
+    (state) => state.userDataSlice.data
+  );
   const error = useRouteError();
   const message = RoutingErrorMessage(error);
 
   useEffect(() => {
-    identificateUserOnAppStart(dispatch, userType);
+    identificateUserOnAppStart(dispatch, authenticationMode);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

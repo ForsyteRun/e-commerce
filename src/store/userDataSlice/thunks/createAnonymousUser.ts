@@ -14,7 +14,7 @@ const createAnonymousUser = createAsyncThunk(
       .execute()
       .then((res) => {
         const data: IUserDataState = {
-          type: 'anonymous',
+          authenticationMode: 'Anonymous',
           id: res.body.anonymousId,
         };
 
