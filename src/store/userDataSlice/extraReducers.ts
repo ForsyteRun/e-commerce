@@ -32,6 +32,9 @@ const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
       state.error = handleLoginError(error);
     })
     .addCase(registerUser.pending, setPendingStatus)
+    .addCase(registerUser.fulfilled, (state) => {
+      state.loading = 'succeeded';
+    })
     .addCase(registerUser.rejected, setCommonError);
 };
 
