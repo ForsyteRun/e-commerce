@@ -38,16 +38,13 @@ const Registration: React.FC = () => {
   const { authenticationMode } = useAppSelector(
     (state) => state.userDataSlice.data
   );
-  const { registrationAccessCode } = useAppSelector(
-    (state) => state.registrationAccessCodeSlice
-  );
 
   useEffect(() => {
-    if (authenticationMode === 'Password' && !registrationAccessCode) {
+    if (authenticationMode === 'Password') {
       navigate(PathNames.index, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authenticationMode, registrationAccessCode]);
+  }, [authenticationMode]);
 
   return (
     <div className={styles.register}>
