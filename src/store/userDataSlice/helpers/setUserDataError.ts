@@ -1,8 +1,8 @@
 import { IUserState } from 'types';
 
-const setCommonError = (state: IUserState) => {
+const setUserDataError = (state: IUserState) => {
   state.loading = 'failed';
   state.error = 'Something went wrong...';
 };
 
-export default setCommonError;
+export default setUserDataError;

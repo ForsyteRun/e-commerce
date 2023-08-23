@@ -1,4 +1,9 @@
-import { AuthenticationMode, Customer } from '@commercetools/platform-sdk';
+import {
+  AuthenticationMode,
+  Customer,
+  ProductProjection,
+  _ErrorResponse,
+} from '@commercetools/platform-sdk';
 import { CookieAttributes } from 'js-cookie';
 
 export enum PathNames {
@@ -91,4 +96,17 @@ export interface IUserState {
   data: IAnonymousUserData | RegisteredUserData;
   loading: LoadingState;
   error: string | null;
+}
+
+interface IStoreBasicData {
+  loading: LoadingState;
+  error: _ErrorResponse | null;
+}
+
+export interface IProductsData extends IStoreBasicData {
+  data: ProductProjection[] | null;
+}
+
+export interface ISingleProductData extends IStoreBasicData {
+  data: ProductProjection | null;
 }
