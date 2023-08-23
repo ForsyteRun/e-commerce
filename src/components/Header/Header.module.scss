@@ -1,8 +1,4 @@
 .header {
   @include flex;
   padding: 1rem 0;
-  &__navigation {
-    @include flex(row, space-between, normal);
-    gap: 20px;
-  }
 }
