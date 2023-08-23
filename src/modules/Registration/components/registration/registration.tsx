@@ -6,14 +6,15 @@ import AlertSnackBar from 'components/SnackBar';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 import { registerUser } from '../../../../store/userDataSlice/thunks';
 import { PathNames } from '../../../../types';
+import Address from '../adress/Adress';
+import validCountries from '../adress/constants';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
-import { validateEmail, validateName, validatePassword } from './validation';
-import NavigateToLogin from '../navigateToLogin';
-import validateAddresses from './validation/validateAddresses';
-import validCountries from '../adress/constants';
 import { IDefaultAddress } from './types';
+import { validateEmail, validateName, validatePassword } from './validation';
+import validateAddresses from './validation/validateAddresses';
+import NavigateToLogin from '../navigateToLogin';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -52,17 +53,13 @@ const Registration: React.FC = () => {
       <Formik<CustomerDraft>
         initialValues={initialValues}
         onSubmit={(value: CustomerDraft) => {
-          const updateAddress: IDefaultAddress = {
+          const updateAdress: IDefaultAddress = {
             isSameBillingFieldAsShipping: billingField,
             defaultShippingAddress: shippingAddress,
             defaultBillingAddress: billingAddress,
           };
           const formData = validateAddresses(value, updateAdress);
-          const data: CustomerDraft = {
-            ...formData,
-            anonymousCartId,
-          };
-          dispatch(registerUser({ registrationData: data }));
+          dispatch(registerUser({ registrationData: formData }));
         }}
       >
         {({ errors, touched }) => (
