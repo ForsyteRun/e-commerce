@@ -1,10 +1,16 @@
 import { createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { setPendingStatus, setRejectedStatus } from 'store/helpers';
+import {
+  setPendingStatus,
+  setRejectedStatus,
+  transformProductData,
+  calculateProductsCounters,
+} from 'store/helpers';
 import { IProductsData } from 'types';
 import fetchAllProductsData from './fetchAllProductsData';
 
 const initialState: IProductsData = {
   data: null,
+  counters: null,
   loading: 'idle',
   error: null,
 };
@@ -15,10 +21,16 @@ const productsDataSlice = createSlice({
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<IProductsData>): void => {
     builder
-      .addCase(fetchAllProductsData.pending, setPendingStatus)
+      .addCase(fetchAllProductsData.pending, (state) => {
+        setPendingStatus(state);
+        state.counters = null;
+      })
       .addCase(fetchAllProductsData.fulfilled, (state, { payload }) => {
-        state.data = payload;
+        const { results, ...counts } = payload;
+
         state.loading = 'succeeded';
+        state.data = results.map((product) => transformProductData(product));
+        state.counters = calculateProductsCounters(counts);
       })
       .addCase(fetchAllProductsData.rejected, setRejectedStatus);
   },

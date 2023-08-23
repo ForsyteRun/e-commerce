@@ -1,5 +1,9 @@
 import { createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { setPendingStatus, setRejectedStatus } from 'store/helpers';
+import {
+  setPendingStatus,
+  setRejectedStatus,
+  transformProductData,
+} from 'store/helpers';
 import { ISingleProductData } from 'types';
 import fetchSingleProductData from './fetchSingleProductData';
 
@@ -19,7 +23,8 @@ const singleProductDataSlice = createSlice({
     builder
       .addCase(fetchSingleProductData.pending, setPendingStatus)
       .addCase(fetchSingleProductData.fulfilled, (state, { payload }) => {
-        state.data = payload;
+        const data = transformProductData(payload);
+        state.data = data;
         state.loading = 'succeeded';
       })
       .addCase(fetchSingleProductData.rejected, setRejectedStatus);

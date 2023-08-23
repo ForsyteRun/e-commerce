@@ -1,7 +1,7 @@
 import {
   AuthenticationMode,
   Customer,
-  ProductProjection,
+  ProductProjectionPagedQueryResponse,
   _ErrorResponse,
 } from '@commercetools/platform-sdk';
 import { CookieAttributes } from 'js-cookie';
@@ -103,10 +103,43 @@ interface IStoreBasicData {
   error: _ErrorResponse | null;
 }
 
+export interface IPriceData {
+  currencyCode: string;
+  net: number;
+  discounted?: number;
+}
+
+export type AttributeValue = string | number | boolean;
+
+export interface IAttributes {
+  [key: string]: AttributeValue;
+}
+
+export interface IProductData {
+  id: string;
+  name: string;
+  categories: string[];
+  slug: string;
+  description?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  sku?: string;
+  price?: IPriceData;
+  attributes?: IAttributes;
+  images?: string[];
+}
+
+export interface IProductsCounters
+  extends Omit<ProductProjectionPagedQueryResponse, 'results'> {
+  totalPages: number;
+  page: number;
+}
+
 export interface IProductsData extends IStoreBasicData {
-  data: ProductProjection[] | null;
+  data: IProductData[] | null;
+  counters: IProductsCounters | null;
 }
 
 export interface ISingleProductData extends IStoreBasicData {
-  data: ProductProjection | null;
+  data: IProductData | null;
 }

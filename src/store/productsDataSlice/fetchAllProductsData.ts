@@ -11,10 +11,10 @@ const fetchAllProductsData = createAsyncThunk(
 
     const response = await api
       .productProjections()
-      .get()
+      .get({ queryArgs: { limit: 5, offset: 5 } })
       .execute()
       .then((res) => {
-        const data = res.body.results;
+        const data = res.body;
         return data;
       })
       .catch((err: _ErrorResponse) => {
