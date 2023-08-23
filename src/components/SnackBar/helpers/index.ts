@@ -1,5 +1,5 @@
 import { AlertColor } from '@mui/material';
-import { RequestStatusAnswer, RequestStatusCode } from '../../../types';
+import { RequestStatusAnswer, RequestStatusCode } from 'types';
 import { IGetErrorSnackBar } from '../types';
 
 const getErrorSnackBar = (statusType: number): IGetErrorSnackBar => {
