@@ -31,6 +31,7 @@ const initialValues: CustomerDraft = {
 const Registration: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   const [shippingAdress, setShippingAdress] = useState<boolean>(false);
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
   const [billingField, setBillingField] = useState<boolean>(true);
@@ -150,8 +151,10 @@ const Registration: React.FC = () => {
               />
               <span>same shipping and billind adresses</span>
             </div>
-            <button type="submit">Register</button>
-            <AlertSnackBar />
+            <button type="submit" onClick={() => setOpen(true)}>
+              Register
+            </button>
+            <AlertSnackBar open={open} setOpen={setOpen} />
           </Form>
         )}
       </Formik>
