@@ -9,8 +9,8 @@ import {
 } from './thunks';
 import {
   setUserData,
-  setPendingStatus,
   handleLoginError,
+  setPendingStatus,
   setCommonError,
 } from './helpers';
 

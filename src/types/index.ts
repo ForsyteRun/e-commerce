@@ -85,8 +85,10 @@ type RegisteredUserDataFields =
 
 export type RegisteredUserData = Pick<Customer, RegisteredUserDataFields>;
 
+type LoadingState = 'idle' | 'pending' | 'succeeded' | 'failed';
+
 export interface IUserState {
   data: IAnonymousUserData | RegisteredUserData;
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+  loading: LoadingState;
   error: string | null;
 }
