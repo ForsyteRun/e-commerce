@@ -2,7 +2,6 @@ import { Snackbar, Stack } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import * as React from 'react';
-import { RootState } from 'store';
 import { useNavigate } from 'react-router-dom';
 import { PathNames, RequestStatusCode } from 'types';
 import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
@@ -18,7 +17,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 
 const AlertSnackBar: React.FC<IAlertSnackBar> = ({ open, setOpen }) => {
   const { registrationAccessCode } = useAppSelector(
-    (state: RootState) => state.registrationAccessCodeSlice
+    (state) => state.registrationAccessCodeSlice
   );
 
   const dispatch = useAppDispatch();
