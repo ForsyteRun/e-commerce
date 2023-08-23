@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
-import { PathNames } from '../../../../types';
+import { PathNames } from 'types';
 import styles from './NavigateToLogin.module.scss';
 
-const NavigateToLogin = () => {
+const NavigateToLogin: React.FC = () => {
   return (
     <h3 className={styles.title}>
       <span>Do you have an account? </span>

@@ -1,12 +1,8 @@
 import { AlertColor } from '@mui/material';
-import { RequestStatusAnswer, RequestStatusCode } from '../../../types';
+import { RequestStatusAnswer, RequestStatusCode } from 'types';
+import { IGetErrorSnackBar } from '../types';
 
-export interface IgetErrorSnackBar {
-  severity: AlertColor;
-  access: string;
-}
-
-const getErrorSnackBar = (statusType: number): IgetErrorSnackBar => {
+const getErrorSnackBar = (statusType: number): IGetErrorSnackBar => {
   const statusMappings: Record<
     number,
     { severity: AlertColor; access: string }

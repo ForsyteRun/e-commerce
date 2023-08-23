@@ -1,5 +1,5 @@
-export interface IDefaultAdress {
+export interface IDefaultAddress {
   isSameBillingFieldAsShipping: boolean;
-  defaultShippingAdress: boolean;
-  defaultBillingAdress: boolean;
+  defaultShippingAddress: boolean;
+  defaultBillingAddress: boolean;
 }
