@@ -27,4 +27,11 @@ export default defineConfig({
   define: {
     global: {},
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "./src/styles/mixins.scss";',
+      },
+    },
+  },
 });
