@@ -6,14 +6,14 @@ import AlertSnackBar from 'components/SnackBar';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 import { registerUser } from '../../../../store/userDataSlice/thunks';
 import { PathNames } from '../../../../types';
-import Adress from '../adress/Adress';
-import validCountries from '../adress/constants';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
-import { IDefaultAdress } from './types';
 import { validateEmail, validateName, validatePassword } from './validation';
-import validateAdresses from './validation/validateAdresses';
+import validCountries from '../adress/constants';
+import { IDefaultAddress } from './types';
+import validateAddresses from './validation/validateAddresses';
+import Address from '../adress/Adress';
 import NavigateToLogin from '../navigateToLogin';
 
 const initialValues: CustomerDraft = {
@@ -32,8 +32,8 @@ const Registration: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [shippingAdress, setShippingAdress] = useState<boolean>(false);
-  const [billingAdress, setBillingAdress] = useState<boolean>(false);
+  const [shippingAddress, setShippingAddress] = useState<boolean>(false);
+  const [billingAddress, setBillingAddress] = useState<boolean>(false);
   const [billingField, setBillingField] = useState<boolean>(true);
 
   const userType = useAppSelector((state) => state.userDataSlice.data.type);
@@ -57,12 +57,12 @@ const Registration: React.FC = () => {
       <Formik<CustomerDraft>
         initialValues={initialValues}
         onSubmit={(value: CustomerDraft) => {
-          const updateAdress: IDefaultAdress = {
+          const updateAddress: IDefaultAddress = {
             isSameBillingFieldAsShipping: billingField,
-            defaultShippingAdress: shippingAdress,
-            defaultBillingAdress: billingAdress,
+            defaultShippingAddress: shippingAddress,
+            defaultBillingAddress: billingAddress,
           };
-          const formData = validateAdresses(value, updateAdress);
+          const formData = validateAddresses(value, updateAddress);
           const data: CustomerDraft = {
             ...formData,
             anonymousCartId,
@@ -132,19 +132,19 @@ const Registration: React.FC = () => {
               </div>
             </div>
             <Select />
-            <div className={styles.adress__container}>
-              <Adress
-                blockTitle="Shipping adress"
+            <div className={styles.address__container}>
+              <Address
+                blockTitle="Shipping address"
                 field={0}
-                adress={shippingAdress}
-                setAdress={setShippingAdress}
+                address={shippingAddress}
+                setAddress={setShippingAddress}
               />
               {!billingField && (
-                <Adress
-                  blockTitle="Billiing adress"
+                <Address
+                  blockTitle="Billing address"
                   field={1}
-                  adress={billingAdress}
-                  setAdress={setBillingAdress}
+                  address={billingAddress}
+                  setAddress={setBillingAddress}
                 />
               )}
             </div>
@@ -154,10 +154,10 @@ const Registration: React.FC = () => {
                 checked={billingField}
                 onChange={() => {
                   setBillingField(!billingField);
-                  setBillingAdress(false);
+                  setBillingAddress(false);
                 }}
               />
-              <span>same shipping and billind adresses</span>
+              <span>same shipping and billing addresses</span>
             </div>
             <button type="submit" onClick={() => setOpen(true)}>
               Register

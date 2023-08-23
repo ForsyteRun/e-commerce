@@ -1,25 +1,25 @@
 import { Field, FormikErrors, FormikValues, useFormikContext } from 'formik';
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
-import styles from './adress.module.scss';
+import styles from './address.module.scss';
 import validCountries from './constants';
 import validateCity from './validation/validateCity';
 import validatePostCode from './validation/validatePostCode';
 import validateStreet from './validation/validateStreet';
 
-interface IAdress {
+interface IAddress {
   blockTitle: string;
   field: number;
-  adress: boolean;
-  setAdress: Dispatch<SetStateAction<boolean>>;
+  address: boolean;
+  setAddress: Dispatch<SetStateAction<boolean>>;
 }
 
-const Adress: React.FC<IAdress> = ({
+const Address: React.FC<IAddress> = ({
   blockTitle,
   field,
-  setAdress,
-  adress,
-}: IAdress): JSX.Element => {
+  setAddress,
+  address,
+}: IAddress) => {
   const { errors, touched } = useFormikContext<FormikValues>();
 
   const errorAddresses = errors.addresses as FormikErrors<BaseAddress[]>;
@@ -94,11 +94,11 @@ const Adress: React.FC<IAdress> = ({
       </div>
       <div className={styles.title}>{blockTitle}</div>
       <div className={styles.checkbox}>
-        <input type="checkbox" onChange={() => setAdress(!adress)} />
+        <input type="checkbox" onChange={() => setAddress(!address)} />
         <span>set as default {blockTitle}</span>
       </div>
     </div>
   );
 };
 
-export default Adress;
+export default Address;
