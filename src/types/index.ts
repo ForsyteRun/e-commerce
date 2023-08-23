@@ -1,3 +1,4 @@
+import { AuthenticationMode, Customer } from '@commercetools/platform-sdk';
 import { CookieAttributes } from 'js-cookie';
 
 export enum PathNames {
@@ -64,16 +65,28 @@ export interface LoginErrorProps {
   message: string;
 }
 
-export type UserType = 'anonymous' | 'registered' | null;
-
-export interface IUserDataState {
-  type: UserType;
+export interface IAnonymousUserData {
+  authenticationMode: AuthenticationMode;
   id: string | null | undefined;
-  cartId?: string;
 }
 
+type RegisteredUserDataFields =
+  | 'id'
+  | 'email'
+  | 'firstName'
+  | 'lastName'
+  | 'dateOfBirth'
+  | 'addresses'
+  | 'defaultBillingAddressId'
+  | 'defaultShippingAddressId'
+  | 'shippingAddressIds'
+  | 'billingAddressIds'
+  | 'authenticationMode';
+
+export type RegisteredUserData = Pick<Customer, RegisteredUserDataFields>;
+
 export interface IUserState {
-  data: IUserDataState;
+  data: IAnonymousUserData | RegisteredUserData;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
   error: string | null;
 }

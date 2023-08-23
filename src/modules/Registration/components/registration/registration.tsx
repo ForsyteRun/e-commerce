@@ -14,7 +14,7 @@ import styles from './registration.module.scss';
 import { IDefaultAdress } from './types';
 import { validateEmail, validateName, validatePassword } from './validation';
 import validateAdresses from './validation/validateAdresses';
-import NavigateToLogin from '../navigateToLogin';
+import NavigateToLogin from '../NavigateToLogin';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -35,20 +35,16 @@ const Registration: React.FC = () => {
   const [billingAdress, setBillingAdress] = useState<boolean>(false);
   const [billingField, setBillingField] = useState<boolean>(true);
 
-  const userType = useAppSelector((state) => state.userDataSlice.data.type);
-  const { registrationAccessCode } = useAppSelector(
-    (state) => state.registrationAccessCodeSlice
-  );
-  const anonymousCartId = useAppSelector(
-    (state) => state.userDataSlice.data.cartId
+  const { authenticationMode } = useAppSelector(
+    (state) => state.userDataSlice.data
   );
 
   useEffect(() => {
-    if (userType === 'registered' && !registrationAccessCode) {
+    if (authenticationMode === 'Password') {
       navigate(PathNames.index, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userType, registrationAccessCode]);
+  }, [authenticationMode]);
 
   return (
     <div className={styles.register}>
@@ -62,11 +58,7 @@ const Registration: React.FC = () => {
             defaultBillingAdress: billingAdress,
           };
           const formData = validateAdresses(value, updateAdress);
-          const data: CustomerDraft = {
-            ...formData,
-            anonymousCartId,
-          };
-          dispatch(registerUser({ registrationData: data }));
+          dispatch(registerUser({ registrationData: formData }));
         }}
       >
         {({ errors, touched }) => (
