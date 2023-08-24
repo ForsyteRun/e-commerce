@@ -14,7 +14,7 @@ describe('Test transformProductAttributes', () => {
     );
   });
 
-  it('Sould return object with only correct attributes', () => {
+  it('Should return object with only correct attributes', () => {
     expect(
       transformProductAttributes(notOnlyCorrectAttributesTest)
     ).toStrictEqual(notOnlyCorrectAttributesTestResult);

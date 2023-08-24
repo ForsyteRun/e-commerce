@@ -34,4 +34,14 @@ describe('Testing calculatePriceByFraction', () => {
     testData.fractionDigits = 3;
     expect(calculatePriceByFraction(testData)).toBe(33.45);
   });
+
+  it('Should return "0" if price equals "NaN"', () => {
+    testData.centAmount = NaN;
+    expect(calculatePriceByFraction(testData)).toBe(0);
+  });
+
+  it('Should return "0" if fractionDigits equals "NaN"', () => {
+    testData.fractionDigits = NaN;
+    expect(calculatePriceByFraction(testData)).toBe(0);
+  });
 });

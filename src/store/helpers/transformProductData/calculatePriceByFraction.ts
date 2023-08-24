@@ -4,6 +4,10 @@ const calculatePriceByFraction = ({
   centAmount,
   fractionDigits,
 }: TypedMoney): number => {
+  if (Number.isNaN(fractionDigits) || Number.isNaN(centAmount)) {
+    return 0;
+  }
+
   if (fractionDigits > 0) {
     const fraction = 10 ** fractionDigits;
     const result = centAmount / fraction;

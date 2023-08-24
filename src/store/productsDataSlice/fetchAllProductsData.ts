@@ -11,7 +11,7 @@ const fetchAllProductsData = createAsyncThunk(
 
     const response = await api
       .productProjections()
-      .get({ queryArgs: { limit: 5, offset: 5 } })
+      .get({ queryArgs: { limit: 20, offset: 0 } })
       .execute()
       .then((res) => {
         const data = res.body;
