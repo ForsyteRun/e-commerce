@@ -3,7 +3,9 @@ import { capitalizeAll } from 'helpers/capitalize';
 import { IAttributes } from 'types';
 import isCorrectAttributeType from './isCorrectAttributeType';
 
-const transformProductAttributes = (attributes: Attribute[]): IAttributes => {
+const transformProductAttributes = (
+  attributes: Attribute[]
+): IAttributes | undefined => {
   const transformedAttributes: IAttributes = {};
   attributes.forEach((attribute) => {
     if (isCorrectAttributeType(attribute.value)) {
@@ -11,6 +13,11 @@ const transformProductAttributes = (attributes: Attribute[]): IAttributes => {
       transformedAttributes[capitalizedName] = attribute.value;
     }
   });
+
+  if (!Object.keys(transformedAttributes).length) {
+    return undefined;
+  }
+
   return transformedAttributes;
 };
 
