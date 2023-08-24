@@ -1,4 +1,4 @@
-import NavLinkButton from 'UI/NavLinkButton';
+import NavigationButton from 'UI/NavigationButton';
 import { PathNames } from 'types';
 import UserNavigation from './components/UserNavigation';
 import Logo from './components/Logo';
@@ -11,7 +11,7 @@ const Header = () => {
       <div className={styles.headerContent}>
         <Logo />
         <div className={styles.container}>
-          <NavLinkButton path={PathNames.catalog}>Catalog</NavLinkButton>
+          <NavigationButton path={PathNames.catalog}>Catalog</NavigationButton>
           <div className={styles.headerElements}>
             <Search />
             <UserNavigation />
