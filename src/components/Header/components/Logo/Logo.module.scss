@@ -6,6 +6,9 @@
 }
 
 .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #6666cc;
   font-size: 1.75rem;
   font-weight: 700;
