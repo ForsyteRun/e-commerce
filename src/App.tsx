@@ -5,6 +5,7 @@ import Header from 'components/Header';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 // import fetchSingleProductData from 'store/singleProductDataSlice/fetchSingleProductData';
+import fetchAllProductsData from 'store/productsDataSlice/fetchAllProductsData';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +15,7 @@ const App = () => {
 
   useEffect(() => {
     identificateUserOnAppStart(dispatch, authenticationMode);
+    dispatch(fetchAllProductsData());
     // dispatch(fetchSingleProductData('0c91d266-6f0e-4203-9aaa-e5c2a00418be'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
