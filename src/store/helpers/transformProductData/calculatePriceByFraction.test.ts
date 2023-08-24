@@ -1,22 +1,18 @@
 import { TypedMoney } from '@commercetools/platform-sdk';
+import { Mutable } from 'types';
 import calculatePriceByFraction from './calculatePriceByFraction';
 
 describe('Testing calculatePriceByFraction', () => {
-  const baseTestData: TypedMoney = {
+  const testData: Mutable<TypedMoney> = {
     type: 'centPrecision',
     currencyCode: 'EUR',
     centAmount: 500,
     fractionDigits: 2,
   };
-  let testData = { ...baseTestData };
 
   beforeEach(() => {
-    testData = {
-      type: 'centPrecision',
-      currencyCode: 'EUR',
-      centAmount: 500,
-      fractionDigits: 2,
-    };
+    testData.centAmount = 500;
+    testData.fractionDigits = 2;
   });
 
   it('Should return a correct integer with postitive fraction', () => {

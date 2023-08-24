@@ -6,6 +6,10 @@ import {
 } from '@commercetools/platform-sdk';
 import { CookieAttributes } from 'js-cookie';
 
+export type Mutable<Type> = {
+  -readonly [Key in keyof Type]: Type[Key];
+};
+
 export enum PathNames {
   index = '/',
   register = '/register',
