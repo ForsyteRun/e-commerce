@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const Profile = () => {
+const UserProfile = () => {
   return (
     <Box sx={{ cursor: 'pointer' }}>
       <AccountCircleIcon fontSize="large" />
@@ -9,4 +9,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProfile;
