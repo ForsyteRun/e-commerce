@@ -1,10 +1,23 @@
 @import 'styles/variables.scss';
 
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
-  color: $blue-color;
-  font-size: 1.35rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6666cc;
+  font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.5;
   text-decoration: none;
   user-select: none;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
 }

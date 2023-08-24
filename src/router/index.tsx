@@ -24,6 +24,14 @@ const router = createBrowserRouter([
         path: PathNames.login,
         element: <Login />,
       },
+      {
+        path: PathNames.catalog,
+        element: <h1>Catalog Page</h1>,
+      },
+      {
+        path: PathNames.profile,
+        element: <h1>Profile Page</h1>,
+      },
     ],
   },
 ]);

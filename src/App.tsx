@@ -18,8 +18,10 @@ const App = () => {
   return (
     <>
       <Header />
-      <main>
-        <Outlet />
+      <main className="main">
+        <div className="wrapper">
+          <Outlet />
+        </div>
       </main>
     </>
   );
