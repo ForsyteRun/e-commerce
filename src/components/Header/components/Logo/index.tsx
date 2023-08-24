@@ -6,10 +6,8 @@ import styles from './Logo.module.scss';
 const Logo = () => {
   return (
     <NavLink className={styles.logo} to={PathNames.index}>
-      <span className={styles.wrapper}>
-        <img src={LogoIcon} alt="logo" className={styles.icon} />
-        <span>Printerix</span>
-      </span>
+      <img src={LogoIcon} alt="logo" className={styles.icon} />
+      <span>Printerix</span>
     </NavLink>
   );
 };
