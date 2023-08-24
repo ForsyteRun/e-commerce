@@ -3,7 +3,7 @@ import { IProductData } from 'types';
 import transformPrice from './transformPrice';
 import transformProductAttributes from './transformProductAttributes';
 
-const transformProductData = (data: ProductProjection) => {
+const transformProductData = (data: ProductProjection): IProductData => {
   const language = 'en-US';
   const {
     id,
