@@ -4,8 +4,13 @@ const calculatePriceByFraction = ({
   centAmount,
   fractionDigits,
 }: TypedMoney): number => {
-  const fraction = 10 ** fractionDigits;
-  return centAmount / fraction;
+  if (fractionDigits > 0) {
+    const fraction = 10 ** fractionDigits;
+    const result = centAmount / fraction;
+    return +result.toFixed(2);
+  }
+
+  return centAmount;
 };
 
 export default calculatePriceByFraction;
