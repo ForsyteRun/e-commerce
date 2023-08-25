@@ -1,9 +1,9 @@
-import { useAppSelector } from '../../../../hooks/useRedux';
-import LogOut from './components/LogOut';
-import NavLinkButton from '../../../../UI/NavLinkButton';
-import { PathNames } from '../../../../types';
+import { useAppSelector } from 'hooks/useRedux';
+import NavLinkButton from 'UI/NavLinkButton';
+import { PathNames } from 'types';
+import LogOutButton from './components/LogOutButton';
+import UserProfileButton from './components/UserProfileButton';
 import styles from './UserNavigation.module.scss';
-import UserProfile from './components/UserProfile';
 
 const UserNavigation = () => {
   const { authenticationMode } = useAppSelector(
@@ -18,8 +18,8 @@ const UserNavigation = () => {
   );
   const registeredUserButtons = (
     <>
-      <LogOut />
-      <UserProfile />
+      <LogOutButton />
+      <UserProfileButton />
     </>
   );
 

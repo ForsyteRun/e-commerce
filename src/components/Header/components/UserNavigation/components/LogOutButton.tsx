@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { createAnonymousUser } from 'store/userDataSlice/thunks';
 import navButtonStyles from 'UI/NavLinkButton/navButtonStyles';
 
-const LogOut = () => {
+const LogOutButton = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.userDataSlice);
   const isPending = loading === 'pending';
@@ -24,4 +24,4 @@ const LogOut = () => {
   );
 };
 
-export default LogOut;
+export default LogOutButton;
