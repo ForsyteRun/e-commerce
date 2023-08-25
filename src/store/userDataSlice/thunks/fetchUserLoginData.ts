@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
-import { getRefreshTokenCookie } from 'helpers/processRefreshTokenCookie';
 import { LoginFormValues } from 'types';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 import createPasswordFlowClientApi from 'services/sdkClient/createPasswordFlowClientApi';
@@ -9,8 +8,7 @@ import { getRegisteredUserData } from '../helpers';
 const fetchUserLoginData = createAsyncThunk(
   'userData/fetchUserLoginData',
   async (userData: LoginFormValues, { rejectWithValue }) => {
-    const refreshToken = getRefreshTokenCookie();
-    const api = createRefreshTokenClientApi(refreshToken);
+    const api = createRefreshTokenClientApi();
     const passwordApi = createPasswordFlowClientApi(userData);
 
     const response = await api

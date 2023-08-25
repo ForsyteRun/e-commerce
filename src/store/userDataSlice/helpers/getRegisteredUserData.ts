@@ -3,6 +3,7 @@ import { RegisteredUserData } from 'types';
 
 const getRegisteredUserData = ({
   id,
+  version,
   email,
   firstName,
   lastName,
@@ -15,6 +16,7 @@ const getRegisteredUserData = ({
   authenticationMode,
 }: Customer): RegisteredUserData => ({
   id,
+  version,
   email,
   firstName,
   lastName,

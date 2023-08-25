@@ -83,6 +83,7 @@ export interface IAnonymousUserData {
 
 type RegisteredUserDataFields =
   | 'id'
+  | 'version'
   | 'email'
   | 'firstName'
   | 'lastName'

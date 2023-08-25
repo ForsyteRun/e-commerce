@@ -6,8 +6,8 @@ import { getRegisteredUserData } from '../helpers';
 
 const fetchUserDataByRefreshToken = createAsyncThunk(
   'userData/fetchUserDataByRefreshToken',
-  async (refreshToken: string, { dispatch, rejectWithValue }) => {
-    const api = createRefreshTokenClientApi(refreshToken);
+  async (_, { dispatch, rejectWithValue }) => {
+    const api = createRefreshTokenClientApi();
 
     const response = await api
       .me()
