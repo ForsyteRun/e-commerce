@@ -6,10 +6,12 @@ const useIconButtonColorTheme = (rgbColor: string): SxProps => {
     padding: '6px',
     transition:
       'color 150ms linear, background 150ms linear, box-shadow 150ms linear',
-    ':hover': {
-      color: `rgba(${rgbColor}, 0.9)`,
-      backgroundColor: `rgba(${rgbColor}, 0.05)`,
-      boxShadow: `0 0 5px 2px rgba(${rgbColor}, 0.05)`,
+    '@media (hover: hover)': {
+      ':hover': {
+        color: `rgba(${rgbColor}, 0.9)`,
+        backgroundColor: `rgba(${rgbColor}, 0.05)`,
+        boxShadow: `0 0 5px 2px rgba(${rgbColor}, 0.05)`,
+      },
     },
   };
 };
