@@ -1,31 +1,29 @@
 @import 'styles/variables.scss';
+@import 'styles/mixins.scss';
 
 .header {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
+  @include flex();
   background-color: $white-color;
+  padding: 1rem;
   width: 100%;
 }
 
 .headerContent {
-  display: flex;
   align-items: center;
-  max-width: 1280px;
+  display: flex;
   margin: 0 auto;
+  max-width: 1280px;
   width: 100%;
 }
 
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  @include flex();
   padding-left: 10rem;
+  width: 100%;
 }
 
 .headerElements {
+  align-items: center;
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }
