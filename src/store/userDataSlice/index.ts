@@ -4,7 +4,7 @@ import extraReducers from './extraReducers';
 
 const initialState: IUserState = {
   data: {
-    type: null,
+    authenticationMode: '',
     id: null,
   },
   loading: 'idle',

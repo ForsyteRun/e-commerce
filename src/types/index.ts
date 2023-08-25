@@ -1,5 +1,14 @@
-import { AuthenticationMode, Customer } from '@commercetools/platform-sdk';
+import {
+  AuthenticationMode,
+  Customer,
+  ProductProjectionPagedQueryResponse,
+  _ErrorResponse,
+} from '@commercetools/platform-sdk';
 import { CookieAttributes } from 'js-cookie';
+
+export type Mutable<Type> = {
+  -readonly [Key in keyof Type]: Type[Key];
+};
 
 export enum PathNames {
   index = '/',
@@ -87,8 +96,56 @@ type RegisteredUserDataFields =
 
 export type RegisteredUserData = Pick<Customer, RegisteredUserDataFields>;
 
+type LoadingState = 'idle' | 'pending' | 'succeeded' | 'failed';
+
 export interface IUserState {
   data: IAnonymousUserData | RegisteredUserData;
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+  loading: LoadingState;
   error: string | null;
+}
+
+interface IStoreBasicData {
+  loading: LoadingState;
+  error: _ErrorResponse | null;
+}
+
+export interface IPriceData {
+  currencyCode: string;
+  net: number;
+  discounted?: number;
+}
+
+export type AttributeValue = string | number | boolean;
+
+export interface IAttributes {
+  [key: string]: AttributeValue;
+}
+
+export interface IProductData {
+  id: string;
+  name: string;
+  categories: string[];
+  slug: string;
+  description?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  sku?: string;
+  price?: IPriceData;
+  attributes?: IAttributes;
+  images?: string[];
+}
+
+export interface IProductsCounters
+  extends Omit<ProductProjectionPagedQueryResponse, 'results'> {
+  totalPages: number;
+  page: number;
+}
+
+export interface IProductsData extends IStoreBasicData {
+  data: IProductData[] | null;
+  counters: IProductsCounters | null;
+}
+
+export interface ISingleProductData extends IStoreBasicData {
+  data: IProductData | null;
 }

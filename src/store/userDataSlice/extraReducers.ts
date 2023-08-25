@@ -9,16 +9,16 @@ import {
 } from './thunks';
 import {
   setUserData,
-  setPendingStatus,
   handleLoginError,
-  setCommonError,
+  setPendingStatus,
+  setUserDataError,
 } from './helpers';
 
 const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
   builder
     .addCase(createAnonymousUser.pending, setPendingStatus)
     .addCase(createAnonymousUser.fulfilled, setUserData)
-    .addCase(createAnonymousUser.rejected, setCommonError)
+    .addCase(createAnonymousUser.rejected, setUserDataError)
     .addCase(fetchUserDataByRefreshToken.pending, setPendingStatus)
     .addCase(fetchUserDataByRefreshToken.fulfilled, setUserData)
     .addCase(fetchUserDataByRefreshToken.rejected, (state) => {
@@ -35,7 +35,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
     .addCase(registerUser.fulfilled, (state) => {
       state.loading = 'succeeded';
     })
-    .addCase(registerUser.rejected, setCommonError);
+    .addCase(registerUser.rejected, setUserDataError);
 };
 
 export default extraReducers;
