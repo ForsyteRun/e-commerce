@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { IUserState } from 'types';
