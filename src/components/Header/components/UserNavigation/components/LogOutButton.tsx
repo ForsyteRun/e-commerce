@@ -1,7 +1,8 @@
-import { Button } from '@mui/material';
+import { IconButton } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { createAnonymousUser } from 'store/userDataSlice/thunks';
-import navButtonStyles from 'UI/NavLinkButton/navButtonStyles';
+import useIconButtonColorTheme from './helpers/useIconButtonColorTheme';
 
 const LogOutButton = () => {
   const dispatch = useAppDispatch();
@@ -13,14 +14,15 @@ const LogOutButton = () => {
   };
 
   return (
-    <Button
+    <IconButton
+      color="primary"
       disabled={isPending}
       onClick={logoutHandler}
-      sx={navButtonStyles}
-      variant="contained"
+      sx={useIconButtonColorTheme('25, 118, 210')}
+      size="large"
     >
-      Logout
-    </Button>
+      <LogoutIcon />
+    </IconButton>
   );
 };
 
