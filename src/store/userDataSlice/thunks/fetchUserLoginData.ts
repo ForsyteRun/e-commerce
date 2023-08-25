@@ -20,11 +20,7 @@ const fetchUserLoginData = createAsyncThunk(
           .me()
           .get()
           .execute()
-          .then((customerData) => {
-            const data = getRegisteredUserData(customerData.body);
-
-            return data;
-          });
+          .then((customerData) => getRegisteredUserData(customerData.body));
         return res;
       })
       .catch((err: _ErrorResponse) => {

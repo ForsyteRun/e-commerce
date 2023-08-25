@@ -13,11 +13,7 @@ const fetchUserDataByRefreshToken = createAsyncThunk(
       .me()
       .get()
       .execute()
-      .then((res) => {
-        const data = getRegisteredUserData(res.body);
-
-        return data;
-      })
+      .then((res) => getRegisteredUserData(res.body))
       .catch((err: _ErrorResponse) => {
         const isNoRefreshToken =
           err.message ===

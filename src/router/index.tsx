@@ -3,6 +3,7 @@ import Login from 'pages/LoginPage';
 import RoutingError from 'pages/RoutingError';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
+import ProfilePage from 'pages/ProfilePage';
 import App from '../App';
 
 const router = createBrowserRouter([
@@ -13,7 +14,6 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        errorElement: <RoutingError />,
         element: <h1>Main Page</h1>,
       },
       {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: PathNames.profile,
-        element: <h1>Profile Page</h1>,
+        element: <ProfilePage />,
       },
     ],
   },

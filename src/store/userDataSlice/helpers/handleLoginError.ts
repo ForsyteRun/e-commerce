@@ -11,7 +11,7 @@ const handleLoginError = (error: _ErrorResponse): string => {
     return ERROR_MESSAGES.BAD_REQUEST;
   }
 
-  return ERROR_MESSAGES.GENERIC;
+  return '';
 };
 
 export default handleLoginError;
