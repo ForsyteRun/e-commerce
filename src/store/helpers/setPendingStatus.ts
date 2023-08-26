@@ -1,8 +1,6 @@
-import { IUserState, IProductsData, ISingleProductData } from 'types';
+import { AppState } from 'types';
 
-function setPendingStatus(
-  state: IUserState | IProductsData | ISingleProductData
-): void {
+function setPendingStatus(state: AppState): void {
   state.loading = 'pending';
   state.error = null;
 }

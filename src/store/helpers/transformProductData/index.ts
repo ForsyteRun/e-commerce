@@ -1,10 +1,11 @@
 import { ProductProjection } from '@commercetools/platform-sdk';
 import { IProductData } from 'types';
+import localizedStringToString from 'helpers/localizedStringToString';
 import transformPrice from './transformPrice';
 import transformProductAttributes from './transformProductAttributes';
 
 const transformProductData = (data: ProductProjection): IProductData => {
-  const language = 'en-US';
+  const localizeString = localizedStringToString('en-US');
   const {
     id,
     name,
@@ -19,21 +20,21 @@ const transformProductData = (data: ProductProjection): IProductData => {
 
   const transformedData: IProductData = {
     id,
-    name: name[language],
+    name: localizeString(name),
     categories: categories.map((category) => category.id),
-    slug: slug[language],
+    slug: localizeString(slug),
   };
 
   if (description) {
-    transformedData.description = description[language];
+    transformedData.description = localizeString(description);
   }
 
   if (metaTitle) {
-    transformedData.metaTitle = metaTitle[language];
+    transformedData.metaTitle = localizeString(metaTitle);
   }
 
   if (metaDescription) {
-    transformedData.metaDescription = metaDescription[language];
+    transformedData.metaDescription = localizeString(metaDescription);
   }
 
   if (sku) {
