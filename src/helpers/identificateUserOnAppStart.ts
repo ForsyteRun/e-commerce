@@ -14,7 +14,7 @@ function identificateUserOnAppStart(
 
   if (!authenticationMode) {
     if (refreshToken) {
-      dispatch(fetchUserDataByRefreshToken(refreshToken));
+      dispatch(fetchUserDataByRefreshToken());
     } else {
       dispatch(createAnonymousUser());
     }

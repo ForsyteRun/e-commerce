@@ -6,13 +6,9 @@ import {
   fetchUserDataByRefreshToken,
   fetchUserLoginData,
   registerUser,
+  updateUserData,
 } from './thunks';
-import {
-  setUserData,
-  handleLoginError,
-  setPendingStatus,
-  setUserDataError,
-} from './helpers';
+import { setUserData, setPendingStatus, setUserDataError } from './helpers';
 
 const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
   builder
@@ -21,21 +17,30 @@ const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
     .addCase(createAnonymousUser.rejected, setUserDataError)
     .addCase(fetchUserDataByRefreshToken.pending, setPendingStatus)
     .addCase(fetchUserDataByRefreshToken.fulfilled, setUserData)
-    .addCase(fetchUserDataByRefreshToken.rejected, (state) => {
+    .addCase(fetchUserDataByRefreshToken.rejected, (state, { payload }) => {
       state.loading = 'failed';
+      const error = payload as _ErrorResponse;
+      state.error = error;
     })
     .addCase(fetchUserLoginData.pending, setPendingStatus)
     .addCase(fetchUserLoginData.fulfilled, setUserData)
     .addCase(fetchUserLoginData.rejected, (state, { payload }) => {
       state.loading = 'failed';
       const error = payload as _ErrorResponse;
-      state.error = handleLoginError(error);
+      state.error = error;
     })
     .addCase(registerUser.pending, setPendingStatus)
     .addCase(registerUser.fulfilled, (state) => {
       state.loading = 'succeeded';
     })
-    .addCase(registerUser.rejected, setUserDataError);
+    .addCase(registerUser.rejected, setUserDataError)
+    .addCase(updateUserData.pending, setPendingStatus)
+    .addCase(updateUserData.fulfilled, setUserData)
+    .addCase(updateUserData.rejected, (state, { payload }) => {
+      state.loading = 'failed';
+      const error = payload as _ErrorResponse;
+      state.error = error;
+    });
 };
 
 export default extraReducers;

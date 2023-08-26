@@ -79,10 +79,12 @@ export interface LoginErrorProps {
 export interface IAnonymousUserData {
   authenticationMode: AuthenticationMode;
   id: string | null | undefined;
+  version?: number;
 }
 
 type RegisteredUserDataFields =
   | 'id'
+  | 'version'
   | 'email'
   | 'firstName'
   | 'lastName'
@@ -101,7 +103,7 @@ type LoadingState = 'idle' | 'pending' | 'succeeded' | 'failed';
 export interface IUserState {
   data: IAnonymousUserData | RegisteredUserData;
   loading: LoadingState;
-  error: string | null;
+  error: _ErrorResponse | null;
 }
 
 interface IStoreBasicData {
