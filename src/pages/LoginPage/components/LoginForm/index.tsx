@@ -4,7 +4,6 @@ import { InputType, LoginFormValues } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { resetUserDataError } from 'store/userDataSlice';
 import { fetchUserLoginData } from 'store/userDataSlice/thunks';
-import { handleLoginError } from 'store/userDataSlice/helpers';
 import { Box, Button, IconButton, TextField } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -12,6 +11,7 @@ import styles from './LoginForm.module.scss';
 import LoginError from './components/LoginError';
 import validationSchema from './helpers/validationSchema';
 import RegistrationLink from './components/RegistrationLink';
+import handleLoginError from './helpers/handleLoginError';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
