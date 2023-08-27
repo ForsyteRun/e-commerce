@@ -1,6 +1,7 @@
 import { SxProps } from '@mui/material';
 
 const buttonStyles: SxProps = {
+  width: '100%',
   fontSize: '12px',
   color: '#673ab7',
   borderRadius: '20px',
