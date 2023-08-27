@@ -3,9 +3,10 @@ import Login from 'pages/LoginPage';
 import RoutingError from 'pages/RoutingError';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
-import ProfilePage from 'pages/ProfilePage';
+import UserProfilePage from 'modules/UserProfile/components/UserProfile';
 import Catalog from 'pages/CatalogPage';
 import ProductPage from 'pages/ProductPage';
+
 import App from '../App';
 import { getCategoryData, getProductData } from './loaders';
 
