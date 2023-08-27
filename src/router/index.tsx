@@ -5,6 +5,7 @@ import ProductPage from 'pages/ProductPage';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
 import Catalog from 'pages/CatalogPage';
+import UserProfilePage from 'modules/UserProfile/components/UserProfile';
 import App from '../App';
 import { getCategoryData, getProductData } from './loaders';
 
