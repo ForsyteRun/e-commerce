@@ -3,8 +3,8 @@ import Login from 'pages/LoginPage';
 import RoutingError from 'pages/RoutingError';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
-import ProfilePage from 'pages/ProfilePage';
-import Catalog from 'pages/CatalogPage';
+import UserProfilePage from 'modules/UserProfile/components/UserProfile';
+
 import App from '../App';
 
 const router = createBrowserRouter([
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: PathNames.profile,
-        element: <ProfilePage />,
+        element: <UserProfilePage />,
       },
     ],
   },
