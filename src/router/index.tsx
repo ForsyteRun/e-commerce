@@ -10,6 +10,7 @@ import {
   UserInfo,
   UserProfileMainPage,
 } from 'modules/UserProfile';
+import Catalog from 'pages/CatalogPage';
 import App from '../App';
 import { getCategoryData, getProductData } from './loaders';
 
