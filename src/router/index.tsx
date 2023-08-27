@@ -3,8 +3,7 @@ import Login from 'pages/LoginPage';
 import RoutingError from 'pages/RoutingError';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
-import UserProfilePage from 'modules/UserProfile/components/UserProfile';
-
+import UserProfilePage from 'modules/UserProfile';
 import App from '../App';
 
 const router = createBrowserRouter([
