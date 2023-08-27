@@ -16,6 +16,8 @@ export enum PathNames {
   login = '/login',
   catalog = '/catalog',
   profile = '/profile',
+  profileInfo = '/profile/info',
+  profileAddress = '/profile/address',
 }
 
 export enum RequestStatusCode {
