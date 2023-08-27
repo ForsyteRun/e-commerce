@@ -7,6 +7,7 @@ import { PathNames } from 'types';
 import { AddressBook, UserInfo } from 'modules/UserProfile';
 import Catalog from 'pages/CatalogPage';
 import ProfilePage from 'pages/ProfilePage';
+import Password from 'modules/UserProfile/components/Content/Password';
 import App from '../App';
 import { getCategoryData, getProductData } from './loaders';
 
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
           {
             path: PathNames.profileAddress,
             element: <AddressBook />,
+          },
+          {
+            path: PathNames.profilePassword,
+            element: <Password />,
           },
         ],
       },

@@ -27,3 +27,7 @@ body {
   margin: 0 auto;
   height: calc(100vh - 92px);
 }
+
+.active {
+  border-bottom: 1px solid blueviolet;
+}

@@ -20,6 +20,7 @@ export enum PathNames {
   product = '/catalog/:category/:product',
   profileInfo = '/profile/info',
   profileAddress = '/profile/address',
+  profilePassword = '/profile/password',
 }
 
 export enum RequestStatusCode {
