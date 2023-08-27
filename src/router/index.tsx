@@ -5,7 +5,11 @@ import ProductPage from 'pages/ProductPage';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
 import Catalog from 'pages/CatalogPage';
-import UserProfilePage from 'modules/UserProfile/components/UserProfile';
+import {
+  AddressBook,
+  UserInfo,
+  UserProfileMainPage,
+} from 'modules/UserProfile';
 import App from '../App';
 import { getCategoryData, getProductData } from './loaders';
 
@@ -55,7 +59,20 @@ const router = createBrowserRouter([
       },
       {
         path: PathNames.profile,
-        element: <UserProfilePage />,
+        element: <UserProfileMainPage />,
+      },
+      {
+        element: <UserProfileMainPage />,
+        children: [
+          {
+            path: PathNames.profileInfo,
+            element: <UserInfo />,
+          },
+          {
+            path: PathNames.profileAddress,
+            element: <AddressBook />,
+          },
+        ],
       },
     ],
   },
