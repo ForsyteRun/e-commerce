@@ -4,12 +4,12 @@ import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenCl
 
 const fetchSingleProductData = createAsyncThunk(
   'singleProductData/fetch',
-  async (productId: string, { rejectWithValue }) => {
+  async (productKey: string, { rejectWithValue }) => {
     const api = createRefreshTokenClientApi();
 
     const response = await api
       .productProjections()
-      .withId({ ID: productId })
+      .withKey({ key: productKey })
       .get()
       .execute()
       .then((res) => {
