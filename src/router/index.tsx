@@ -4,6 +4,7 @@ import RoutingError from 'pages/RoutingError';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
 import ProfilePage from 'pages/ProfilePage';
+import Catalog from 'pages/CatalogPage';
 import App from '../App';
 
 const router = createBrowserRouter([
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: PathNames.catalog,
-        element: <h1>Catalog Page</h1>,
+        element: <Catalog />,
       },
       {
         path: PathNames.profile,
