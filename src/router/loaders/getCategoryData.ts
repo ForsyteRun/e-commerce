@@ -1,24 +1,13 @@
-import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { LoaderFunction } from 'react-router-dom';
-import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
+import throwRouteError from '../helpers/throwRouteError';
+import fetchCategoryWith from './fetchCategory';
 
 const getCategoryData: LoaderFunction = async ({ params }) => {
-  const api = createRefreshTokenClientApi();
   if (params.category) {
-    const response = await api
-      .categories()
-      .withKey({ key: params.category })
-      .get()
-      .execute()
-      .then((res) => res)
-      .catch((err: _ErrorResponse) => err);
+    const response = await fetchCategoryWith('key', params.category);
 
     if (response && response.statusCode === 404) {
-      // eslint-disable-next-line @typescript-eslint/no-throw-literal
-      throw new Response('Not Found', {
-        statusText: 'Not Found',
-        status: response.statusCode,
-      });
+      throwRouteError(404, 'Not found');
     }
 
     return response;

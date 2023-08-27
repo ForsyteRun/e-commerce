@@ -36,7 +36,7 @@ const router = createBrowserRouter([
             element: <Catalog />,
           },
           {
-            path: `${PathNames.catalog}/:category`,
+            path: `${PathNames.category}`,
             element: <Outlet />,
             loader: getCategoryData,
             children: [
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
                 element: <h1>Category</h1>,
               },
               {
-                path: `${PathNames.catalog}/:category/:product`,
+                path: `${PathNames.product}`,
                 element: <ProductPage />,
                 loader: getProductData,
               },
