@@ -1,3 +1,4 @@
 .container {
-  @include flex(row, flex-start, center);
+  height: 100%;
+  @include flex(row, flex-start, flex-start);
 }
