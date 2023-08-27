@@ -26,9 +26,7 @@ const AsideMenu = () => {
       <Stack className={styles.links__block}>
         <NavLink to={PathNames.profileInfo}>Personal information</NavLink>
         <NavLink to={PathNames.profileAddress}>Address book</NavLink>
-        <NavLink to={PathNames.profileAddress} className={styles.disable}>
-          Change password
-        </NavLink>
+        <NavLink to={PathNames.profilePassword}>Change password</NavLink>
       </Stack>
     </aside>
   );
