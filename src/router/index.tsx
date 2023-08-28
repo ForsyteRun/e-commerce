@@ -1,11 +1,12 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import Login from 'pages/LoginPage';
 import RoutingError from 'pages/RoutingError';
+import ProductPage from 'pages/ProductPage';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
-import ProfilePage from 'pages/ProfilePage';
+import { AddressBook, Password, UserInfo } from 'modules/UserProfile';
 import Catalog from 'pages/CatalogPage';
-import ProductPage from 'pages/ProductPage';
+import ProfilePage from 'pages/ProfilePage';
 import App from '../App';
 import { getCategoryData, getProductData } from './loaders';
 
@@ -56,6 +57,20 @@ const router = createBrowserRouter([
       {
         path: PathNames.profile,
         element: <ProfilePage />,
+        children: [
+          {
+            path: PathNames.profileInfo,
+            element: <UserInfo />,
+          },
+          {
+            path: PathNames.profileAddress,
+            element: <AddressBook />,
+          },
+          {
+            path: PathNames.profilePassword,
+            element: <Password />,
+          },
+        ],
       },
     ],
   },
