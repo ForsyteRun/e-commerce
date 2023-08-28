@@ -1,9 +1,8 @@
 import { LoaderFunction } from 'react-router-dom';
 import fetchCategoriesList from 'pages/CatalogPage/api/fetchCategoriesList';
 import store from 'store';
-import fetchSingleProductData from 'store/singleProductDataSlice/fetchSingleProductData';
-import { ICategoryData } from 'types';
-import throwRouteError from '../helpers/throwRouteError';
+import { findDataItemBySlug } from 'helpers';
+import { throwRouteError, mapSplatArray, checkProductExists } from './helpers';
 
 const checkCatalogPath: LoaderFunction = async ({ params }) => {
   const { dispatch, getState } = store;
@@ -15,9 +14,7 @@ const checkCatalogPath: LoaderFunction = async ({ params }) => {
 
   let splatArray = splat.split('/');
 
-  const slug = splatArray[splatArray.length - 1];
-
-  if (slug === '') {
+  if (splatArray[splatArray.length - 1] === '') {
     splatArray = splatArray.slice(0, -1);
   }
 
@@ -26,54 +23,34 @@ const checkCatalogPath: LoaderFunction = async ({ params }) => {
     getState().categoriesSlice;
 
   if (fetchingCategories === 'succeeded' && categoriesData) {
-    const findCategory = (
-      categorySlug: string | undefined
-    ): ICategoryData | undefined =>
-      categoriesData.find((item) => item.slug === categorySlug);
+    const rootCategory = findDataItemBySlug(categoriesData, category);
 
-    const parentCategory = findCategory(category);
+    if (rootCategory) {
+      const rootId = rootCategory.id;
 
-    if (parentCategory) {
-      const parentCategoryId = parentCategory.id;
-
-      const mappedSplat = splatArray.map((item, index, array) => {
-        const categoryData = findCategory(item);
-
-        const parentId = index
-          ? findCategory(array[index - 1])?.id
-          : parentCategoryId;
-
-        if (categoryData) {
-          const { parent } = categoryData;
-          return parent === parentId ? 'category' : null;
-        }
-
-        return null;
-      });
+      const mappedSplat = mapSplatArray(splatArray, categoriesData, rootId);
 
       const lastMappedElement = mappedSplat[mappedSplat.length - 1];
+
       if (lastMappedElement) {
         return 'category';
       }
 
       const nullsArray = mappedSplat.filter((item) => !item);
       const nullElements = nullsArray.length;
-      if (nullElements > 1 && lastMappedElement) {
+
+      if (nullElements > 1) {
         throwRouteError(404, 'Not Found');
       }
 
-      await dispatch(fetchSingleProductData(slug));
-      const { loading, data } = getState().singleProductDataSlice;
+      const isProductExists = await checkProductExists(
+        splatArray,
+        rootId,
+        categoriesData
+      );
 
-      const categoryId =
-        splatArray.length > 1
-          ? findCategory(splatArray[splatArray.length - 2])?.id
-          : parentCategoryId;
-
-      if (loading === 'succeeded' && data) {
-        if (categoryId && data.categories.includes(categoryId)) {
-          return 'product';
-        }
+      if (isProductExists) {
+        return 'product';
       }
 
       throwRouteError(404, 'Not Found');
