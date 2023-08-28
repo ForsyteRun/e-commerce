@@ -1,9 +1,9 @@
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { IProductsData, ISingleProductData } from 'types';
+import { AppState } from 'types';
 
 const setRejectedStatus = (
-  state: IProductsData | ISingleProductData,
+  state: AppState,
   { payload }: PayloadAction<unknown>
 ): void => {
   state.loading = 'failed';

@@ -1,17 +1,15 @@
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getRefreshTokenCookie } from 'helpers/processRefreshTokenCookie';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 
 const fetchSingleProductData = createAsyncThunk(
   'singleProductData/fetch',
-  async (productId: string, { rejectWithValue }) => {
-    const refreshToken = getRefreshTokenCookie();
-    const api = createRefreshTokenClientApi(refreshToken);
+  async (productKey: string, { rejectWithValue }) => {
+    const api = createRefreshTokenClientApi();
 
     const response = await api
       .productProjections()
-      .withId({ ID: productId })
+      .withKey({ key: productKey })
       .get()
       .execute()
       .then((res) => {

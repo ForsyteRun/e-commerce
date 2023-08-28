@@ -16,6 +16,8 @@ export enum PathNames {
   login = '/login',
   catalog = '/catalog',
   profile = '/profile',
+  category = '/catalog/:category',
+  product = '/catalog/:category/:product',
 }
 
 export enum RequestStatusCode {
@@ -100,15 +102,28 @@ export type RegisteredUserData = Pick<Customer, RegisteredUserDataFields>;
 
 type LoadingState = 'idle' | 'pending' | 'succeeded' | 'failed';
 
-export interface IUserState {
-  data: IAnonymousUserData | RegisteredUserData;
+interface IStoreBasicData {
   loading: LoadingState;
   error: _ErrorResponse | null;
 }
 
-interface IStoreBasicData {
-  loading: LoadingState;
-  error: _ErrorResponse | null;
+export interface IUserState extends IStoreBasicData {
+  data: IAnonymousUserData | RegisteredUserData;
+}
+
+export interface ICategoryData {
+  id: string;
+  name: string;
+  slug: string;
+  orderHint: number;
+  description?: string;
+  key?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+}
+
+export interface ICategoriesState extends IStoreBasicData {
+  data: null | ICategoryData[];
 }
 
 export interface IPriceData {
@@ -151,3 +166,9 @@ export interface IProductsData extends IStoreBasicData {
 export interface ISingleProductData extends IStoreBasicData {
   data: IProductData | null;
 }
+
+export type AppState =
+  | IUserState
+  | IProductsData
+  | ISingleProductData
+  | ICategoriesState;

@@ -10,8 +10,7 @@ const RoutingErrorMessage = (error: unknown): JSX.Element => {
 
     message = `
       ${status && `${status} - `}
-      ${is404 && 'PAGE '}
-      ${statusText && statusText}
+      ${is404 ? 'Page not found' : statusText}
     `;
   }
 
