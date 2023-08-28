@@ -37,9 +37,9 @@ const checkCatalogPath: LoaderFunction = async ({ params }) => {
       }
 
       const nullsArray = mappedSplat.filter((item) => !item);
-      const nullElements = nullsArray.length;
+      const nullsCount = nullsArray.length;
 
-      if (nullElements > 1) {
+      if (nullsCount > 1) {
         throwRouteError(404, 'Not Found');
       }
 
