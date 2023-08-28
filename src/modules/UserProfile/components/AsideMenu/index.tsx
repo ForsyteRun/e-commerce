@@ -10,6 +10,9 @@ const AsideMenu = () => {
     (state) => state.userDataSlice.data as RegisteredUserData
   );
 
+  const activeLink = ({ isActive }: Record<string, boolean>) =>
+    isActive ? styles.active__link : '';
+
   return (
     <aside className={styles.aside}>
       <Stack
@@ -24,9 +27,15 @@ const AsideMenu = () => {
         <LogOutButton />
       </Stack>
       <Stack className={styles.links__block}>
-        <NavLink to={PathNames.profileInfo}>Personal information</NavLink>
-        <NavLink to={PathNames.profileAddress}>Address book</NavLink>
-        <NavLink to={PathNames.profilePassword}>Change password</NavLink>
+        <NavLink to={PathNames.profileInfo} className={activeLink}>
+          Personal information
+        </NavLink>
+        <NavLink to={PathNames.profileAddress} className={activeLink}>
+          Address book
+        </NavLink>
+        <NavLink to={PathNames.profilePassword} className={activeLink}>
+          Change password
+        </NavLink>
       </Stack>
     </aside>
   );
