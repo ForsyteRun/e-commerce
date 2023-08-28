@@ -35,7 +35,7 @@ const ProfilePage = () => {
   return (
     <Paper className={styles.container}>
       <AsideMenu />
-      <Box sx={{ p: '1rem', flexGrow: '1' }}>
+      <Box sx={{ p: '1rem', flexBasis: '70%' }}>
         <Outlet />
       </Box>
     </Paper>
