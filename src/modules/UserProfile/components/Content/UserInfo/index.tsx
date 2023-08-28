@@ -25,7 +25,9 @@ const UserInfo: React.FC = () => {
   return (
     <div>
       <Box sx={{ mb: '4rem' }}>
-        <Typography variant="h3">Personal details</Typography>
+        <Typography variant="h3" sx={{ mb: '1rem' }}>
+          Personal details
+        </Typography>
         <Typography variant="h5">
           Keep these up to date so you can breeze through checkout and see the
           best personalized offers!
