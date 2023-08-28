@@ -30,7 +30,7 @@ const ProfilePage = () => {
   }, [authenticationMode]);
 
   return (
-    <Stack sx={{ flexDirection: 'row', gap: '2rem', p: '1rem' }}>
+    <Stack sx={{ flexDirection: 'row', gap: '2rem', width: '100%' }}>
       <Paper sx={{ p: '1rem', height: 'fit-content' }}>
         <AsideMenu />
       </Paper>

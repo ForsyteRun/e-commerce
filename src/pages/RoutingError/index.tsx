@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRouteError } from 'react-router-dom';
 import Header from 'components/Header';
 import NavLinkButton from 'UI/NavLinkButton';
+import Wrapper from 'UI/Wrapper';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import identificateUserOnAppStart from 'helpers/identificateUserOnAppStart';
 import { PathNames } from 'types';
@@ -24,10 +25,14 @@ const RoutingError = () => {
   return (
     <>
       <Header />
-      <main className={styles.routingError}>
-        <h1 className={styles.oops}>Oops!</h1>
-        {message}
-        <NavLinkButton path={PathNames.index}>GO TO HOMEPAGE</NavLinkButton>
+      <main>
+        <Wrapper>
+          <div className={styles.container}>
+            <h1 className={styles.oops}>Oops!</h1>
+            {message}
+            <NavLinkButton path={PathNames.index}>GO TO HOMEPAGE</NavLinkButton>
+          </div>
+        </Wrapper>
       </main>
     </>
   );
