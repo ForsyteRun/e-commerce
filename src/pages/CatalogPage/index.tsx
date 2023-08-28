@@ -17,7 +17,7 @@ const Catalog = () => {
   }, []);
 
   return (
-    <div className={styles.catalogPage}>
+    <div className={styles.container}>
       <FilterSideBar />
       <div className={styles.content}>
         <div className={styles.sortContainer}>

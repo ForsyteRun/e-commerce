@@ -11,17 +11,20 @@ body {
   background-color: #f2f2f2;
 }
 
+header,
+main,
+footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+main {
+  flex: 1;
+}
+
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-.main {
-  padding: 0 1rem;
-}
-
-.wrapper {
-  max-width: 1280px;
-  margin: 0 auto;
 }

@@ -19,10 +19,10 @@ const Login = () => {
   }, [authenticationMode]);
 
   return (
-    <>
+    <div className={styles.container}>
       <h1 className={styles.title}>LOG IN</h1>
       <LoginForm />
-    </>
+    </div>
   );
 };
 
