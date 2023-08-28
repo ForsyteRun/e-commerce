@@ -1,7 +1,7 @@
 // import { CustomerDraft } from '@commercetools/platform-sdk';
 import { useAppSelector } from 'hooks/useRedux';
 import { RegisteredUserData } from 'types';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import styles from './UserInfo.module.scss';
 
 // const initialValues: CustomerDraft = {
@@ -25,6 +25,16 @@ const UserInfo: React.FC = () => {
           best personalized offers!
         </Typography>
       </Box>
+      <Stack
+        sx={{
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          p: '0 1rem',
+          mb: '1rem',
+        }}
+      >
+        <Button variant="contained">Edit</Button>
+      </Stack>
       <Stack sx={{ gap: '3rem' }}>
         <Stack
           sx={{ flexDirection: 'row', justifyContent: 'space-between' }}
@@ -54,6 +64,7 @@ const UserInfo: React.FC = () => {
           </Typography>
         </Stack>
       </Stack>
+      {/* <Button variant="contained">Edit</Button> */}
       {/* <Formik<CustomerDraft>
         initialValues={initialValues}
         onSubmit={(value: CustomerDraft) => {
