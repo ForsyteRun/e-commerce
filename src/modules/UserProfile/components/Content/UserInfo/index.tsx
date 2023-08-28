@@ -77,6 +77,7 @@ const UserInfo: React.FC = () => {
         <Formik<CustomerDraft>
           initialValues={initialValues}
           onSubmit={(value: CustomerDraft) => {
+            // eslint-disable-next-line no-console
             console.log(value);
           }}
         >

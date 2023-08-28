@@ -1,13 +1,10 @@
-// import ProfilePageUpdateRequestExample from './ProfilePageUpdateRequestExample';
-import { Paper } from '@mui/material';
-import Box from '@mui/material/Box';
+import { Stack, Paper } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { AsideMenu } from 'modules/UserProfile';
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { PathNames } from 'types';
 import { fetchUserDataByRefreshToken } from 'store/userDataSlice/thunks';
-import styles from './ProfilePage.module.scss';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -33,14 +30,15 @@ const ProfilePage = () => {
   }, [authenticationMode]);
 
   return (
-    <Paper className={styles.container}>
-      <AsideMenu />
-      <Box sx={{ p: '1rem', flexBasis: '70%' }}>
+    <Stack sx={{ flexDirection: 'row', gap: '2rem', p: '1rem' }}>
+      <Paper sx={{ p: '1rem', height: 'fit-content' }}>
+        <AsideMenu />
+      </Paper>
+      <Paper sx={{ p: '2rem', flexBasis: '70%' }}>
         <Outlet />
-      </Box>
-    </Paper>
+      </Paper>
+    </Stack>
   );
-  // return <ProfilePageUpdateRequestExample />;
 };
 
 export default ProfilePage;
