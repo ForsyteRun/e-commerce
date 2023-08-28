@@ -1,4 +1,4 @@
-import { createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import {
   setPendingStatus,
   setRejectedStatus,
@@ -17,9 +17,7 @@ const singleProductDataSlice = createSlice({
   name: 'singleProductData',
   initialState,
   reducers: {},
-  extraReducers: (
-    builder: ActionReducerMapBuilder<ISingleProductData>
-  ): void => {
+  extraReducers: (builder): void => {
     builder
       .addCase(fetchSingleProductData.pending, setPendingStatus)
       .addCase(fetchSingleProductData.fulfilled, (state, { payload }) => {
