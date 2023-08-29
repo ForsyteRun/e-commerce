@@ -16,7 +16,10 @@ const AddressBlock: React.FC<IAddressBlock> = ({ title, address }) => {
 
   return (
     <>
-      <Typography variant="h6" sx={{ mb: '1rem' }}>
+      <Typography
+        variant="h6"
+        sx={{ mb: '1rem', alignSelf: 'center', fontWeight: 'bold' }}
+      >
         {title}
       </Typography>
       <Stack>

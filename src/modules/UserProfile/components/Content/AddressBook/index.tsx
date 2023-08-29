@@ -4,6 +4,7 @@ import { useAppSelector } from 'hooks/useRedux';
 import { RegisteredUserData } from 'types';
 import AddressBlock from './components/AddressBlock';
 import { AddressTypesEnum } from './types';
+import styles from './AddressBook.module.scss';
 
 const AddressBook = () => {
   const { addresses } = useAppSelector(
@@ -25,7 +26,12 @@ const AddressBook = () => {
       <Stack sx={{ flexDirection: 'row', justifyContent: 'space-around' }}>
         {addresses &&
           addresses.map((address: BaseAddress, index) => (
-            <Stack key={address.id}>
+            <Stack
+              key={address.id}
+              className={styles.container}
+              flexBasis="45%"
+              sx={{ border: '1px solid #999' }}
+            >
               <AddressBlock
                 title={
                   index ? AddressTypesEnum.billing : AddressTypesEnum.shipping
