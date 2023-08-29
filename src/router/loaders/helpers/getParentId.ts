@@ -1,4 +1,4 @@
-import { findDataItemBySlug } from 'helpers';
+import findDataItemBySlug from 'helpers/findDataItemBySlug';
 import { ICategoryData } from 'types';
 
 const getParentId = (

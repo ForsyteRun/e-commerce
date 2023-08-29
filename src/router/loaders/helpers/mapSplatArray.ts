@@ -1,4 +1,4 @@
-import { findDataItemBySlug } from 'helpers';
+import findDataItemBySlug from 'helpers/findDataItemBySlug';
 import { ICategoryData } from 'types';
 import getParentId from './getParentId';
 
@@ -9,6 +9,7 @@ const mapSplatArray = (
 ): ('category' | null)[] => {
   return array.map((item, index) => {
     const data = findDataItemBySlug(categoriesData, item);
+
     if (data) {
       const { parent } = data;
 
