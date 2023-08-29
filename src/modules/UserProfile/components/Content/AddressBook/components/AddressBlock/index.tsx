@@ -1,15 +1,14 @@
 import React from 'react';
 import { Typography, Stack } from '@mui/material';
-import { BaseAddress } from '@commercetools/platform-sdk';
 import AddressField from '../AddressField';
-import { AddressTypesEnum } from '../../types';
+import { IAddressBlock } from '../../types';
+import DefaultAddress from '../DefaultAddress';
 
-interface IAddressBlock {
-  title: AddressTypesEnum;
-  address: BaseAddress;
-}
-
-const AddressBlock: React.FC<IAddressBlock> = ({ title, address }) => {
+const AddressBlock: React.FC<IAddressBlock> = ({
+  title,
+  address,
+  defaultAddress,
+}) => {
   const filteredAddress = Object.entries(address).filter(
     ([key]) => key !== 'id'
   );
@@ -26,6 +25,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({ title, address }) => {
         {filteredAddress.map(([key, value]: [string, string]) => (
           <AddressField key={key} title={key} value={value} />
         ))}
+        {defaultAddress && <DefaultAddress />}
       </Stack>
     </>
   );

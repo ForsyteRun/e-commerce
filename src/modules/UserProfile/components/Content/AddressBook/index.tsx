@@ -3,13 +3,28 @@ import { Typography, Box, Stack } from '@mui/material';
 import { useAppSelector } from 'hooks/useRedux';
 import { RegisteredUserData } from 'types';
 import AddressBlock from './components/AddressBlock';
-import { AddressTypesEnum } from './types';
+import { AddressEnum } from './types';
 import styles from './AddressBook.module.scss';
 
 const AddressBook = () => {
-  const { addresses } = useAppSelector(
-    (state) => state.userDataSlice.data
-  ) as RegisteredUserData;
+  const { data } = useAppSelector((state) => state.userDataSlice);
+  const {
+    addresses,
+    defaultBillingAddressId,
+    defaultShippingAddressId,
+    billingAddressIds,
+    shippingAddressIds,
+  } = data as RegisteredUserData;
+
+  const isEqualAddress = shippingAddressIds?.every(
+    (item) => billingAddressIds?.includes(item)
+  );
+
+  const modifyAddress = isEqualAddress
+    ? [...addresses, ...addresses]
+    : addresses;
+
+  console.log(data);
 
   return (
     <>
@@ -24,19 +39,22 @@ const AddressBook = () => {
       </Box>
 
       <Stack sx={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-        {addresses &&
-          addresses.map((address: BaseAddress, index) => (
+        {modifyAddress &&
+          modifyAddress.map((address: BaseAddress, index) => (
             <Stack
-              key={address.id}
+              key={Math.random()}
               className={styles.container}
               flexBasis="45%"
               sx={{ border: '1px solid #999' }}
             >
               <AddressBlock
-                title={
-                  index ? AddressTypesEnum.billing : AddressTypesEnum.shipping
-                }
+                title={index ? AddressEnum.billing : AddressEnum.shipping}
                 address={address}
+                defaultAddress={
+                  index
+                    ? address.id === defaultBillingAddressId
+                    : address.id === defaultShippingAddressId
+                }
               />
             </Stack>
           ))}
