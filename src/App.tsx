@@ -4,8 +4,8 @@ import Wrapper from 'UI/Wrapper';
 import Header from 'components/Header';
 import identificateUserOnAppStart from 'helpers/identificateUserOnAppStart';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import styles from './App.module.scss';
 import BurgerModal from 'components/BurgerModal';
+import styles from './App.module.scss';
 
 const App = () => {
   const dispatch = useAppDispatch();

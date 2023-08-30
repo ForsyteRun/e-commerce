@@ -18,8 +18,8 @@ const UserNavigation = () => {
   );
   const registeredUserButtons = (
     <>
-      <UserProfileButton />
       <LogOutButton />
+      <UserProfileButton />
     </>
   );
 

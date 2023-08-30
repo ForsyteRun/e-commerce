@@ -1,12 +1,12 @@
 import Wrapper from 'UI/Wrapper';
+import { useMediaQuery } from '@mui/material';
 import UserNavigation from './components/UserNavigation';
 import Logo from './components/Logo';
 import styles from './Header.module.scss';
 import AppNavigation from './components/AppNavigation';
-import { useMediaQuery } from '@mui/material';
 
 const Header = () => {
-  const matches = useMediaQuery('screen and (min-width: 768px)');
+  const matches = useMediaQuery('screen and (min-width: 769px)');
 
   return (
     <header className={styles.header}>
