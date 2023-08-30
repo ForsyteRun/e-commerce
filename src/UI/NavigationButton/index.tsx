@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useMatch } from 'react-router-dom';
 import { NavLinkButtonProps } from 'types';
 import navButtonStyles from './navButtonStyles';
 
@@ -7,13 +7,15 @@ const NavigationButton = ({
   children,
   path,
 }: NavLinkButtonProps): JSX.Element => {
-  const { pathname } = useLocation();
-  const isCatalogPage = pathname === path;
+  const match = useMatch({
+    path,
+    end: path.length === 1,
+  });
 
   return (
     <Button
       component={NavLink}
-      disabled={isCatalogPage}
+      disabled={!!match}
       sx={navButtonStyles}
       to={path}
       variant="contained"

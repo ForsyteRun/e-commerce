@@ -1,4 +1,4 @@
 import getCategoryData from './getCategoryData';
-import getProductData from './getProductData';
+import checkCatalogPath from './checkCatalogPath';
 
-export { getCategoryData, getProductData };
+export { getCategoryData, checkCatalogPath };
