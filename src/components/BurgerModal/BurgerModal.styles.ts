@@ -11,8 +11,8 @@ export const modal = {
 export const modalBox = {
   alignItems: 'center',
   background: `no-repeat url(${logo})`,
-  backgroundPosition: '1rem 1rem',
-  backgroundSize: '50px',
+  backgroundPosition: '1.25rem 1rem',
+  backgroundSize: '51.5px',
   backgroundColor: '#fff',
   boxShadow: '-2px 0 2px 3px rgba(0, 0, 0, 0.075)',
   display: 'flex',
