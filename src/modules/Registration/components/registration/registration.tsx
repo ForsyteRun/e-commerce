@@ -51,8 +51,6 @@ const Registration: React.FC = () => {
     (state) => state.userDataSlice.data
   );
 
-  console.log(33);
-
   useEffect(() => {
     if (authenticationMode === 'Password') {
       navigate(PathNames.index, { replace: true });
