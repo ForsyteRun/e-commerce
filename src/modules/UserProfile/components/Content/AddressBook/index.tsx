@@ -2,27 +2,17 @@ import { BaseAddress } from '@commercetools/platform-sdk';
 import { Typography, Box, Stack } from '@mui/material';
 import { useAppSelector } from 'hooks/useRedux';
 import { RegisteredUserData } from 'types';
+import getAddressIfSame from 'modules/UserProfile/helpers/getAddressIfSame';
 import AddressBlock from './components/AddressBlock';
 import { AddressEnum } from './types';
 import styles from './AddressBook.module.scss';
 
 const AddressBook = () => {
   const { data } = useAppSelector((state) => state.userDataSlice);
-  const {
-    addresses,
-    defaultBillingAddressId,
-    defaultShippingAddressId,
-    billingAddressIds,
-    shippingAddressIds,
-  } = data as RegisteredUserData;
+  const { defaultBillingAddressId, defaultShippingAddressId } =
+    data as RegisteredUserData;
 
-  const isEqualAddress = shippingAddressIds?.every(
-    (item) => billingAddressIds?.includes(item)
-  );
-
-  const modifyAddress = isEqualAddress
-    ? [...addresses, ...addresses]
-    : addresses;
+  const modifyAddress = getAddressIfSame(data as RegisteredUserData);
 
   return (
     <>
