@@ -1,11 +1,12 @@
-import { Outlet, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import Login from 'pages/LoginPage';
-import Catalog from 'pages/CatalogPage';
-import ProfilePage from 'pages/ProfilePage';
 import RoutingError from 'pages/RoutingError';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
 import { AddressBook, Password, UserInfo } from 'modules/UserProfile';
+import CatalogPage from 'pages/CatalogPage';
+import ProfilePage from 'pages/ProfilePage';
+import CategoryPage from 'pages/CategoryPage';
 import App from '../App';
 import DynamicRoute from './components/DynamicRoute';
 import { getCategoryData, checkCatalogPath } from './loaders';
@@ -30,27 +31,21 @@ const router = createBrowserRouter([
       },
       {
         path: PathNames.catalog,
-        element: <Outlet />,
+        element: <CatalogPage />,
         children: [
           {
             index: true,
-            element: <Catalog />,
+            element: <CategoryPage />,
           },
           {
             path: PathNames.category,
-            element: <Outlet />,
+            element: <CategoryPage />,
             loader: getCategoryData,
-            children: [
-              {
-                index: true,
-                element: <h1>Category</h1>,
-              },
-              {
-                path: `${PathNames.category}/*`,
-                element: <DynamicRoute />,
-                loader: checkCatalogPath,
-              },
-            ],
+          },
+          {
+            path: `${PathNames.category}/*`,
+            element: <DynamicRoute />,
+            loader: checkCatalogPath,
           },
         ],
       },

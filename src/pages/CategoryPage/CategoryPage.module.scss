@@ -1,0 +1,36 @@
+.category {
+  width: 100%;
+}
+
+.container {
+  column-gap: 2rem;
+  display: flex;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
