@@ -5,8 +5,9 @@ import ProductPage from 'pages/ProductPage';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
 import { AddressBook, Password, UserInfo } from 'modules/UserProfile';
-import Catalog from 'pages/CatalogPage';
+import CatalogPage from 'pages/CatalogPage';
 import ProfilePage from 'pages/ProfilePage';
+import CategoryPage from 'pages/CategoryPage';
 import App from '../App';
 import { getCategoryData, getProductData } from './loaders';
 
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Catalog />,
+            element: <CatalogPage />,
           },
           {
             path: `${PathNames.category}`,
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <h1>Category</h1>,
+                element: <CategoryPage />,
               },
               {
                 path: `${PathNames.product}`,
