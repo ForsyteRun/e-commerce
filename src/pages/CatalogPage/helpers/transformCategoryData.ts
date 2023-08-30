@@ -13,6 +13,7 @@ const transformCategoryData = (data: Category): ICategoryData => {
     description,
     metaTitle,
     metaDescription,
+    parent,
   } = data;
 
   const transformedData: ICategoryData = {
@@ -21,6 +22,10 @@ const transformCategoryData = (data: Category): ICategoryData => {
     slug: localizeString(slug),
     orderHint: +orderHint,
   };
+
+  if (parent) {
+    transformedData.parent = parent.id;
+  }
 
   if (key) {
     transformedData.key = key;

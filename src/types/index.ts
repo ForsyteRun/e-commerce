@@ -124,6 +124,7 @@ export interface ICategoryData {
   key?: string;
   metaTitle?: string;
   metaDescription?: string;
+  parent?: string;
 }
 
 export interface ICategoriesState extends IStoreBasicData {
