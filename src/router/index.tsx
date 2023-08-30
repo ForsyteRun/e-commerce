@@ -1,4 +1,4 @@
-import { Outlet, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import Login from 'pages/LoginPage';
 import RoutingError from 'pages/RoutingError';
 import ProductPage from 'pages/ProductPage';
@@ -31,15 +31,15 @@ const router = createBrowserRouter([
       },
       {
         path: PathNames.catalog,
-        element: <Outlet />,
+        element: <CatalogPage />,
         children: [
           {
             index: true,
-            element: <CatalogPage />,
+            element: <CategoryPage />,
           },
           {
             path: `${PathNames.category}`,
-            element: <Outlet />,
+            element: <CategoryPage />,
             loader: getCategoryData,
             children: [
               {
