@@ -1,15 +1,14 @@
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import ProductCard from 'pages/CategoryPage/components/ProductCard';
 import fetchAllProductsData from 'store/productsDataSlice/fetchAllProductsData';
-import FilterSideBar from './components/FilterSideBar';
-import ProductCard from './components/ProductCard';
 import styles from './CatalogPage.module.scss';
-import Sort from './components/Sort';
+import BreadcrumbsNavigation from './components/Breadcrumbs';
+import Navigation from './components/Navigation';
 
-const Catalog = () => {
+const CatalogPage = () => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector((state) => state.productsDataSlice);
-  const [sortOption, setSortOption] = useState('default');
+  const products = useAppSelector((state) => state.productsDataSlice.data);
 
   useEffect(() => {
     dispatch(fetchAllProductsData());
@@ -17,19 +16,21 @@ const Catalog = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <FilterSideBar />
-      <div className={styles.content}>
-        <div className={styles.sortContainer}>
-          <Sort sortOption={sortOption} setSortOption={setSortOption} />
+    <section className={styles.catalog}>
+      <BreadcrumbsNavigation />
+      <div className={styles.container}>
+        <Navigation />
+        <div className={styles.products}>
+          <h2 className={styles.title}>Products</h2>
+          <div className={styles.content}>
+            {products?.map((product) => (
+              <ProductCard key={product.id} data={product} />
+            ))}
+          </div>
         </div>
-        {data &&
-          data.map((product) => (
-            <ProductCard key={product.id} data={product} />
-          ))}
       </div>
-    </div>
+    </section>
   );
 };
 
-export default Catalog;
+export default CatalogPage;
