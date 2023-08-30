@@ -2,6 +2,10 @@
 
 .container {
   @include flex(row, center, center);
-  column-gap: 1rem;
-  width: 100%;
+  gap: 1rem;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    height: 100%;
+  }
 }
