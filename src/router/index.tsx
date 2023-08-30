@@ -2,7 +2,7 @@ import { Outlet, createBrowserRouter } from 'react-router-dom';
 import Login from 'pages/LoginPage';
 import RoutingError from 'pages/RoutingError';
 import ProductPage from 'pages/ProductPage';
-import Registration from 'modules/Registration';
+import { Registration } from 'modules/Registration';
 import { PathNames } from 'types';
 import { AddressBook, Password, UserInfo } from 'modules/UserProfile';
 import Catalog from 'pages/CatalogPage';
@@ -72,10 +72,10 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: PathNames.about,
-        element: <h1>About Us</h1>,
-      },
+      // {
+      //   path: PathNames.about,
+      //   element: <h1>About Us</h1>,
+      // },
     ],
   },
 ]);

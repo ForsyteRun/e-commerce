@@ -1,19 +1,11 @@
-// import { CustomerDraft } from '@commercetools/platform-sdk';
+import { Box, Typography, Stack, Button } from '@mui/material';
+import { Field, Formik, Form } from 'formik';
+import React from 'react';
 import { useAppSelector } from 'hooks/useRedux';
 import { RegisteredUserData } from 'types';
-import { Box, Button, Stack, Typography } from '@mui/material';
-import React from 'react';
 import { CustomerDraft } from '@commercetools/platform-sdk';
-import { Form } from 'react-router-dom';
-import { Field, Formik } from 'formik';
+import { RegistrationSchema } from 'modules/Registration';
 import styles from './UserInfo.module.scss';
-
-const initialValues: CustomerDraft = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  dateOfBirth: '',
-};
 
 const UserInfo: React.FC = () => {
   const [edit, setEdit] = React.useState(false);
@@ -21,6 +13,13 @@ const UserInfo: React.FC = () => {
   const { firstName, lastName, dateOfBirth } = useAppSelector(
     (state) => state.userDataSlice.data
   ) as RegisteredUserData;
+
+  const initialValues: CustomerDraft = {
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    email: '',
+  };
 
   return (
     <div>
@@ -42,7 +41,7 @@ const UserInfo: React.FC = () => {
         }}
       >
         <Button variant="contained" onClick={() => setEdit(!edit)}>
-          Edit
+          edit
         </Button>
       </Stack>
       {!edit ? (
@@ -76,19 +75,19 @@ const UserInfo: React.FC = () => {
           </Stack>
         </Stack>
       ) : (
-        <Formik<CustomerDraft>
+        <Formik
           initialValues={initialValues}
-          onSubmit={(value: CustomerDraft) => {
-            // eslint-disable-next-line no-console
-            console.log(value);
+          validationSchema={RegistrationSchema}
+          onSubmit={(values: CustomerDraft) => {
+            // Handle form submission
+            console.log(values);
           }}
         >
           {({ errors, touched }) => (
-            <Form method="PUT" action="update" className={styles.form}>
+            <Form className={styles.form}>
               <Field
                 name="firstName"
-                // validate={validateName}
-                placeholder="First Name"
+                placeholder="Enter first name"
                 className={styles.input}
               />
               {errors.firstName && touched.firstName && (
@@ -96,8 +95,7 @@ const UserInfo: React.FC = () => {
               )}
               <Field
                 name="lastName"
-                // validate={validateName}
-                placeholder="Last Name"
+                placeholder="Enter last name"
                 className={styles.input}
               />
               {errors.lastName && touched.lastName && (
@@ -105,14 +103,13 @@ const UserInfo: React.FC = () => {
               )}
               <Field
                 name="dateOfBirth"
-                // validate={validateDateOfBirth}
-                placeholder="DateOfBirth"
+                placeholder="Enter date of birth"
                 className={styles.input}
               />
               {errors.dateOfBirth && touched.dateOfBirth && (
                 <div className={styles.errorValid}>{errors.dateOfBirth}</div>
               )}
-              {/* <AlertSnackBar open={open} setOpen={setOpen} /> */}
+              <button type="submit">Edit</button>
             </Form>
           )}
         </Formik>
@@ -122,3 +119,34 @@ const UserInfo: React.FC = () => {
 };
 
 export default UserInfo;
+
+// import { CustomerDraft } from '@commercetools/platform-sdk';
+// import { Form, Field, Formik } from 'formik';
+// import React from 'react';
+
+// const initialValues: CustomerDraft = {
+//   firstName: '',
+//   lastName: '',
+//   email: '',
+//   dateOfBirth: '',
+// };
+
+// const UserInfo: React.FC = () => {
+//   return (
+//     <Formik
+//       initialValues={initialValues}
+//       onSubmit={(values) => {
+//         console.log(values);
+//       }}
+//     >
+//       {() => (
+//         <Form>
+//           <Field type="text" name="name2" />
+//           <button type="submit"> Submit Form2 </button>
+//         </Form>
+//       )}
+//     </Formik>
+//   );
+// };
+
+// export default UserInfo;
