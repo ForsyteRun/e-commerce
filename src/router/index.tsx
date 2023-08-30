@@ -4,7 +4,12 @@ import RoutingError from 'pages/RoutingError';
 import ProductPage from 'pages/ProductPage';
 import { Registration } from 'modules/Registration';
 import { PathNames } from 'types';
-import { AddressBook, Password, UserInfo } from 'modules/UserProfile';
+import {
+  AddressBook,
+  MyAccount,
+  Password,
+  UserInfo,
+} from 'modules/UserProfile';
 import Catalog from 'pages/CatalogPage';
 import ProfilePage from 'pages/ProfilePage';
 import App from '../App';
@@ -58,6 +63,10 @@ const router = createBrowserRouter([
         path: PathNames.profile,
         element: <ProfilePage />,
         children: [
+          {
+            path: PathNames.root,
+            element: <MyAccount />,
+          },
           {
             path: PathNames.profileInfo,
             element: <UserInfo />,
