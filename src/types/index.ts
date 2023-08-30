@@ -11,6 +11,7 @@ export type Mutable<Type> = {
 };
 
 export enum PathNames {
+  root = '',
   index = '/',
   register = '/register',
   login = '/login',

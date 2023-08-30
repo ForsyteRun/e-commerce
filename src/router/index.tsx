@@ -3,13 +3,19 @@ import Login from 'pages/LoginPage';
 import RoutingError from 'pages/RoutingError';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
-import { AddressBook, Password, UserInfo } from 'modules/UserProfile';
-import CatalogPage from 'pages/CatalogPage';
+import {
+  AddressBook,
+  MyAccount,
+  Password,
+  UserInfo,
+} from 'modules/UserProfile';
+import Catalog from 'pages/CatalogPage';
 import ProfilePage from 'pages/ProfilePage';
 import CategoryPage from 'pages/CategoryPage';
 import App from '../App';
 import DynamicRoute from './components/DynamicRoute';
 import { getCategoryData, checkCatalogPath } from './loaders';
+import CatalogPage from 'pages/CatalogPage';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +59,10 @@ const router = createBrowserRouter([
         path: PathNames.profile,
         element: <ProfilePage />,
         children: [
+          {
+            path: PathNames.root,
+            element: <MyAccount />,
+          },
           {
             path: PathNames.profileInfo,
             element: <UserInfo />,
