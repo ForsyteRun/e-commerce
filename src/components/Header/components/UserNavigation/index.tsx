@@ -1,5 +1,6 @@
 import { useAppSelector } from 'hooks/useRedux';
 import NavLinkButton from 'UI/NavLinkButton';
+import { useMediaQueryContext } from 'context/MediaQueryContext';
 import { PathNames } from 'types';
 import LogOutButton from './components/LogOutButton';
 import UserProfileButton from './components/UserProfileButton';
@@ -24,10 +25,12 @@ const UserNavigation = () => {
     </>
   );
 
+  const isMobile = useMediaQueryContext();
+
   return (
     <nav className={styles.userNavigation}>
       {isRegistered ? registeredUserButtons : notRegisteredUserButtons}
-      <BurgerButton />
+      {isMobile && <BurgerButton />}
     </nav>
   );
 };

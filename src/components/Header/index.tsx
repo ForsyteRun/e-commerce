@@ -1,19 +1,19 @@
 import Wrapper from 'UI/Wrapper';
-import { useMediaQuery } from '@mui/material';
+import { useMediaQueryContext } from 'context/MediaQueryContext';
 import UserNavigation from './components/UserNavigation';
 import Logo from './components/Logo';
 import styles from './Header.module.scss';
 import AppNavigation from './components/AppNavigation';
 
 const Header = () => {
-  const matches = useMediaQuery('screen and (min-width: 769px)');
+  const isMobile = useMediaQueryContext();
 
   return (
     <header className={styles.header}>
       <Wrapper>
         <div className={styles.container}>
           <Logo />
-          {matches && <AppNavigation />}
+          {!isMobile && <AppNavigation />}
           <UserNavigation />
         </div>
       </Wrapper>

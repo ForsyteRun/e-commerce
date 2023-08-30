@@ -2,6 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useAppSelector } from 'hooks/useRedux';
 import { NavLinkButtonProps, PathNames } from 'types';
+import { useUpdateBurgerContext } from 'context/BurgerContext';
 import navButtonStyles from './navButtonStyles';
 
 const NavLinkButton = ({ children, path }: NavLinkButtonProps): JSX.Element => {
@@ -15,11 +16,13 @@ const NavLinkButton = ({ children, path }: NavLinkButtonProps): JSX.Element => {
   const isNotUserOrPending = !authenticationMode || isPending;
   const isDisabled =
     (isNotUserOrPending || pathname === path) && isLoginOrRegisterPage;
+  const changeModalStatus = useUpdateBurgerContext();
 
   return (
     <Button
       component={NavLink}
       disabled={isDisabled}
+      onClick={() => changeModalStatus(false)}
       sx={navButtonStyles}
       to={path}
       variant="contained"
