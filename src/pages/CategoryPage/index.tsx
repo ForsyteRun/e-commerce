@@ -1,8 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { useEffect, useState } from 'react';
 import fetchAllProductsData from 'store/productsDataSlice/fetchAllProductsData';
-// import BreadcrumbsNavigation from 'pages/CatalogPage/components/Breadcrumbs';
-// import Navigation from 'pages/CatalogPage/components/Navigation';
 import FilterSideBar from './components/FilterSideBar';
 import ProductCard from './components/ProductCard';
 import styles from './CategoryPage.module.scss';
