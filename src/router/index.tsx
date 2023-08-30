@@ -1,14 +1,14 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import Login from 'pages/LoginPage';
+import Catalog from 'pages/CatalogPage';
+import ProfilePage from 'pages/ProfilePage';
 import RoutingError from 'pages/RoutingError';
-import ProductPage from 'pages/ProductPage';
 import Registration from 'modules/Registration';
 import { PathNames } from 'types';
 import { AddressBook, Password, UserInfo } from 'modules/UserProfile';
-import Catalog from 'pages/CatalogPage';
-import ProfilePage from 'pages/ProfilePage';
 import App from '../App';
-import { getCategoryData, getProductData } from './loaders';
+import DynamicRoute from './components/DynamicRoute';
+import { getCategoryData, checkCatalogPath } from './loaders';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             element: <Catalog />,
           },
           {
-            path: `${PathNames.category}`,
+            path: PathNames.category,
             element: <Outlet />,
             loader: getCategoryData,
             children: [
@@ -46,9 +46,9 @@ const router = createBrowserRouter([
                 element: <h1>Category</h1>,
               },
               {
-                path: `${PathNames.product}`,
-                element: <ProductPage />,
-                loader: getProductData,
+                path: `${PathNames.category}/*`,
+                element: <DynamicRoute />,
+                loader: checkCatalogPath,
               },
             ],
           },

@@ -1,6 +1,5 @@
 import { LoaderFunction } from 'react-router-dom';
-import throwRouteError from '../helpers/throwRouteError';
-import fetchCategoryWith from './fetchCategory';
+import { throwRouteError, fetchCategoryWith } from './helpers';
 
 const getCategoryData: LoaderFunction = async ({ params }) => {
   if (params.category) {
