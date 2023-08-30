@@ -2,6 +2,7 @@ import { InputAdornment, TextField, IconButton } from '@mui/material';
 import { Close, Search } from '@mui/icons-material';
 import { useState } from 'react';
 import styles from './SearchBar.module.scss';
+import buttonStyles from './helpers/buttonStyles';
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -18,6 +19,7 @@ const SearchBar = () => {
         className={`${styles.searchIcon} ${
           isSearchVisible ? styles.hidden : ''
         }`}
+        sx={buttonStyles}
       >
         <Search sx={{ fill: 'rgba(0, 0, 0, 0.54)' }} />
       </IconButton>
@@ -35,9 +37,6 @@ const SearchBar = () => {
           '& fieldset': {
             border: '1px solid #eaebed',
             borderRadius: '12px',
-            '&:hover': {
-              border: '1px solid #1976d2',
-            },
           },
         }}
         InputProps={{

@@ -18,7 +18,7 @@ const Navigation = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Categories</h2>
-      <nav>
+      <nav className={styles.navigation}>
         <List component="ul" sx={{ display: 'flex' }}>
           {data?.map((category) => (
             <li key={category.id}>

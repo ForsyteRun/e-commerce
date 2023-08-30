@@ -5,20 +5,14 @@
 .container {
   column-gap: 2rem;
   display: flex;
-  flex-direction: column;
   margin-top: 1rem;
   width: 100%;
-}
-
-.innerContainer {
-  display: flex;
-  column-gap: 2rem;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: 1rem;
 }
 
 .control {

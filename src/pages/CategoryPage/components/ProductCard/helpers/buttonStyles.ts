@@ -7,10 +7,12 @@ const buttonStyles: SxProps = {
   borderRadius: '20px',
   border: '2px solid #673ab7',
   whiteSpace: 'nowrap',
-  '&:hover': {
-    textDecoration: 'none',
-    backgroundColor: 'rgba(103, 58, 183, 0.1)',
-    border: '2px solid #673ab7',
+  '@media (hover: hover)': {
+    '&:hover': {
+      textDecoration: 'none',
+      backgroundColor: 'rgba(103, 58, 183, 0.1)',
+      border: '2px solid #673ab7',
+    },
   },
 };
 export default buttonStyles;

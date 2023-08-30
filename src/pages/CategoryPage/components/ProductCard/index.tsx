@@ -7,40 +7,21 @@ import {
   CardActions,
   Typography,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { IProductData } from 'types';
+import { NavLink } from 'react-router-dom';
+import { IProductData, PathNames } from 'types';
 import buttonStyles from './helpers/buttonStyles';
+import cardStyles from './helpers/cardStyle';
 import formatPrintAttributes from './helpers/formatPrintAttributes';
+import skuStyles from './helpers/skuStyles';
 import styles from './ProductCard.module.scss';
 
 const ProductCard: React.FC<{
   data: IProductData;
 }> = ({ data }) => {
-  const navigate = useNavigate();
   const { name, images, price, attributes, sku } = data;
 
-  const handleCardClick = () => {
-    navigate(`/`);
-  };
-
-  // const handleAddToCartClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   event.stopPropagation();
-  //   navigate('/');
-  // };
-
   return (
-    <Card
-      className={styles.card}
-      sx={{
-        borderRadius: '10px',
-        boxShadow: 'none',
-        transition: 'box-shadow 0.2s ease-in-out',
-        '&:hover': {
-          boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
-        },
-      }}
-      onClick={handleCardClick}
-    >
+    <Card sx={cardStyles} component={NavLink} to={PathNames.index}>
       <div className={styles.productImage}>
         {images && (
           <img src={images[0]} alt="printer" className={styles.image} />
@@ -54,18 +35,7 @@ const ProductCard: React.FC<{
         >
           {name}
         </Typography>
-        <Typography
-          className={styles.sku}
-          sx={{
-            backgroundColor: 'rgba(103, 58, 183, 0.2)',
-            borderRadius: '5px',
-            borderLeft: '5px solid #673ab7',
-            color: '#000000',
-            fontSize: '12px',
-            maxWidth: 'max-content',
-            padding: '3px',
-          }}
-        >
+        <Typography className={styles.sku} sx={skuStyles}>
           {`SKU: ${sku}`}
         </Typography>
         {attributes && (
@@ -104,11 +74,7 @@ const ProductCard: React.FC<{
             )}
           </div>
         )}
-        <Button
-          variant="outlined"
-          sx={buttonStyles}
-          // onClick={handleAddToCartClick}
-        >
+        <Button variant="outlined" sx={buttonStyles}>
           Add to cart
         </Button>
       </CardActions>
