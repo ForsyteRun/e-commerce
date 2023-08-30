@@ -1,3 +1,5 @@
+import logo from 'assets/images/svg/logo.svg';
+
 export const modal = {
   alignItems: 'flex-end',
   display: 'flex',
@@ -8,6 +10,9 @@ export const modal = {
 
 export const modalBox = {
   alignItems: 'center',
+  background: `no-repeat url(${logo})`,
+  backgroundPosition: '1rem 1rem',
+  backgroundSize: '50px',
   backgroundColor: '#fff',
   boxShadow: '-2px 0 2px 3px rgba(0, 0, 0, 0.075)',
   display: 'flex',

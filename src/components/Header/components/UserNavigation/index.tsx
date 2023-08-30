@@ -4,6 +4,7 @@ import { PathNames } from 'types';
 import LogOutButton from './components/LogOutButton';
 import UserProfileButton from './components/UserProfileButton';
 import styles from './UserNavigation.module.scss';
+import BurgerButton from './components/BurgerButton';
 
 const UserNavigation = () => {
   const { authenticationMode } = useAppSelector(
@@ -26,6 +27,7 @@ const UserNavigation = () => {
   return (
     <nav className={styles.userNavigation}>
       {isRegistered ? registeredUserButtons : notRegisteredUserButtons}
+      <BurgerButton />
     </nav>
   );
 };

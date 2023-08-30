@@ -4,7 +4,7 @@ import Wrapper from 'UI/Wrapper';
 import Header from 'components/Header';
 import identificateUserOnAppStart from 'helpers/identificateUserOnAppStart';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import BurgerModal from 'components/BurgerModal';
+// import BurgerModal from 'components/BurgerModal';
 import styles from './App.module.scss';
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <div className={styles.container}>
-      <BurgerModal />
+      {/* <BurgerModal /> */}
       <Header />
       <main>
         <Wrapper>
