@@ -1,5 +1,4 @@
-import validateEmail from './validateEmail';
-import validateName from './validateName';
-import validatePassword from './validatePassword';
+import RegistrationSchema from './RegistrationSchema';
+import validateAddresses from './validateAddresses';
 
-export { validateName, validateEmail, validatePassword };
+export { validateAddresses, RegistrationSchema };

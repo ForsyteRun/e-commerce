@@ -24,8 +24,6 @@ const AddressBook = () => {
     ? [...addresses, ...addresses]
     : addresses;
 
-  console.log(data);
-
   return (
     <>
       <Box sx={{ mb: '4rem' }}>

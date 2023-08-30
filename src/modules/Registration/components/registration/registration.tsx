@@ -13,8 +13,7 @@ import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { IDefaultAddress } from './types';
-import validateAddresses from './validation/validateAddresses';
-import { RegistrationSchema } from '../adress/validation';
+import { validateAddresses, RegistrationSchema } from './validation';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -51,6 +50,8 @@ const Registration: React.FC = () => {
   const { authenticationMode } = useAppSelector(
     (state) => state.userDataSlice.data
   );
+
+  console.log(33);
 
   useEffect(() => {
     if (authenticationMode === 'Password') {

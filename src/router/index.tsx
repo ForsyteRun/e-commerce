@@ -67,10 +67,10 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: PathNames.about,
-        element: <h1>About Us</h1>,
-      },
+      // {
+      //   path: PathNames.about,
+      //   element: <h1>About Us</h1>,
+      // },
     ],
   },
 ]);

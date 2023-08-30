@@ -1,3 +1,4 @@
 import Registration from './components/registration/registration';
+import { RegistrationSchema } from './components/registration/validation';
 
-export default Registration;
+export { Registration, RegistrationSchema };
