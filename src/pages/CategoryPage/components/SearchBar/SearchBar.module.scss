@@ -1,0 +1,55 @@
+.searchContainer {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 2px;
+  // position: relative;
+
+  .searchIcon {
+    // position: absolute;
+    // top: 50%;
+    // right: 0;
+    // transform: translateY(-50%);
+    opacity: 1;
+    visibility: visible;
+    background-color: #FFFFFF;
+    border: 1px solid #eaebed;
+    border-radius: 50%;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+
+    &.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  .closeIcon {
+    cursor: pointer;
+
+    &.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  .searchField {
+    opacity: 0;
+    visibility: visible;
+    width: 0;
+    border: none;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    transition: opacity 0.3s ease, visibility 0.3s ease, width 0.3s linear;
+
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+      width: 300px;
+    }
+  }
+}
