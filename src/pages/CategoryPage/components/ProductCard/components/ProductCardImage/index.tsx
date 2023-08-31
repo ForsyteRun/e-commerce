@@ -1,9 +1,5 @@
+import { IProductImage } from '../../types';
 import styles from './ProductImage.module.scss';
-
-interface IProductImage {
-  url: string | undefined;
-  name: string;
-}
 
 const ProductImage = ({ url, name }: IProductImage) => {
   return (

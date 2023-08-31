@@ -1,14 +1,8 @@
 import { CardContent, Typography } from '@mui/material';
-import { IAttributes } from 'types';
 import formatPrintAttributes from '../../helpers/formatPrintAttributes';
 import skuStyles from './skuStyles';
 import styles from './ProductCardContent.module.scss';
-
-interface IProductCardContent {
-  attributes: IAttributes | undefined;
-  sku: string | undefined;
-  name: string;
-}
+import { IProductCardContent } from '../../types';
 
 const ProductCardContent = ({ attributes, sku, name }: IProductCardContent) => {
   return (

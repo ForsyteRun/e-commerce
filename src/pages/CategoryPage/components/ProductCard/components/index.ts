@@ -1,5 +1,6 @@
 import ProductCardContent from './ProductCardContent';
-import ProductImage from './ProductImage';
+import ProductImage from './ProductCardImage';
 import AddToCartButton from './AddToCartButton';
+import ProductCardPrice from './ProductCardPrice';
 
-export { ProductImage, ProductCardContent, AddToCartButton };
+export { ProductImage, ProductCardContent, AddToCartButton, ProductCardPrice };
