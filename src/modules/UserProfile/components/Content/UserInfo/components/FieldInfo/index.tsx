@@ -1,5 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import React from 'react';
+import ModeIcon from '@mui/icons-material/Mode';
 import styles from './fieldInfo.module.scss';
 
 interface IFieldInfo {
@@ -17,6 +18,7 @@ const FieldInfo: React.FC<IFieldInfo> = ({ value, title }) => {
       <Typography variant="h5" sx={{ flexBasis: '50%' }}>
         {value}
       </Typography>
+      <ModeIcon sx={{ cursor: 'pointer' }} />
     </Stack>
   );
 };

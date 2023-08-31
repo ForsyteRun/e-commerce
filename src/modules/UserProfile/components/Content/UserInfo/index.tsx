@@ -1,9 +1,9 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, Button } from '@mui/material';
 import React from 'react';
-import { ShowInfo } from './components';
+import { EditInfo, ShowInfo } from './components';
 
 const UserInfo: React.FC = () => {
-  // const [edit, setEdit] = React.useState(false);
+  const [edit, setEdit] = React.useState(false);
 
   return (
     <div>
@@ -24,12 +24,13 @@ const UserInfo: React.FC = () => {
           mb: '1rem',
         }}
       >
-        {/* <Button variant="contained" onClick={() => setEdit(!edit)}>
-          edit
-        </Button> */}
+        {!edit && (
+          <Button variant="contained" onClick={() => setEdit(!edit)}>
+            edit
+          </Button>
+        )}
       </Stack>
-      <ShowInfo />
-      {/* {!edit ? <ShowInfo /> : <EditInfo />} */}
+      {!edit ? <ShowInfo /> : <EditInfo onClick={() => setEdit(!edit)} />}
     </div>
   );
 };
