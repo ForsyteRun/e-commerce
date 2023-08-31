@@ -38,6 +38,7 @@ const FieldInfo: React.FC<IFieldInfo> = ({ value, title }) => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
+                <Button onClick={() => setOpen(false)}>cancel</Button>
                 <Button>submit</Button>
               </InputAdornment>
             ),
