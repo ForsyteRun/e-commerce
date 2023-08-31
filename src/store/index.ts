@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import categoriesSlice from 'pages/CatalogPage/store/categoriesSlice';
+import categoriesSlice from 'store/categoriesSlice';
 import registrationAccessCodeSlice from './registration/registrationAccess.slice';
 import userDataSlice from './userDataSlice';
 import productsDataSlice from './productsDataSlice';

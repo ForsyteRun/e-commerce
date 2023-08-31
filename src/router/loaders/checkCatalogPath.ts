@@ -1,8 +1,7 @@
-import { LoaderFunction, redirect } from 'react-router-dom';
-import fetchCategoriesList from 'pages/CatalogPage/api/fetchCategoriesList';
+import { LoaderFunction } from 'react-router-dom';
+import fetchCategoriesList from 'store/categoriesSlice/fetchCategoriesList';
 import store from 'store';
 import { findDataItemBySlug } from 'helpers';
-import { PathNames } from 'types';
 import { throwRouteError, mapSplatArray, checkProductExists } from './helpers';
 
 const checkCatalogPath: LoaderFunction = async ({ params }) => {
@@ -13,16 +12,7 @@ const checkCatalogPath: LoaderFunction = async ({ params }) => {
     return { ok: true };
   }
 
-  const splatMatch = splat.match(/\/*$/);
-
-  if (splatMatch && splatMatch[0].length > 1) {
-    const formattedSplat = splat.replace(/\/*$/, '');
-    const path = `${PathNames.catalog}/${category}/${formattedSplat}`;
-
-    return redirect(path);
-  }
-
-  const splatArray = splat.split('/');
+  const splatArray = splat.replace(/\/$/, '').split('/');
 
   await dispatch(fetchCategoriesList());
   const { loading: fetchingCategories, data: categoriesData } =

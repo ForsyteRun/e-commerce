@@ -3,7 +3,7 @@ import { PathNames } from 'types';
 import { List, ListItem, ListItemText } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { useEffect } from 'react';
-import fetchCategoriesList from 'pages/CatalogPage/api/fetchCategoriesList';
+import fetchCategoriesList from 'store/categoriesSlice/fetchCategoriesList';
 import styles from './Navigation.module.scss';
 
 const Navigation = () => {
