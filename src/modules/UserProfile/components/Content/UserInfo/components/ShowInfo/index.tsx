@@ -8,12 +8,18 @@ const ShowInfo = () => {
     (state) => state.userDataSlice.data
   ) as RegisteredUserData;
 
+  const fieldInfoData = [
+    { title: 'first name', value: firstName },
+    { title: 'last name', value: lastName },
+    { title: 'date of birth', value: dateOfBirth },
+    { title: 'email', value: email },
+  ];
+
   return (
     <Stack sx={{ gap: '3rem' }}>
-      <FieldInfo title="first name" value={firstName} />
-      <FieldInfo title="last name" value={lastName} />
-      <FieldInfo title="date of birth" value={dateOfBirth} />
-      <FieldInfo title="email" value={email} />
+      {fieldInfoData.map((data) => (
+        <FieldInfo key={data.title} title={data.title} value={data.value} />
+      ))}
     </Stack>
   );
 };
