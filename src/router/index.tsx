@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from 'pages/LoginPage';
 import RoutingError from 'pages/RoutingError';
-import Registration from 'modules/Registration';
+import { Registration } from 'modules/Registration';
 import { PathNames } from 'types';
 import {
   AddressBook,
@@ -9,13 +9,12 @@ import {
   Password,
   UserInfo,
 } from 'modules/UserProfile';
-import Catalog from 'pages/CatalogPage';
 import ProfilePage from 'pages/ProfilePage';
 import CategoryPage from 'pages/CategoryPage';
+import CatalogPage from 'pages/CatalogPage';
 import App from '../App';
 import DynamicRoute from './components/DynamicRoute';
 import { getCategoryData, checkCatalogPath } from './loaders';
-import CatalogPage from 'pages/CatalogPage';
 
 const router = createBrowserRouter([
   {
