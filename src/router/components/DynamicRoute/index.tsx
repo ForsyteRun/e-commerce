@@ -1,5 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import ProductPage from 'pages/ProductPage';
+import CategoryPage from 'pages/CategoryPage';
 
 const DynamicRoute = () => {
   const params = useLoaderData();
@@ -7,7 +8,7 @@ const DynamicRoute = () => {
   return (
     <>
       {params === 'product' && <ProductPage />}
-      {params === 'category' && <h1>SubCategory Page</h1>}
+      {params === 'category' && <CategoryPage />}
     </>
   );
 };
