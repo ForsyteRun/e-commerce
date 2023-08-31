@@ -1,6 +1,5 @@
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import { useEffect, useState } from 'react';
-import fetchAllProductsData from 'store/productsDataSlice/fetchAllProductsData';
+import { useState } from 'react';
+import { useAppSelector } from 'hooks/useRedux';
 import FilterSideBar from './components/FilterSideBar';
 import ProductCard from './components/ProductCard';
 import styles from './CategoryPage.module.scss';
@@ -8,14 +7,8 @@ import Sort from './components/Sort';
 import SearchBar from './components/SearchBar';
 
 const CategoryPage = () => {
-  const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.productsDataSlice);
   const [sortOption, setSortOption] = useState('default');
-
-  useEffect(() => {
-    dispatch(fetchAllProductsData());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <section className={styles.category}>
