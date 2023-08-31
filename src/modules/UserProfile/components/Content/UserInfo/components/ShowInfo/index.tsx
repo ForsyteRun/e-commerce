@@ -1,12 +1,38 @@
 import { Stack } from '@mui/material';
-import { useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import React from 'react';
 import { RegisteredUserData } from 'types';
+import updateUserData from 'modules/UserProfile/api';
+import { MyCustomerUpdate } from '@commercetools/platform-sdk';
 import FieldInfo from '../FieldInfo';
 
 const ShowInfo = () => {
-  const { firstName, lastName, dateOfBirth, email } = useAppSelector(
+  const dispatch = useAppDispatch();
+
+  const { firstName, lastName, dateOfBirth, email, version } = useAppSelector(
     (state) => state.userDataSlice.data
   ) as RegisteredUserData;
+
+  const [userData, setUserData] = React.useState<
+    Record<string, string | undefined>
+  >({
+    firstName,
+  });
+
+  React.useEffect(() => {
+    const updateData: MyCustomerUpdate = {
+      version: version as number,
+      actions: [
+        {
+          action: 'setFirstName',
+          firstName: userData.firstName,
+        },
+      ],
+    };
+
+    dispatch(updateUserData(updateData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userData]);
 
   const fieldInfoData = [
     { title: 'first name', value: firstName },
@@ -18,7 +44,12 @@ const ShowInfo = () => {
   return (
     <Stack sx={{ gap: '3rem' }}>
       {fieldInfoData.map((data) => (
-        <FieldInfo key={data.title} title={data.title} value={data.value} />
+        <FieldInfo
+          key={data.title}
+          title={data.title}
+          value={data.value}
+          setUserData={setUserData}
+        />
       ))}
     </Stack>
   );
