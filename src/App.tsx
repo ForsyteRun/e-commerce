@@ -4,6 +4,9 @@ import Wrapper from 'UI/Wrapper';
 import Header from 'components/Header';
 import identificateUserOnAppStart from 'helpers/identificateUserOnAppStart';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import BurgerModal from 'components/BurgerModal';
+import { AppProvider } from 'context';
+import styles from './App.module.scss';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -17,14 +20,17 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <Header />
-      <main>
-        <Wrapper>
-          <Outlet />
-        </Wrapper>
-      </main>
-    </>
+    <AppProvider>
+      <div className={styles.container}>
+        <BurgerModal />
+        <Header />
+        <main>
+          <Wrapper>
+            <Outlet />
+          </Wrapper>
+        </main>
+      </div>
+    </AppProvider>
   );
 };
 
