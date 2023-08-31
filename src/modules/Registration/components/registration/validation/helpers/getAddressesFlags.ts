@@ -1,35 +1,35 @@
-import { IDefaultAdress } from '../../types';
+import { IDefaultAddress } from '../../types';
 
-const getAdressesFlags = ({
+const getAddressesFlags = ({
   isSameBillingFieldAsShipping,
-  defaultShippingAdress,
-  defaultBillingAdress,
-}: IDefaultAdress) => {
-  const shippingAdressIndex = 0;
-  const billingAdressIndex = isSameBillingFieldAsShipping ? 0 : 1;
-  const defaultShippingAddressIndex = defaultShippingAdress
-    ? shippingAdressIndex
+  defaultShippingAddress,
+  defaultBillingAddress,
+}: IDefaultAddress) => {
+  const shippingAddressIndex = 0;
+  const billingAddressIndex = isSameBillingFieldAsShipping ? 0 : 1;
+  const defaultShippingAddressIndex = defaultShippingAddress
+    ? shippingAddressIndex
     : undefined;
 
-  const getDefaultBillingAdress = () => {
+  const getDefaultBillingAddress = () => {
     if (isSameBillingFieldAsShipping) {
       return defaultShippingAddressIndex;
     }
-    if (defaultBillingAdress) {
-      return billingAdressIndex;
+    if (defaultBillingAddress) {
+      return billingAddressIndex;
     }
 
     return undefined;
   };
 
   const flags = {
-    shippingAddresses: [shippingAdressIndex],
-    billingAddresses: [billingAdressIndex],
-    defaultBillingAddress: getDefaultBillingAdress(),
+    shippingAddresses: [shippingAddressIndex],
+    billingAddresses: [billingAddressIndex],
+    defaultBillingAddress: getDefaultBillingAddress(),
     defaultShippingAddress: defaultShippingAddressIndex,
   };
 
   return flags;
 };
 
-export default getAdressesFlags;
+export default getAddressesFlags;

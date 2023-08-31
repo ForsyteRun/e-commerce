@@ -1,17 +1,15 @@
 import { Stack } from '@mui/material';
 import LogOutButton from 'components/Header/components/UserNavigation/components/LogOutButton';
-import { NavLink } from 'react-router-dom';
-import { PathNames, RegisteredUserData } from 'types';
+import { RegisteredUserData } from 'types';
 import { useAppSelector } from 'hooks/useRedux';
+import linkAsideData from 'modules/UserProfile/constants';
 import styles from './AsideMenu.module.scss';
+import AsideLink from './components/AsideLink';
 
 const AsideMenu = () => {
   const { firstName } = useAppSelector(
     (state) => state.userDataSlice.data as RegisteredUserData
   );
-
-  const activeLink = ({ isActive }: Record<string, boolean>) =>
-    isActive ? styles.active__link : '';
 
   return (
     <aside className={styles.aside}>
@@ -27,15 +25,9 @@ const AsideMenu = () => {
         <LogOutButton />
       </Stack>
       <Stack className={styles.links__block}>
-        <NavLink to={PathNames.profileInfo} className={activeLink}>
-          Personal information
-        </NavLink>
-        <NavLink to={PathNames.profileAddress} className={activeLink}>
-          Address book
-        </NavLink>
-        <NavLink to={PathNames.profilePassword} className={activeLink}>
-          Change password
-        </NavLink>
+        {linkAsideData.map(({ title, path, end }) => (
+          <AsideLink key={title} title={title} path={path} end={end} />
+        ))}
       </Stack>
     </aside>
   );

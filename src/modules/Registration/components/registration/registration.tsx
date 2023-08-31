@@ -1,20 +1,19 @@
 import { CustomerDraft } from '@commercetools/platform-sdk';
+import AlertSnackBar from 'components/SnackBar';
 import { Field, Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AlertSnackBar from 'components/SnackBar';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-import { registerUser } from '../../../../store/userDataSlice/thunks';
-import { PathNames } from '../../../../types';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { registerUser } from 'store/userDataSlice/thunks';
+import { PathNames } from 'types';
 import Address from '../adress/Adress';
 import validCountries from '../adress/constants';
+import NavigateToLogin from '../navigateToLogin';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
 import { IDefaultAddress } from './types';
-import { validateEmail, validateName, validatePassword } from './validation';
-import validateAddresses from './validation/validateAddresses';
-import NavigateToLogin from '../navigateToLogin';
+import { validateAddresses, RegistrationSchema } from './validation';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -23,8 +22,20 @@ const initialValues: CustomerDraft = {
   password: '',
   dateOfBirth: BIRTH_INIT_DATA,
   addresses: [
-    { country: validCountries[0], city: '', postalCode: '', streetName: '' },
-    { country: validCountries[0], city: '', postalCode: '', streetName: '' },
+    {
+      country: validCountries[0],
+      city: '',
+      state: '',
+      postalCode: '',
+      streetName: '',
+    },
+    {
+      country: validCountries[0],
+      city: '',
+      state: '',
+      postalCode: '',
+      streetName: '',
+    },
   ],
 };
 
@@ -52,13 +63,14 @@ const Registration: React.FC = () => {
       <h1 className={styles.title}>REGISTRATION</h1>
       <Formik<CustomerDraft>
         initialValues={initialValues}
+        validationSchema={RegistrationSchema}
         onSubmit={(value: CustomerDraft) => {
-          const updateAdress: IDefaultAddress = {
+          const updateAddress: IDefaultAddress = {
             isSameBillingFieldAsShipping: billingField,
             defaultShippingAddress: shippingAddress,
             defaultBillingAddress: billingAddress,
           };
-          const formData = validateAddresses(value, updateAdress);
+          const formData = validateAddresses(value, updateAddress);
           dispatch(registerUser({ registrationData: formData }));
         }}
       >
@@ -72,7 +84,6 @@ const Registration: React.FC = () => {
                 <Field
                   id="firstName"
                   name="firstName"
-                  validate={validateName}
                   placeholder="First Name*"
                   className={styles.input}
                 />
@@ -85,7 +96,6 @@ const Registration: React.FC = () => {
                 <Field
                   id="lastName"
                   name="lastName"
-                  validate={validateName}
                   placeholder="Last Name*"
                   className={styles.input}
                 />
@@ -100,7 +110,6 @@ const Registration: React.FC = () => {
                 <Field
                   id="email"
                   name="email"
-                  validate={validateEmail}
                   placeholder="email*"
                   className={styles.input}
                 />
@@ -114,7 +123,6 @@ const Registration: React.FC = () => {
                   id="password"
                   type="password"
                   name="password"
-                  validate={validatePassword}
                   placeholder="password*"
                   className={styles.input}
                 />

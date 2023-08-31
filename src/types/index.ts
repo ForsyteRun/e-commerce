@@ -18,9 +18,9 @@ export enum PathNames {
   profile = '/profile',
   category = '/catalog/:category',
   product = '/catalog/:category/:product',
-  profileInfo = '/profile/info',
-  profileAddress = '/profile/address',
-  profilePassword = '/profile/password',
+  profileInfo = 'info',
+  profileAddress = 'address',
+  profilePassword = 'password',
   about = '/about',
 }
 

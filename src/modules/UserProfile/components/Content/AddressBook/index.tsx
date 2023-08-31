@@ -1,7 +1,54 @@
-import Typography from '@mui/material/Typography';
+import { BaseAddress } from '@commercetools/platform-sdk';
+import { Typography, Box, Stack } from '@mui/material';
+import { useAppSelector } from 'hooks/useRedux';
+import { RegisteredUserData } from 'types';
+import getAddressIfSame from 'modules/UserProfile/helpers/getAddressIfSame';
+import AddressBlock from './components/AddressBlock';
+import { AddressEnum } from './types';
+import styles from './AddressBook.module.scss';
 
 const AddressBook = () => {
-  return <Typography variant="h4">Addrefdfff</Typography>;
+  const { data } = useAppSelector((state) => state.userDataSlice);
+  const { defaultBillingAddressId, defaultShippingAddressId } =
+    data as RegisteredUserData;
+
+  const modifyAddress = getAddressIfSame(data as RegisteredUserData);
+
+  return (
+    <>
+      <Box sx={{ mb: '4rem' }}>
+        <Typography variant="h3" sx={{ mb: '1rem' }}>
+          Address book
+        </Typography>
+        <Typography variant="h5">
+          Update addresses here. Orders are sent to your default delivery
+          address
+        </Typography>
+      </Box>
+
+      <Stack sx={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+        {modifyAddress &&
+          modifyAddress.map((address: BaseAddress, index) => (
+            <Stack
+              key={Math.random()}
+              className={styles.container}
+              flexBasis="45%"
+              sx={{ border: '1px solid #999' }}
+            >
+              <AddressBlock
+                title={index ? AddressEnum.billing : AddressEnum.shipping}
+                address={address}
+                defaultAddress={
+                  index
+                    ? address.id === defaultBillingAddressId
+                    : address.id === defaultShippingAddressId
+                }
+              />
+            </Stack>
+          ))}
+      </Stack>
+    </>
+  );
 };
 
 export default AddressBook;
