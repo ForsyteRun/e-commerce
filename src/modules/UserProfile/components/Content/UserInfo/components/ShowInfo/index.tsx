@@ -10,9 +10,9 @@ const ShowInfo = () => {
 
   return (
     <Stack sx={{ gap: '3rem' }}>
-      <FieldInfo value={firstName} />
-      <FieldInfo value={lastName} />
-      <FieldInfo value={dateOfBirth} />
+      <FieldInfo title="first name" value={firstName} />
+      <FieldInfo title="last name" value={lastName} />
+      <FieldInfo title="date of birth" value={dateOfBirth} />
     </Stack>
   );
 };
