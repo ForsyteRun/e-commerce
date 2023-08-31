@@ -19,6 +19,7 @@ const FieldInfo: React.FC<IFieldInfo> = ({ value, title, setUserData }) => {
     const dataField = getModifyTitle(Object.keys(unit));
 
     setUserData({ [dataField]: formValue });
+    setOpen(false);
   };
 
   return (
