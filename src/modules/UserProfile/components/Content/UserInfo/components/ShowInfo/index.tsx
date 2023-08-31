@@ -1,9 +1,11 @@
+import React from 'react';
+import { MyCustomerUpdate } from '@commercetools/platform-sdk';
 import { Stack } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import React from 'react';
-import { RegisteredUserData } from 'types';
 import updateUserData from 'modules/UserProfile/api';
-import { MyCustomerUpdate } from '@commercetools/platform-sdk';
+import { RegisteredUserData } from 'types';
+import { createAction } from 'modules/UserProfile/helpers';
+import { IFieldInfo } from 'modules/UserProfile/types';
 import FieldInfo from '../FieldInfo';
 
 const ShowInfo = () => {
@@ -20,21 +22,25 @@ const ShowInfo = () => {
   });
 
   React.useEffect(() => {
+    const actionName = Object.keys(userData)[0];
+    const actionValue = userData[actionName] as string;
+
+    const actionToAdd = createAction(actionName, actionValue);
+
+    if (!actionToAdd) {
+      return;
+    }
+
     const updateData: MyCustomerUpdate = {
-      version: version as number,
-      actions: [
-        {
-          action: 'setFirstName',
-          firstName: userData.firstName,
-        },
-      ],
+      version,
+      actions: [actionToAdd],
     };
 
     dispatch(updateUserData(updateData));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData]);
 
-  const fieldInfoData = [
+  const fieldInfoData: IFieldInfo[] = [
     { title: 'first name', value: firstName },
     { title: 'last name', value: lastName },
     { title: 'date of birth', value: dateOfBirth },
@@ -43,7 +49,7 @@ const ShowInfo = () => {
 
   return (
     <Stack sx={{ gap: '3rem' }}>
-      {fieldInfoData.map((data) => (
+      {fieldInfoData.map((data: IFieldInfo) => (
         <FieldInfo
           key={data.title}
           title={data.title}
