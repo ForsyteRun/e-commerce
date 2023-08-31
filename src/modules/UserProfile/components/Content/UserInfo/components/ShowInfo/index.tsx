@@ -4,7 +4,7 @@ import { RegisteredUserData } from 'types';
 import FieldInfo from '../FieldInfo';
 
 const ShowInfo = () => {
-  const { firstName, lastName, dateOfBirth } = useAppSelector(
+  const { firstName, lastName, dateOfBirth, email } = useAppSelector(
     (state) => state.userDataSlice.data
   ) as RegisteredUserData;
 
@@ -13,6 +13,7 @@ const ShowInfo = () => {
       <FieldInfo title="first name" value={firstName} />
       <FieldInfo title="last name" value={lastName} />
       <FieldInfo title="date of birth" value={dateOfBirth} />
+      <FieldInfo title="email" value={email} />
     </Stack>
   );
 };

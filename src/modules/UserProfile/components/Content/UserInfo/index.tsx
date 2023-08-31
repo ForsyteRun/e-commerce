@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { EditInfo, ShowInfo } from './components';
 
@@ -6,7 +6,7 @@ const UserInfo: React.FC = () => {
   const [edit, setEdit] = React.useState(false);
 
   return (
-    <div>
+    <>
       <Box sx={{ mb: '4rem' }}>
         <Typography variant="h3" sx={{ mb: '1rem' }}>
           Personal details
@@ -16,22 +16,8 @@ const UserInfo: React.FC = () => {
           best personalized offers!
         </Typography>
       </Box>
-      <Stack
-        sx={{
-          flexDirection: 'row',
-          justifyContent: 'flex-end',
-          p: '0 1rem',
-          mb: '1rem',
-        }}
-      >
-        {!edit && (
-          <Button variant="contained" onClick={() => setEdit(!edit)}>
-            edit
-          </Button>
-        )}
-      </Stack>
       {!edit ? <ShowInfo /> : <EditInfo onClick={() => setEdit(!edit)} />}
-    </div>
+    </>
   );
 };
 
