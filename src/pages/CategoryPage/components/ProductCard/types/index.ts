@@ -5,6 +5,7 @@ export type PriceType = 'net' | 'discounted';
 export interface IProductPrice {
   price: number;
   type: PriceType;
+  isDiscountedNet?: boolean;
 }
 
 export interface IProductImage {

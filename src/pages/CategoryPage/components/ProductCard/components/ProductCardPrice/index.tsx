@@ -8,7 +8,11 @@ const ProductCardPrice = ({ price }: { price: IPriceData }) => {
   return (
     <CardActions className={styles.cardActions}>
       <div className={styles.priceInfo}>
-        <ProductPrice price={price.net} type="net" />
+        <ProductPrice
+          price={price.net}
+          type="net"
+          isDiscountedNet={!!price.discounted}
+        />
         {price.discounted && (
           <ProductPrice price={price.discounted} type="discounted" />
         )}

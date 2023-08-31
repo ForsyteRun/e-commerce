@@ -1,20 +1,21 @@
 import { Typography } from '@mui/material';
 import { Discount as DiscountIcon } from '@mui/icons-material';
-import styles from './ProductCardPrice.module.scss';
 import getPriceStyles from './getPriceStyles';
 import { IProductPrice } from '../../types';
 
-const ProductPrice = ({ price, type }: IProductPrice) => {
-  const isDiscounted = type === 'discounted';
-
-  const priceStyles = getPriceStyles(isDiscounted);
+const ProductPrice = ({
+  price,
+  type,
+  isDiscountedNet = false,
+}: IProductPrice) => {
+  const priceStyles = getPriceStyles(type, isDiscountedNet);
 
   return (
     <Typography sx={priceStyles}>
-      {isDiscounted && (
-        <DiscountIcon fontSize="medium" className={styles.discountIcon} />
+      {type === 'discounted' && (
+        <DiscountIcon fontSize="small" sx={{ mr: '0.3rem' }} />
       )}
-      {`${price} €`}
+      <span>{`${price} €`}</span>
     </Typography>
   );
 };
