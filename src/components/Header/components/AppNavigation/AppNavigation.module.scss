@@ -1,7 +1,11 @@
 @import 'styles/mixins.scss';
+@import 'styles/variables.scss';
 
 .container {
   @include flex(row, center, center);
-  column-gap: 1rem;
-  width: 100%;
+  gap: 1rem;
+
+  @media #{$mq-mobile} {
+    flex-direction: column;
+  }
 }

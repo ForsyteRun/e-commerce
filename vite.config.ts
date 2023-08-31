@@ -22,6 +22,7 @@ export default defineConfig({
       styles: `${path.resolve(__dirname, './src/styles/')}`,
       UI: `${path.resolve(__dirname, './src/UI/')}`,
       helpers: `${path.resolve(__dirname, './src/helpers/')}`,
+      context: `${path.resolve(__dirname, './src/context/')}`,
     },
   },
   define: {
