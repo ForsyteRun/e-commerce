@@ -1,29 +1,10 @@
-.title {
-  margin: 0;
-}
-
 .linkName {
   text-decoration: none;
   color: #213038;
 }
 
-.productImage {
-  padding: 16px;
-  flex: 2;
-}
-
-.image {
-  max-width: 150px;
-  width: 100%;
-  height: auto;
-}
-
 .description {
   max-width: 400px;
-}
-
-.cardInfo {
-  flex: 1;
 }
 
 .list {
@@ -36,10 +17,6 @@
   line-height: 20px;
 }
 
-.attributes {
-  margin: 15px 0;
-}
-
 .cardActions {
   flex-direction: column;
   justify-content: flex-end;
@@ -50,11 +27,12 @@
 }
 
 .priceInfo {
+  align-items: flex-end;
   display: flex;
   justify-content: center;
   column-gap: 10px;
   width: 100%;
-  padding: 8px;
+  padding: 0 0.5rem;
 }
 
 .value {
