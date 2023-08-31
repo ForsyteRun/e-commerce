@@ -1,0 +1,20 @@
+.container {
+  box-sizing: border-box;
+  @include flex(row, center, flex-end);
+  padding: 0 1rem;
+  flex: 2;
+  height: 100%;
+  min-height: 200px;
+  max-height: 200px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.image {
+  display: block;
+  height: 100%;
+  max-height: 200px;
+  max-width: 240px;
+  object-fit: contain;
+  width: 100%;
+}
