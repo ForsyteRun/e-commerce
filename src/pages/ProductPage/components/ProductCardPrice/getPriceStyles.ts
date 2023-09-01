@@ -3,7 +3,7 @@ import { PriceType } from './types';
 
 const getPriceStyles = (type: PriceType, isDiscountedNet: boolean): SxProps => {
   const netPriceStyles: SxProps = {
-    color: '#213038',
+    color: isDiscountedNet ? '#213038' : '#e30425',
     fontWeight: isDiscountedNet ? 500 : 700,
     fontSize: isDiscountedNet ? '1.25rem' : '1.5rem',
     lineHeight: 1,
