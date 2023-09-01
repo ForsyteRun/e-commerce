@@ -33,7 +33,7 @@ export const generateCategoryPath = (slug: string): string => {
 
   collectPaths(slug);
 
-  return pathArray.join('/');
+  return pathArray.slice(1).join('/');
 };
 
 export const generateProductPath = (
