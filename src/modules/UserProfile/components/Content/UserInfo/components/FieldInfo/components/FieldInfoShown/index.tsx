@@ -10,7 +10,9 @@ const FieldInfoShown: React.FC<IFieldInfoShown> = ({
 }) => {
   return (
     <>
-      <Typography variant="h5">{title}</Typography>
+      <Typography variant="h5" sx={{ flexGrow: 1 }}>
+        {title}
+      </Typography>
       <Typography variant="h5" sx={{ flexBasis: '50%' }}>
         {value}
       </Typography>

@@ -7,4 +7,5 @@ export interface IFieldInfoSingleForm {
     | ObjectSchema<Record<string, string>>
     | ObjectSchema<Record<string, Date>>;
   submit: (value: InitialValues) => void;
+  setOpen: (value: boolean) => void;
 }
