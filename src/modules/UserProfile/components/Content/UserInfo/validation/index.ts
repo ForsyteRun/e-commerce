@@ -13,6 +13,7 @@ const UserInfoSchema = Yup.object().shape({
       'Must be 13 years or older'
     )
     .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
 });
 
 export default UserInfoSchema;

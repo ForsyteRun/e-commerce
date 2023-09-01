@@ -1,9 +1,16 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import React from 'react';
+import { CustomerDraft } from '@commercetools/platform-sdk';
 import { EditInfo, ShowInfo } from './components';
 
 const UserInfo: React.FC = () => {
   const [edit, setEdit] = React.useState(false);
+  const [userFullData, setUserFullData] = React.useState<CustomerDraft>({
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    email: '',
+  });
 
   return (
     <>
@@ -15,8 +22,20 @@ const UserInfo: React.FC = () => {
           Keep these up to date so you can breeze through checkout and see the
           best personalized offers!
         </Typography>
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{ display: 'block', float: 'right' }}
+          onClick={() => setEdit(!edit)}
+        >
+          submit
+        </Button>
       </Box>
-      {!edit ? <ShowInfo /> : <EditInfo onClick={() => setEdit(!edit)} />}
+      {!edit ? (
+        <ShowInfo userFullData={userFullData} />
+      ) : (
+        <EditInfo setUserFullData={setUserFullData} onClick={setEdit} />
+      )}
     </>
   );
 };
