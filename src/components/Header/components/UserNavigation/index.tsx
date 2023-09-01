@@ -25,7 +25,7 @@ const UserNavigation = () => {
     </>
   );
 
-  const isMobile = useMediaQueryContext();
+  const { isMobile } = useMediaQueryContext();
 
   return (
     <nav className={styles.userNavigation}>

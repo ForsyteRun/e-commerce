@@ -2,7 +2,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { IconButton } from '@mui/material';
 import { NavLink, useLocation } from 'react-router-dom';
 import { PathNames } from 'types';
-import useIconButtonColorTheme from './helpers/useIconButtonColorTheme';
+import useIconButtonColorTheme from 'helpers/useIconButtonColorTheme';
 
 const UserProfileButton = () => {
   const location = useLocation();
