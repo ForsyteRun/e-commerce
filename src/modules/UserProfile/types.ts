@@ -1,9 +1,13 @@
 import { ObjectSchema } from 'yup';
+import { Dispatch, SetStateAction } from 'react';
 
 export interface IFieldInfo {
-  title: string;
   value: string | undefined;
+  title: string;
   validation:
     | ObjectSchema<Record<string, string>>
     | ObjectSchema<Record<string, Date>>;
+  setUserData: Dispatch<SetStateAction<Record<string, string | undefined>>>;
 }
+
+export type IFieldData = Omit<IFieldInfo, 'setUserData'>;

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import updateUserData from 'modules/UserProfile/api';
 import { RegisteredUserData } from 'types';
 import { createAction } from 'modules/UserProfile/helpers';
-import { IFieldInfo } from 'modules/UserProfile/types';
+import { IFieldData } from 'modules/UserProfile/types';
 import FieldInfo from '../FieldInfo';
 import {
   firstNameSchema,
@@ -46,7 +46,7 @@ const ShowInfo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData]);
 
-  const fieldInfoData: IFieldInfo[] = [
+  const fieldInfoData: IFieldData[] = [
     { title: 'firstName', value: firstName, validation: firstNameSchema },
     { title: 'lastName', value: lastName, validation: lastNameSchema },
     {
@@ -59,7 +59,7 @@ const ShowInfo = () => {
 
   return (
     <Stack sx={{ gap: '3rem' }}>
-      {fieldInfoData.map((data: IFieldInfo) => (
+      {fieldInfoData.map((data: IFieldData) => (
         <FieldInfo
           key={data.title}
           title={data.title}
