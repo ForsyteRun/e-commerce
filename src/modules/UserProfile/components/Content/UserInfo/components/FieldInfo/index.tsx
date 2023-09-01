@@ -1,26 +1,44 @@
 import ModeIcon from '@mui/icons-material/Mode';
-import { Button, InputAdornment, Stack, Typography } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import { Form, Formik } from 'formik';
+import { Stack, Typography, Button } from '@mui/material';
+import { Field, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
-import getModifyTitle from 'modules/UserProfile/helpers/getModifyTitle';
+import { ObjectSchema } from 'yup';
 import styles from './fieldInfo.module.scss';
 
 interface IFieldInfo {
   value: string | undefined;
   title: string;
+  validation:
+    | ObjectSchema<Record<string, string>>
+    | ObjectSchema<Record<string, Date>>;
   setUserData: Dispatch<SetStateAction<Record<string, string | undefined>>>;
 }
-const FieldInfo: React.FC<IFieldInfo> = ({ value, title, setUserData }) => {
+const FieldInfo: React.FC<IFieldInfo> = ({
+  value,
+  title,
+  validation,
+  setUserData,
+}) => {
   const [open, setOpen] = React.useState(false);
-  const [formValue, setFormValue] = React.useState('');
+  // const [formValue, setFormValue] = React.useState('');
 
-  const handleSubmit = (unit: Record<string, string>) => {
-    const dataField = getModifyTitle(Object.keys(unit));
+  const handleSubmit = (values: Record<string, string>) => {
+    // const dataField = getModifyTitle(Object.keys(data));
 
-    setUserData({ [dataField]: formValue });
-    setOpen(false);
+    // eslint-disable-next-line no-console
+    console.log(values, setUserData);
+
+    // setUserData({ [dataField]: formValue });
+    // setOpen(false);
   };
+
+  const initialValues: InitialValues = {
+    [title]: '',
+  };
+
+  interface InitialValues {
+    [key: string]: string;
+  }
 
   return (
     <Stack
@@ -39,31 +57,18 @@ const FieldInfo: React.FC<IFieldInfo> = ({ value, title, setUserData }) => {
           <ModeIcon sx={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
         </>
       ) : (
-        <Formik
-          initialValues={{
-            [title]: '',
-          }}
+        <Formik<InitialValues>
+          initialValues={initialValues}
+          validationSchema={validation}
           onSubmit={(values) => {
             handleSubmit(values);
           }}
         >
-          {() => (
+          {({ errors, touched }) => (
             <Form>
-              <TextField
-                fullWidth
-                placeholder={`enter ${title}`}
-                name={title}
-                type={title}
-                onChange={(e) => setFormValue(e.target.value)}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Button onClick={() => setOpen(false)}>cancel</Button>
-                      <Button type="submit">submit</Button>
-                    </InputAdornment>
-                  ),
-                }}
-              />
+              <Field name={title} placeholder={`enter ${title}`} />
+              {errors && touched && <div>{errors[title]}</div>}
+              <Button type="submit">Submit</Button>
             </Form>
           )}
         </Formik>

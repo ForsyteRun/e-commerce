@@ -7,6 +7,12 @@ import { RegisteredUserData } from 'types';
 import { createAction } from 'modules/UserProfile/helpers';
 import { IFieldInfo } from 'modules/UserProfile/types';
 import FieldInfo from '../FieldInfo';
+import {
+  firstNameSchema,
+  lastNameSchema,
+  dateOfBirthSchema,
+  emailSchema,
+} from '../FieldInfo/validation';
 
 const ShowInfo = () => {
   const dispatch = useAppDispatch();
@@ -41,10 +47,14 @@ const ShowInfo = () => {
   }, [userData]);
 
   const fieldInfoData: IFieldInfo[] = [
-    { title: 'first name', value: firstName },
-    { title: 'last name', value: lastName },
-    { title: 'date of birth', value: dateOfBirth },
-    { title: 'email', value: email },
+    { title: 'firstName', value: firstName, validation: firstNameSchema },
+    { title: 'lastName', value: lastName, validation: lastNameSchema },
+    {
+      title: 'dateOfBirth',
+      value: dateOfBirth,
+      validation: dateOfBirthSchema,
+    },
+    { title: 'email', value: email, validation: emailSchema },
   ];
 
   return (
@@ -55,6 +65,7 @@ const ShowInfo = () => {
           title={data.title}
           value={data.value}
           setUserData={setUserData}
+          validation={data.validation}
         />
       ))}
     </Stack>
