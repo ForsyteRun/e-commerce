@@ -7,7 +7,7 @@ const CatalogPage = () => {
   return (
     <section className={styles.catalog}>
       <BreadcrumbsNavigation />
-      <div style={{ display: 'flex' }}>
+      <div className={styles.container}>
         <Navigation />
         <Outlet />
       </div>

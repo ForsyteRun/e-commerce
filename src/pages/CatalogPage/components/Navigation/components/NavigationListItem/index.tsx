@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-import { Button, Collapse, ListItemButton } from '@mui/material';
+import { Button, Collapse, ListItem } from '@mui/material';
 import { useAppSelector } from 'hooks/useRedux';
 import { PathNames, OnClickHandler, INavigationListItemProps } from 'types';
 import ExpandArrow from './ExpandArrow';
@@ -32,7 +32,12 @@ const NavigationListItem = ({ slug, id, name }: INavigationListItemProps) => {
 
   return (
     <>
-      <ListItemButton key={id} sx={listItem} onClick={selectedHandler}>
+      <ListItem
+        key={id}
+        sx={{ ...listItem, cursor: hasChildren ? 'pointer' : 'auto' }}
+        onClick={selectedHandler}
+        alignItems="flex-start"
+      >
         {hasChildren && <ExpandArrow isSelected={!!selected} />}
         <Button
           component={NavLink}
@@ -44,9 +49,14 @@ const NavigationListItem = ({ slug, id, name }: INavigationListItemProps) => {
         >
           {name}
         </Button>
-      </ListItemButton>
+      </ListItem>
       {hasChildren && (
-        <Collapse in={selected} timeout="auto" unmountOnExit>
+        <Collapse
+          in={selected}
+          timeout="auto"
+          sx={{ ml: '2.25rem' }}
+          unmountOnExit
+        >
           {children}
         </Collapse>
       )}

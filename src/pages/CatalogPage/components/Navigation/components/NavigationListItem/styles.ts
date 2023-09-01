@@ -8,7 +8,9 @@ export const listItem: SxProps = {
 
 export const listButton: SxProps = {
   lineHeight: 1,
-  m: '0.5rem auto',
+  m: '0.5rem',
+  minWidth: 0,
+  textTransform: 'none',
   p: 0,
   ':hover': {
     backgroundColor: 'transparent',
