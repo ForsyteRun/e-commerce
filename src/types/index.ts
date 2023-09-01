@@ -177,3 +177,9 @@ export type AppState =
   | IProductsData
   | ISingleProductData
   | ICategoriesState;
+
+export interface IProductsQuery {
+  limit?: number;
+  offset?: number;
+  categoryId?: string;
+}

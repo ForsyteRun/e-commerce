@@ -9,7 +9,7 @@ const fetchCategoriesList = createAsyncThunk(
 
     const response = api
       .categories()
-      .get()
+      .get({ queryArgs: { limit: 100 } })
       .execute()
       .then((res) => res.body.results)
       .catch((err: _ErrorResponse) => rejectWithValue({ ...err }));

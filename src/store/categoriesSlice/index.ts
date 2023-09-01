@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setPendingStatus, setRejectedStatus } from 'store/helpers';
 import { ICategoriesState } from 'types';
-import fetchCategoriesList from '../api/fetchCategoriesList';
-import transformCategoryData from '../helpers/transformCategoryData';
+import fetchCategoriesList from './fetchCategoriesList';
+import transformCategoryData from '../../pages/CatalogPage/helpers/transformCategoryData';
 
 const initialState: ICategoriesState = {
   data: null,

@@ -41,6 +41,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <CategoryPage />,
+            loader: getCategoryData,
           },
           {
             path: PathNames.category,

@@ -1,8 +1,8 @@
-import { LoaderFunction, redirect } from 'react-router-dom';
-import fetchCategoriesList from 'pages/CatalogPage/api/fetchCategoriesList';
+import { LoaderFunction } from 'react-router-dom';
+import fetchCategoriesList from 'store/categoriesSlice/fetchCategoriesList';
+import fetchProductsData from 'store/productsDataSlice/fetchProductsData';
 import store from 'store';
 import { findDataItemBySlug } from 'helpers';
-import { PathNames } from 'types';
 import { throwRouteError, mapSplatArray, checkProductExists } from './helpers';
 
 const checkCatalogPath: LoaderFunction = async ({ params }) => {
@@ -13,33 +13,32 @@ const checkCatalogPath: LoaderFunction = async ({ params }) => {
     return { ok: true };
   }
 
-  const splatMatch = splat.match(/\/*$/);
-
-  if (splatMatch && splatMatch[0].length > 1) {
-    const formattedSplat = splat.replace(/\/*$/, '');
-    const path = `${PathNames.catalog}/${category}/${formattedSplat}`;
-
-    return redirect(path);
-  }
-
-  const splatArray = splat.split('/');
+  const splatArray = splat.replace(/\/$/, '').split('/');
 
   await dispatch(fetchCategoriesList());
-  const { loading: fetchingCategories, data: categoriesData } =
-    getState().categoriesSlice;
 
-  if (fetchingCategories === 'succeeded' && categoriesData) {
+  const { data: categoriesData } = getState().categoriesSlice;
+
+  if (categoriesData) {
     const rootCategory = findDataItemBySlug(categoriesData, category);
 
     if (rootCategory) {
       const rootId = rootCategory.id;
-
       const mappedSplat = mapSplatArray(splatArray, categoriesData, rootId);
-
       const lastMappedElement = mappedSplat[mappedSplat.length - 1];
 
       if (lastMappedElement) {
-        return 'category';
+        const categoryId = categoriesData.find(
+          (cat) => cat.slug === splatArray[splatArray.length - 1]
+        )?.id;
+
+        if (categoryId) {
+          dispatch(fetchProductsData({ categoryId }));
+
+          return 'category';
+        }
+
+        throwRouteError(404, 'Not Found');
       }
 
       const nullsArray = mappedSplat.filter((item) => !item);

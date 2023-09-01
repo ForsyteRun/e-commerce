@@ -6,7 +6,7 @@ import {
   calculateProductsCounters,
 } from 'store/helpers';
 import { IProductsData } from 'types';
-import fetchAllProductsData from './fetchAllProductsData';
+import fetchProductsData from './fetchProductsData';
 
 const initialState: IProductsData = {
   data: null,
@@ -21,18 +21,19 @@ const productsDataSlice = createSlice({
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<IProductsData>): void => {
     builder
-      .addCase(fetchAllProductsData.pending, (state) => {
+      .addCase(fetchProductsData.pending, (state) => {
         setPendingStatus(state);
+        state.data = null;
         state.counters = null;
       })
-      .addCase(fetchAllProductsData.fulfilled, (state, { payload }) => {
+      .addCase(fetchProductsData.fulfilled, (state, { payload }) => {
         const { results, ...counts } = payload;
 
         state.loading = 'succeeded';
         state.data = results.map((product) => transformProductData(product));
         state.counters = calculateProductsCounters(counts);
       })
-      .addCase(fetchAllProductsData.rejected, setRejectedStatus);
+      .addCase(fetchProductsData.rejected, setRejectedStatus);
   },
 });
 
