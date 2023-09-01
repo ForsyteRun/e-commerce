@@ -1,0 +1,37 @@
+.cardActions {
+  flex-direction: column;
+  justify-content: flex-end;
+  row-gap: 10px;
+  width: 100%;
+  height: max-content;
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 1024px) {
+    margin: 3rem 0 2rem;
+  }
+}
+
+.priceInfo {
+  align-items: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 10px;
+  width: 100%;
+  padding: 0 0.5rem;
+
+  @media screen and (max-width: 1024px) {
+    justify-content: center;
+  }
+}
+
+.value {
+  line-height: 1;
+  color: #213038;
+}
+
+.discount {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #e5006d;
+}
