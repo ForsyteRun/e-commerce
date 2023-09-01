@@ -24,18 +24,6 @@ const EditInfo: React.FC<IEditInfo> = ({ setUserFullData, onClick }) => {
       validationSchema={UserInfoSchema}
       onSubmit={(values: CustomerDraft) => {
         setUserFullData(values);
-
-        // const updateData: MyCustomerUpdate = {
-        //   version: version as number,
-        //   actions: [
-        //     {
-        //       action: 'setFirstName',
-        //       firstName: values.firstName,
-        //     },
-        //   ],
-        // };
-
-        // dispatch(updateUserData(updateData));
         onClick(false);
       }}
     >

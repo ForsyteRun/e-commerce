@@ -6,7 +6,7 @@ import { IFieldInfoShown } from './types';
 const FieldInfoShown: React.FC<IFieldInfoShown> = ({
   title,
   value,
-  setOpen,
+  setOpenSingleForm,
 }) => {
   return (
     <>
@@ -16,7 +16,10 @@ const FieldInfoShown: React.FC<IFieldInfoShown> = ({
       <Typography variant="h5" sx={{ flexBasis: '50%' }}>
         {value}
       </Typography>
-      <ModeIcon sx={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
+      <ModeIcon
+        sx={{ cursor: 'pointer' }}
+        onClick={() => setOpenSingleForm(true)}
+      />
     </>
   );
 };
