@@ -6,5 +6,5 @@ export interface ISingleFormField {
     | ObjectSchema<Record<string, string>>
     | ObjectSchema<Record<string, Date>>;
   setOpenSingleForm: (value: boolean) => void;
-  setOpenModal: (value: boolean) => void;
+  // setOpenModal: (value: boolean) => void;
 }

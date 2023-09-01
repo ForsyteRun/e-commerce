@@ -14,7 +14,6 @@ const SingleFormField: React.FC<ISingleFormField> = ({
   title,
   validation,
   setOpenSingleForm,
-  setOpenModal,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -23,6 +22,9 @@ const SingleFormField: React.FC<ISingleFormField> = ({
   ) as RegisteredUserData;
 
   const { loading } = useAppSelector((state) => state.userDataSlice);
+  const { registrationAccessCode } = useAppSelector(
+    (state) => state.registrationAccessCodeSlice
+  );
 
   const initialValues: InitialValues = {
     [title]: '',
@@ -33,9 +35,8 @@ const SingleFormField: React.FC<ISingleFormField> = ({
   React.useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
-    } else if (loading === 'succeeded') {
+    } else if (loading === 'succeeded' && registrationAccessCode === 200) {
       setOpenSingleForm(false);
-      setOpenModal(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);

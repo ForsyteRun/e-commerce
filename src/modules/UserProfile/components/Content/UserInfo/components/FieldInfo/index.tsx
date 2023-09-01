@@ -1,4 +1,4 @@
-import { Snackbar, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { IFieldInfo } from 'modules/UserProfile/types';
 import React from 'react';
 import FieldInfoShown from './components/FieldInfoShown';
@@ -7,11 +7,6 @@ import styles from './fieldInfo.module.scss';
 
 const FieldInfo: React.FC<IFieldInfo> = ({ value, title, validation }) => {
   const [openSingleForm, setOpenSingleForm] = React.useState(false);
-  const [openModal, setOpenModal] = React.useState(false);
-
-  const handleClose = () => {
-    setOpenModal(false);
-  };
 
   return (
     <Stack
@@ -32,15 +27,15 @@ const FieldInfo: React.FC<IFieldInfo> = ({ value, title, validation }) => {
           title={title}
           validation={validation}
           setOpenSingleForm={setOpenSingleForm}
-          setOpenModal={setOpenModal}
+          // setOpenModal={setOpenModal}
         />
       )}
-      <Snackbar
+      {/* <Snackbar
         open={openModal}
         autoHideDuration={2000}
         onClose={handleClose}
         message="Update"
-      />
+      /> */}
     </Stack>
   );
 };
