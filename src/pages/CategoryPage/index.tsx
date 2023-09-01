@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppSelector } from 'hooks/useRedux';
-import FilterSideBar from './components/FilterSideBar';
+// import FilterSideBar from './components/FilterSideBar';
 import ProductCard from './components/ProductCard';
 import Sort from './components/Sort';
 import SearchBar from './components/SearchBar';
@@ -13,7 +13,7 @@ const CategoryPage = () => {
   return (
     <section className={styles.category}>
       <div className={styles.container}>
-        <FilterSideBar />
+        {/* <FilterSideBar /> */}
         <div className={styles.content}>
           <div className={styles.control}>
             <Sort sortOption={sortOption} setSortOption={setSortOption} />

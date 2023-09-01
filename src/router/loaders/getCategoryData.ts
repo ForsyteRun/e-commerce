@@ -8,14 +8,14 @@ const getCategoryData: LoaderFunction = async ({ params }) => {
   const { category } = params;
   const { dispatch, getState } = store;
 
+  await dispatch(fetchCategoriesList());
+  const { data, error } = getState().categoriesSlice;
+
+  if (error) {
+    throwRouteError(error.statusCode, error.message);
+  }
+
   if (category) {
-    await dispatch(fetchCategoriesList());
-    const { data, error } = getState().categoriesSlice;
-
-    if (error) {
-      throwRouteError(error.statusCode, error.message);
-    }
-
     const categoryData = data?.find((cat) => cat.slug === category);
 
     if (categoryData?.parent || !categoryData) {

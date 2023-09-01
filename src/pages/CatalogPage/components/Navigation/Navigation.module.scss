@@ -1,8 +1,18 @@
 @import 'src/styles/variables.scss';
 
 .navigation {
-  background: $white-color;
-  border: 1px solid #eaebed;
-  border-radius: $border-radius;
+  max-width: 250px;
   margin: 1rem auto;
+}
+
+.container {
+  background: $white-color;
+  border-radius: $border-radius;
+  padding-bottom: 0.5rem;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  padding: 1rem;
 }

@@ -7,8 +7,10 @@ const CatalogPage = () => {
   return (
     <section className={styles.catalog}>
       <BreadcrumbsNavigation />
-      <Navigation />
-      <Outlet />
+      <div style={{ display: 'flex' }}>
+        <Navigation />
+        <Outlet />
+      </div>
     </section>
   );
 };
