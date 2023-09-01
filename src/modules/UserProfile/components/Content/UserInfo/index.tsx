@@ -1,16 +1,20 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
-import { CustomerDraft } from '@commercetools/platform-sdk';
-import { EditInfo, ShowInfo } from './components';
+import { ShowInfo } from './components';
 
 const UserInfo: React.FC = () => {
   const [edit, setEdit] = React.useState(false);
-  const [userFullData, setUserFullData] = React.useState<CustomerDraft>({
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    email: '',
-  });
+
+  // const { firstName, lastName, dateOfBirth, email, version } = useAppSelector(
+  //   (state) => state.userDataSlice.data
+  // ) as RegisteredUserData;
+
+  // const [userFullData, setUserFullData] = React.useState<CustomerDraft>({
+  //   firstName: '',
+  //   lastName: '',
+  //   dateOfBirth: '',
+  //   email: '',
+  // });
 
   return (
     <>
@@ -31,11 +35,12 @@ const UserInfo: React.FC = () => {
           submit
         </Button>
       </Box>
-      {!edit ? (
+      <ShowInfo />
+      {/* {!edit ? (
         <ShowInfo userFullData={userFullData} />
       ) : (
         <EditInfo setUserFullData={setUserFullData} onClick={setEdit} />
-      )}
+      )} */}
     </>
   );
 };
