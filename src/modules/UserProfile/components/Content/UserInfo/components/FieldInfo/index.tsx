@@ -33,6 +33,7 @@ const FieldInfo: React.FC<IFieldInfo> = ({
           title={title}
           submit={handleSubmit}
           validation={validation}
+          setOpen={setOpen}
         />
       )}
     </Stack>
