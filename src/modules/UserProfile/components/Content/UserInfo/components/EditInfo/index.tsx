@@ -1,10 +1,7 @@
-import { CustomerDraft, MyCustomerUpdate } from '@commercetools/platform-sdk';
+import { CustomerDraft } from '@commercetools/platform-sdk';
 import { Button } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import { Select } from 'modules/Registration';
-import updateUserData from 'modules/UserProfile/api';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import UserInfoSchema from '../../validation';
 import styles from './editInfo.module.scss';
 
@@ -16,32 +13,30 @@ const initialValues: CustomerDraft = {
 };
 
 interface IEditInfo {
+  setUserFullData: Dispatch<SetStateAction<CustomerDraft>>;
   onClick: (value: boolean) => void;
 }
 
-const EditInfo: React.FC<IEditInfo> = ({ onClick }) => {
-  // eslint-disable-next-line no-console
-  console.log(onClick);
-
-  const dispatch = useAppDispatch();
-  const { version } = useAppSelector((state) => state.userDataSlice.data);
-
+const EditInfo: React.FC<IEditInfo> = ({ setUserFullData, onClick }) => {
   return (
     <Formik<CustomerDraft>
       initialValues={initialValues}
       validationSchema={UserInfoSchema}
       onSubmit={(values: CustomerDraft) => {
-        const updateData: MyCustomerUpdate = {
-          version: version as number,
-          actions: [
-            {
-              action: 'setFirstName',
-              firstName: values.firstName,
-            },
-          ],
-        };
+        setUserFullData(values);
 
-        dispatch(updateUserData(updateData));
+        // const updateData: MyCustomerUpdate = {
+        //   version: version as number,
+        //   actions: [
+        //     {
+        //       action: 'setFirstName',
+        //       firstName: values.firstName,
+        //     },
+        //   ],
+        // };
+
+        // dispatch(updateUserData(updateData));
+        onClick(false);
       }}
     >
       {({ errors, touched }) => (
@@ -53,7 +48,7 @@ const EditInfo: React.FC<IEditInfo> = ({ onClick }) => {
               className={styles.input}
             />
             {errors.firstName && touched.firstName && (
-              <div className={styles.errorValid}>{errors.firstName}</div>
+              <div className="errorValid">{errors.firstName}</div>
             )}
           </div>
           <div className={styles.input__container}>
@@ -63,7 +58,17 @@ const EditInfo: React.FC<IEditInfo> = ({ onClick }) => {
               className={styles.input}
             />
             {errors.lastName && touched.lastName && (
-              <div className={styles.errorValid}>{errors.lastName}</div>
+              <div className="errorValid">{errors.lastName}</div>
+            )}
+          </div>
+          <div className={styles.input__container}>
+            <Field
+              name="dateOfBirth"
+              placeholder="enter dateOfBirth"
+              className={styles.input}
+            />
+            {errors.dateOfBirth && touched.dateOfBirth && (
+              <div className="errorValid">{errors.dateOfBirth}</div>
             )}
           </div>
           <div className={styles.input__container}>
@@ -73,17 +78,10 @@ const EditInfo: React.FC<IEditInfo> = ({ onClick }) => {
               className={styles.input}
             />
             {errors.email && touched.email && (
-              <div className={styles.errorValid}>{errors.email}</div>
+              <div className="errorValid">{errors.email}</div>
             )}
           </div>
-          {/* <Box sx={{ width: '100%' }}> */}
-          <Select />
-          {/* </Box> */}
-          <Button
-            variant="contained"
-            type="submit"
-            // onClick={() => onClick(false)}
-          >
+          <Button variant="contained" type="submit">
             submit
           </Button>
         </Form>
