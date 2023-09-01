@@ -11,7 +11,7 @@ const cardStyles: SxProps = {
   padding: '1rem',
   backgroundColor: '#ffffff',
   border: '1px solid #eaebed',
-  borderRadius: '12px',
+  borderRadius: '10px',
   boxShadow: 'none',
   transition: 'box-shadow 0.2s ease-in-out',
   textDecoration: 'none',

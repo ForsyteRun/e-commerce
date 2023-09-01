@@ -1,39 +1,32 @@
 import { NavLink } from 'react-router-dom';
+import { List, ListItemButton, ListItemText } from '@mui/material';
+import { useAppSelector } from 'hooks/useRedux';
 import { PathNames } from 'types';
-import { List, ListItem, ListItemText } from '@mui/material';
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import { useEffect } from 'react';
-import fetchCategoriesList from 'store/categoriesSlice/fetchCategoriesList';
 import styles from './Navigation.module.scss';
 
 const Navigation = () => {
-  const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.categoriesSlice);
 
-  useEffect(() => {
-    dispatch(fetchCategoriesList());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const rootCategories = data?.filter((category) => !category.parent);
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Categories</h2>
-      <nav className={styles.navigation}>
-        <List component="ul" sx={{ display: 'flex' }}>
-          {data?.map((category) => (
-            <li key={category.id}>
-              <ListItem
-                button
-                component={NavLink}
-                to={`${PathNames.catalog}/${category.key}`}
-              >
-                <ListItemText primary={category.name} />
-              </ListItem>
-            </li>
-          ))}
-        </List>
-      </nav>
-    </div>
+    <nav className={styles.navigation}>
+      <List
+        component="ul"
+        sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
+      >
+        {rootCategories?.map((category) => (
+          <ListItemButton
+            key={category.id}
+            component={NavLink}
+            to={`${PathNames.catalog}/${category.slug}`}
+            sx={{ maxWidth: '200px', textAlign: 'center', borderRadius: '5px' }}
+          >
+            <ListItemText primary={category.name} />
+          </ListItemButton>
+        ))}
+      </List>
+    </nav>
   );
 };
 

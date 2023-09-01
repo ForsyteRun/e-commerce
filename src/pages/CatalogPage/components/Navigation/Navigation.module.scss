@@ -1,11 +1,8 @@
-.title {
-  margin: 1rem 0;
-}
+@import 'src/styles/variables.scss';
 
 .navigation {
-  max-width: max-content;
-  padding: 1rem;
-  background: #ffffff;
+  background: $white-color;
   border: 1px solid #eaebed;
-  border-radius: 12px;
+  border-radius: $border-radius;
+  margin: 1rem auto;
 }
