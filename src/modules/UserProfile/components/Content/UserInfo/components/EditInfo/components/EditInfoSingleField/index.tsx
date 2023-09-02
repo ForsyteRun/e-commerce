@@ -7,8 +7,6 @@ interface IEditInfoSingleField {
 }
 
 const EditInfoSingleField: FC<IEditInfoSingleField> = ({ name }) => {
-  console.log(name);
-
   const formikProps = useFormikContext<FormikValues>();
 
   const { errors, touched } = formikProps;
