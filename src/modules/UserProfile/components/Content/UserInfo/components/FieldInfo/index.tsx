@@ -1,6 +1,7 @@
 import { Stack } from '@mui/material';
 import { IFieldInfo } from 'modules/UserProfile/types';
 import React from 'react';
+import ClearIcon from '@mui/icons-material/Clear';
 import FieldInfoShown from './components/FieldInfoShown';
 import SingleFormField from './components/SingleFormField.tsx';
 import styles from './fieldInfo.module.scss';
@@ -27,6 +28,13 @@ const FieldInfo: React.FC<IFieldInfo> = ({ value, title, validation }) => {
           title={title}
           validation={validation}
           setOpenSingleForm={setOpenSingleForm}
+        />
+      )}
+      {openSingleForm && (
+        <ClearIcon
+          fontSize="large"
+          sx={{ cursor: 'pointer' }}
+          onClick={() => setOpenSingleForm(false)}
         />
       )}
     </Stack>
