@@ -1,11 +1,20 @@
-.title {
-  margin: 1rem 0;
-}
+@import 'src/styles/variables.scss';
 
 .navigation {
-  max-width: max-content;
+  margin: 1rem auto;
+  max-width: 250px;
+  min-width: 175px;
+  width: 100%;
+}
+
+.container {
+  background: $white-color;
+  border-radius: $border-radius;
+  padding-bottom: 0.5rem;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
   padding: 1rem;
-  background: #ffffff;
-  border: 1px solid #eaebed;
-  border-radius: 12px;
 }

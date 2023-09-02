@@ -2,7 +2,7 @@ import { IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { createAnonymousUser } from 'store/userDataSlice/thunks';
-import useIconButtonColorTheme from './helpers/useIconButtonColorTheme';
+import useIconButtonColorTheme from 'helpers/useIconButtonColorTheme';
 
 const LogOutButton = () => {
   const dispatch = useAppDispatch();

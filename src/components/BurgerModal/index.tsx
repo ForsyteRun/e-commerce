@@ -1,17 +1,18 @@
 import { Box, Modal } from '@mui/material';
 import AppNavigation from 'components/Header/components/AppNavigation';
-import {
-  useBurgerContext,
-  useUpdateBurgerContext,
-} from 'context/BurgerContext';
+import { useModalContext, useUpdateModalContext } from 'context/ModalContext';
 import { modal, modalBox } from './BurgerModal.styles';
 
 const BurgerModal = () => {
-  const isOpen = useBurgerContext();
-  const changeModalStatus = useUpdateBurgerContext();
+  const { isBurgerOpen } = useModalContext();
+  const { changeBurgerModalStatus } = useUpdateModalContext();
 
   return (
-    <Modal open={isOpen} onClose={() => changeModalStatus(false)} sx={modal}>
+    <Modal
+      open={isBurgerOpen}
+      onClose={() => changeBurgerModalStatus(false)}
+      sx={modal}
+    >
       <Box sx={modalBox}>
         <AppNavigation />
       </Box>
