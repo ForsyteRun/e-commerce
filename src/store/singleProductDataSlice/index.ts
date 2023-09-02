@@ -19,7 +19,10 @@ const singleProductDataSlice = createSlice({
   reducers: {},
   extraReducers: (builder): void => {
     builder
-      .addCase(fetchSingleProductData.pending, setPendingStatus)
+      .addCase(fetchSingleProductData.pending, (state) => {
+        setPendingStatus(state);
+        state.data = null;
+      })
       .addCase(fetchSingleProductData.fulfilled, (state, { payload }) => {
         const data = transformProductData(payload);
         state.data = data;
