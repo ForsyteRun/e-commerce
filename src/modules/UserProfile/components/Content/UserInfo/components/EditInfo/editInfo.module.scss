@@ -1,10 +1,12 @@
 .form {
-  @include flex(column, space-between, flex-start);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 2rem;
   & > input {
     width: 100%;
     border-radius: 1.3rem;
     font-size: 1.5rem;
-    padding: 2.5rem;
+    padding: 1.5rem;
   }
 }

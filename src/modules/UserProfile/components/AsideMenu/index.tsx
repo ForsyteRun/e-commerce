@@ -2,7 +2,7 @@ import { Stack } from '@mui/material';
 import LogOutButton from 'components/Header/components/UserNavigation/components/LogOutButton';
 import { RegisteredUserData } from 'types';
 import { useAppSelector } from 'hooks/useRedux';
-import linkAsideData from 'modules/UserProfile/constants';
+import { linkAsideData } from 'modules/UserProfile/constants';
 import styles from './AsideMenu.module.scss';
 import AsideLink from './components/AsideLink';
 

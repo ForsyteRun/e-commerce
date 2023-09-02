@@ -1,7 +1,8 @@
 .product {
-  padding: 2rem;
+  flex: 1;
+  padding: 1rem 2rem;
   border-radius: 20px;
-  margin-top: 50px;
+  margin-top: 1rem;
   background-color: #fff;
   border: 1px solid #EAEBED;
 }
@@ -45,18 +46,6 @@
   @media screen and (max-width: 425px) {
     font-size: 0.875rem;
   }
-}
-
-.images {
-  display: flex;
-  justify-content: center;
-}
-
-.image {
-  max-width: 500px;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
 }
 
 .rightContainer {

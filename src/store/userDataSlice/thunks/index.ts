@@ -1,8 +1,9 @@
-import updateUserData from 'pages/ProfilePage/api/updateUserData';
 import createAnonymousUser from './createAnonymousUser';
 import fetchUserDataByRefreshToken from './fetchUserDataByRefreshToken';
 import registerUser from './registerUser';
 import fetchUserLoginData from './fetchUserLoginData';
+import updateUserData from './updateUserData';
+import updatePassword from './updatePassword';
 
 export {
   createAnonymousUser,
@@ -10,4 +11,5 @@ export {
   fetchUserDataByRefreshToken,
   fetchUserLoginData,
   updateUserData,
+  updatePassword,
 };

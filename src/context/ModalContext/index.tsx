@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useState,
-  useContext,
-  useEffect,
-  useMemo,
-} from 'react';
+import { createContext, useState, useContext, useEffect, useMemo } from 'react';
 import { useMediaQueryContext } from 'context/MediaQueryContext';
 
 interface IModalContextUpdateFunctions {
@@ -40,23 +33,17 @@ export const ModalProvider = ({ children }: { children: JSX.Element }) => {
     return { isBurgerOpen, isCatalogNavigationOpen };
   }, [isBurgerOpen, isCatalogNavigationOpen]);
 
-  const changeBurgerModalStatus = useCallback(
-    (value: boolean) => {
-      if (isMobile) {
-        setIsBurgerOpen(value);
-      }
-    },
-    [isMobile]
-  );
+  const changeBurgerModalStatus = (value: boolean) => {
+    if (isMobile) {
+      setIsBurgerOpen(value);
+    }
+  };
 
-  const changeCatalogNavigationModalStatus = useCallback(
-    (value: boolean) => {
-      if (!isDesktop) {
-        setIsCatalogNavigationOpen(value);
-      }
-    },
-    [isDesktop]
-  );
+  const changeCatalogNavigationModalStatus = (value: boolean) => {
+    if (!isDesktop) {
+      setIsCatalogNavigationOpen(value);
+    }
+  };
 
   useEffect(() => {
     if (!isMobile) {
@@ -76,7 +63,7 @@ export const ModalProvider = ({ children }: { children: JSX.Element }) => {
       changeCatalogNavigationModalStatus,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isMobile, isDesktop]);
 
   return (
     <ModalContext.Provider value={context}>
