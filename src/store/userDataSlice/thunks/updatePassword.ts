@@ -15,9 +15,7 @@ const updatePassword = createAsyncThunk(
       .password()
       .post({ body: _body })
       .execute()
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => res)
       .catch((err: _ErrorResponse) => rejectWithValue({ ...err }));
 
     return response;
