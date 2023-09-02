@@ -1,12 +1,15 @@
 import { CustomerDraft, MyCustomerUpdate } from '@commercetools/platform-sdk';
 import { Button } from '@mui/material';
-import { Field, Form, Formik } from 'formik';
-import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
+import { Form, Formik } from 'formik';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { createAction } from 'modules/UserProfile/helpers';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { updateUserData } from 'store/userDataSlice/thunks';
+import { titleFields } from 'modules/UserProfile/constants';
 import UserInfoSchema from '../../validation';
+import EditInfoSingleField from './components/EditInfoSingleField';
 import styles from './editInfo.module.scss';
+import UserSimpleInfo from '../../types';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -37,10 +40,10 @@ const EditInfo: FC<IEditInfo> = ({ setEdit }) => {
         const updateData: MyCustomerUpdate = {
           version: version || 0,
           actions: [
-            createAction('firstName', firstName),
-            createAction('lastName', lastName),
-            createAction('dateOfBirth', dateOfBirth),
-            createAction('email', email),
+            createAction(UserSimpleInfo.firstName, firstName),
+            createAction(UserSimpleInfo.lastName, lastName),
+            createAction(UserSimpleInfo.dateOfBirth, dateOfBirth),
+            createAction(UserSimpleInfo.email, email),
           ],
         };
 
@@ -48,48 +51,11 @@ const EditInfo: FC<IEditInfo> = ({ setEdit }) => {
         setEdit(false);
       }}
     >
-      {({ errors, touched }) => (
+      {() => (
         <Form className={styles.form}>
-          <div className={styles.input__container}>
-            <Field
-              name="firstName"
-              placeholder="Enter first name"
-              className={styles.input}
-            />
-            {errors.firstName && touched.firstName && (
-              <div className="errorValid">{errors.firstName}</div>
-            )}
-          </div>
-          <div className={styles.input__container}>
-            <Field
-              name="lastName"
-              placeholder="Enter last name"
-              className={styles.input}
-            />
-            {errors.lastName && touched.lastName && (
-              <div className="errorValid">{errors.lastName}</div>
-            )}
-          </div>
-          <div className={styles.input__container}>
-            <Field
-              name="dateOfBirth"
-              placeholder="enter dateOfBirth"
-              className={styles.input}
-            />
-            {errors.dateOfBirth && touched.dateOfBirth && (
-              <div className="errorValid">{errors.dateOfBirth}</div>
-            )}
-          </div>
-          <div className={styles.input__container}>
-            <Field
-              name="email"
-              placeholder="enter email"
-              className={styles.input}
-            />
-            {errors.email && touched.email && (
-              <div className="errorValid">{errors.email}</div>
-            )}
-          </div>
+          {titleFields.map((title: string) => (
+            <EditInfoSingleField name={title} key={title} />
+          ))}
           <Button variant="contained" type="submit">
             submit
           </Button>

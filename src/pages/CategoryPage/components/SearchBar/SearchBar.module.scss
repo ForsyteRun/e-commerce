@@ -11,10 +11,12 @@
     transform: translateY(-50%);
     opacity: 1;
     visibility: visible;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border: 1px solid #eaebed;
     border-radius: 50%;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
     overflow: hidden;
     cursor: pointer;
 
@@ -41,9 +43,12 @@
     width: 0;
     border: none;
     border-radius: 12px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     font-size: 14px;
-    transition: opacity 0.3s ease, visibility 0.3s ease, width 0.3s linear;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease,
+      width 0.3s linear;
     overflow: hidden;
 
     &.visible {
