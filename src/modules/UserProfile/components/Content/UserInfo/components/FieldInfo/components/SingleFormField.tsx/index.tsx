@@ -3,14 +3,14 @@ import { Button } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { createAction } from 'modules/UserProfile/helpers';
-import React, { useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { RegisteredUserData, RequestStatusCode } from 'types';
 import { updateUserData } from 'store/userDataSlice/thunks';
 import { InitialValues } from '../../type';
 import styles from './singleFormField.module.scss';
 import { ISingleFormField } from './types';
 
-const SingleFormField: React.FC<ISingleFormField> = ({
+const SingleFormField: FC<ISingleFormField> = ({
   title,
   validation,
   setOpenSingleForm,
@@ -32,7 +32,7 @@ const SingleFormField: React.FC<ISingleFormField> = ({
 
   const firstRender = useRef(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
     } else if (
