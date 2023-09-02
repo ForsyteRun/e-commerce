@@ -4,7 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
 import { createAction } from 'modules/UserProfile/helpers';
 import React from 'react';
-import updateUserData from 'modules/UserProfile/api';
+import { updateUserData } from 'store/userDataSlice/thunks';
 import UserInfoSchema from '../../validation';
 import styles from './editInfo.module.scss';
 
