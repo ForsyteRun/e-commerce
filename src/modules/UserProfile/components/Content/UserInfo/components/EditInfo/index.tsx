@@ -28,13 +28,19 @@ const EditInfo: React.FC<IEditInfo> = ({ setEdit }) => {
       initialValues={initialValues}
       validationSchema={UserInfoSchema}
       onSubmit={(values: CustomerDraft) => {
+        const filteredValues: Record<string, string> = Object.fromEntries(
+          Object.entries(values).filter(([, value]) => value !== undefined)
+        );
+
+        const { firstName, lastName, dateOfBirth, email } = filteredValues;
+
         const updateData: MyCustomerUpdate = {
-          version: version as number,
+          version: version || 0,
           actions: [
-            createAction('firstName', values.firstName as string),
-            createAction('lastName', values.lastName as string),
-            createAction('dateOfBirth', values.dateOfBirth as string),
-            createAction('email', values.email as string),
+            createAction('firstName', firstName),
+            createAction('lastName', lastName),
+            createAction('dateOfBirth', dateOfBirth),
+            createAction('email', email),
           ],
         };
 

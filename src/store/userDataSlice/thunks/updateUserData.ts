@@ -14,7 +14,9 @@ const updateUserData = createAsyncThunk(
       .post({ body: _body })
       .execute()
       .then((res) => {
-        dispatch(getRegistrationAccessCode(res.statusCode as number));
+        if (res.statusCode) {
+          dispatch(getRegistrationAccessCode(res.statusCode));
+        }
         return getRegisteredUserData(res.body);
       })
       .catch((err: _ErrorResponse) => rejectWithValue({ ...err }));
