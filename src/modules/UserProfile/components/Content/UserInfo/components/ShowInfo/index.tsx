@@ -1,7 +1,6 @@
 import { Stack } from '@mui/material';
 import { useAppSelector } from 'hooks/useRedux';
 import { IFieldData } from 'modules/UserProfile/types';
-import React from 'react';
 import { RegisteredUserData } from 'types';
 import FieldInfo from '../FieldInfo';
 import {
@@ -11,7 +10,7 @@ import {
   lastNameSchema,
 } from '../FieldInfo/validation';
 
-const ShowInfo: React.FC = () => {
+const ShowInfo = () => {
   const { firstName, lastName, dateOfBirth, email } = useAppSelector(
     (state) => state.userDataSlice.data
   ) as RegisteredUserData;

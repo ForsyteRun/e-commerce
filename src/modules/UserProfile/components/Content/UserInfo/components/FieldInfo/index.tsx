@@ -1,13 +1,13 @@
 import { Stack } from '@mui/material';
 import { IFieldInfo } from 'modules/UserProfile/types';
-import React from 'react';
+import React, { FC, useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import FieldInfoShown from './components/FieldInfoShown';
 import SingleFormField from './components/SingleFormField.tsx';
 import styles from './fieldInfo.module.scss';
 
-const FieldInfo: React.FC<IFieldInfo> = ({ value, title, validation }) => {
-  const [openSingleForm, setOpenSingleForm] = React.useState(false);
+const FieldInfo: FC<IFieldInfo> = ({ value, title, validation }) => {
+  const [openSingleForm, setOpenSingleForm] = useState(false);
 
   return (
     <Stack

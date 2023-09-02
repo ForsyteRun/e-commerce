@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
 import { createAction } from 'modules/UserProfile/helpers';
-import React from 'react';
+import React, { FC } from 'react';
 import { updateUserData } from 'store/userDataSlice/thunks';
 import UserInfoSchema from '../../validation';
 import styles from './editInfo.module.scss';
@@ -19,7 +19,7 @@ interface IEditInfo {
   setEdit: (value: boolean) => void;
 }
 
-const EditInfo: React.FC<IEditInfo> = ({ setEdit }) => {
+const EditInfo: FC<IEditInfo> = ({ setEdit }) => {
   const dispatch = useAppDispatch();
   const { version } = useAppSelector((state) => state.userDataSlice.data);
 

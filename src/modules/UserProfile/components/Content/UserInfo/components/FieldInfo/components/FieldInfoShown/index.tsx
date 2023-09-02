@@ -1,9 +1,9 @@
 import ModeIcon from '@mui/icons-material/Mode';
 import { Typography } from '@mui/material';
-import React from 'react';
+import React, { FC } from 'react';
 import { IFieldInfoShown } from './types';
 
-const FieldInfoShown: React.FC<IFieldInfoShown> = ({
+const FieldInfoShown: FC<IFieldInfoShown> = ({
   title,
   value,
   setOpenSingleForm,
