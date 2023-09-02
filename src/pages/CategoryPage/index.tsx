@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useAppSelector } from 'hooks/useRedux';
-import FilterSideBar from './components/FilterSideBar';
+// import FilterSideBar from './components/FilterSideBar';
 import ProductCard from './components/ProductCard';
-import styles from './CategoryPage.module.scss';
 import Sort from './components/Sort';
 import SearchBar from './components/SearchBar';
+import styles from './CategoryPage.module.scss';
 
 const CategoryPage = () => {
   const { data } = useAppSelector((state) => state.productsDataSlice);
@@ -12,9 +12,8 @@ const CategoryPage = () => {
 
   return (
     <section className={styles.category}>
-      <h2 className={styles.title}>Products</h2>
       <div className={styles.container}>
-        <FilterSideBar />
+        {/* <FilterSideBar /> */}
         <div className={styles.content}>
           <div className={styles.control}>
             <Sort sortOption={sortOption} setSortOption={setSortOption} />

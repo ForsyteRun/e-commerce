@@ -6,7 +6,7 @@ import styles from './Header.module.scss';
 import AppNavigation from './components/AppNavigation';
 
 const Header = () => {
-  const isMobile = useMediaQueryContext();
+  const { isMobile } = useMediaQueryContext();
 
   return (
     <header className={styles.header}>
