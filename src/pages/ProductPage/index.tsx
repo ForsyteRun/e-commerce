@@ -1,7 +1,7 @@
-import { HideImage } from '@mui/icons-material';
 import { useAppSelector } from 'hooks/useRedux';
 import ProductCardPrice from './components/ProductCardPrice';
 import ProductCharacteristics from './components/ProductCharacteristics';
+import ProductImages from './components/ProductImages';
 import parseHtmlSafely from './helpers/parseHtmlSafely';
 import styles from './ProductPage.module.scss';
 
@@ -18,22 +18,7 @@ const ProductPage = () => {
             <h2 className={styles.title}>{data?.name}</h2>
             <p className={styles.sku}>{`SKU: ${data?.sku}`}</p>
           </div>
-          <div className={styles.images}>
-            {data?.images ? (
-              <img
-                src={data?.images[0]}
-                alt={data?.name}
-                className={styles.image}
-              />
-            ) : (
-              <HideImage
-                sx={{
-                  fontSize: '10rem',
-                  color: 'rgba(25, 118, 210, 0.5)',
-                }}
-              />
-            )}
-          </div>
+          <ProductImages images={data?.images} name={data?.name} />
         </div>
         <div className={styles.rightContainer}>
           {data?.price && <ProductCardPrice price={data.price} />}
