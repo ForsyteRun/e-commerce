@@ -1,5 +1,4 @@
 .form {
-  // @include flex(column, space-between, flex-start);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -9,32 +8,5 @@
     border-radius: 1.3rem;
     font-size: 1.5rem;
     padding: 1.5rem;
-  }
-}
-
-.input {
-  width: 100%;
-  border-radius: 7px;
-  padding: 10px;
-  &__container {
-    width: 100%;
-    height: 90px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-    @media (max-width: 768px) {
-      height: calc(5rem + 14 * (100vw / 890));
-    }
-    @media (max-width: 425px) {
-      width: 100%;
-      height: calc(3rem + 14 * (100vw / 890));
-    }
-  }
-  @media (max-width: 768px) {
-    font-size: calc(0.4rem + 14 * (100vw / 890));
-  }
-  @media (max-width: 425px) {
-    font-size: calc(0.2rem + 14 * (100vw / 488));
   }
 }
