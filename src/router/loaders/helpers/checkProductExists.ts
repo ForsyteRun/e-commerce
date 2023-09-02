@@ -23,7 +23,17 @@ const checkProductExists = async (
     );
 
     if (parentId && data.categories.includes(parentId)) {
-      return true;
+      const parentCategory = categoriesData.find(
+        (cat) => cat.id === rootCategoryId
+      );
+
+      if (parentCategory) {
+        const { id, parent } = parentCategory;
+
+        if (id === rootCategoryId && !parent) {
+          return true;
+        }
+      }
     }
   }
 
