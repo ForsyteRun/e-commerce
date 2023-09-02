@@ -4,6 +4,9 @@ import { CustomerChangePassword } from '@commercetools/platform-sdk';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
 import { updatePassword } from 'store/userDataSlice/thunks';
+import { useEffect, useState } from 'react';
+import DialogInit from './components/DialogInit';
+import { DialogModalAnswer } from './types';
 
 const validationSchema = Yup.object().shape({
   currentPassword: Yup.string()
@@ -31,6 +34,20 @@ const Password = () => {
   const dispatch = useAppDispatch();
   const { id, version } = useAppSelector((state) => state.userDataSlice.data);
 
+  const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState('no');
+  const [formData, setFormData] = useState<CustomerChangePassword | null>(null);
+
+  useEffect(() => {
+    if (selectedValue === DialogModalAnswer.yes && formData) {
+      dispatch(updatePassword(formData));
+      setSelectedValue(DialogModalAnswer.no);
+    } else {
+      setFormData(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedValue]);
+
   const formik = useFormik({
     initialValues: {
       currentPassword: '',
@@ -47,7 +64,8 @@ const Password = () => {
           newPassword: values.newPassword,
         };
 
-        dispatch(updatePassword(passwordData));
+        setFormData(passwordData);
+        setOpen(true);
       }
     },
   });
@@ -116,6 +134,11 @@ const Password = () => {
           Submit
         </Button>
       </form>
+      <DialogInit
+        open={open}
+        setOpen={setOpen}
+        setSelectedValue={setSelectedValue}
+      />
     </>
   );
 };
