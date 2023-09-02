@@ -183,3 +183,13 @@ export interface IProductsQuery {
   offset?: number;
   categoryId?: string;
 }
+
+export type OnClickHandler = (
+  e: React.MouseEvent<HTMLElement, MouseEvent>
+) => void;
+
+export interface INavigationListItemProps {
+  slug: string;
+  id: string;
+  name: string;
+}

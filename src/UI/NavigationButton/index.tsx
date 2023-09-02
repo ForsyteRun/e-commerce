@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { NavLink, useMatch } from 'react-router-dom';
 import { NavLinkButtonProps } from 'types';
-import { useUpdateBurgerContext } from 'context/BurgerContext';
+import { useUpdateModalContext } from 'context/ModalContext';
 import navButtonStyles from './navButtonStyles';
 
 const NavigationButton = ({
@@ -12,13 +12,13 @@ const NavigationButton = ({
     path,
     end: path.length === 1,
   });
-  const changeModalStatus = useUpdateBurgerContext();
+  const { changeBurgerModalStatus } = useUpdateModalContext();
 
   return (
     <Button
       component={NavLink}
       disabled={!!match}
-      onClick={() => changeModalStatus(false)}
+      onClick={() => changeBurgerModalStatus(false)}
       sx={navButtonStyles}
       to={path}
       variant="contained"
