@@ -4,7 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { createAction } from 'modules/UserProfile/helpers';
 import React, { useRef } from 'react';
-import { RegisteredUserData } from 'types';
+import { RegisteredUserData, RequestStatusCode } from 'types';
 import { updateUserData } from 'store/userDataSlice/thunks';
 import { InitialValues } from '../../type';
 import styles from './singleFormField.module.scss';
@@ -35,7 +35,10 @@ const SingleFormField: React.FC<ISingleFormField> = ({
   React.useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
-    } else if (loading === 'succeeded' && registrationAccessCode === 200) {
+    } else if (
+      loading === 'succeeded' &&
+      registrationAccessCode === RequestStatusCode.OK
+    ) {
       setOpenSingleForm(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,7 +50,7 @@ const SingleFormField: React.FC<ISingleFormField> = ({
       validationSchema={validation}
       onSubmit={(values) => {
         const actionName = Object.keys(values)[0];
-        const actionValue = values[actionName] as string;
+        const actionValue = values[actionName];
 
         const actionToAdd = createAction(actionName, actionValue);
 
