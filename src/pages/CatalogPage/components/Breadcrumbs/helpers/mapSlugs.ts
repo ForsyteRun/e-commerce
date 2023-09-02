@@ -16,7 +16,7 @@ const mapSlugs = (slugs: string[]) => {
 
     if (index === 1) {
       return {
-        to: '',
+        to: PathNames.catalog,
         name: 'Catalog',
       };
     }
