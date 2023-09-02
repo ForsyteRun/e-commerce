@@ -27,15 +27,8 @@ const FieldInfo: React.FC<IFieldInfo> = ({ value, title, validation }) => {
           title={title}
           validation={validation}
           setOpenSingleForm={setOpenSingleForm}
-          // setOpenModal={setOpenModal}
         />
       )}
-      {/* <Snackbar
-        open={openModal}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        message="Update"
-      /> */}
     </Stack>
   );
 };

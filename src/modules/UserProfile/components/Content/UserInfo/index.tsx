@@ -2,6 +2,7 @@ import { Box, Button, Snackbar, Typography } from '@mui/material';
 import React, { useRef } from 'react';
 import { useAppSelector } from 'hooks/useRedux';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import ClearIcon from '@mui/icons-material/Clear';
 import { EditInfo, ShowInfo } from './components';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
@@ -52,7 +53,7 @@ const UserInfo: React.FC = () => {
           Keep these up to date so you can breeze through checkout and see the
           best personalized offers!
         </Typography>
-        {!edit && (
+        {!edit ? (
           <Button
             variant="contained"
             type="submit"
@@ -61,6 +62,12 @@ const UserInfo: React.FC = () => {
           >
             EditMode
           </Button>
+        ) : (
+          <ClearIcon
+            onClick={() => setEdit(false)}
+            fontSize="large"
+            sx={{ display: 'block', float: 'right', cursor: 'pointer' }}
+          />
         )}
       </Box>
       {!edit ? <ShowInfo /> : <EditInfo setEdit={setEdit} />}
