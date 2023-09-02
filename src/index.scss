@@ -22,3 +22,14 @@ footer {
 main {
   flex: 1;
 }
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.errorValid {
+  color: red;
+  font-size: 1rem;
+}

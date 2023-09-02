@@ -1,13 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import * as Yup from 'yup';
 
-const UserInfoSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .matches(/^[A-Za-z\s]+$/, 'no special characters or numbers')
-    .required('Required'),
-  lastName: Yup.string()
-    .matches(/^[A-Za-z\s]+$/, 'no special characters or numbers')
-    .required('Required'),
+const dateOfBirthSchema = Yup.object().shape({
   dateOfBirth: Yup.string()
     .test('valid-date', 'Invalid date format (YYYY-MM-DD)', (value) => {
       if (!value) return true;
@@ -31,14 +25,12 @@ const UserInfoSchema = Yup.object().shape({
       return year >= 1950 && year <= new Date().getFullYear();
     })
     .test('minimumAge', 'Must be min 13 years old', (value) => {
-      if (!value) return false;
+      if (!value) return false; // Required field
       const minAgeDate = new Date();
       minAgeDate.setFullYear(minAgeDate.getFullYear() - 13);
       const selectedDate = new Date(value);
       return selectedDate <= minAgeDate;
     })
     .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
 });
-
-export default UserInfoSchema;
+export default dateOfBirthSchema;

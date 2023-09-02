@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Stack, Paper } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { AsideMenu } from 'modules/UserProfile';
@@ -19,14 +20,12 @@ const ProfilePage = () => {
     if (loading !== 'pending' && authenticationMode === 'Password') {
       dispatch(fetchUserDataByRefreshToken());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
     if (authenticationMode !== 'Password' && loading === 'succeeded') {
       navigate(PathNames.login);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authenticationMode]);
 
   return (

@@ -1,46 +1,64 @@
-import { CustomerDraft } from '@commercetools/platform-sdk';
-import { Field, Form, Formik } from 'formik';
-import { Select } from 'modules/Registration';
+import { CustomerDraft, MyCustomerUpdate } from '@commercetools/platform-sdk';
 import { Button } from '@mui/material';
+import { Form, Formik } from 'formik';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { createAction } from 'modules/UserProfile/helpers';
+import { FC } from 'react';
+import { updateUserData } from 'store/userDataSlice/thunks';
+import { titleFields } from 'modules/UserProfile/constants';
 import UserInfoSchema from '../../validation';
+import EditInfoSingleField from './components/EditInfoSingleField';
 import styles from './editInfo.module.scss';
+import UserSimpleInfo from '../../types';
 
-const initialValues: Omit<CustomerDraft, 'email'> = {
+const initialValues: CustomerDraft = {
   firstName: '',
   lastName: '',
-  dateOfBirth: '1985-44-44',
+  dateOfBirth: '',
+  email: '',
 };
 
-const EditInfo = () => {
+interface IEditInfo {
+  setEdit: (value: boolean) => void;
+}
+
+const EditInfo: FC<IEditInfo> = ({ setEdit }) => {
+  const dispatch = useAppDispatch();
+  const { version } = useAppSelector((state) => state.userDataSlice.data);
+
   return (
-    <Formik<Omit<CustomerDraft, 'email'>>
+    <Formik<CustomerDraft>
       initialValues={initialValues}
       validationSchema={UserInfoSchema}
-      onSubmit={(values: Omit<CustomerDraft, 'email'>) => {
-        // eslint-disable-next-line no-console
-        console.log(values);
+      onSubmit={(values: CustomerDraft) => {
+        const filteredValues: Record<string, string> = Object.fromEntries(
+          Object.entries(values).filter(([, value]) => value !== undefined)
+        );
+
+        const { firstName, lastName, dateOfBirth, email } = filteredValues;
+
+        const updateData: MyCustomerUpdate = {
+          version: version || 0,
+          actions: [
+            createAction(UserSimpleInfo.firstName, firstName),
+            createAction(UserSimpleInfo.lastName, lastName),
+            createAction(UserSimpleInfo.dateOfBirth, dateOfBirth),
+            createAction(UserSimpleInfo.email, email),
+          ],
+        };
+
+        dispatch(updateUserData(updateData));
+        setEdit(false);
       }}
     >
-      {({ errors, touched }) => (
+      {() => (
         <Form className={styles.form}>
-          <Field
-            name="firstName"
-            placeholder="Enter first name"
-            className={styles.input}
-          />
-          {errors.firstName && touched.firstName && (
-            <div className={styles.errorValid}>{errors.firstName}</div>
-          )}
-          <Field
-            name="lastName"
-            placeholder="Enter last name"
-            className={styles.input}
-          />
-          {errors.lastName && touched.lastName && (
-            <div className={styles.errorValid}>{errors.lastName}</div>
-          )}
-          <Select />
-          <Button type="submit">Edit</Button>
+          {titleFields.map((title: string) => (
+            <EditInfoSingleField name={title} key={title} />
+          ))}
+          <Button variant="contained" type="submit">
+            submit
+          </Button>
         </Form>
       )}
     </Formik>
