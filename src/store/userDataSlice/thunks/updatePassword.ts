@@ -38,6 +38,8 @@ const updatePassword = createAsyncThunk(
       .catch((err: _ErrorResponse) =>
         dispatch(getRegistrationAccessCode(err.statusCode))
       );
+      .then((res) => res)
+      .catch((err: _ErrorResponse) => rejectWithValue({ ...err }));
 
     return response;
   }
