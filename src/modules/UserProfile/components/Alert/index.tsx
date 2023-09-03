@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Snackbar } from '@mui/material';
 import { FC, forwardRef, useEffect, useState } from 'react';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';

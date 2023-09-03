@@ -12,7 +12,6 @@ const updatePassword = createAsyncThunk(
   'userData/updatePassword',
   async (data: CustomerChangePassword, { dispatch }) => {
     const api = createRefreshTokenClientApi();
-    console.log(api);
 
     const response = await api
       .customers()
@@ -22,11 +21,8 @@ const updatePassword = createAsyncThunk(
       .then((res) => {
         const isPasswordUpdate =
           res.statusCode && res.statusCode === RequestStatusCode.OK;
-        console.log('out');
 
         if (isPasswordUpdate) {
-          console.log('in');
-
           dispatch(getRegistrationAccessCode(res.statusCode!));
 
           const loginData: LoginFormValues = {
