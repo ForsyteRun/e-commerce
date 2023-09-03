@@ -2,7 +2,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 5px 0;
+  align-self: flex-start;
+  padding: 0;
 
   .searchIcon {
     position: absolute;
@@ -55,6 +56,10 @@
       opacity: 1;
       visibility: visible;
       width: 300px;
+
+      @media screen and (max-width: 350px) {
+        width: 272px;
+      }
     }
   }
 }
