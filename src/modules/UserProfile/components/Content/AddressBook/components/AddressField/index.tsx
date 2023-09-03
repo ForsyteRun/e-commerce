@@ -8,7 +8,11 @@ interface IAddressField {
 
 const AddressField: React.FC<IAddressField> = ({ title, value }) => {
   return (
-    <Stack flexDirection="row" justifyContent="space-between">
+    <Stack
+      flexDirection="column"
+      justifyContent="space-between"
+      alignItems="center"
+    >
       <Typography variant="h6">{title}</Typography>
       <Typography variant="h6" sx={{ mb: '1rem' }}>
         {value}

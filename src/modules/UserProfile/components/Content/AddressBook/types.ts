@@ -8,5 +8,6 @@ export enum AddressEnum {
 export interface IAddressBlock {
   title: AddressEnum;
   address: BaseAddress;
+  index: number;
   defaultAddress: boolean;
 }
