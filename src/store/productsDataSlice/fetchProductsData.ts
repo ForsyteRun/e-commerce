@@ -10,14 +10,17 @@ const fetchProductsData = createAsyncThunk(
 
     const filter: string[] = [];
 
-    if (_query && _query.categoryId) {
-      filter.push(`categories.id: subtree("${_query.categoryId}")`);
+    if (_query) {
+      if (_query.categoryId) {
+        filter.push(`categories.id: subtree("${_query.categoryId}")`);
+      }
     }
 
     const queryArgs = {
       limit: 9,
       offset: 0,
       filter,
+      sort: _query?.sort || undefined,
     };
 
     const response = await api

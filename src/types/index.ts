@@ -163,6 +163,15 @@ export interface IProductsCounters
   page: number;
 }
 
+export interface ISortState {
+  price: SortDirections;
+  name: SortDirections;
+}
+
+export type SortDirections = 'asc' | 'desc' | false;
+
+export type SortBy = 'price' | 'name';
+
 export interface IProductsData extends IStoreBasicData {
   data: IProductData[] | null;
   counters: IProductsCounters | null;
@@ -182,6 +191,7 @@ export interface IProductsQuery {
   limit?: number;
   offset?: number;
   categoryId?: string;
+  sort?: string;
 }
 
 export type OnClickHandler = (

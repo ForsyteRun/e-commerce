@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import categoriesSlice from 'store/categoriesSlice';
+import sortSlice from 'store/sortSlice';
 import registrationAccessCodeSlice from './registration/registrationAccess.slice';
 import userDataSlice from './userDataSlice';
 import productsDataSlice from './productsDataSlice';
@@ -11,6 +12,7 @@ const reducer = {
   productsDataSlice,
   singleProductDataSlice,
   categoriesSlice,
+  sortSlice,
 };
 
 const store = configureStore({
