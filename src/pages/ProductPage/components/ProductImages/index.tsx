@@ -22,7 +22,7 @@ const ProductImages = ({ images, name }: IProductImagesProps) => {
           <ModalWindow
             open={open}
             handleClose={handleClose}
-            image={images[0]}
+            images={images}
             name={name || ''}
           />
         </div>

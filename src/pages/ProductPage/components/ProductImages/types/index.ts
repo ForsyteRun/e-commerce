@@ -1,4 +1,4 @@
 export interface IProductImagesProps {
-  images: string[] | string | undefined;
+  images: string[] | undefined;
   name: string | undefined;
 }
