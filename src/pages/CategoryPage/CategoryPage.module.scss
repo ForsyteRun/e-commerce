@@ -37,4 +37,8 @@
   @media screen and (max-width: 648px) {
     grid-template-columns: repeat(1, 300px);
   }
+
+  @media screen and (max-width: 350px) {
+    grid-template-columns: repeat(1, 288px);
+  }
 }
