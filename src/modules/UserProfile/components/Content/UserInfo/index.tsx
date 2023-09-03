@@ -14,14 +14,13 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
 const UserInfo = () => {
   const [edit, setEdit] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
 
   const { loading } = useAppSelector((state) => state.userDataSlice);
   const { registrationAccessCode } = useAppSelector(
     (state) => state.registrationAccessCodeSlice
   );
-
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
 
   const handleClose = () => {
     setOpen(false);

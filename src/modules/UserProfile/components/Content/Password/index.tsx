@@ -1,10 +1,12 @@
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { CustomerChangePassword } from '@commercetools/platform-sdk';
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
-import { updatePassword } from 'store/userDataSlice/thunks';
+import { useFormik } from 'formik';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { useEffect, useState } from 'react';
+import { updatePassword } from 'store/userDataSlice/thunks';
+import * as Yup from 'yup';
+import Alert from '../../Alert';
 import DialogInit from './components/DialogInit';
 import { DialogModalAnswer } from './types';
 
@@ -30,10 +32,22 @@ const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
 });
 
+// const Alert = forwardRef<HTMLDivElement, AlertProps>(
+//   function Alert(props, ref) {
+//     // eslint-disable-next-line react/jsx-props-no-spreading
+//     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+//   }
+// );
+
 const Password = () => {
   const dispatch = useAppDispatch();
   const { id, version } = useAppSelector((state) => state.userDataSlice.data);
+  // const { registrationAccessCode } = useAppSelector(
+  //   (state) => state.registrationAccessCodeSlice
+  // );
 
+  // const [error, setError] = useState(false);
+  // const [openSnackBar, setOpenSnackBar] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('no');
   const [formData, setFormData] = useState<CustomerChangePassword | null>(null);
@@ -42,11 +56,24 @@ const Password = () => {
     if (selectedValue === DialogModalAnswer.yes && formData) {
       dispatch(updatePassword(formData));
       setSelectedValue(DialogModalAnswer.no);
-    } else {
-      setFormData(null);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    return () => setFormData(null);
   }, [selectedValue]);
+
+  // // TODO: inAlert
+  // useEffect(() => {
+  //   if (registrationAccessCode === RequestStatusCode.BadRequest) {
+  //     setError(true);
+  //     setOpenSnackBar(true);
+  //   } else {
+  //     setError(false);
+  //   }
+
+  //   return () => {
+  //     dispatch(getRegistrationAccessCode(0));
+  //   };
+  // }, [registrationAccessCode]);
 
   const formik = useFormik({
     initialValues: {
@@ -139,6 +166,23 @@ const Password = () => {
         setOpen={setOpen}
         setSelectedValue={setSelectedValue}
       />
+      <Alert
+      // openSnackBar={openSnackBar}
+      // setOpenSnackBar={setOpenSnackBar}
+      />
+      {/* <Snackbar
+        open={openSnackBar}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={error ? 'error' : 'success'}
+          sx={{ width: '100%' }}
+        >
+          {error ? 'wrong data' : 'success!'}
+        </Alert>
+      </Snackbar> */}
     </>
   );
 };
