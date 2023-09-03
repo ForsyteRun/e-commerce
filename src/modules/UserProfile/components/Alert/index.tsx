@@ -1,14 +1,9 @@
 import { Snackbar } from '@mui/material';
-import { FC, forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { RequestStatusCode } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
-
-interface IAlert {
-  // openSnackBar: boolean;
-  // setOpenSnackBar: (value: boolean) => void;
-}
 
 const AlertModal = forwardRef<HTMLDivElement, AlertProps>(
   function Alert(props, ref) {
@@ -17,7 +12,7 @@ const AlertModal = forwardRef<HTMLDivElement, AlertProps>(
   }
 );
 
-const Alert: FC<IAlert> = () => {
+const Alert = () => {
   const dispatch = useAppDispatch();
 
   const { registrationAccessCode } = useAppSelector(
@@ -31,8 +26,12 @@ const Alert: FC<IAlert> = () => {
     dispatch(getRegistrationAccessCode(0));
   };
 
+  const firstRender = useRef(true);
+
   useEffect(() => {
-    if (registrationAccessCode === RequestStatusCode.BadRequest) {
+    if (firstRender.current) {
+      firstRender.current = false;
+    } else if (registrationAccessCode === RequestStatusCode.BadRequest) {
       setError(true);
       setOpen(true);
     } else if (registrationAccessCode === RequestStatusCode.OK) {

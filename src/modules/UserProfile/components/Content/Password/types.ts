@@ -13,3 +13,9 @@ export enum DialogModalAnswer {
   'yes' = 'yes',
   'no' = 'no',
 }
+
+export interface InitialValues {
+  currentPassword: string;
+  newPassword: string;
+  repeatNewPassword: string;
+}

@@ -6,6 +6,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
 import { LoginFormValues, RequestStatusCode } from 'types';
+import createAnonymousUser from './createAnonymousUser';
 import fetchUserLoginData from './fetchUserLoginData';
 
 const updatePassword = createAsyncThunk(
@@ -14,20 +15,21 @@ const updatePassword = createAsyncThunk(
     const api = createRefreshTokenClientApi();
 
     const response = await api
-      .customers()
+      .me()
       .password()
       .post({ body: data })
       .execute()
-      .then((res) => {
+      .then(async (res) => {
         const isPasswordUpdate =
           res.statusCode && res.statusCode === RequestStatusCode.OK;
 
         if (isPasswordUpdate) {
           dispatch(getRegistrationAccessCode(res.statusCode!));
+          await dispatch(createAnonymousUser());
 
           const loginData: LoginFormValues = {
             email: res.body.email,
-            password: res.body.password!,
+            password: data.newPassword,
           };
 
           dispatch(fetchUserLoginData(loginData));

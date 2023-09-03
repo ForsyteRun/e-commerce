@@ -1,3 +1,6 @@
-const answers = ['yes', 'no'];
-
-export default answers;
+export const answers = ['yes', 'no'];
+export const fieldTitle = [
+  'currentPassword',
+  'newPassword',
+  'repeatNewPassword',
+];
