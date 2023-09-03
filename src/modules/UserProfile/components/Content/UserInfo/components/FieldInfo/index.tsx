@@ -1,7 +1,7 @@
+import ClearIcon from '@mui/icons-material/Clear';
 import { Stack } from '@mui/material';
 import { IFieldInfo } from 'modules/UserProfile/types';
-import React, { FC, useState } from 'react';
-import ClearIcon from '@mui/icons-material/Clear';
+import { FC, useState } from 'react';
 import FieldInfoShown from './components/FieldInfoShown';
 import SingleFormField from './components/SingleFormField.tsx';
 import styles from './fieldInfo.module.scss';

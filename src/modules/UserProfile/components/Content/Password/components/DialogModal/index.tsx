@@ -5,8 +5,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { FC } from 'react';
-import answers from '../../constants';
 import { SimpleDialogProps } from '../../types';
+import { answers } from '../../constants';
 
 const DialogModal: FC<SimpleDialogProps> = ({ onClose, open }) => {
   const handleListItemClick = (value: string) => {
