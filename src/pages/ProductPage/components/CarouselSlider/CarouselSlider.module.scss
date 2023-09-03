@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   flex: 2;
+  overflow: hidden;
 }
 
 .imageContainer {
@@ -26,4 +27,34 @@
   @media screen and (max-width: 648px) {
     min-height: max-content;
   }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s ease-in-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-in-out;
 }
