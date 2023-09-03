@@ -12,8 +12,6 @@ const AddressForm = () => {
     (state) => state.userDataSlice.data
   ) as RegisteredUserData;
 
-  console.log(version);
-
   const formik = useFormik({
     initialValues: {
       country: validCountries[0],
@@ -33,8 +31,6 @@ const AddressForm = () => {
           },
         ],
       };
-
-      console.log(addAddress(addAddressData));
 
       dispatch(addAddress(addAddressData));
     },
