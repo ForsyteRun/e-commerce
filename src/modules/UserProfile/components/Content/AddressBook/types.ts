@@ -1,4 +1,5 @@
 import { BaseAddress } from '@commercetools/platform-sdk';
+import { Dispatch, SetStateAction } from 'react';
 
 export enum AddressEnum {
   billing = 'Billing address',
@@ -8,6 +9,9 @@ export enum AddressEnum {
 export interface IAddressBlock {
   title: AddressEnum;
   address: BaseAddress;
-  index: number;
+  billing: boolean;
   defaultAddress: boolean;
+  indexModify: number | null;
+  setIndexModify: Dispatch<SetStateAction<number | null>>;
+  setBilling: Dispatch<SetStateAction<boolean>>;
 }

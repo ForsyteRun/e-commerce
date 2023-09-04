@@ -1,24 +1,36 @@
 /* eslint-disable no-console */
-import React, { useState } from 'react';
-import { Typography, Stack, Button } from '@mui/material';
-import AddressField from '../AddressField';
+import { Button, Stack, Typography } from '@mui/material';
+import React from 'react';
 import { IAddressBlock } from '../../types';
+import AddressField from '../AddressField';
 import DefaultAddress from '../DefaultAddress';
 
 const AddressBlock: React.FC<IAddressBlock> = ({
   title,
   address,
-  index,
   defaultAddress,
+  billing,
+  indexModify,
+  setIndexModify,
+  setBilling,
 }) => {
-  const [billing, setBilling] = useState(false);
+  // const { addresses } = useAppSelector(
+  //   (state) => state.userDataSlice.data
+  // ) as RegisteredUserData;
+  // const [billing, setBilling] = useState(false);
 
-  console.log(billing, index);
+  // console.log(billing, index);
+
+  // modifyAddress(addresses, index, billing);
 
   const filteredAddress = Object.entries(address).filter(
     ([key]) => key !== 'id'
   );
 
+  const handleModify = () => {
+    setIndexModify(indexModify);
+    setBilling(!billing);
+  };
   return (
     <>
       <Stack flexDirection="row" justifyContent="space-between">
@@ -45,7 +57,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({
       {defaultAddress && <DefaultAddress />}
       <Stack flexDirection="row">
         <Button>set as shipping</Button>
-        <Button onClick={() => setBilling(!billing)}>set as billing</Button>
+        <Button onClick={handleModify}>set as billing</Button>
         <Button>set as default</Button>
       </Stack>
     </>

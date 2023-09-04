@@ -1,9 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import { Address, BaseAddress } from '@commercetools/platform-sdk';
+import {
+  Address,
+  BaseAddress,
+  MyCustomerUpdate,
+} from '@commercetools/platform-sdk';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import { useAppSelector } from 'hooks/useRedux';
-import { useState } from 'react';
+import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
+import { useEffect, useState } from 'react';
 import { RegisteredUserData } from 'types';
+import addAddress from 'store/userDataSlice/thunks/addAddress';
 import styles from './AddressBook.module.scss';
 import AddressBlock from './components/AddressBlock';
 import { AddressEnum } from './types';
@@ -17,13 +24,21 @@ const AddressBook = () => {
     defaultBillingAddressId,
     defaultShippingAddressId,
   } = useAppSelector((state) => state.userDataSlice.data) as RegisteredUserData;
-  // const { registrationAccessCode } = useAppSelector(
-  //   (state) => state.registrationAccessCodeSlice
-  // );
+  const { version } = useAppSelector(
+    (state) => state.userDataSlice.data
+  ) as RegisteredUserData;
 
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
+  const [billing, setBilling] = useState(false);
+  const [indexModify, setIndexModify] = useState<number | null>(null);
 
-  console.log(addresses);
+  // if (addresses) {
+  //   const setDefaultItem = addresses.find(
+  //     (address: Address, index: number) => index === indexModify && address.id
+  //   );
+  //   console.log(addresses, setDefaultItem?.id);
+  // }
 
   let shippingAddress: BaseAddress[] = [];
   let billingAddress: BaseAddress[] = [];
@@ -48,17 +63,47 @@ const AddressBook = () => {
     }
   }
 
-  console.log(shippingAddress, billingAddress);
+  useEffect(() => {
+    if (addresses) {
+      const setBillingItems = addresses.filter(
+        (address: Address, index: number) => index === indexModify && address
+      );
+      // console.log(setBillingItems, billing);
 
-  // const HandleOpenForm = (value: string) => {
-  //   if (value === 'shipping') {
-  //     setOpenShippingForm(!openShippingForm);
-  //     setOpenBillingForm(false);
-  //   } else {
-  //     setOpenBillingForm(!openBillingForm);
-  //     setOpenShippingForm(false);
-  //   }
-  // };
+      if (billing && setBillingItems.length > 0) {
+        console.log(setBillingItems, billing);
+
+        const data: MyCustomerUpdate = {
+          version,
+          actions: [
+            {
+              action: 'addBillingAddressId',
+              addressId: setBillingItems[0].id,
+            },
+          ],
+        };
+
+        dispatch(addAddress(data));
+      } else if (!billing && setBillingItems.length > 0) {
+        const data: MyCustomerUpdate = {
+          version,
+          actions: [
+            {
+              action: 'removeBillingAddressId',
+              addressId: setBillingItems[0].id,
+            },
+          ],
+        };
+
+        dispatch(addAddress(data));
+      }
+    }
+    return () => {
+      setIndexModify(null);
+    };
+  }, [indexModify]);
+
+  console.log(addresses, indexModify);
 
   return (
     <>
@@ -90,7 +135,10 @@ const AddressBook = () => {
               <AddressBlock
                 title={index ? AddressEnum.billing : AddressEnum.shipping}
                 address={address}
-                index={index}
+                billing={billing}
+                setBilling={setBilling}
+                setIndexModify={setIndexModify}
+                indexModify={index}
                 defaultAddress={
                   index
                     ? address.id === defaultBillingAddressId
