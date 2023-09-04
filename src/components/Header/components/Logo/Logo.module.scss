@@ -21,3 +21,9 @@
   width: 60px;
   height: 60px;
 }
+
+.logoText {
+  @media screen and (max-width: 425px) {
+    display: none;
+  }
+}
