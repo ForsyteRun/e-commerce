@@ -10,34 +10,34 @@ import AddressField from '../AddressField';
 import DefaultAddress from '../DefaultAddress';
 
 const AddressBlock: React.FC<IAddressBlock> = ({
-  title,
   defaultAddress,
   cardIndex,
   allAddress,
 }) => {
   const dispatch = useAppDispatch();
-  const { addresses, billingAddressIds, version } = useAppSelector(
-    (state) => state.userDataSlice.data
-  ) as RegisteredUserData;
+  const { addresses, billingAddressIds, shippingAddressIds, version } =
+    useAppSelector((state) => state.userDataSlice.data) as RegisteredUserData;
 
   const isBilling = billingAddressIds?.some(
     (item) => item === addresses[cardIndex].id
   );
 
+  const isShipping = shippingAddressIds?.some(
+    (item) => item === addresses[cardIndex].id
+  );
+
   const [billing, setBilling] = useState(isBilling);
+  const [shipping, setShipping] = useState(isShipping);
 
   const addressWithoutId = { ...allAddress };
   delete addressWithoutId.id;
 
-  const handleModify = () => {
-    setBilling(!billing);
-  };
-
-  const firstRender = useRef(true);
+  const firsBillingRender = useRef(true);
+  const firstShippingRender = useRef(true);
 
   useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
+    if (firsBillingRender.current) {
+      firsBillingRender.current = false;
     } else if (addresses) {
       const setBillingItems = addresses.filter(
         (address: Address, index: number) => index === cardIndex && address
@@ -71,6 +71,42 @@ const AddressBlock: React.FC<IAddressBlock> = ({
     }
   }, [billing]);
 
+  useEffect(() => {
+    if (firstShippingRender.current) {
+      firstShippingRender.current = false;
+    } else if (addresses) {
+      const setShippingItems = addresses.filter(
+        (address: Address, index: number) => index === cardIndex && address
+      );
+
+      if (shipping && setShippingItems.length > 0) {
+        const data: MyCustomerUpdate = {
+          version,
+          actions: [
+            {
+              action: 'addShippingAddressId',
+              addressId: setShippingItems[0].id,
+            },
+          ],
+        };
+
+        dispatch(addAddress(data));
+      } else if (!shipping && setShippingItems.length > 0) {
+        const data: MyCustomerUpdate = {
+          version,
+          actions: [
+            {
+              action: 'removeShippingAddressId',
+              addressId: setShippingItems[0].id,
+            },
+          ],
+        };
+
+        dispatch(addAddress(data));
+      }
+    }
+  }, [shipping]);
+
   return (
     <>
       <Stack flexDirection="row" justifyContent="space-between">
@@ -79,7 +115,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({
           variant="h6"
           sx={{ mb: '1rem', alignSelf: 'center', fontWeight: 'bold' }}
         >
-          {title}
+          {isShipping ? <div>Shipping</div> : ''}
         </Typography>
         <Typography
           color="blue"
@@ -96,8 +132,10 @@ const AddressBlock: React.FC<IAddressBlock> = ({
       </Stack>
       {defaultAddress && <DefaultAddress />}
       <Stack flexDirection="row">
-        <Button>set as shipping</Button>
-        <Button onClick={handleModify}>
+        <Button onClick={() => setShipping(!shipping)}>
+          {isShipping ? 'remove from shipping' : 'set as shipping'}
+        </Button>
+        <Button onClick={() => setBilling(!billing)}>
           {isBilling ? 'remove from billing' : 'set as billing'}
         </Button>
         <Button>set as default</Button>

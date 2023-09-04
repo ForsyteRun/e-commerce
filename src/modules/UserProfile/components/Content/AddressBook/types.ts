@@ -6,7 +6,6 @@ export enum AddressEnum {
 }
 
 export interface IAddressBlock {
-  title: AddressEnum;
   defaultAddress: boolean;
   cardIndex: number;
   allAddress: BaseAddress;

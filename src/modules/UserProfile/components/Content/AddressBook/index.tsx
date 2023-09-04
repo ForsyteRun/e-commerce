@@ -6,7 +6,6 @@ import { RegisteredUserData } from 'types';
 import styles from './AddressBook.module.scss';
 import AddressBlock from './components/AddressBlock';
 import AddressForm from './components/AddressForm';
-import { AddressEnum } from './types';
 
 const AddressBook = () => {
   const { addresses, defaultBillingAddressId, defaultShippingAddressId } =
@@ -42,7 +41,6 @@ const AddressBook = () => {
               sx={{ border: '1px solid #999' }}
             >
               <AddressBlock
-                title={index ? AddressEnum.billing : AddressEnum.shipping}
                 allAddress={address}
                 cardIndex={index}
                 defaultAddress={
