@@ -1,9 +1,7 @@
-// import { Button } from '@mui/material';
+import ProductImageButton from '../ProductImageButton';
 import ProductCarouselSlider from './components/ProductCarouselSlider';
 import { IProductImagesProps } from './types';
 import styles from './ProductImages.module.scss';
-import ProductImageButton from '../ProductImageButton';
-// import { buttonImageStyles } from '../CarouselSlider/helpers';
 
 const ProductImages = ({ images, name, handleOpen }: IProductImagesProps) => {
   const isMultipleImages: boolean = images.length > 1;
