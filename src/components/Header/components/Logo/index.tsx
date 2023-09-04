@@ -7,7 +7,7 @@ const Logo = () => {
   return (
     <NavLink className={styles.logo} to={PathNames.index}>
       <img src={LogoIcon} alt="logo" className={styles.icon} />
-      <span>Printerix</span>
+      <span className={styles.logoText}>Printerix</span>
     </NavLink>
   );
 };

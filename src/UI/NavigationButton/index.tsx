@@ -21,7 +21,7 @@ const NavigationButton = ({
       onClick={() => changeBurgerModalStatus(false)}
       sx={navButtonStyles}
       to={path}
-      variant="contained"
+      variant="text"
     >
       {children}
     </Button>
