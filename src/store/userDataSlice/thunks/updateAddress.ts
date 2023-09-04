@@ -5,7 +5,7 @@ import { getRegistrationAccessCode } from 'store/registration/registrationAccess
 import { getRegisteredUserData } from '../helpers';
 import fetchUserDataByRefreshToken from './fetchUserDataByRefreshToken';
 
-const addAddress = createAsyncThunk(
+const updateAddress = createAsyncThunk(
   'userData/addAddress',
   async (_body: MyCustomerUpdate, { dispatch }) => {
     const api = createRefreshTokenClientApi();
@@ -29,4 +29,4 @@ const addAddress = createAsyncThunk(
   }
 );
 
-export default addAddress;
+export default updateAddress;

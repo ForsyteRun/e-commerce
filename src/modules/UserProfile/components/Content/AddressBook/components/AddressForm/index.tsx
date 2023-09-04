@@ -3,7 +3,7 @@ import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import validCountries from 'modules/Registration/components/adress/constants';
-import addAddress from 'store/userDataSlice/thunks/addAddress';
+import updateAddress from 'store/userDataSlice/thunks/updateAddress';
 import { RegisteredUserData } from 'types';
 import validationSchema from './validation';
 
@@ -33,7 +33,7 @@ const AddressForm = () => {
         ],
       };
 
-      dispatch(addAddress(addAddressData));
+      dispatch(updateAddress(addAddressData));
     },
   });
 

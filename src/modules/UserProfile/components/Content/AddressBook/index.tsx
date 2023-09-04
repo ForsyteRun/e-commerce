@@ -4,7 +4,7 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { useEffect, useRef, useState } from 'react';
 import { RegisteredUserData } from 'types';
-import addAddress from 'store/userDataSlice/thunks/addAddress';
+import updateAddress from 'store/userDataSlice/thunks/updateAddress';
 import styles from './AddressBook.module.scss';
 import AddressBlock from './components/AddressBlock';
 import AddressForm from './components/AddressForm';
@@ -45,7 +45,7 @@ const AddressBook = () => {
           ],
         };
 
-        dispatch(addAddress(data));
+        dispatch(updateAddress(data));
         setDefaultShippingAddress(false);
       }
     }
@@ -69,7 +69,7 @@ const AddressBook = () => {
         ],
       };
 
-      dispatch(addAddress(data));
+      dispatch(updateAddress(data));
       setDefaultBillingAddress(false);
     }
   }, [defaultBillingAddress]);

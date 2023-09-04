@@ -2,7 +2,7 @@
 import { Button, Stack, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import React, { useEffect, useRef, useState } from 'react';
-import addAddress from 'store/userDataSlice/thunks/addAddress';
+import updateAddress from 'store/userDataSlice/thunks/updateAddress';
 import { RegisteredUserData } from 'types';
 import { Address, MyCustomerUpdate } from '@commercetools/platform-sdk';
 import { IAddressBlock } from '../../types';
@@ -79,7 +79,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({
           ],
         };
 
-        dispatch(addAddress(data));
+        dispatch(updateAddress(data));
       } else if (!billing && setBillingItems.length > 0) {
         const data: MyCustomerUpdate = {
           version,
@@ -91,7 +91,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({
           ],
         };
 
-        dispatch(addAddress(data));
+        dispatch(updateAddress(data));
       }
     }
   }, [billing]);
@@ -115,7 +115,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({
           ],
         };
 
-        dispatch(addAddress(data));
+        dispatch(updateAddress(data));
       } else if (!shipping && setShippingItems.length > 0) {
         const data: MyCustomerUpdate = {
           version,
@@ -127,7 +127,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({
           ],
         };
 
-        dispatch(addAddress(data));
+        dispatch(updateAddress(data));
       }
     }
   }, [shipping]);
