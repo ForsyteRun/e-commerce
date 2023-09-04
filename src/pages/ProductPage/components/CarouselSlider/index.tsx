@@ -1,12 +1,23 @@
 import { useState } from 'react';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
-import { IconButton, MobileStepper } from '@mui/material';
+import { IconButton, Button, MobileStepper } from '@mui/material';
 import styles from './CarouselSlider.module.scss';
 import { ICarouselSliderProps, SlideDirection } from './types';
-import { buttonStyles, mobileStepperStyles } from './helpers';
+import {
+  buttonImageStyles,
+  buttonStyles,
+  mobileStepperStyles,
+} from './helpers';
+import { BACK_STEP, NEXT_STEP } from './constants';
 
-const CarouselSlider = ({ images, name }: ICarouselSliderProps) => {
-  const [activeStep, setActiveStep] = useState(0);
+const CarouselSlider = ({
+  images,
+  name,
+  initialStep = 0,
+  isClickableImage = true,
+  handleOpen,
+}: ICarouselSliderProps) => {
+  const [activeStep, setActiveStep] = useState(initialStep);
   const [slideIn, setSlideIn] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [slideDirection, setSlideDirection] = useState<
@@ -17,13 +28,24 @@ const CarouselSlider = ({ images, name }: ICarouselSliderProps) => {
     setIsAnimating(true);
     setActiveStep((prevActiveStep) => prevActiveStep + step);
     setSlideIn(true);
-    setSlideDirection(step === 1 ? SlideDirection.Right : SlideDirection.Left);
+    setSlideDirection(
+      step === NEXT_STEP ? SlideDirection.Right : SlideDirection.Left
+    );
   };
 
   const handleAnimationEnd = () => {
     setSlideIn(false);
     setIsAnimating(false);
   };
+
+  const handleClick = () => {
+    if (handleOpen) {
+      handleOpen(activeStep);
+    }
+  };
+
+  const isNextButtonDisabled = activeStep === images.length - 1 || isAnimating;
+  const isBackButtonDisabled = activeStep === 0 || isAnimating;
 
   const imageClasses = `${styles.image} ${
     slideIn ? styles[`slide-in-${slideDirection}`] : ''
@@ -33,12 +55,23 @@ const CarouselSlider = ({ images, name }: ICarouselSliderProps) => {
     <>
       <div className={styles.container}>
         <div className={styles.imageContainer}>
-          <img
-            src={images[activeStep]}
-            alt={name}
-            className={imageClasses}
-            onAnimationEnd={handleAnimationEnd}
-          />
+          {isClickableImage ? (
+            <Button size="small" onClick={handleClick} sx={buttonImageStyles}>
+              <img
+                src={images[activeStep]}
+                alt={name}
+                className={imageClasses}
+                onAnimationEnd={handleAnimationEnd}
+              />
+            </Button>
+          ) : (
+            <img
+              src={images[activeStep]}
+              alt={name}
+              className={imageClasses}
+              onAnimationEnd={handleAnimationEnd}
+            />
+          )}
         </div>
       </div>
       <MobileStepper
@@ -50,8 +83,8 @@ const CarouselSlider = ({ images, name }: ICarouselSliderProps) => {
         nextButton={
           <IconButton
             size="small"
-            onClick={() => handleStep(1)}
-            disabled={activeStep === images.length - 1 || isAnimating}
+            onClick={() => handleStep(NEXT_STEP)}
+            disabled={isNextButtonDisabled}
             sx={buttonStyles}
           >
             <KeyboardArrowRight />
@@ -60,8 +93,8 @@ const CarouselSlider = ({ images, name }: ICarouselSliderProps) => {
         backButton={
           <IconButton
             size="small"
-            onClick={() => handleStep(-1)}
-            disabled={activeStep === 0 || isAnimating}
+            onClick={() => handleStep(BACK_STEP)}
+            disabled={isBackButtonDisabled}
             sx={buttonStyles}
           >
             <KeyboardArrowLeft />

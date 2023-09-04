@@ -11,3 +11,15 @@ export const buttonStyles: SxProps = {
   borderRadius: '50%',
   border: '1px solid #EAEBED',
 };
+
+export const buttonImageStyles: SxProps = {
+  backgroundColor: 'transparent',
+  color: 'transparent',
+  transition: 'none',
+  '&:hover': {
+    backgroundColor: 'transparent',
+  },
+  '&:active': {
+    transform: 'none',
+  },
+};

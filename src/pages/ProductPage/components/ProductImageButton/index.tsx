@@ -8,8 +8,9 @@ const ProductImageButton = ({
   name,
   handleOpen,
 }: IProductImageButtonProps) => {
+  const initialStep: number = 0;
   return (
-    <Button onClick={handleOpen} sx={buttonImageStyles}>
+    <Button onClick={() => handleOpen(initialStep)} sx={buttonImageStyles}>
       <img src={image} alt={name} className={styles.image} />
     </Button>
   );
