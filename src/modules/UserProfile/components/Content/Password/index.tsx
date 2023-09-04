@@ -1,122 +1,87 @@
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { CustomerChangePassword } from '@commercetools/platform-sdk';
-import { Box, Button, TextField, Typography } from '@mui/material';
-import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
+import { Box, Button, Typography } from '@mui/material';
+import { Form, Formik } from 'formik';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { useEffect, useState } from 'react';
 import { updatePassword } from 'store/userDataSlice/thunks';
+import DialogInit from './components/DialogInit';
+import PasswordField from './components/PasswordField';
+import { DialogModalAnswer, InitialValues } from './types';
+import Alert from '../../Alert';
+import validationSchema from './components/PasswordField/validation';
+import { fieldTitle } from './constants';
 
-const validationSchema = Yup.object().shape({
-  currentPassword: Yup.string()
-    .min(8, 'min 8 characters long')
-    .matches(/^(?=.*[a-z])/, 'min 1 lowercase letter')
-    .matches(/^(?=.*[A-Z])/, 'min 1 uppercase letter')
-    .matches(/^(?=.*\d)/, 'min 1 number')
-    .required('Required'),
-  newPassword: Yup.string()
-    .min(8, 'min 8 characters long')
-    .matches(/^(?=.*[a-z])/, 'min 1 lowercase letter')
-    .matches(/^(?=.*[A-Z])/, 'min 1 uppercase letter')
-    .matches(/^(?=.*\d)/, 'min 1 number')
-    .required('Required'),
-  repeatNewPassword: Yup.string()
-    .min(8, 'min 8 characters long')
-    .matches(/^(?=.*[a-z])/, 'min 1 lowercase letter')
-    .matches(/^(?=.*[A-Z])/, 'min 1 uppercase letter')
-    .matches(/^(?=.*\d)/, 'min 1 number')
-    .required('Required')
-    .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
-});
+const initialValues: InitialValues = {
+  currentPassword: '',
+  newPassword: '',
+  confirmPassword: '',
+};
 
 const Password = () => {
   const dispatch = useAppDispatch();
   const { id, version } = useAppSelector((state) => state.userDataSlice.data);
 
-  const formik = useFormik({
-    initialValues: {
-      currentPassword: '',
-      newPassword: '',
-      repeatNewPassword: '',
-    },
-    validationSchema,
-    onSubmit: (values) => {
-      if (id && version) {
-        const passwordData: CustomerChangePassword = {
-          id,
-          version,
-          currentPassword: values.currentPassword,
-          newPassword: values.newPassword,
-        };
+  const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState('no');
+  const [formData, setFormData] = useState<CustomerChangePassword | null>(null);
 
-        dispatch(updatePassword(passwordData));
-      }
-    },
-  });
+  const handleSubmit = (values: InitialValues) => {
+    if (id && version) {
+      const passwordData: CustomerChangePassword = {
+        id,
+        version,
+        currentPassword: values.currentPassword,
+        newPassword: values.newPassword,
+      };
+
+      setFormData(passwordData);
+      setOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedValue === DialogModalAnswer.yes && formData) {
+      dispatch(updatePassword(formData));
+      setSelectedValue(DialogModalAnswer.no);
+    }
+
+    return () => setFormData(null);
+  }, [selectedValue]);
+
   return (
-    <>
-      <Box sx={{ mb: '4rem' }}>
-        <Typography variant="h3" sx={{ mb: '1rem' }}>
-          Update password
-        </Typography>
-        <Typography variant="h5">
-          You can update your password at any time below.
-        </Typography>
-      </Box>
-      <form
-        onSubmit={formik.handleSubmit}
-        style={{ display: 'flex', flexDirection: 'column', gap: '1.3rem' }}
-      >
-        <TextField
-          fullWidth
-          id="currentPassword"
-          name="currentPassword"
-          label="Current password"
-          value={formik.values.currentPassword}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={
-            formik.touched.currentPassword &&
-            Boolean(formik.errors.currentPassword)
-          }
-          helperText={
-            formik.touched.currentPassword && formik.errors.currentPassword
-          }
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      <>
+        <Box sx={{ mb: '4rem' }}>
+          <Typography variant="h3" sx={{ mb: '1rem' }}>
+            Update password
+          </Typography>
+          <Typography variant="h5">
+            You can update your password at any time below.
+          </Typography>
+        </Box>
+        <Form
+          style={{ display: 'flex', flexDirection: 'column', gap: '1.3rem' }}
+        >
+          {fieldTitle.map((title: string) => (
+            <PasswordField name={title} key={title} />
+          ))}
+          <Button color="primary" variant="contained" fullWidth type="submit">
+            Submit
+          </Button>
+        </Form>
+        <DialogInit
+          open={open}
+          setOpen={setOpen}
+          setSelectedValue={setSelectedValue}
         />
-        <TextField
-          fullWidth
-          id="newPassword"
-          name="newPassword"
-          label="New password"
-          type="newPassword"
-          value={formik.values.newPassword}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={
-            formik.touched.newPassword && Boolean(formik.errors.newPassword)
-          }
-          helperText={formik.touched.newPassword && formik.errors.newPassword}
-        />
-        <TextField
-          fullWidth
-          id="repeatNewPassword"
-          name="repeatNewPassword"
-          label="Confirm new password"
-          type="repeatNewPassword"
-          value={formik.values.repeatNewPassword}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={
-            formik.touched.repeatNewPassword &&
-            Boolean(formik.errors.repeatNewPassword)
-          }
-          helperText={
-            formik.touched.repeatNewPassword && formik.errors.repeatNewPassword
-          }
-        />
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
-        </Button>
-      </form>
-    </>
+        <Alert />
+      </>
+    </Formik>
   );
 };
 

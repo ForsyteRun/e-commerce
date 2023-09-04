@@ -1,6 +1,6 @@
 import { Box, IconButton, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import CarouselSlider from 'pages/ProductPage/components/CarouselSlider';
+import ModalCarouselSlider from 'pages/ProductPage/components/ModalWindow/components/ModalCarouselSlider';
 import {
   iconButtonStyles,
   modalWindowStyles,
@@ -14,6 +14,7 @@ const ModalWindow = ({
   handleClose,
   images,
   name,
+  step,
 }: IModalWindowProps) => {
   const isMultipleImages: boolean = images.length > 1;
 
@@ -25,7 +26,11 @@ const ModalWindow = ({
             <Close />
           </IconButton>
           {isMultipleImages ? (
-            <CarouselSlider images={images} name={name} />
+            <ModalCarouselSlider
+              images={images}
+              name={name || ''}
+              step={step}
+            />
           ) : (
             <img src={images[0]} alt={name} className={styles.image} />
           )}
