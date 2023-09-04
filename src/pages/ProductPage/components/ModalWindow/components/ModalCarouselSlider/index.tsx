@@ -6,7 +6,14 @@ const ModalCarouselSlider = ({
   name,
   step,
 }: IModalCarouselSliderProps) => {
-  return <CarouselSlider images={images} name={name} initialStep={step} />;
+  return (
+    <CarouselSlider
+      images={images}
+      name={name}
+      initialStep={step}
+      isClickableImage={false}
+    />
+  );
 };
 
 export default ModalCarouselSlider;

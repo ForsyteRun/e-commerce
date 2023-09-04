@@ -8,6 +8,7 @@ import {
   buttonStyles,
   mobileStepperStyles,
 } from './helpers';
+import { BACK_STEP, NEXT_STEP } from './constants';
 
 const CarouselSlider = ({
   images,
@@ -23,11 +24,13 @@ const CarouselSlider = ({
     SlideDirection.Left | SlideDirection.Right
   >(SlideDirection.Right);
 
-  const handleStep = (idx: number) => {
+  const handleStep = (step: number) => {
     setIsAnimating(true);
-    setActiveStep((prevActiveStep) => prevActiveStep + idx);
+    setActiveStep((prevActiveStep) => prevActiveStep + step);
     setSlideIn(true);
-    setSlideDirection(idx === 1 ? SlideDirection.Right : SlideDirection.Left);
+    setSlideDirection(
+      step === NEXT_STEP ? SlideDirection.Right : SlideDirection.Left
+    );
   };
 
   const handleAnimationEnd = () => {
@@ -40,6 +43,9 @@ const CarouselSlider = ({
       handleOpen(activeStep);
     }
   };
+
+  const isNextButtonDisabled = activeStep === images.length - 1 || isAnimating;
+  const isBackButtonDisabled = activeStep === 0 || isAnimating;
 
   const imageClasses = `${styles.image} ${
     slideIn ? styles[`slide-in-${slideDirection}`] : ''
@@ -77,8 +83,8 @@ const CarouselSlider = ({
         nextButton={
           <IconButton
             size="small"
-            onClick={() => handleStep(1)}
-            disabled={activeStep === images.length - 1 || isAnimating}
+            onClick={() => handleStep(NEXT_STEP)}
+            disabled={isNextButtonDisabled}
             sx={buttonStyles}
           >
             <KeyboardArrowRight />
@@ -87,8 +93,8 @@ const CarouselSlider = ({
         backButton={
           <IconButton
             size="small"
-            onClick={() => handleStep(-1)}
-            disabled={activeStep === 0 || isAnimating}
+            onClick={() => handleStep(BACK_STEP)}
+            disabled={isBackButtonDisabled}
             sx={buttonStyles}
           >
             <KeyboardArrowLeft />
