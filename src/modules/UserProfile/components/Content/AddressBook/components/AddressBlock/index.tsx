@@ -136,18 +136,18 @@ const AddressBlock: React.FC<IAddressBlock> = ({
     <>
       <Stack flexDirection="row" justifyContent="space-between">
         <Typography
-          color="#999"
+          color="primary"
           variant="h6"
           sx={{ mb: '1rem', alignSelf: 'center', fontWeight: 'bold' }}
         >
-          {isShipping ? <div>Shipping</div> : ''}
+          {isShipping ? 'Shipping' : ''}
         </Typography>
         <Typography
-          color="blue"
+          color="secondary"
           variant="h6"
           sx={{ mb: '1rem', alignSelf: 'center', fontWeight: 'bold' }}
         >
-          {isBilling ? <div>Billing</div> : ''}
+          {isBilling ? 'Billing' : ''}
         </Typography>
       </Stack>
       <Stack flexDirection="row" justifyContent="space-between">
@@ -155,20 +155,28 @@ const AddressBlock: React.FC<IAddressBlock> = ({
           <AddressField title={key} value={value} key={key} />
         ))}
       </Stack>
-      {isDefaultShipping && <DefaultAddress title="default shipping address" />}
-      {isDefaultBilling && <DefaultAddress title="default billing address" />}
-      <Stack flexDirection="row">
-        <Button onClick={() => setShipping(!shipping)}>
-          {isShipping ? 'remove from shipping' : 'set as shipping'}
+      {isDefaultShipping && (
+        <DefaultAddress title="default shipping address" shipping />
+      )}
+      {isDefaultBilling && (
+        <DefaultAddress title="default billing address" shipping={false} />
+      )}
+      <Stack flexDirection="row" justifyContent="space-between">
+        <Button variant="contained" onClick={() => setShipping(!shipping)}>
+          {isShipping ? 'remove shipping' : 'set shipping'}
         </Button>
-        <Button onClick={() => setBilling(!billing)}>
-          {isBilling ? 'remove from billing' : 'set as billing'}
-        </Button>
-        <Button onClick={handleDefaultShippingAddress}>
-          {isDefaultShipping ? '' : 'set as default shipping'}
-        </Button>
-        <Button onClick={handleDefaultBillingAddress}>
-          {isDefaultBilling ? '' : 'set as default billing'}
+        {!isDefaultShipping && (
+          <Button variant="contained" onClick={handleDefaultShippingAddress}>
+            default shipping
+          </Button>
+        )}
+        {!isDefaultBilling && (
+          <Button variant="contained" onClick={handleDefaultBillingAddress}>
+            default billing
+          </Button>
+        )}
+        <Button variant="contained" onClick={() => setBilling(!billing)}>
+          {isBilling ? 'remove billing' : 'set billing'}
         </Button>
       </Stack>
     </>
