@@ -13,7 +13,9 @@ const AddressBlock: React.FC<IAddressBlock> = ({
   cardIndex,
   allAddress,
   defaultShippingAddress,
+  defaultBillingAddress,
   setDefaultShippingAddress,
+  setDefaultBillingAddress,
   setCardId,
 }) => {
   const dispatch = useAppDispatch();
@@ -22,11 +24,17 @@ const AddressBlock: React.FC<IAddressBlock> = ({
     billingAddressIds,
     shippingAddressIds,
     defaultShippingAddressId,
+    defaultBillingAddressId,
     version,
   } = useAppSelector((state) => state.userDataSlice.data) as RegisteredUserData;
 
-  const handleDefaultAddress = () => {
+  const handleDefaultShippingAddress = () => {
     setDefaultShippingAddress(!defaultShippingAddress);
+    setCardId(cardIndex);
+  };
+
+  const handleDefaultBillingAddress = () => {
+    setDefaultBillingAddress(!defaultBillingAddress);
     setCardId(cardIndex);
   };
 
@@ -40,6 +48,8 @@ const AddressBlock: React.FC<IAddressBlock> = ({
 
   const isDefaultShipping =
     addresses[cardIndex].id === defaultShippingAddressId;
+
+  const isDefaultBilling = addresses[cardIndex].id === defaultBillingAddressId;
 
   const [billing, setBilling] = useState(isBilling);
   const [shipping, setShipping] = useState(isShipping);
@@ -146,6 +156,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({
         ))}
       </Stack>
       {isDefaultShipping && <DefaultAddress title="default shipping address" />}
+      {isDefaultBilling && <DefaultAddress title="default billing address" />}
       <Stack flexDirection="row">
         <Button onClick={() => setShipping(!shipping)}>
           {isShipping ? 'remove from shipping' : 'set as shipping'}
@@ -153,8 +164,11 @@ const AddressBlock: React.FC<IAddressBlock> = ({
         <Button onClick={() => setBilling(!billing)}>
           {isBilling ? 'remove from billing' : 'set as billing'}
         </Button>
-        <Button onClick={handleDefaultAddress}>
+        <Button onClick={handleDefaultShippingAddress}>
           {isDefaultShipping ? '' : 'set as default shipping'}
+        </Button>
+        <Button onClick={handleDefaultBillingAddress}>
+          {isDefaultBilling ? '' : 'set as default billing'}
         </Button>
       </Stack>
     </>

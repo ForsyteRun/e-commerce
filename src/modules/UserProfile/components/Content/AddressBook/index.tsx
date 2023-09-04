@@ -20,10 +20,11 @@ const AddressBook = () => {
 
   const [open, setOpen] = useState(false);
   const [defaultShippingAddress, setDefaultShippingAddress] = useState(false);
-  // const [defaultBillingAddress, setDefaultBillingAddress] = useState(false);
+  const [defaultBillingAddress, setDefaultBillingAddress] = useState(false);
   const [cardId, setCardId] = useState<number | null>(null);
 
   const firstDefaultShippingRender = useRef(true);
+  const firstDefaultBillingRender = useRef(true);
 
   useEffect(() => {
     if (firstDefaultShippingRender.current) {
@@ -49,6 +50,29 @@ const AddressBook = () => {
       }
     }
   }, [defaultShippingAddress]);
+
+  useEffect(() => {
+    if (firstDefaultBillingRender.current) {
+      firstDefaultBillingRender.current = false;
+    } else if (addresses) {
+      const addressId =
+        cardId !== null ? String(addresses[cardId]?.id) : undefined;
+
+      const data: MyCustomerUpdate = {
+        version,
+
+        actions: [
+          {
+            action: 'setDefaultBillingAddress',
+            addressId,
+          },
+        ],
+      };
+
+      dispatch(addAddress(data));
+      setDefaultBillingAddress(false);
+    }
+  }, [defaultBillingAddress]);
   return (
     <>
       <Box sx={{ mb: '4rem' }}>
@@ -85,7 +109,9 @@ const AddressBook = () => {
                     : address.id === defaultShippingAddressId
                 }
                 defaultShippingAddress={defaultShippingAddress}
+                defaultBillingAddress={defaultBillingAddress}
                 setDefaultShippingAddress={setDefaultShippingAddress}
+                setDefaultBillingAddress={setDefaultBillingAddress}
                 setCardId={setCardId}
               />
             </Stack>
