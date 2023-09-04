@@ -5,6 +5,10 @@
   margin-top: 1rem;
   background-color: #fff;
   border: 1px solid #EAEBED;
+
+  @media screen and (max-width: 1024px) {
+    padding: 1rem;
+  }
 }
 
 .container {
@@ -21,7 +25,7 @@
 .leftContainer {
   display: flex;
   flex-direction: column;
-  row-gap: 4rem;
+  row-gap: 1rem;
   flex: 2;
 }
 

@@ -1,6 +1,7 @@
 export interface IModalWindowProps {
+  images: string[];
+  name: string | undefined;
   open: boolean;
   handleClose: () => void;
-  images: string[];
-  name: string;
+  step: number;
 }

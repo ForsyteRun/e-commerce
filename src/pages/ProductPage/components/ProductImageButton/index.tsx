@@ -9,7 +9,7 @@ const ProductImageButton = ({
   handleOpen,
 }: IProductImageButtonProps) => {
   return (
-    <Button onClick={handleOpen} sx={buttonImageStyles}>
+    <Button onClick={() => handleOpen(0)} sx={buttonImageStyles}>
       <img src={image} alt={name} className={styles.image} />
     </Button>
   );

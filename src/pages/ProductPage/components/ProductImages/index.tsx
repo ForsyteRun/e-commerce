@@ -1,37 +1,26 @@
-import { HideImage } from '@mui/icons-material';
-import { useState } from 'react';
-import ModalWindow from './components/ModalWindow';
-import ProductImageButton from './components/ProductImageButton';
+// import { Button } from '@mui/material';
+import ProductCarouselSlider from './components/ProductCarouselSlider';
 import { IProductImagesProps } from './types';
 import styles from './ProductImages.module.scss';
+import ProductImageButton from '../ProductImageButton';
+// import { buttonImageStyles } from '../CarouselSlider/helpers';
 
-const ProductImages = ({ images, name }: IProductImagesProps) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const ProductImages = ({ images, name, handleOpen }: IProductImagesProps) => {
+  const isMultipleImages: boolean = images.length > 1;
 
   return (
     <div className={styles.container}>
-      {images ? (
-        <div>
-          <ProductImageButton
-            handleOpen={handleOpen}
-            image={images[0]}
-            name={name || ''}
-          />
-          <ModalWindow
-            open={open}
-            handleClose={handleClose}
-            images={images}
-            name={name || ''}
-          />
-        </div>
+      {isMultipleImages ? (
+        <ProductCarouselSlider
+          images={images}
+          name={name || ''}
+          handleOpen={handleOpen}
+        />
       ) : (
-        <HideImage
-          sx={{
-            fontSize: '10rem',
-            color: 'rgba(25, 118, 210, 0.5)',
-          }}
+        <ProductImageButton
+          image={images[0]}
+          name={name || ''}
+          handleOpen={handleOpen}
         />
       )}
     </div>
