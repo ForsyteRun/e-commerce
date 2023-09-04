@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import updateAddress from 'store/userDataSlice/thunks/updateAddress';
 import { RegisteredUserData } from 'types';
 import { Address, MyCustomerUpdate } from '@commercetools/platform-sdk';
+import CloseIcon from '@mui/icons-material/Close';
 import { IAddressBlock } from '../../types';
 import AddressField from '../AddressField';
 import DefaultAddress from '../DefaultAddress';
@@ -50,6 +51,8 @@ const AddressBlock: React.FC<IAddressBlock> = ({
     addresses[cardIndex].id === defaultShippingAddressId;
 
   const isDefaultBilling = addresses[cardIndex].id === defaultBillingAddressId;
+
+  const [close, setClose] = useState(false);
 
   const [billing, setBilling] = useState(isBilling);
   const [shipping, setShipping] = useState(isShipping);
@@ -132,6 +135,26 @@ const AddressBlock: React.FC<IAddressBlock> = ({
     }
   }, [shipping]);
 
+  useEffect(() => {
+    if (close) {
+      const setShippingItems = addresses.filter(
+        (address: Address, index: number) => index === cardIndex && address
+      );
+
+      const data: MyCustomerUpdate = {
+        version,
+        actions: [
+          {
+            action: 'removeAddress',
+            addressId: setShippingItems[0].id,
+          },
+        ],
+      };
+
+      dispatch(updateAddress(data));
+    }
+  }, [close]);
+
   return (
     <>
       <Stack flexDirection="row" justifyContent="space-between">
@@ -149,6 +172,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({
         >
           {isBilling ? 'Billing' : ''}
         </Typography>
+        <CloseIcon onClick={() => setClose(true)} sx={{ cursor: 'pointer' }} />
       </Stack>
       <Stack flexDirection="row" justifyContent="space-between">
         {Object.entries(addressWithoutId).map(([key, value]) => (
