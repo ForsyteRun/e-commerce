@@ -1,65 +1,24 @@
 .searchContainer {
-  position: relative;
   display: flex;
   align-items: center;
   align-self: flex-start;
   padding: 0;
 
-  .searchIcon {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
+  .searchField {
     opacity: 1;
     visibility: visible;
-    background-color: #ffffff;
-    border: 1px solid #eaebed;
-    border-radius: 50%;
-    transition:
-      opacity 0.3s ease,
-      visibility 0.3s ease;
-    overflow: hidden;
-    cursor: pointer;
-
-    &.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-  }
-
-  .closeIcon {
-    cursor: pointer;
-
-    &.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-  }
-
-  .searchField {
-    opacity: 0;
-    visibility: visible;
-    width: 0;
+    width: 300px;
     border: none;
     border-radius: 12px;
     background-color: #ffffff;
     font-size: 14px;
     transition:
-      opacity 0.3s ease,
       visibility 0.3s ease,
       width 0.3s linear;
     overflow: hidden;
 
-    &.visible {
-      opacity: 1;
-      visibility: visible;
-      width: 300px;
-
-      @media screen and (max-width: 350px) {
-        width: 272px;
-      }
+    @media screen and (max-width: 390px) {
+      width: 232px;
     }
   }
 }

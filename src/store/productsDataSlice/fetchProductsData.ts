@@ -20,7 +20,8 @@ const fetchProductsData = createAsyncThunk(
       limit: 9,
       offset: 0,
       filter,
-      sort: _query?.sort || undefined,
+      sort: _query?.sort,
+      'text.en-US': _query?.searchValue,
     };
 
     const response = await api
