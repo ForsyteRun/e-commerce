@@ -1,28 +1,34 @@
-import { InputAdornment, TextField, IconButton } from '@mui/material';
-import { Close, Search } from '@mui/icons-material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { TextField, IconButton } from '@mui/material';
+import { Search } from '@mui/icons-material';
+import { getCategoryIdBySlug } from 'pages/CategoryPage/helpers/getCategoryParams';
+import { useAppDispatch } from 'hooks/useRedux';
+import fetchProductsData from 'store/productsDataSlice/fetchProductsData';
+import useIconButtonColorTheme from 'helpers/useIconButtonColorTheme';
 import styles from './SearchBar.module.scss';
-import buttonStyles from './helpers/buttonStyles';
 
 const SearchBar = () => {
+  const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
   const [searchValue, setSearchValue] = useState('');
-  const [isSearchVisible, setSearchVisible] = useState(false);
 
-  const toggleSearch = () => {
-    setSearchVisible(!isSearchVisible);
+  const submitHandler = (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+    const formattedPathname = pathname.replace(/\*$/, '');
+    const slug = formattedPathname.slice(
+      formattedPathname.lastIndexOf('/') + 1
+    );
+    const categoryId = getCategoryIdBySlug(slug);
+    dispatch(fetchProductsData({ searchValue, categoryId }));
   };
 
+  useEffect(() => {
+    setSearchValue('');
+  }, [pathname]);
+
   return (
-    <div className={styles.searchContainer}>
-      <IconButton
-        onClick={toggleSearch}
-        className={`${styles.searchIcon} ${
-          isSearchVisible ? styles.hidden : ''
-        }`}
-        sx={buttonStyles}
-      >
-        <Search sx={{ fill: 'rgba(0, 0, 0, 0.54)' }} />
-      </IconButton>
+    <form className={styles.searchContainer} onSubmit={submitHandler}>
       <TextField
         variant="outlined"
         size="small"
@@ -30,33 +36,25 @@ const SearchBar = () => {
         placeholder="Search"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        className={`${styles.searchField} ${
-          isSearchVisible ? styles.visible : ''
-        }`}
+        className={styles.searchField}
         sx={{
           '& fieldset': {
             border: '1px solid #eaebed',
             borderRadius: '12px',
           },
         }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search />
-            </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="end">
-              <Close
-                className={styles.closeIcon}
-                onClick={toggleSearch}
-                sx={{ fill: 'rgba(0, 0, 0, 0.54)' }}
-              />
-            </InputAdornment>
-          ),
-        }}
       />
-    </div>
+      <IconButton
+        type="submit"
+        onSubmit={submitHandler}
+        sx={{
+          ml: '0.25rem',
+          ...useIconButtonColorTheme('25, 118, 210'),
+        }}
+      >
+        <Search />
+      </IconButton>
+    </form>
   );
 };
 

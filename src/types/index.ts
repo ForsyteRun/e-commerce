@@ -192,6 +192,7 @@ export interface IProductsQuery {
   offset?: number;
   categoryId?: string;
   sort?: string;
+  searchValue?: string;
 }
 
 export type OnClickHandler = (
