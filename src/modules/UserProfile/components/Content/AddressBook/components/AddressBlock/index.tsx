@@ -10,13 +10,25 @@ import AddressField from '../AddressField';
 import DefaultAddress from '../DefaultAddress';
 
 const AddressBlock: React.FC<IAddressBlock> = ({
-  defaultAddress,
   cardIndex,
   allAddress,
+  defaultShippingAddress,
+  setDefaultShippingAddress,
+  setCardId,
 }) => {
   const dispatch = useAppDispatch();
-  const { addresses, billingAddressIds, shippingAddressIds, version } =
-    useAppSelector((state) => state.userDataSlice.data) as RegisteredUserData;
+  const {
+    addresses,
+    billingAddressIds,
+    shippingAddressIds,
+    defaultShippingAddressId,
+    version,
+  } = useAppSelector((state) => state.userDataSlice.data) as RegisteredUserData;
+
+  const handleDefaultAddress = () => {
+    setDefaultShippingAddress(!defaultShippingAddress);
+    setCardId(cardIndex);
+  };
 
   const isBilling = billingAddressIds?.some(
     (item) => item === addresses[cardIndex].id
@@ -25,6 +37,9 @@ const AddressBlock: React.FC<IAddressBlock> = ({
   const isShipping = shippingAddressIds?.some(
     (item) => item === addresses[cardIndex].id
   );
+
+  const isDefaultShipping =
+    addresses[cardIndex].id === defaultShippingAddressId;
 
   const [billing, setBilling] = useState(isBilling);
   const [shipping, setShipping] = useState(isShipping);
@@ -130,7 +145,7 @@ const AddressBlock: React.FC<IAddressBlock> = ({
           <AddressField title={key} value={value} key={key} />
         ))}
       </Stack>
-      {defaultAddress && <DefaultAddress />}
+      {isDefaultShipping && <DefaultAddress title="default shipping address" />}
       <Stack flexDirection="row">
         <Button onClick={() => setShipping(!shipping)}>
           {isShipping ? 'remove from shipping' : 'set as shipping'}
@@ -138,7 +153,9 @@ const AddressBlock: React.FC<IAddressBlock> = ({
         <Button onClick={() => setBilling(!billing)}>
           {isBilling ? 'remove from billing' : 'set as billing'}
         </Button>
-        <Button>set as default</Button>
+        <Button onClick={handleDefaultAddress}>
+          {isDefaultShipping ? '' : 'set as default shipping'}
+        </Button>
       </Stack>
     </>
   );

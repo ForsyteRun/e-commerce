@@ -1,18 +1,54 @@
-import { BaseAddress } from '@commercetools/platform-sdk';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { BaseAddress, MyCustomerUpdate } from '@commercetools/platform-sdk';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import { useAppSelector } from 'hooks/useRedux';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { useEffect, useRef, useState } from 'react';
 import { RegisteredUserData } from 'types';
+import addAddress from 'store/userDataSlice/thunks/addAddress';
 import styles from './AddressBook.module.scss';
 import AddressBlock from './components/AddressBlock';
 import AddressForm from './components/AddressForm';
 
 const AddressBook = () => {
-  const { addresses, defaultBillingAddressId, defaultShippingAddressId } =
-    useAppSelector((state) => state.userDataSlice.data) as RegisteredUserData;
+  const dispatch = useAppDispatch();
+  const {
+    addresses,
+    defaultBillingAddressId,
+    defaultShippingAddressId,
+    version,
+  } = useAppSelector((state) => state.userDataSlice.data) as RegisteredUserData;
 
   const [open, setOpen] = useState(false);
+  const [defaultShippingAddress, setDefaultShippingAddress] = useState(false);
+  // const [defaultBillingAddress, setDefaultBillingAddress] = useState(false);
+  const [cardId, setCardId] = useState<number | null>(null);
 
+  const firstDefaultShippingRender = useRef(true);
+
+  useEffect(() => {
+    if (firstDefaultShippingRender.current) {
+      firstDefaultShippingRender.current = false;
+    } else if (addresses) {
+      if (defaultShippingAddress) {
+        const addressId =
+          cardId !== null ? String(addresses[cardId]?.id) : undefined;
+
+        const data: MyCustomerUpdate = {
+          version,
+
+          actions: [
+            {
+              action: 'setDefaultShippingAddress',
+              addressId,
+            },
+          ],
+        };
+
+        dispatch(addAddress(data));
+        setDefaultShippingAddress(false);
+      }
+    }
+  }, [defaultShippingAddress]);
   return (
     <>
       <Box sx={{ mb: '4rem' }}>
@@ -48,6 +84,9 @@ const AddressBook = () => {
                     ? address.id === defaultBillingAddressId
                     : address.id === defaultShippingAddressId
                 }
+                defaultShippingAddress={defaultShippingAddress}
+                setDefaultShippingAddress={setDefaultShippingAddress}
+                setCardId={setCardId}
               />
             </Stack>
           ))}

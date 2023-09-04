@@ -9,4 +9,7 @@ export interface IAddressBlock {
   defaultAddress: boolean;
   cardIndex: number;
   allAddress: BaseAddress;
+  defaultShippingAddress: boolean;
+  setDefaultShippingAddress: (value: boolean) => void;
+  setCardId: (value: number | null) => void;
 }
