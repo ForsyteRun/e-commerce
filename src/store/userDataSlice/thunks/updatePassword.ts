@@ -8,22 +8,15 @@ import { getRegistrationAccessCode } from 'store/registration/registrationAccess
 import { LoginFormValues, RequestStatusCode } from 'types';
 import createAnonymousUser from './createAnonymousUser';
 import fetchUserLoginData from './fetchUserLoginData';
-import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
-import { LoginFormValues, RequestStatusCode } from 'types';
-import createAnonymousUser from './createAnonymousUser';
-import fetchUserLoginData from './fetchUserLoginData';
 
 const updatePassword = createAsyncThunk(
   'userData/updatePassword',
-  async (data: CustomerChangePassword, { dispatch }) => {
   async (data: CustomerChangePassword, { dispatch }) => {
     const api = createRefreshTokenClientApi();
 
     const response = await api
       .me()
-      .me()
       .password()
-      .post({ body: data })
       .post({ body: data })
       .execute()
       .then(async (res) => {
