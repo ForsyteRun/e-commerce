@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import validCountries from 'modules/Registration/components/adress/constants';
 import addAddress from 'store/userDataSlice/thunks/addAddress';
 import { RegisteredUserData } from 'types';
+import validationSchema from './validation';
 
 const AddressForm = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ const AddressForm = () => {
       postalCode: '',
       streetName: '',
     },
-    // validationSchema,
+    validationSchema,
     onSubmit: (value) => {
       const addAddressData: MyCustomerUpdate = {
         version,

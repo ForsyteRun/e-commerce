@@ -87,8 +87,6 @@ const AddressBook = () => {
 
       <Box
         sx={{
-          flexDirection: 'row',
-          justifyContent: 'space-around',
           mb: '2rem',
         }}
       >
@@ -98,7 +96,7 @@ const AddressBook = () => {
               key={Math.random()}
               className={styles.container}
               flexBasis="45%"
-              sx={{ border: '1px solid #999' }}
+              sx={{ border: '1px solid #999', mb: '1rem' }}
             >
               <AddressBlock
                 allAddress={address}
@@ -117,13 +115,25 @@ const AddressBook = () => {
             </Stack>
           ))}
       </Box>
-      <Button
-        color="primary"
-        variant="contained"
-        onClick={() => setOpen(!open)}
-      >
-        {open ? 'cancel' : 'add address'}
-      </Button>
+      {open ? (
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => setOpen(!open)}
+          sx={{ mb: '1rem' }}
+        >
+          cancel
+        </Button>
+      ) : (
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={() => setOpen(!open)}
+          sx={{ mb: '1rem' }}
+        >
+          add address
+        </Button>
+      )}
       {open && <AddressForm />}
     </>
   );
