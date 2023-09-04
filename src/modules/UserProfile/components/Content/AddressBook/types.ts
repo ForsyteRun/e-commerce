@@ -6,7 +6,12 @@ export enum AddressEnum {
 }
 
 export interface IAddressBlock {
-  title: AddressEnum;
-  address: BaseAddress;
   defaultAddress: boolean;
+  cardIndex: number;
+  allAddress: BaseAddress;
+  defaultShippingAddress: boolean;
+  defaultBillingAddress: boolean;
+  setDefaultShippingAddress: (value: boolean) => void;
+  setDefaultBillingAddress: (value: boolean) => void;
+  setCardId: (value: number | null) => void;
 }
