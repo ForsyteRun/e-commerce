@@ -15,7 +15,7 @@ import { fieldTitle } from './constants';
 const initialValues: InitialValues = {
   currentPassword: '',
   newPassword: '',
-  repeatNewPassword: '',
+  confirmPassword: '',
 };
 
 const Password = () => {

@@ -17,5 +17,5 @@ export enum DialogModalAnswer {
 export interface InitialValues {
   currentPassword: string;
   newPassword: string;
-  repeatNewPassword: string;
+  confirmPassword: string;
 }
