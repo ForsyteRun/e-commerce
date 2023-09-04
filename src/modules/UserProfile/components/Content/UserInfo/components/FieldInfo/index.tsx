@@ -14,6 +14,7 @@ const FieldInfo: FC<IFieldInfo> = ({ value, title, validation }) => {
       sx={{
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
       }}
       className={styles.info}
     >

@@ -1,6 +1,6 @@
 import ModeIcon from '@mui/icons-material/Mode';
 import { Typography } from '@mui/material';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { IFieldInfoShown } from './types';
 
 const FieldInfoShown: FC<IFieldInfoShown> = ({
@@ -10,10 +10,22 @@ const FieldInfoShown: FC<IFieldInfoShown> = ({
 }) => {
   return (
     <>
-      <Typography variant="h5" sx={{ flexGrow: 1 }}>
+      <Typography
+        variant="h5"
+        sx={{
+          flex: 1,
+          '@media screen and (max-width: 425px)': { fontSize: '1rem' },
+        }}
+      >
         {title}
       </Typography>
-      <Typography variant="h5" sx={{ flexBasis: '50%' }}>
+      <Typography
+        variant="h5"
+        sx={{
+          flexBasis: '50%',
+          '@media screen and (max-width: 425px)': { fontSize: '1rem' },
+        }}
+      >
         {value}
       </Typography>
       <ModeIcon

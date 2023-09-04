@@ -6,6 +6,7 @@ import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { PathNames } from 'types';
 import { fetchUserDataByRefreshToken } from 'store/userDataSlice/thunks';
+import stackStyles from './helpers';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const ProfilePage = () => {
   }, [authenticationMode]);
 
   return (
-    <Stack sx={{ flexDirection: 'row', gap: '2rem', width: '100%' }}>
+    <Stack sx={stackStyles}>
       <Paper sx={{ p: '1rem', height: 'fit-content' }}>
         <AsideMenu />
       </Paper>
