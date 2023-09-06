@@ -18,6 +18,7 @@ export enum PathNames {
   profile = '/profile',
   category = '/catalog/:category',
   product = '/catalog/:category/:product',
+  cart = '/cart',
   profileInfo = 'info',
   profileAddress = 'address',
   profilePassword = 'password',

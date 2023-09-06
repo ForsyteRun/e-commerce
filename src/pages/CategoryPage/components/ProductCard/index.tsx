@@ -8,6 +8,7 @@ import {
   ProductCardContent,
   ProductCardPrice,
 } from './components';
+import styles from './ProductCard.module.scss';
 
 const ProductCard = ({ data }: { data: IProductData }) => {
   const { name, images, price, attributes, sku, slug, categories } = data;
@@ -17,9 +18,11 @@ const ProductCard = ({ data }: { data: IProductData }) => {
   const to = `${PathNames.catalog}/${path}`;
 
   return (
-    <Card component={NavLink} to={to} sx={cardStyles}>
-      <ProductImage name={name} url={image} />
-      <ProductCardContent attributes={attributes} name={name} sku={sku} />
+    <Card sx={cardStyles}>
+      <NavLink to={to} className={styles.link_to_product}>
+        <ProductImage name={name} url={image} />
+        <ProductCardContent attributes={attributes} name={name} sku={sku} />
+      </NavLink>
       {price && <ProductCardPrice price={price} />}
     </Card>
   );
