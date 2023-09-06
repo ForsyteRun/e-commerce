@@ -1,26 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
-import { IUserDataState } from 'types';
 import createAnonymousUser from './createAnonymousUser';
+import { getRegisteredUserData } from '../helpers';
 
 const fetchUserDataByRefreshToken = createAsyncThunk(
   'userData/fetchUserDataByRefreshToken',
-  async (refreshToken: string, { dispatch, rejectWithValue }) => {
-    const api = createRefreshTokenClientApi(refreshToken);
+  async (_, { dispatch, rejectWithValue }) => {
+    const api = createRefreshTokenClientApi();
 
     const response = await api
       .me()
       .get()
       .execute()
-      .then((res) => {
-        const data: IUserDataState = {
-          type: 'registered',
-          id: res.body.id,
-        };
-
-        return data;
-      })
+      .then((res) => getRegisteredUserData(res.body))
       .catch((err: _ErrorResponse) => {
         const isNoRefreshToken =
           err.message ===

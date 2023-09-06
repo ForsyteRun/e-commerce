@@ -1,5 +1,6 @@
 .register {
   overflow: hidden;
+  width: 100%;
 }
 
 .name__container {
@@ -91,7 +92,7 @@ button {
   }
 }
 
-.adress__container {
+.address__container {
   display: flex;
   justify-content: space-around;
   gap: 25px;

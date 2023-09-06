@@ -1,17 +1,20 @@
+import { AuthenticationMode } from '@commercetools/platform-sdk';
 import { AppDispatch } from 'store';
 import {
   createAnonymousUser,
   fetchUserDataByRefreshToken,
 } from 'store/userDataSlice/thunks';
-import { UserType } from 'types';
 import { getRefreshTokenCookie } from './processRefreshTokenCookie';
 
-function identificateUserOnAppStart(dispatch: AppDispatch, userType: UserType) {
+function identificateUserOnAppStart(
+  dispatch: AppDispatch,
+  authenticationMode: AuthenticationMode
+) {
   const refreshToken = getRefreshTokenCookie();
 
-  if (!userType) {
+  if (!authenticationMode) {
     if (refreshToken) {
-      dispatch(fetchUserDataByRefreshToken(refreshToken));
+      dispatch(fetchUserDataByRefreshToken());
     } else {
       dispatch(createAnonymousUser());
     }

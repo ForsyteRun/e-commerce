@@ -3,11 +3,13 @@ import {
   ClientBuilder,
   TokenCache,
 } from '@commercetools/sdk-client-v2';
+import { getRefreshTokenCookie } from 'helpers/processRefreshTokenCookie';
 import { authMiddlewareOptions, httpMiddlewareOptions } from './constants';
 import createTokenCache from './helpers/createTokenCache';
 import createApi from './helpers/createApi';
 
-function createRefreshTokenClientApi(refreshToken: string) {
+function createRefreshTokenClientApi() {
+  const refreshToken = getRefreshTokenCookie();
   const tokenCache: TokenCache = createTokenCache();
 
   const options: RefreshAuthMiddlewareOptions = {

@@ -1,23 +1,36 @@
-import { useAppSelector } from '../../../../hooks/useRedux';
-import LogOut from './components/LogOut';
-import NavLinkButton from '../../../../UI/NavLinkButton';
-import { PathNames } from '../../../../types';
+import { useAppSelector } from 'hooks/useRedux';
+import NavLinkButton from 'UI/NavLinkButton';
+import { useMediaQueryContext } from 'context/MediaQueryContext';
+import { PathNames } from 'types';
+import LogOutButton from './components/LogOutButton';
+import UserProfileButton from './components/UserProfileButton';
 import styles from './UserNavigation.module.scss';
+import BurgerButton from './components/BurgerButton';
 
 const UserNavigation = () => {
-  const userType = useAppSelector((state) => state.userDataSlice.data.type);
-  const isRegistered = userType === 'registered';
-  const notRegisteredButtons = (
+  const { authenticationMode } = useAppSelector(
+    (state) => state.userDataSlice.data
+  );
+  const isRegistered = authenticationMode === 'Password';
+  const notRegisteredUserButtons = (
     <>
       <NavLinkButton path={PathNames.register}>Register</NavLinkButton>
       <NavLinkButton path={PathNames.login}>Login</NavLinkButton>
     </>
   );
+  const registeredUserButtons = (
+    <>
+      <LogOutButton />
+      <UserProfileButton />
+    </>
+  );
+
+  const { isMobile } = useMediaQueryContext();
 
   return (
     <nav className={styles.userNavigation}>
-      {isRegistered && <LogOut />}
-      {!isRegistered && notRegisteredButtons}
+      {isRegistered ? registeredUserButtons : notRegisteredUserButtons}
+      {isMobile && <BurgerButton />}
     </nav>
   );
 };

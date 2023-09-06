@@ -1,9 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { IUserDataState, IUserState } from 'types';
+import { IAnonymousUserData, IUserState } from 'types';
 
 const setUserData = (
   state: IUserState,
-  { payload }: PayloadAction<IUserDataState>
+  { payload }: PayloadAction<IAnonymousUserData>
 ) => {
   state.data = payload;
   state.loading = 'succeeded';

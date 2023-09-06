@@ -1,20 +1,19 @@
 import { CustomerDraft } from '@commercetools/platform-sdk';
+import AlertSnackBar from 'components/SnackBar';
 import { Field, Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AlertSnackBar from 'components/SnackBar';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-import { registerUser } from '../../../../store/userDataSlice/thunks';
-import { PathNames } from '../../../../types';
-import Adress from '../adress/Adress';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { registerUser } from 'store/userDataSlice/thunks';
+import { PathNames } from 'types';
+import Address from '../adress/Adress';
 import validCountries from '../adress/constants';
+import NavigateToLogin from '../navigateToLogin';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
-import { IDefaultAdress } from './types';
-import { validateEmail, validateName, validatePassword } from './validation';
-import validateAdresses from './validation/validateAdresses';
-import NavigateToLogin from '../navigateToLogin';
+import { IDefaultAddress } from './types';
+import { validateAddresses, RegistrationSchema } from './validation';
 
 const initialValues: CustomerDraft = {
   firstName: '',
@@ -23,50 +22,56 @@ const initialValues: CustomerDraft = {
   password: '',
   dateOfBirth: BIRTH_INIT_DATA,
   addresses: [
-    { country: validCountries[0], city: '', postalCode: '', streetName: '' },
-    { country: validCountries[0], city: '', postalCode: '', streetName: '' },
+    {
+      country: validCountries[0],
+      city: '',
+      state: '',
+      postalCode: '',
+      streetName: '',
+    },
+    {
+      country: validCountries[0],
+      city: '',
+      state: '',
+      postalCode: '',
+      streetName: '',
+    },
   ],
 };
 
 const Registration: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [shippingAdress, setShippingAdress] = useState<boolean>(false);
-  const [billingAdress, setBillingAdress] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState<boolean>(false);
+  const [billingAddress, setBillingAddress] = useState<boolean>(false);
   const [billingField, setBillingField] = useState<boolean>(true);
 
-  const userType = useAppSelector((state) => state.userDataSlice.data.type);
-  const { registrationAccessCode } = useAppSelector(
-    (state) => state.registrationAccessCodeSlice
-  );
-  const anonymousCartId = useAppSelector(
-    (state) => state.userDataSlice.data.cartId
+  const { authenticationMode } = useAppSelector(
+    (state) => state.userDataSlice.data
   );
 
   useEffect(() => {
-    if (userType === 'registered' && !registrationAccessCode) {
+    if (authenticationMode === 'Password') {
       navigate(PathNames.index, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userType, registrationAccessCode]);
+  }, [authenticationMode]);
 
   return (
     <div className={styles.register}>
       <h1 className={styles.title}>REGISTRATION</h1>
       <Formik<CustomerDraft>
         initialValues={initialValues}
+        validationSchema={RegistrationSchema}
         onSubmit={(value: CustomerDraft) => {
-          const updateAdress: IDefaultAdress = {
+          const updateAddress: IDefaultAddress = {
             isSameBillingFieldAsShipping: billingField,
-            defaultShippingAdress: shippingAdress,
-            defaultBillingAdress: billingAdress,
+            defaultShippingAddress: shippingAddress,
+            defaultBillingAddress: billingAddress,
           };
-          const formData = validateAdresses(value, updateAdress);
-          const data: CustomerDraft = {
-            ...formData,
-            anonymousCartId,
-          };
-          dispatch(registerUser({ registrationData: data }));
+          const formData = validateAddresses(value, updateAddress);
+          dispatch(registerUser({ registrationData: formData }));
         }}
       >
         {({ errors, touched }) => (
@@ -79,7 +84,6 @@ const Registration: React.FC = () => {
                 <Field
                   id="firstName"
                   name="firstName"
-                  validate={validateName}
                   placeholder="First Name*"
                   className={styles.input}
                 />
@@ -92,7 +96,6 @@ const Registration: React.FC = () => {
                 <Field
                   id="lastName"
                   name="lastName"
-                  validate={validateName}
                   placeholder="Last Name*"
                   className={styles.input}
                 />
@@ -107,7 +110,6 @@ const Registration: React.FC = () => {
                 <Field
                   id="email"
                   name="email"
-                  validate={validateEmail}
                   placeholder="email*"
                   className={styles.input}
                 />
@@ -121,7 +123,6 @@ const Registration: React.FC = () => {
                   id="password"
                   type="password"
                   name="password"
-                  validate={validatePassword}
                   placeholder="password*"
                   className={styles.input}
                 />
@@ -131,19 +132,19 @@ const Registration: React.FC = () => {
               </div>
             </div>
             <Select />
-            <div className={styles.adress__container}>
-              <Adress
-                blockTitle="Shipping adress"
+            <div className={styles.address__container}>
+              <Address
+                blockTitle="Shipping address"
                 field={0}
-                adress={shippingAdress}
-                setAdress={setShippingAdress}
+                address={shippingAddress}
+                setAddress={setShippingAddress}
               />
               {!billingField && (
-                <Adress
-                  blockTitle="Billiing adress"
+                <Address
+                  blockTitle="Billing address"
                   field={1}
-                  adress={billingAdress}
-                  setAdress={setBillingAdress}
+                  address={billingAddress}
+                  setAddress={setBillingAddress}
                 />
               )}
             </div>
@@ -153,13 +154,15 @@ const Registration: React.FC = () => {
                 checked={billingField}
                 onChange={() => {
                   setBillingField(!billingField);
-                  setBillingAdress(false);
+                  setBillingAddress(false);
                 }}
               />
-              <span>same shipping and billind adresses</span>
+              <span>same shipping and billing addresses</span>
             </div>
-            <button type="submit">Register</button>
-            <AlertSnackBar />
+            <button type="submit" onClick={() => setOpen(true)}>
+              Register
+            </button>
+            <AlertSnackBar open={open} setOpen={setOpen} />
           </Form>
         )}
       </Formik>

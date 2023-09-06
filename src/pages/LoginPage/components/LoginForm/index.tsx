@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { InputType, LoginFormValues } from 'types';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import { fetchUserLoginData } from 'store/userDataSlice/thunks';
 import { resetUserDataError } from 'store/userDataSlice';
+import { fetchUserLoginData } from 'store/userDataSlice/thunks';
 import { Box, Button, IconButton, TextField } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -11,12 +11,22 @@ import styles from './LoginForm.module.scss';
 import LoginError from './components/LoginError';
 import validationSchema from './helpers/validationSchema';
 import RegistrationLink from './components/RegistrationLink';
+import handleLoginError from './helpers/handleLoginError';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const loginError = useAppSelector((state) => state.userDataSlice.error);
+  const { error } = useAppSelector((state) => state.userDataSlice);
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  useEffect(() => {
+    if (error) {
+      setLoginErrorMessage(handleLoginError(error));
+    } else {
+      setLoginErrorMessage('');
+    }
+  }, [error]);
 
   const formik = useFormik({
     initialValues: {
@@ -32,7 +42,7 @@ const LoginForm = (): JSX.Element => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     formik.handleChange(e);
-    if (loginError) {
+    if (loginErrorMessage) {
       dispatch(resetUserDataError());
     }
   };
@@ -40,7 +50,7 @@ const LoginForm = (): JSX.Element => {
   return (
     <div className={styles.login}>
       <div className={styles.form}>
-        {loginError && <LoginError message={loginError} />}
+        {loginErrorMessage && <LoginError message={loginErrorMessage} />}
         <form noValidate onSubmit={formik.handleSubmit}>
           <Box mb={2}>
             <TextField

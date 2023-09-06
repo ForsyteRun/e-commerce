@@ -1,20 +1,13 @@
-.routingError,
-.oops {
-  user-select: none;
-}
+@import 'styles/mixins.scss';
 
-.routingError {
-  align-items: center;
-  display: flex;
+.container {
+  @include flex(column, center, center);
   flex: 1;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  text-align: center;
 }
 
 .oops {
   font-size: 4rem;
   margin: 0;
   margin-bottom: 1rem;
+  user-select: none;
 }
