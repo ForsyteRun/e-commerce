@@ -12,6 +12,7 @@ import {
 import ProfilePage from 'pages/ProfilePage';
 import CategoryPage from 'pages/CategoryPage';
 import CatalogPage from 'pages/CatalogPage';
+import CartPage from 'pages/CartPage';
 import App from '../App';
 import DynamicRoute from './components/DynamicRoute';
 import { getCategoryData, checkCatalogPath } from './loaders';
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
             element: <Password />,
           },
         ],
+      },
+      {
+        path: PathNames.cart,
+        element: <CartPage />,
       },
       {
         path: PathNames.about,
