@@ -16,6 +16,7 @@ import CartPage from 'pages/CartPage';
 import App from '../App';
 import DynamicRoute from './components/DynamicRoute';
 import { getCategoryData, checkCatalogPath } from './loaders';
+import cartLoader from './loaders/cartLoader';
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,7 @@ const router = createBrowserRouter([
       {
         path: PathNames.cart,
         element: <CartPage />,
+        loader: cartLoader,
       },
       {
         path: PathNames.about,
