@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 import createAnonymousUser from './createAnonymousUser';
-import { getRegisteredUserData } from '../helpers';
+import getRegisteredUserData from '../helpers/getRegisteredUserData';
 
 const fetchUserDataByRefreshToken = createAsyncThunk(
   'userData/fetchUserDataByRefreshToken',

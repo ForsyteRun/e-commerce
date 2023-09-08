@@ -9,7 +9,6 @@ import {
   registerUser,
   updateUserData,
 } from './thunks';
-// import { setUserData } from './helpers';
 
 const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
   builder

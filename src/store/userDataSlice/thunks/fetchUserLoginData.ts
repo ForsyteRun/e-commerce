@@ -4,7 +4,7 @@ import { LoginFormValues } from 'types';
 import createCredentialFlow from 'services/sdkClient/createCredentialFlow';
 import createPasswordFlowClientApi from 'services/sdkClient/createPasswordFlowClientApi';
 import fetchCartData from 'store/cartSlice/fetchCartData';
-import { getRegisteredUserData } from '../helpers';
+import getRegisteredUserData from '../helpers/getRegisteredUserData';
 
 const fetchUserLoginData = createAsyncThunk(
   'userData/fetchUserLoginData',
