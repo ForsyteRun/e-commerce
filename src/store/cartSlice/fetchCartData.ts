@@ -13,9 +13,7 @@ const fetchCartData = createAsyncThunk(
       .activeCart()
       .get()
       .execute()
-      .then((res) => {
-        return getCartData(res.body);
-      })
+      .then((res) => getCartData(res.body))
       .catch((err: _ErrorResponse) => {
         if (err.statusCode === 404) {
           api
@@ -23,9 +21,7 @@ const fetchCartData = createAsyncThunk(
             .carts()
             .post({ body: { currency: 'EUR' } })
             .execute()
-            .then((res) => {
-              return getCartData(res.body);
-            })
+            .then((res) => getCartData(res.body))
             .catch((error: _ErrorResponse) => rejectWithValue({ ...error }));
         }
 
