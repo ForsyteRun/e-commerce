@@ -8,6 +8,7 @@ import {
   updateRefreshTokenCookie,
   removeRefreshTokenCookie,
 } from './processRefreshTokenCookie';
+import addToCartHandler from './addToCartHandler';
 
 export {
   findDataItemBySlug,
@@ -19,4 +20,5 @@ export {
   getRefreshTokenCookie,
   updateRefreshTokenCookie,
   removeRefreshTokenCookie,
+  addToCartHandler,
 };
