@@ -11,7 +11,7 @@ import {
 import styles from './ProductCard.module.scss';
 
 const ProductCard = ({ data }: { data: IProductData }) => {
-  const { name, images, price, attributes, sku, slug, categories } = data;
+  const { name, images, price, attributes, sku, slug, categories, id } = data;
   const image = images ? images[0] : undefined;
 
   const path = generateProductPath(slug, categories[0]);
@@ -23,7 +23,7 @@ const ProductCard = ({ data }: { data: IProductData }) => {
         <ProductImage name={name} url={image} />
         <ProductCardContent attributes={attributes} name={name} sku={sku} />
       </NavLink>
-      {price && <ProductCardPrice price={price} />}
+      {price && <ProductCardPrice productId={id} price={price} />}
     </Card>
   );
 };

@@ -4,7 +4,12 @@ import ProductPrice from './ProductPrice';
 import AddToCartButton from '../AddToCartButton';
 import styles from './ProductCardPrice.module.scss';
 
-const ProductCardPrice = ({ price }: { price: IPriceData }) => {
+interface IProductCardPriceProps {
+  price: IPriceData;
+  productId: string;
+}
+
+const ProductCardPrice = ({ price, productId }: IProductCardPriceProps) => {
   return (
     <CardActions className={styles.cardActions}>
       <div className={styles.priceInfo}>
@@ -17,7 +22,7 @@ const ProductCardPrice = ({ price }: { price: IPriceData }) => {
           <ProductPrice price={price.discounted} type="discounted" />
         )}
       </div>
-      <AddToCartButton />
+      <AddToCartButton productId={productId} />
     </CardActions>
   );
 };

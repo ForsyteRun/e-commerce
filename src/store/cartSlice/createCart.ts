@@ -1,20 +1,20 @@
-import { CartDraft } from '@commercetools/platform-sdk';
+import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
+import getCartData from './helpers/getCartData';
 
 const createCart = createAsyncThunk(
   'cart/createCart',
-  async (body: CartDraft) => {
+  async (_, { rejectWithValue }) => {
     const api = createRefreshTokenClientApi();
 
     const response = await api
       .me()
       .carts()
-      .post({ body })
+      .post({ body: { currency: 'EUR' } })
       .execute()
-      // eslint-disable-next-line no-console
-      .then((res) => console.log(res))
-      .catch(() => {});
+      .then((res) => getCartData(res.body))
+      .catch((error: _ErrorResponse) => rejectWithValue({ ...error }));
 
     return response;
   }
