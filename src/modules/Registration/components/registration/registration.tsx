@@ -8,7 +8,7 @@ import { registerUser } from 'store/userDataSlice/thunks';
 import { PathNames } from 'types';
 import Address from '../adress/Adress';
 import validCountries from '../adress/constants';
-import NavigateToLogin from '../navigateToLogin';
+import NavigateToLogin from '../NavigateToLogin';
 import Select from '../select/select';
 import { BIRTH_INIT_DATA } from './constant';
 import styles from './registration.module.scss';
@@ -47,7 +47,7 @@ const Registration: React.FC = () => {
   const [billingAddress, setBillingAddress] = useState<boolean>(false);
   const [billingField, setBillingField] = useState<boolean>(true);
 
-  const { authenticationMode } = useAppSelector(
+  const { authenticationMode, id } = useAppSelector(
     (state) => state.userDataSlice.data
   );
 
@@ -71,7 +71,11 @@ const Registration: React.FC = () => {
             defaultBillingAddress: billingAddress,
           };
           const formData = validateAddresses(value, updateAddress);
-          dispatch(registerUser({ registrationData: formData }));
+          dispatch(
+            registerUser({
+              registrationData: { ...formData, anonymousId: id || undefined },
+            })
+          );
         }}
       >
         {({ errors, touched }) => (

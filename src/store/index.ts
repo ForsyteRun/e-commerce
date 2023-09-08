@@ -5,6 +5,7 @@ import registrationAccessCodeSlice from './registration/registrationAccess.slice
 import userDataSlice from './userDataSlice';
 import productsDataSlice from './productsDataSlice';
 import singleProductDataSlice from './singleProductDataSlice';
+import cartSlice from './cartSlice';
 
 const reducer = {
   registrationAccessCodeSlice,
@@ -13,6 +14,7 @@ const reducer = {
   singleProductDataSlice,
   categoriesSlice,
   sortSlice,
+  cartSlice,
 };
 
 const store = configureStore({

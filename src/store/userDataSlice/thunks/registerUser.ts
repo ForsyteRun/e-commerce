@@ -8,12 +8,17 @@ import { RegisterUserProps } from './types';
 
 const registerUser = createAsyncThunk(
   'userData/registerUser',
-  async ({ registrationData }: RegisterUserProps, { dispatch }) => {
+  async (
+    { registrationData }: RegisterUserProps,
+    { dispatch, rejectWithValue }
+  ) => {
     const api = createRefreshTokenClientApi();
 
     const request = await api
       .customers()
-      .post({ body: registrationData })
+      .post({
+        body: registrationData,
+      })
       .execute()
       .then((res) => {
         const isUserCreated =
@@ -28,6 +33,7 @@ const registerUser = createAsyncThunk(
           };
 
           dispatch(fetchUserLoginData(loginData));
+
           dispatch(
             getRegistrationAccessCode(
               RequestStatusCode.Created && RequestStatusCode.OK
@@ -37,6 +43,7 @@ const registerUser = createAsyncThunk(
       })
       .catch((err: _ErrorResponse) => {
         dispatch(getRegistrationAccessCode(err.statusCode));
+        return rejectWithValue({ ...err });
       });
 
     return request;

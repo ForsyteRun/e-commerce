@@ -1,6 +1,8 @@
 import {
   AuthenticationMode,
+  CentPrecisionMoney,
   Customer,
+  LineItem,
   ProductProjectionPagedQueryResponse,
   _ErrorResponse,
 } from '@commercetools/platform-sdk';
@@ -63,6 +65,7 @@ export type GetNavLinkButtonStyles = (
 export interface LoginFormValues {
   email: string;
   password: string;
+  anonymousId?: string;
 }
 
 export enum InputType {
@@ -114,6 +117,17 @@ interface IStoreBasicData {
 
 export interface IUserState extends IStoreBasicData {
   data: IAnonymousUserData | RegisteredUserData;
+}
+
+export interface ICartData {
+  id: string;
+  version: number;
+  lineItems: LineItem[];
+  totalPrice: CentPrecisionMoney;
+}
+
+export interface ICartState extends IStoreBasicData {
+  data: ICartData;
 }
 
 export interface ICategoryData {
@@ -186,7 +200,8 @@ export type AppState =
   | IUserState
   | IProductsData
   | ISingleProductData
-  | ICategoriesState;
+  | ICategoriesState
+  | ICartState;
 
 export interface IProductsQuery {
   limit?: number;
