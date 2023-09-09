@@ -1,6 +1,6 @@
 import { useAppSelector } from 'hooks/useRedux';
 import Cart from 'modules/Cart';
-import EmptyCart from 'modules/Cart/components';
+import { EmptyCart } from 'modules/Cart/components';
 
 const CartPage = () => {
   const { data } = useAppSelector((state) => state.cartSlice);
