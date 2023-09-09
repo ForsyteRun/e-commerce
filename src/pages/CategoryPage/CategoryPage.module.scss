@@ -37,10 +37,6 @@
   flex-direction: column;
   justify-content: space-between;
   row-gap: 2rem;
-
-  @media screen and (max-width: 964px) {
-    min-height: 0%;
-  }
 }
 
 .products {
