@@ -2,7 +2,7 @@ import { MyCustomerUpdate, _ErrorResponse } from '@commercetools/platform-sdk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
-import { getRegisteredUserData } from '../helpers';
+import getRegisteredUserData from '../helpers/getRegisteredUserData';
 import fetchUserDataByRefreshToken from './fetchUserDataByRefreshToken';
 
 const updateAddress = createAsyncThunk(

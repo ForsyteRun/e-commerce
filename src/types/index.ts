@@ -127,7 +127,7 @@ export interface ICartData {
 }
 
 export interface ICartState extends IStoreBasicData {
-  data: ICartData;
+  data: ICartData | null;
 }
 
 export interface ICategoryData {
