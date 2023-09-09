@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { LineItem } from '@commercetools/platform-sdk';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { Localization } from 'types';
@@ -35,4 +36,5 @@ const CartItem = ({ item }: ICartItem) => {
     </Stack>
   );
 };
+
 export default CartItem;
