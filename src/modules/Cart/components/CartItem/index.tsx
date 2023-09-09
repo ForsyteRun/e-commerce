@@ -35,5 +35,4 @@ const CartItem = ({ item }: ICartItem) => {
     </Stack>
   );
 };
-
 export default CartItem;

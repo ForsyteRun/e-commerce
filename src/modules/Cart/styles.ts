@@ -11,8 +11,8 @@ export const container: SxProps = {
 };
 
 export const mainBlock: SxProps = {
-  flexBasis: '50%',
   p: '1rem 1.5rem',
+  flexBasis: '50%',
   '@media (max-width: 768px)': {
     flexBasis: '57%',
   },
