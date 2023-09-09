@@ -5,6 +5,7 @@ import Header from 'components/Header';
 import BurgerModal from 'components/BurgerModal';
 import { AppProvider } from 'context';
 import { identificateUserOnAppStart } from 'helpers';
+import CssBaseline from '@mui/material/CssBaseline';
 import styles from './App.module.scss';
 
 const App = () => {
@@ -14,15 +15,18 @@ const App = () => {
 
   return (
     <AppProvider>
-      <div className={styles.container}>
-        <BurgerModal />
-        <Header />
-        <main>
-          <Wrapper>
-            <Outlet />
-          </Wrapper>
-        </main>
-      </div>
+      <>
+        <CssBaseline />
+        <div className={styles.container}>
+          <BurgerModal />
+          <Header />
+          <main>
+            <Wrapper>
+              <Outlet />
+            </Wrapper>
+          </main>
+        </div>
+      </>
     </AppProvider>
   );
 };
