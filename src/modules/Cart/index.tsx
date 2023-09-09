@@ -1,19 +1,14 @@
 import { LineItem } from '@commercetools/platform-sdk';
-import { Stack, Paper, Typography } from '@mui/material';
-import CartItem from './components/CartItem';
+import { Paper, Stack, Typography } from '@mui/material';
+import { PriceBlock, CartItem } from './components';
+import { container, mainBlock } from './styles';
+import { ICart } from './types';
 
-interface ICart {
-  lineItems: LineItem[];
-}
 const Cart = ({ lineItems }: ICart) => {
   return (
-    <Stack
-      flexDirection="row"
-      justifyContent="space-around"
-      sx={{ width: '100%' }}
-    >
-      <Paper sx={{ p: '1rem 2rem' }}>
-        <Typography variant="h4">Your orders</Typography>
+    <Stack sx={container}>
+      <Paper sx={mainBlock}>
+        <Typography variant="h4">Your order</Typography>
         <Typography variant="body2" color="GrayText">
           2 items for 1000 Euro
         </Typography>
@@ -21,7 +16,7 @@ const Cart = ({ lineItems }: ICart) => {
           <CartItem key={item.id} />
         ))}
       </Paper>
-      <Paper>45</Paper>
+      <PriceBlock />
     </Stack>
   );
 };
