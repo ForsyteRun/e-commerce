@@ -1,6 +1,7 @@
 import { LineItem } from '@commercetools/platform-sdk';
 
 export interface IPriceItem {
+  title: string;
   price?: number;
   address?: string;
 }
