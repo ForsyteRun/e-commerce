@@ -1,21 +1,13 @@
-import { CartDraft } from '@commercetools/platform-sdk';
-import { useAppDispatch } from 'hooks/useRedux';
+import { useAppSelector } from 'hooks/useRedux';
+import Cart from 'modules/Cart';
 import EmptyCart from 'modules/Cart/components';
-import { useEffect } from 'react';
-import createCart from '../../store/cartSlice/createCart';
 
 const CartPage = () => {
-  const dispatch = useAppDispatch();
+  const { data } = useAppSelector((state) => state.cartSlice);
 
-  useEffect(() => {
-    const data: CartDraft = {
-      currency: 'EUR',
-    };
+  const isCartNotEmpty = data && data.lineItems.some(() => true);
 
-    dispatch(createCart(data));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return <EmptyCart />;
+  return !isCartNotEmpty ? <Cart lineItems={data.lineItems} /> : <EmptyCart />;
 };
 
 export default CartPage;
