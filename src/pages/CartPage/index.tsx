@@ -7,7 +7,7 @@ const CartPage = () => {
 
   const isCartNotEmpty = data && data.lineItems.some(() => true);
 
-  return !isCartNotEmpty ? <Cart lineItems={data.lineItems} /> : <EmptyCart />;
+  return isCartNotEmpty ? <Cart lineItems={data.lineItems} /> : <EmptyCart />;
 };
 
 export default CartPage;
