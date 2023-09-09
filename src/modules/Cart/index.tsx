@@ -13,7 +13,7 @@ const Cart = ({ lineItems }: ICart) => {
           2 items for 1000 Euro
         </Typography>
         {lineItems.map((item: LineItem) => (
-          <CartItem key={item.id} />
+          <CartItem key={item.id} item={item} />
         ))}
       </Paper>
       <PriceBlock />
