@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
-import createAnonymousUser from './createAnonymousUser';
+import { createAnonymousCart } from 'store/cartSlice/thunks';
 import getRegisteredUserData from '../helpers/getRegisteredUserData';
 
 const fetchUserDataByRefreshToken = createAsyncThunk(
@@ -19,7 +19,7 @@ const fetchUserDataByRefreshToken = createAsyncThunk(
           err.message ===
           'The refresh token was not found. It may have expired.';
         if (isNoRefreshToken || err.statusCode === 403) {
-          dispatch(createAnonymousUser());
+          dispatch(createAnonymousCart());
         }
         return rejectWithValue({ ...err });
       });

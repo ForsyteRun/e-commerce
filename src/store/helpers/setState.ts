@@ -3,15 +3,13 @@ import {
   IUserState,
   ICartData,
   ICartState,
-  IAnonymousUserData,
+  IUserData,
   RegisteredUserData,
 } from 'types';
 
 const setState = (
   state: ICartState | IUserState,
-  {
-    payload,
-  }: PayloadAction<ICartData | IAnonymousUserData | RegisteredUserData>
+  { payload }: PayloadAction<ICartData | IUserData | RegisteredUserData>
 ) => {
   state.data = payload;
   state.loading = 'succeeded';

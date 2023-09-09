@@ -1,5 +1,5 @@
 import store from 'store';
-import fetchCartData from 'store/cartSlice/fetchCartData';
+import { fetchCartData } from 'store/cartSlice/thunks';
 
 const cartLoader = () => {
   const { dispatch } = store;

@@ -6,7 +6,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 import { getRegistrationAccessCode } from 'store/registration/registrationAccess.slice';
 import { LoginFormValues, RequestStatusCode } from 'types';
-import createAnonymousUser from './createAnonymousUser';
+import { createAnonymousCart } from 'store/cartSlice/thunks';
 import fetchUserLoginData from './fetchUserLoginData';
 
 const updatePassword = createAsyncThunk(
@@ -25,7 +25,7 @@ const updatePassword = createAsyncThunk(
 
         if (isPasswordUpdate) {
           dispatch(getRegistrationAccessCode(res.statusCode!));
-          await dispatch(createAnonymousUser());
+          await dispatch(createAnonymousCart());
 
           const loginData: LoginFormValues = {
             email: res.body.email,

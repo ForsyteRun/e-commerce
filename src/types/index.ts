@@ -86,7 +86,7 @@ export interface LoginErrorProps {
   message: string;
 }
 
-export interface IAnonymousUserData {
+export interface IUserData {
   authenticationMode: AuthenticationMode;
   id: string | null | undefined;
   version?: number;
@@ -116,7 +116,7 @@ interface IStoreBasicData {
 }
 
 export interface IUserState extends IStoreBasicData {
-  data: IAnonymousUserData | RegisteredUserData;
+  data: IUserData | RegisteredUserData;
 }
 
 export interface ICartData {
