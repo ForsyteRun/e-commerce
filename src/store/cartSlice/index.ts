@@ -4,7 +4,17 @@ import { ICartState } from 'types';
 import getCartData from './fetchCartData';
 
 const initialState: ICartState = {
-  data: null,
+  data: {
+    id: '',
+    version: 0,
+    lineItems: [],
+    totalPrice: {
+      type: 'centPrecision',
+      centAmount: 0,
+      currencyCode: '',
+      fractionDigits: 0,
+    },
+  },
   loading: 'idle',
   error: null,
 };
