@@ -10,17 +10,7 @@ import {
 } from './thunks';
 
 const initialState: ICartState = {
-  data: {
-    id: '',
-    version: 0,
-    lineItems: [],
-    totalPrice: {
-      type: 'centPrecision',
-      centAmount: 0,
-      currencyCode: '',
-      fractionDigits: 0,
-    },
-  },
+  data: null,
   loading: 'idle',
   error: null,
 };
