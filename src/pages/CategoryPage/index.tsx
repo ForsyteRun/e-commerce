@@ -14,7 +14,6 @@ const CategoryPage = () => {
   return (
     <section className={styles.category}>
       <div className={styles.container}>
-        {/* <FilterSideBar /> */}
         <div className={styles.control}>
           <Sort />
           <SearchBar />

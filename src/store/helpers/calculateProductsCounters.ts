@@ -5,7 +5,7 @@ const calculateProductsCounters = (
   counters: Omit<ProductProjectionPagedQueryResponse, 'results'>
 ): IProductsCounters => {
   const { total, limit, offset } = counters;
-  let page = Math.ceil(offset / limit) + 1;
+  let page = Math.ceil((offset * limit) / limit);
   const totalPages = total ? Math.ceil(total / limit) : 1;
 
   if (page < 1) {
