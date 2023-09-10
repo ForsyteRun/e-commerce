@@ -3,7 +3,6 @@ import { setRejectedStatus, setPendingStatus } from 'store/helpers';
 import setState from 'store/helpers/setState';
 import { IUserState } from 'types';
 import {
-  createAnonymousUser,
   fetchUserDataByRefreshToken,
   fetchUserLoginData,
   registerUser,
@@ -12,9 +11,6 @@ import {
 
 const extraReducers = (builder: ActionReducerMapBuilder<IUserState>): void => {
   builder
-    .addCase(createAnonymousUser.pending, setPendingStatus)
-    .addCase(createAnonymousUser.fulfilled, setState)
-    .addCase(createAnonymousUser.rejected, setRejectedStatus)
     .addCase(fetchUserDataByRefreshToken.pending, setPendingStatus)
     .addCase(fetchUserDataByRefreshToken.fulfilled, setState)
     .addCase(fetchUserDataByRefreshToken.rejected, setRejectedStatus)

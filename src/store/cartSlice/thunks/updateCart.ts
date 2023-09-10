@@ -5,7 +5,7 @@ import {
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 import store from 'store';
-import getCartData from './helpers/getCartData';
+import getCartData from '../helpers/getCartData';
 
 const updateCart = createAsyncThunk(
   'cart/update',

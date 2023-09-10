@@ -3,22 +3,17 @@ import { useRouteError } from 'react-router-dom';
 import Header from 'components/Header';
 import NavLinkButton from 'UI/NavLinkButton';
 import Wrapper from 'UI/Wrapper';
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import identificateUserOnAppStart from 'helpers/identificateUserOnAppStart';
 import { PathNames } from 'types';
+import { identifyUser } from 'helpers';
 import RoutingErrorMessage from './components/RoutingErrorMessage';
 import styles from './RoutingError.module.scss';
 
 const RoutingError = () => {
-  const dispatch = useAppDispatch();
-  const { authenticationMode } = useAppSelector(
-    (state) => state.userDataSlice.data
-  );
   const error = useRouteError();
   const message = RoutingErrorMessage(error);
 
   useEffect(() => {
-    identificateUserOnAppStart(dispatch, authenticationMode);
+    identifyUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,8 +1,8 @@
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
-import getCartData from './helpers/getCartData';
 import createCart from './createCart';
+import getCartData from '../helpers/getCartData';
 
 const fetchCartData = createAsyncThunk(
   'cart/fetchData',

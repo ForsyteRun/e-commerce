@@ -19,9 +19,13 @@ const userDataSlice = createSlice({
       state.loading = 'idle';
       state.error = null;
     },
+    setIdentifyUserData(state: IUserState, { payload }) {
+      state.data = payload;
+    },
   },
   extraReducers,
 });
 
-export const { resetUserDataError } = userDataSlice.actions;
+export const { resetUserDataError, setIdentifyUserData } =
+  userDataSlice.actions;
 export default userDataSlice.reducer;

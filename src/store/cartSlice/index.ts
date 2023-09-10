@@ -2,8 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { setPendingStatus, setRejectedStatus } from 'store/helpers';
 import setState from 'store/helpers/setState';
 import { ICartState } from 'types';
-import fetchCartData from './fetchCartData';
-import updateCart from './updateCart';
+import {
+  fetchCartData,
+  updateCart,
+  fetchCartOnStart,
+  createAnonymousCart,
+} from './thunks';
 
 const initialState: ICartState = {
   data: null,
@@ -17,6 +21,12 @@ const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(fetchCartOnStart.pending, setPendingStatus)
+      .addCase(fetchCartOnStart.fulfilled, setState)
+      .addCase(fetchCartOnStart.rejected, setRejectedStatus)
+      .addCase(createAnonymousCart.pending, setPendingStatus)
+      .addCase(createAnonymousCart.fulfilled, setState)
+      .addCase(createAnonymousCart.rejected, setRejectedStatus)
       .addCase(fetchCartData.pending, setPendingStatus)
       .addCase(fetchCartData.fulfilled, setState)
       .addCase(fetchCartData.rejected, setRejectedStatus)
