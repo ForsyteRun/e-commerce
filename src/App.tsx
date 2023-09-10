@@ -4,7 +4,7 @@ import Wrapper from 'UI/Wrapper';
 import BurgerModal from 'components/BurgerModal';
 import Header from 'components/Header';
 import { AppProvider } from 'context';
-import { identificateUserOnAppStart } from 'helpers';
+import { identifyUser } from 'helpers';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import theme from './theme';

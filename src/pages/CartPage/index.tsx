@@ -4,7 +4,6 @@ import { EmptyCart } from 'modules/Cart/components';
 
 const CartPage = () => {
   const { data } = useAppSelector((state) => state.cartSlice);
-  const { data } = useAppSelector((state) => state.cartSlice);
 
   const isCartNotEmpty = !!data?.lineItems.length;
 
