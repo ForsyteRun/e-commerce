@@ -1,5 +1,4 @@
 import { useAppSelector } from 'hooks/useRedux';
-// import FilterSideBar from './components/FilterSideBar';
 import ProductPagination from 'pages/CategoryPage/components/ProductPagination';
 import Spinner from 'UI/Spinner';
 import ProductsList from './components/ProductsList';
