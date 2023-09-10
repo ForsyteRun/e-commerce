@@ -24,7 +24,6 @@ const productsDataSlice = createSlice({
       .addCase(fetchProductsData.pending, (state) => {
         setPendingStatus(state);
         state.data = null;
-        state.counters = null;
       })
       .addCase(fetchProductsData.fulfilled, (state, { payload }) => {
         const { results, ...counts } = payload;

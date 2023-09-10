@@ -18,8 +18,7 @@ const SortButton = ({ by }: { by: SortBy }) => {
 
   useEffect(() => {
     setCategoryId(getCategoryIdByParams(params));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [params]);
 
   return (
     <Button
