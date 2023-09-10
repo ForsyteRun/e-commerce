@@ -6,17 +6,7 @@ import fetchCartData from './fetchCartData';
 import updateCart from './updateCart';
 
 const initialState: ICartState = {
-  data: {
-    id: '',
-    version: 0,
-    lineItems: [],
-    totalPrice: {
-      type: 'centPrecision',
-      centAmount: 0,
-      currencyCode: '',
-      fractionDigits: 0,
-    },
-  },
+  data: null,
   loading: 'idle',
   error: null,
 };
