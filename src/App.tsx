@@ -10,7 +10,6 @@ import styles from './App.module.scss';
 const App = () => {
   useEffect(() => {
     identifyUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

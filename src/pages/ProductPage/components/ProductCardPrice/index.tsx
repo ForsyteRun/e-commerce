@@ -1,8 +1,7 @@
 import { CardActions } from '@mui/material';
 import { useAppSelector } from 'hooks/useRedux';
 import { IPriceData } from 'types';
-import AddToCartButton from '../AddToCartButton';
-import RemoveFromCartButton from '../RemoveFromCartButton';
+import { AddToCartButton, RemoveFromCartButton } from 'UI/CartActionButton';
 import styles from './ProductCardPrice.module.scss';
 import ProductPrice from './ProductPrice';
 
@@ -23,8 +22,8 @@ const ProductCardPrice = ({ price }: { price: IPriceData }) => {
           <ProductPrice price={price.discounted} type="discounted" />
         )}
       </div>
-      {data && !isInCart && <AddToCartButton />}
-      {data && isInCart && <RemoveFromCartButton />}
+      {data && !isInCart && <AddToCartButton id={id} />}
+      {data && isInCart && <RemoveFromCartButton id={id} />}
     </CardActions>
   );
 };
