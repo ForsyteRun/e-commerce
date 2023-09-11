@@ -8,6 +8,7 @@ import {
   removeRefreshTokenCookie,
 } from './processRefreshTokenCookie';
 import addToCartHandler from './addToCartHandler';
+import removeFromCartHandler from './removeFromCartHandler';
 import identifyUser from './identifyUser';
 
 export {
@@ -21,4 +22,5 @@ export {
   removeRefreshTokenCookie,
   addToCartHandler,
   identifyUser,
+  removeFromCartHandler,
 };

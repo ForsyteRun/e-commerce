@@ -1,20 +1,19 @@
 import { Button } from '@mui/material';
+import AddShoppingCartRoundedIcon from '@mui/icons-material/AddShoppingCartRounded';
 import { useAppSelector } from 'hooks/useRedux';
 import { addToCartHandler } from 'helpers';
 import buttonStyles from './buttonStyles';
 
 const AddToCartButton = () => {
   const { id } = useAppSelector((state) => state.singleProductDataSlice.data!);
-  const { data } = useAppSelector((state) => state.cartSlice);
-  const isInCart = !!data?.lineItems.find((item) => item.productId === id);
 
   return (
     <Button
-      disabled={isInCart}
       onClick={() => addToCartHandler(id)}
       variant="contained"
       sx={buttonStyles}
     >
+      <AddShoppingCartRoundedIcon sx={{ mr: '0.5rem' }} />
       Add to cart
     </Button>
   );
