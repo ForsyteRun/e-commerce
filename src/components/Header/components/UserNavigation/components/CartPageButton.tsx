@@ -3,9 +3,14 @@ import { IconButton } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import useIconButtonColorTheme from 'helpers/useIconButtonColorTheme';
 import { PathNames } from 'types';
+import Badge from '@mui/material/Badge';
+import { useAppSelector } from 'hooks/useRedux';
 
 const CartPageButton = () => {
   const { pathname } = useLocation();
+  const { data } = useAppSelector((state) => state.cartSlice);
+
+  const badgeItemCount = data?.lineItems.length;
 
   return (
     <IconButton
@@ -15,7 +20,9 @@ const CartPageButton = () => {
       sx={useIconButtonColorTheme('103, 58, 183')}
       size="large"
     >
-      <ShoppingCartIcon sx={{ fontSize: '1.8rem' }} />
+      <Badge badgeContent={badgeItemCount} color="primary">
+        <ShoppingCartIcon sx={{ fontSize: '1.8rem' }} />
+      </Badge>
     </IconButton>
   );
 };

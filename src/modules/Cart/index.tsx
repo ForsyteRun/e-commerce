@@ -1,8 +1,8 @@
-import { LineItem } from '@commercetools/platform-sdk';
 import { Paper, Stack, Typography } from '@mui/material';
 import { PriceBlock, CartItem } from './components';
 import { container, mainBlock } from './styles';
 import { ICart } from './types';
+import { LineItem } from '@commercetools/platform-sdk';
 
 const Cart = ({ lineItems }: ICart) => {
   return (
