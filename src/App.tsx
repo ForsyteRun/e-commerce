@@ -2,6 +2,7 @@ import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Wrapper from 'UI/Wrapper';
 import BurgerModal from 'components/BurgerModal';
+import AppSnackbar from 'components/AppSnackbar';
 import Header from 'components/Header';
 import { AppProvider } from 'context';
 import { identifyUser } from 'helpers';
@@ -27,6 +28,7 @@ const App = () => {
               <Outlet />
             </Wrapper>
           </main>
+          <AppSnackbar />
         </div>
       </ThemeProvider>
     </AppProvider>
