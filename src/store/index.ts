@@ -6,6 +6,7 @@ import userDataSlice from './userDataSlice';
 import productsDataSlice from './productsDataSlice';
 import singleProductDataSlice from './singleProductDataSlice';
 import cartSlice from './cartSlice';
+import snackbarSlice from './snackbarSlice';
 
 const reducer = {
   registrationAccessCodeSlice,
@@ -15,6 +16,7 @@ const reducer = {
   categoriesSlice,
   sortSlice,
   cartSlice,
+  snackbarSlice,
 };
 
 const store = configureStore({
