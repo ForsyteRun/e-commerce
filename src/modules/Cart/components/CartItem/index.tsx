@@ -2,13 +2,17 @@ import { LineItem } from '@commercetools/platform-sdk';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { Localization } from 'types';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EuroIcon from '@mui/icons-material/Euro';
 
 interface ICartItem {
   item: LineItem;
 }
 
 const CartItem = ({ item }: ICartItem) => {
-  const { name, quantity, variant, price } = item;
+  const { name, quantity, variant, totalPrice } = item;
+
+  const convertEuroCentToEuro = totalPrice.centAmount / 100;
+
   return (
     <Stack flexDirection="row" gap="1rem" sx={{ p: '1rem 0.5rem' }}>
       <Box sx={{ width: '70px', height: '70px' }}>
@@ -30,7 +34,7 @@ const CartItem = ({ item }: ICartItem) => {
       </Stack>
       <Stack alignItems="flex-end" justifyContent="space-between">
         <DeleteOutlineIcon sx={{ cursor: 'pointer' }} />
-        <Typography variant="h5">{price.value.centAmount}</Typography>
+        <Typography variant="h5">{convertEuroCentToEuro} €</Typography>
       </Stack>
     </Stack>
   );
