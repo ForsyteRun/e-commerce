@@ -1,11 +1,14 @@
-import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import Wrapper from 'UI/Wrapper';
-import Header from 'components/Header';
 import BurgerModal from 'components/BurgerModal';
 import AppSnackbar from 'components/AppSnackbar';
+import Header from 'components/Header';
 import { AppProvider } from 'context';
 import { identifyUser } from 'helpers';
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import theme from './theme';
 import styles from './App.module.scss';
 
 const App = () => {
@@ -15,16 +18,19 @@ const App = () => {
 
   return (
     <AppProvider>
-      <div className={styles.container}>
-        <BurgerModal />
-        <Header />
-        <main>
-          <Wrapper>
-            <Outlet />
-          </Wrapper>
-        </main>
-        <AppSnackbar />
-      </div>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className={styles.container}>
+          <BurgerModal />
+          <Header />
+          <main>
+            <Wrapper>
+              <Outlet />
+            </Wrapper>
+          </main>
+          <AppSnackbar />
+        </div>
+      </ThemeProvider>
     </AppProvider>
   );
 };

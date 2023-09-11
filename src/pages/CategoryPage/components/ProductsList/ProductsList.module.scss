@@ -1,0 +1,19 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem auto;
+
+  @media screen and (max-width: 964px) {
+    grid-template-columns: repeat(2, 300px);
+  }
+
+  @media screen and (max-width: 648px) {
+    grid-template-columns: repeat(1, 300px);
+  }
+
+  @media screen and (max-width: 350px) {
+    grid-template-columns: repeat(1, 288px);
+  }
+}

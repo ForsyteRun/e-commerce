@@ -17,8 +17,8 @@ const fetchProductsData = createAsyncThunk(
     }
 
     const queryArgs = {
-      limit: 9,
-      offset: 0,
+      limit: 3,
+      offset: _query?.offset || 0,
       filter,
       sort: _query?.sort,
       'text.en-US': _query?.searchValue,
