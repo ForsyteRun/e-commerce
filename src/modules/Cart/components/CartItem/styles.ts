@@ -1,6 +1,22 @@
 import { SxProps } from '@mui/material';
 import theme from 'theme';
 
+export const titleContainer: SxProps = {
+  flex: 1,
+  justifyContent: 'space-between',
+  ml: '1rem',
+  [theme.breakpoints.down('xs')]: {},
+};
+
+export const title: SxProps = {
+  [theme.breakpoints.down('smPlus')]: {
+    fontSize: '1rem',
+  },
+  [theme.breakpoints.down('xs')]: {
+    fontSize: '0.7rem',
+  },
+};
+
 export const container: SxProps = {
   flexDirection: 'row',
   gap: '1rem',

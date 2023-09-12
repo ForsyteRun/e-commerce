@@ -7,7 +7,11 @@ const DeleteItemButton = ({ id }: { id: string }) => {
   return (
     <IconButton
       onClick={() => removeFromCartHandler(id)}
-      sx={useIconButtonColorTheme('255, 75, 75')}
+      sx={{
+        ...useIconButtonColorTheme('255, 75, 75'),
+        width: '24px',
+        height: '24px',
+      }}
     >
       <DeleteForeverOutlinedIcon />
     </IconButton>

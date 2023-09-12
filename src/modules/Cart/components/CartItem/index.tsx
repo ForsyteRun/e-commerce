@@ -1,42 +1,33 @@
-import { Box, Stack, Typography } from '@mui/material';
 import { LineItem } from '@commercetools/platform-sdk';
-import calculatePriceByFraction from 'helpers/calculatePriceByFraction';
+import { localizedStringToString } from 'helpers';
 import DeleteItemButton from './components/DeleteItemButton';
-import CartItemQuantity from './components/CartItemQuantity';
-import { container, priceTitle, imgContainer } from './styles';
+import styles from './CartItem.module.scss';
+import ItemPrice from './components/ItemPrice';
+import ItemCounter from './components/ItemCounter';
 
-interface ICartItem {
-  item: LineItem;
-}
+const CartItem = ({ item }: { item: LineItem }) => {
+  const { name, variant, productId, price, quantity } = item;
 
-const CartItem = ({ item }: ICartItem) => {
-  const { variant, totalPrice, productId } = item;
-
-  const convertedPrice = calculatePriceByFraction(totalPrice);
+  const localizedName = localizedStringToString('en-US')(name);
+  const imageUrl = variant.images && variant.images[0].url;
 
   return (
-    <Stack sx={container}>
-      <Box sx={imgContainer}>
-        <img
-          src={variant.images && variant.images[0].url}
-          alt=""
-          srcSet=""
-          width="100%"
-          height="100%"
-        />
-      </Box>
-      <CartItemQuantity item={item} />
-      <Stack
-        alignItems="flex-end"
-        justifyContent="space-between"
-        sx={{ flexBasis: '20%', gap: '10px' }}
-      >
+    <article className={styles.item}>
+      <section className={styles.item_details_section}>
+        <img className={styles.item_image} src={imageUrl} alt={localizedName} />
+        <h4 className={styles.item_title}>{localizedName}</h4>
         <DeleteItemButton id={productId} />
-        <Typography variant="h5" sx={priceTitle}>
-          {convertedPrice} €
-        </Typography>
-      </Stack>
-    </Stack>
+      </section>
+      <section className={styles.item_price_section}>
+        <p className={styles.item_label}>Single price</p>
+        <ItemPrice price={price} />
+      </section>
+      <section className={styles.item_price_section}>
+        <p className={styles.item_label}>Total price</p>
+        <ItemCounter />
+        <ItemPrice price={price} quantity={quantity} />
+      </section>
+    </article>
   );
 };
 export default CartItem;
