@@ -20,7 +20,7 @@ const CartPageButton = () => {
       sx={useIconButtonColorTheme('103, 58, 183')}
       size="large"
     >
-      <Badge badgeContent={badgeItemCount} color="primary">
+      <Badge badgeContent={badgeItemCount} color="error">
         <ShoppingCartIcon sx={{ fontSize: '1.8rem' }} />
       </Badge>
     </IconButton>

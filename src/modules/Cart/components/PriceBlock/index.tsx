@@ -7,7 +7,7 @@ interface IPriceBlock {
 
 const PriceBlock = ({ totalPrice }: IPriceBlock) => {
   return (
-    <Paper sx={{ p: '1rem 1.5rem', flexBasis: '30%' }}>
+    <Paper sx={{ p: '1rem 1.5rem', flexBasis: '30%', height: 'fit-content' }}>
       <PriceItem title="sum" price={totalPrice} />
       <PriceItem title="address" address="Tokio" />
       <Divider sx={{ mb: '1rem' }} />
