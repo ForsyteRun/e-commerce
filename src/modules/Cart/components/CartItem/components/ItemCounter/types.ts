@@ -18,3 +18,16 @@ export type CountChanger = (
   count: string,
   setCount: SetCount
 ) => void;
+
+interface CounterComponentsProps {
+  disabled: boolean;
+  callback: () => void;
+}
+
+export interface CounterButtonProps extends CounterComponentsProps {
+  content: string;
+}
+
+export interface CounterInputProps extends CounterComponentsProps {
+  count: string;
+}
