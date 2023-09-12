@@ -11,6 +11,12 @@ export const container: SxProps = {
   },
 };
 
+export const title: SxProps = {
+  [theme.breakpoints.down('smPlus')]: {
+    fontSize: '1.2rem',
+  },
+};
+
 export const mainBlock: SxProps = {
   p: '1rem 1.5rem',
   flexBasis: '50%',

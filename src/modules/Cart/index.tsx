@@ -2,7 +2,7 @@ import { Paper, Stack, Typography } from '@mui/material';
 import { LineItem } from '@commercetools/platform-sdk';
 import { useAppSelector } from 'hooks/useRedux';
 import { PriceBlock, CartItem } from './components';
-import { container, mainBlock } from './styles';
+import { container, mainBlock, title } from './styles';
 import { ICart } from './types';
 import convertEuroCentToEuro from './helpers';
 
@@ -17,7 +17,9 @@ const Cart = ({ lineItems }: ICart) => {
   return (
     <Stack sx={container}>
       <Paper sx={mainBlock}>
-        <Typography variant="h4">Your order</Typography>
+        <Typography variant="h4" sx={title}>
+          Your order
+        </Typography>
         <Typography variant="body2" color="GrayText">
           {badgeItemCount} items for {convertedPrice} Euro
         </Typography>
