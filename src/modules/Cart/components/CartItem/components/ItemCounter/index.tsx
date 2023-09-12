@@ -1,29 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Button, SxProps } from '@mui/material';
-import {
-  MyCartChangeLineItemQuantityAction,
-  Price,
-} from '@commercetools/platform-sdk';
+import { Button } from '@mui/material';
+import { MyCartChangeLineItemQuantityAction } from '@commercetools/platform-sdk';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { updateCart } from 'store/cartSlice/thunks';
-import { showSnackbar } from 'store/snackbarSlice';
+import { ItemCounterProps } from 'modules/Cart/types';
+import showSnackbarMessage from 'helpers/showSnackbarMessage';
 import styles from './ItemCounter.module.scss';
 import ItemPrice from '../ItemPrice';
-
-interface ItemCounterProps {
-  price: Price;
-  quantity: number;
-  id: string;
-}
+import buttonStyles from './buttonStyles';
+import { changeCount, handleChange } from './helpers';
 
 const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
-  const buttonStyles: SxProps = {
-    width: '24px',
-    height: '24px',
-    minWidth: 0,
-    fontSize: '1.15rem',
-  };
-
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.cartSlice);
   const [count, setCount] = useState<string>(`${quantity}`);
@@ -34,12 +21,10 @@ const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
 
     if (loading === 'failed') {
       setCount(`${quantity}`);
-      dispatch(
-        showSnackbar({
-          status: 'error',
-          message: 'Failed to change product quantity. Please try again',
-        })
-      );
+      showSnackbarMessage({
+        status: 'error',
+        message: 'Failed to change product quantity. Please try again',
+      });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,43 +47,27 @@ const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, quantity]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    if (!Number.isNaN(+value) && +value > 0) {
-      setCount(value);
-    }
-  };
-
-  const inc = () => {
-    const newValue = `${+count + 1}`;
-    setCount(newValue);
-  };
-
-  const dec = () => {
-    const newValue = +count - 1;
-    if (newValue >= 0) {
-      setCount(`${newValue}`);
-    }
-  };
-
   return (
     <div className={styles.container}>
-      <Button disabled={isDisabled} onClick={dec} sx={buttonStyles}>
+      <Button
+        disabled={isDisabled}
+        onClick={() => changeCount('dec', count, setCount)}
+        sx={buttonStyles}
+      >
         –
       </Button>
       <input
         className={styles.count_input}
         disabled={isDisabled}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e, setCount)}
         onFocus={(e) => e.target.select()}
         type="text"
         value={count}
       />
       <Button
         disabled={isDisabled}
-        onClick={inc}
-        sx={{ ...buttonStyles, mr: '0.5rem' }}
+        onClick={() => changeCount('inc', count, setCount)}
+        sx={buttonStyles}
       >
         +
       </Button>
