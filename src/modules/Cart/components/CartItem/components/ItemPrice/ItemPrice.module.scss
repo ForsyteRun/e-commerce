@@ -5,6 +5,13 @@
 }
 
 .net_price,
+.net_price_discount,
+.discounted_price {
+  text-align: right;
+  text-wrap: nowrap;
+}
+
+.net_price,
 .net_price_discount {
   color: #213038;
 }

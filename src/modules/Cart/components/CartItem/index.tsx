@@ -6,7 +6,7 @@ import ItemPrice from './components/ItemPrice';
 import ItemCounter from './components/ItemCounter';
 
 const CartItem = ({ item }: { item: LineItem }) => {
-  const { name, variant, productId, price, quantity } = item;
+  const { name, variant, productId, price, quantity, id } = item;
 
   const localizedName = localizedStringToString('en-US')(name);
   const imageUrl = variant.images && variant.images[0].url;
@@ -24,8 +24,7 @@ const CartItem = ({ item }: { item: LineItem }) => {
       </section>
       <section className={styles.item_price_section}>
         <p className={styles.item_label}>Total price</p>
-        <ItemCounter />
-        <ItemPrice price={price} quantity={quantity} />
+        <ItemCounter price={price} quantity={quantity} id={id} />
       </section>
     </article>
   );
