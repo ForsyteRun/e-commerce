@@ -1,4 +1,4 @@
-import { HandleChange, CountChanger } from 'modules/Cart/types';
+import { HandleChange, CountChanger } from '../types';
 
 export const handleChange: HandleChange = (e, setCount) => {
   const { value } = e.target;
