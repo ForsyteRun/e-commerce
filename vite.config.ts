@@ -20,6 +20,7 @@ export default defineConfig({
       types: `${path.resolve(__dirname, './src/types/')}`,
       constants: `${path.resolve(__dirname, './src/constants/')}`,
       styles: `${path.resolve(__dirname, './src/styles/')}`,
+      theme: `${path.resolve(__dirname, './src/theme/')}`,
       UI: `${path.resolve(__dirname, './src/UI/')}`,
       helpers: `${path.resolve(__dirname, './src/helpers/')}`,
       context: `${path.resolve(__dirname, './src/context/')}`,

@@ -1,13 +1,17 @@
 import { Button, Divider, Paper } from '@mui/material';
 import PriceItem from './components/PriceItem';
 
-const PriceBlock = () => {
+interface IPriceBlock {
+  totalPrice: number;
+}
+
+const PriceBlock = ({ totalPrice }: IPriceBlock) => {
   return (
-    <Paper sx={{ p: '1rem 1.5rem', flexBasis: '30%' }}>
-      <PriceItem title="sum" price={11} />
+    <Paper sx={{ p: '1rem 1.5rem', flexBasis: '30%', height: 'fit-content' }}>
+      <PriceItem title="sum" price={totalPrice} />
       <PriceItem title="address" address="Tokio" />
       <Divider sx={{ mb: '1rem' }} />
-      <PriceItem title="order price" price={1212} />
+      <PriceItem title="order price" price={totalPrice} />
       <Button variant="contained" fullWidth>
         submit order
       </Button>
