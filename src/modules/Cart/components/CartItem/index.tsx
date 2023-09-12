@@ -1,24 +1,16 @@
-import { Box, Button, Stack, Typography } from '@mui/material';
-import { Localization } from 'types';
+import { Box, Stack, Typography } from '@mui/material';
 import { LineItem } from '@commercetools/platform-sdk';
 import calculatePriceByFraction from 'helpers/calculatePriceByFraction';
 import DeleteItemButton from './components/DeleteItemButton';
-import {
-  container,
-  title,
-  count,
-  priceTitle,
-  imgContainer,
-  titleContainer,
-  countBlock,
-} from './styles';
+import CartItemQuantity from './components/CartItemQuantity';
+import { container, priceTitle, imgContainer } from './styles';
 
 interface ICartItem {
   item: LineItem;
 }
 
 const CartItem = ({ item }: ICartItem) => {
-  const { name, quantity, variant, totalPrice, productId } = item;
+  const { variant, totalPrice, productId } = item;
 
   const convertedPrice = calculatePriceByFraction(totalPrice);
 
@@ -33,18 +25,7 @@ const CartItem = ({ item }: ICartItem) => {
           height="100%"
         />
       </Box>
-      <Stack sx={titleContainer}>
-        <Typography variant="h6" sx={title}>
-          {name[Localization.en]}
-        </Typography>
-        <Stack sx={countBlock}>
-          <Button>-</Button>
-          <Typography variant="h5" sx={count}>
-            {quantity}
-          </Typography>
-          <Button>+</Button>
-        </Stack>
-      </Stack>
+      <CartItemQuantity item={item} />
       <Stack
         alignItems="flex-end"
         justifyContent="space-between"

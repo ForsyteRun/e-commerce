@@ -220,7 +220,3 @@ export interface INavigationListItemProps {
   id: string;
   name: string;
 }
-
-export enum Localization {
-  en = 'en-US',
-}
