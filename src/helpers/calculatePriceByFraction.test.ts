@@ -44,4 +44,8 @@ describe('Testing calculatePriceByFraction', () => {
     testData.fractionDigits = NaN;
     expect(calculatePriceByFraction(testData)).toBe(0);
   });
+
+  it('Should return 0 if props = undefined', () => {
+    expect(calculatePriceByFraction(undefined)).toBe(0);
+  });
 });

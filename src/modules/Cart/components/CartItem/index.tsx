@@ -1,7 +1,7 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { Localization } from 'types';
 import { LineItem } from '@commercetools/platform-sdk';
-import convertEuroCentToEuro from 'modules/Cart/helpers';
+import calculatePriceByFraction from 'helpers/calculatePriceByFraction';
 import DeleteItemButton from './components/DeleteItemButton';
 import {
   container,
@@ -20,7 +20,7 @@ interface ICartItem {
 const CartItem = ({ item }: ICartItem) => {
   const { name, quantity, variant, totalPrice, productId } = item;
 
-  const convertedPrice = convertEuroCentToEuro(totalPrice.centAmount);
+  const convertedPrice = calculatePriceByFraction(totalPrice);
 
   return (
     <Stack sx={container}>
