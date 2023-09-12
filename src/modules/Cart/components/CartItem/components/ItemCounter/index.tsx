@@ -21,6 +21,7 @@ const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
     width: '24px',
     height: '24px',
     minWidth: 0,
+    fontSize: '1.15rem',
   };
 
   const dispatch = useAppDispatch();
@@ -84,7 +85,7 @@ const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
   return (
     <div className={styles.container}>
       <Button disabled={isDisabled} onClick={dec} sx={buttonStyles}>
-        -
+        –
       </Button>
       <input
         className={styles.count_input}
@@ -94,7 +95,11 @@ const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
         type="text"
         value={count}
       />
-      <Button disabled={isDisabled} onClick={inc} sx={buttonStyles}>
+      <Button
+        disabled={isDisabled}
+        onClick={inc}
+        sx={{ ...buttonStyles, mr: '0.5rem' }}
+      >
         +
       </Button>
       <ItemPrice price={price} quantity={quantity} />
