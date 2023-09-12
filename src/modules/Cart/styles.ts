@@ -1,10 +1,11 @@
 import { SxProps } from '@mui/material';
+import theme from '../../theme/index';
 
 export const container: SxProps = {
   flexDirection: 'row',
   justifyContent: 'space-around',
   width: '100%',
-  '@media (max-width: 580px)': {
+  [theme.breakpoints.down('smPlus')]: {
     flexDirection: 'column',
     gap: '1rem',
   },
@@ -13,7 +14,7 @@ export const container: SxProps = {
 export const mainBlock: SxProps = {
   p: '1rem 1.5rem',
   flexBasis: '50%',
-  '@media (max-width: 768px)': {
-    flexBasis: '57%',
+  [theme.breakpoints.down('md')]: {
+    flexBasis: '65%',
   },
 };
