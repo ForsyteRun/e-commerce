@@ -1,4 +1,4 @@
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { IconButton } from '@mui/material';
 import { removeFromCartHandler } from 'helpers';
 import useIconButtonColorTheme from 'helpers/useIconButtonColorTheme';
@@ -7,9 +7,9 @@ const DeleteItemButton = ({ id }: { id: string }) => {
   return (
     <IconButton
       onClick={() => removeFromCartHandler(id)}
-      sx={useIconButtonColorTheme('255, 135, 135')}
+      sx={useIconButtonColorTheme('255, 75, 75')}
     >
-      <DeleteOutlineIcon />
+      <DeleteForeverOutlinedIcon />
     </IconButton>
   );
 };
