@@ -1,5 +1,5 @@
 import { SxProps } from '@mui/material';
-import theme from '../../theme/index';
+import theme from 'theme';
 
 export const container: SxProps = {
   flexDirection: 'row',
