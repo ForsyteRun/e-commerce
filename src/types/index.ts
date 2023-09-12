@@ -4,6 +4,7 @@ import {
   Customer,
   LineItem,
   ProductProjectionPagedQueryResponse,
+  QueryParam,
   _ErrorResponse,
 } from '@commercetools/platform-sdk';
 import { CookieAttributes } from 'js-cookie';
@@ -187,6 +188,10 @@ export type SortDirections = 'asc' | 'desc' | false;
 
 export type SortBy = 'price' | 'name';
 
+export interface ISearchState {
+  searchValue: string;
+}
+
 export interface IProductsData extends IStoreBasicData {
   data: IProductData[] | null;
   counters: IProductsCounters | null;
@@ -209,6 +214,10 @@ export interface IProductsQuery {
   categoryId?: string;
   sort?: string;
   searchValue?: string;
+}
+
+export interface IQueryArgs {
+  [key: string]: QueryParam;
 }
 
 export type OnClickHandler = (
