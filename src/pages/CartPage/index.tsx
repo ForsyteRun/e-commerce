@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppSelector } from 'hooks/useRedux';
 import Cart from 'modules/Cart';
 import { EmptyCart } from 'modules/Cart/components';
