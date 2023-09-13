@@ -29,4 +29,5 @@ const CartItem = ({ item }: { item: LineItem }) => {
     </article>
   );
 };
+
 export default CartItem;
