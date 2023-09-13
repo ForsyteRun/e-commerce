@@ -1,19 +1,28 @@
-import { IProductsQuery, ISortState, SortBy, SortDirections } from 'types';
 import {
   getSortDirection,
   getSortQuery,
-} from '../../Sort/components/SortButton/helpers';
+} from 'pages/CategoryPage/components/Sort/components/SortButton/helpers';
+import { IProductsQuery, ISortState, SortBy, SortDirections } from 'types';
 
-const createProductsQuery = (
+const createQuery = (
   offset: number,
+  searchValue: string,
   categoryId: string | undefined,
   sort: ISortState
 ): IProductsQuery => {
-  const query: IProductsQuery = { offset };
   const isSortActive = sort.name !== false || sort.price !== false;
+  const query: IProductsQuery = {};
+
+  if (offset) {
+    query.offset = offset;
+  }
 
   if (categoryId) {
     query.categoryId = categoryId;
+  }
+
+  if (searchValue) {
+    query.searchValue = searchValue;
   }
 
   if (isSortActive) {
@@ -27,4 +36,4 @@ const createProductsQuery = (
   return query;
 };
 
-export default createProductsQuery;
+export default createQuery;

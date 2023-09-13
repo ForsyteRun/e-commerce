@@ -1,17 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { TextField, IconButton } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { getCategoryIdBySlug } from 'pages/CategoryPage/helpers/getCategoryParams';
-import { useAppDispatch } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import fetchProductsData from 'store/productsDataSlice/fetchProductsData';
 import useIconButtonColorTheme from 'helpers/useIconButtonColorTheme';
+import { setSearchValue, resetSearchValue } from 'store/searchSlice';
+import createQuery from 'helpers/createQuery';
+import { IProductsQuery } from 'types';
 import styles from './SearchBar.module.scss';
 
 const SearchBar = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
-  const [searchValue, setSearchValue] = useState('');
+  const { searchValue } = useAppSelector((state) => state.searchSlice);
+  const sort = useAppSelector((state) => state.sortSlice);
 
   const submitHandler = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
@@ -20,11 +24,25 @@ const SearchBar = () => {
       formattedPathname.lastIndexOf('/') + 1
     );
     const categoryId = getCategoryIdBySlug(slug);
-    dispatch(fetchProductsData({ searchValue, categoryId }));
+
+    const offset = 0;
+    const query: IProductsQuery = createQuery(
+      offset,
+      searchValue,
+      categoryId,
+      sort
+    );
+    dispatch(fetchProductsData(query));
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    dispatch(setSearchValue(newValue));
   };
 
   useEffect(() => {
-    setSearchValue('');
+    dispatch(resetSearchValue());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (
@@ -35,7 +53,7 @@ const SearchBar = () => {
         fullWidth
         placeholder="Search"
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={handleSearchChange}
         className={styles.searchField}
         sx={{
           '& fieldset': {

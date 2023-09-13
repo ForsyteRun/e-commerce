@@ -10,7 +10,6 @@ const cardStyles: SxProps = {
   width: '100%',
   padding: '1rem',
   backgroundColor: '#ffffff',
-  border: '1px solid #eaebed',
   borderRadius: '10px',
   transition: 'box-shadow 0.2s ease-in-out',
   textDecoration: 'none',

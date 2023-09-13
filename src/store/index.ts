@@ -7,6 +7,7 @@ import productsDataSlice from './productsDataSlice';
 import singleProductDataSlice from './singleProductDataSlice';
 import cartSlice from './cartSlice';
 import snackbarSlice from './snackbarSlice';
+import searchSlice from './searchSlice';
 
 const reducer = {
   registrationAccessCodeSlice,
@@ -15,6 +16,7 @@ const reducer = {
   singleProductDataSlice,
   categoriesSlice,
   sortSlice,
+  searchSlice,
   cartSlice,
   snackbarSlice,
 };
