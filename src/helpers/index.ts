@@ -10,6 +10,7 @@ import {
 import addToCartHandler from './addToCartHandler';
 import removeFromCartHandler from './removeFromCartHandler';
 import identifyUser from './identifyUser';
+import calculatePriceByFraction from './calculatePriceByFraction';
 
 export {
   findDataItemBySlug,
@@ -23,4 +24,5 @@ export {
   addToCartHandler,
   identifyUser,
   removeFromCartHandler,
+  calculatePriceByFraction,
 };

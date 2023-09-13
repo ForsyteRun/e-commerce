@@ -1,16 +1,6 @@
 import { SxProps } from '@mui/material';
 import theme from 'theme';
 
-export const container: SxProps = {
-  flexDirection: 'row',
-  gap: '1rem',
-  p: '1rem 0.5rem',
-  [theme.breakpoints.down('xs')]: {
-    alignItems: 'center',
-    gap: '0',
-  },
-};
-
 export const titleContainer: SxProps = {
   flex: 1,
   justifyContent: 'space-between',
@@ -27,18 +17,13 @@ export const title: SxProps = {
   },
 };
 
-export const countBlock: SxProps = {
+export const container: SxProps = {
   flexDirection: 'row',
-  alignItems: 'flex-end',
-  [theme.breakpoints.down('smPlus')]: {
+  gap: '1rem',
+  p: '1rem 0.5rem',
+  [theme.breakpoints.down('xs')]: {
     alignItems: 'center',
-  },
-};
-
-export const count: SxProps = {
-  [theme.breakpoints.down('smPlus')]: {
-    alignItems: 'center',
-    fontSize: '1rem',
+    gap: '0',
   },
 };
 
@@ -59,5 +44,3 @@ export const imgContainer: SxProps = {
     height: '45px',
   },
 };
-
-// { width: '70px', height: '70px' }

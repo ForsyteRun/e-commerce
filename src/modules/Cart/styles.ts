@@ -18,7 +18,7 @@ export const title: SxProps = {
 };
 
 export const mainBlock: SxProps = {
-  p: '1rem 1.5rem',
+  p: '1rem',
   flexBasis: '50%',
   [theme.breakpoints.down('md')]: {
     flexBasis: '65%',
