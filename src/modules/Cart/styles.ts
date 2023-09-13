@@ -21,6 +21,6 @@ export const mainBlock: SxProps = {
   p: '1rem 1.5rem',
   flexBasis: '50%',
   [theme.breakpoints.down('md')]: {
-    flexBasis: '65%',
+    flexBasis: '55%',
   },
 };
