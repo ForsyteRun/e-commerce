@@ -1,46 +1,51 @@
 import { MyCartUpdateAction } from '@commercetools/platform-sdk';
-import { Button } from '@mui/material';
-import { Field, Form, Formik } from 'formik';
+import { Button, InputAdornment, TextField } from '@mui/material';
+import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { updateCart } from 'store/cartSlice/thunks';
+import styles from './DiscountField.module.scss';
 
 const DiscountField = () => {
   const dispatch = useAppDispatch();
   const { error } = useAppSelector((state) => state.cartSlice);
 
-  return (
-    <Formik
-      initialValues={{ code: '' }}
-      onSubmit={(value: { code: string }) => {
-        const action: MyCartUpdateAction = {
-          action: 'addDiscountCode',
-          code: value.code,
-        };
+  const formik = useFormik({
+    initialValues: { code: '' },
+    onSubmit: (value, { resetForm }) => {
+      const action: MyCartUpdateAction = {
+        action: 'addDiscountCode',
+        code: value.code,
+      };
 
-        dispatch(updateCart(action));
-      }}
-    >
-      <Form
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginBottom: '1rem',
-        }}
-      >
-        <Field
+      dispatch(updateCart(action));
+      resetForm();
+    },
+  });
+
+  return (
+    <div className={styles.form}>
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          fullWidth
+          id="code"
           name="code"
-          label="Enter promo code"
-          variant="outlined"
-          placeholder="Enter promo code"
-          style={{ padding: '9px', marginRight: '1rem' }}
+          label="code"
+          value={formik.values.code}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Button color="primary" variant="outlined" type="submit">
+                  ok
+                </Button>
+              </InputAdornment>
+            ),
+          }}
         />
-        {error && <div>Not found</div>}
-        <Button variant="contained" color="primary" type="submit">
-          Use
-        </Button>
-      </Form>
-    </Formik>
+        {error && <div>code not exist</div>}
+      </form>
+    </div>
   );
 };
 
