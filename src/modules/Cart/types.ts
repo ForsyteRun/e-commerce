@@ -9,3 +9,8 @@ export interface IPriceItem {
 export interface ICart {
   lineItems: LineItem[];
 }
+
+export interface CartClearModalProps {
+  open: boolean;
+  onClose: () => void;
+}
