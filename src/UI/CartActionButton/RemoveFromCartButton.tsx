@@ -1,4 +1,4 @@
-import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { removeFromCartHandler } from 'helpers';
 import CartActionButton from './CartActionButton';
 import { RemoveFromCartButtonProps } from './types';
@@ -12,7 +12,7 @@ const RemoveFromCartButton = ({ id }: RemoveFromCartButtonProps) => {
       sx={removeFromCartStyles}
     >
       <>
-        <RemoveShoppingCartOutlinedIcon sx={{ mr: '0.5rem' }} />
+        <DeleteForeverOutlinedIcon sx={{ mr: '0.5rem' }} />
         Remove from cart
       </>
     </CartActionButton>

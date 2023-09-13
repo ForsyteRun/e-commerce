@@ -1,17 +1,15 @@
 import { Paper, Stack, Typography } from '@mui/material';
 import { LineItem } from '@commercetools/platform-sdk';
 import { useAppSelector } from 'hooks/useRedux';
+import calculatePriceByFraction from 'helpers/calculatePriceByFraction';
 import { PriceBlock, CartItem } from './components';
 import { container, mainBlock, title } from './styles';
 import { ICart } from './types';
-import convertEuroCentToEuro from './helpers';
 
 const Cart = ({ lineItems }: ICart) => {
   const { data } = useAppSelector((state) => state.cartSlice);
 
-  const convertedPrice = convertEuroCentToEuro(
-    data?.totalPrice.centAmount as number
-  );
+  const convertedPrice = calculatePriceByFraction(data?.totalPrice);
   const badgeItemCount = data?.lineItems.length;
 
   return (

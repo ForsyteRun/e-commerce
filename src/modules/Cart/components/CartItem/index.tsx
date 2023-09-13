@@ -1,8 +1,8 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { Localization } from 'types';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { LineItem } from '@commercetools/platform-sdk';
-import convertEuroCentToEuro from 'modules/Cart/helpers';
+import calculatePriceByFraction from 'helpers/calculatePriceByFraction';
+import DeleteItemButton from './components/DeleteItemButton';
 import {
   container,
   title,
@@ -18,9 +18,9 @@ interface ICartItem {
 }
 
 const CartItem = ({ item }: ICartItem) => {
-  const { name, quantity, variant, totalPrice } = item;
+  const { name, quantity, variant, totalPrice, productId } = item;
 
-  const convertedPrice = convertEuroCentToEuro(totalPrice.centAmount);
+  const convertedPrice = calculatePriceByFraction(totalPrice);
 
   return (
     <Stack sx={container}>
@@ -50,7 +50,7 @@ const CartItem = ({ item }: ICartItem) => {
         justifyContent="space-between"
         sx={{ flexBasis: '20%', gap: '10px' }}
       >
-        <DeleteOutlineIcon sx={{ cursor: 'pointer' }} />
+        <DeleteItemButton id={productId} />
         <Typography variant="h5" sx={priceTitle}>
           {convertedPrice} €
         </Typography>

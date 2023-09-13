@@ -33,11 +33,11 @@ export const addToCartStyles: SxProps = {
 
 export const removeFromCartStyles: SxProps = {
   ...basicStyles,
-  color: '#ff8787',
-  borderColor: '#ff8787',
+  color: '#ff4b4b',
+  borderColor: '#ff4b4b',
   '@media (hover: hover)': {
     '&:hover': {
-      backgroundColor: 'rgba(255, 135, 135, 0.15)',
+      backgroundColor: 'rgba(255, 75, 75, 0.15)',
       transition,
     },
   },
