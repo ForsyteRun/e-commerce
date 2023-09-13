@@ -1,5 +1,6 @@
 import { Button, Divider, Paper } from '@mui/material';
 import PriceItem from './components/PriceItem';
+import DiscountField from '../DiscountField';
 
 interface IPriceBlock {
   totalPrice: number;
@@ -12,6 +13,7 @@ const PriceBlock = ({ totalPrice }: IPriceBlock) => {
       <PriceItem title="address" address="Tokio" />
       <Divider sx={{ mb: '1rem' }} />
       <PriceItem title="order price" price={totalPrice} />
+      <DiscountField />
       <Button variant="contained" fullWidth>
         submit order
       </Button>
