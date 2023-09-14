@@ -1,7 +1,7 @@
-import { Price } from '@commercetools/platform-sdk';
+import { ModifyTypesPrice } from '../../types';
 
 export interface ItemCounterProps {
-  price: Price;
+  price: ModifyTypesPrice;
   quantity: number;
   id: string;
 }
