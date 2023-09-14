@@ -8,6 +8,7 @@ export interface IPriceItem {
   title: string;
   price?: number;
   discount?: number;
+  isDiscounted?: boolean;
 }
 
 export interface ICart {
