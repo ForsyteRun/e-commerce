@@ -1,12 +1,8 @@
 import { Button, Divider, Paper } from '@mui/material';
-import PriceItem from './components/PriceItem';
-import DiscountField from '../DiscountField';
+import { FC } from 'react';
+import { DiscountField, PriceItem } from './components';
 
-interface IPriceBlock {
-  totalPrice: number;
-}
-
-const PriceBlock = ({ totalPrice }: IPriceBlock) => {
+const PriceBlock: FC<{ totalPrice: number }> = ({ totalPrice }) => {
   return (
     <Paper sx={{ p: '1rem 1.5rem', flexBasis: '30%', height: 'fit-content' }}>
       <PriceItem title="sum" price={totalPrice} />

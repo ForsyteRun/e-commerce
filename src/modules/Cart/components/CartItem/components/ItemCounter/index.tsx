@@ -11,23 +11,23 @@ import CounterButton from './CounterButton';
 
 const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
   const dispatch = useAppDispatch();
-  const { loading } = useAppSelector((state) => state.cartSlice);
+  const { loading, error } = useAppSelector((state) => state.cartSlice);
   const [count, setCount] = useState<string>(`${quantity}`);
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     setIsDisabled(loading === 'pending');
 
-    if (loading === 'failed') {
+    if (loading === 'failed' && error) {
       setCount(`${quantity}`);
       showSnackbarMessage({
         status: 'error',
-        message: 'Failed to change product quantity. Please try again',
+        message: error.message,
       });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading]);
+  }, [loading, error]);
 
   useEffect(() => {
     if (+count !== quantity) {

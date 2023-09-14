@@ -1,13 +1,12 @@
 import { MyCartUpdateAction } from '@commercetools/platform-sdk';
 import { Button, InputAdornment, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch } from 'hooks/useRedux';
 import { updateCart } from 'store/cartSlice/thunks';
 import styles from './DiscountField.module.scss';
 
 const DiscountField = () => {
   const dispatch = useAppDispatch();
-  const { error } = useAppSelector((state) => state.cartSlice);
 
   const formik = useFormik({
     initialValues: { code: '' },
@@ -43,7 +42,6 @@ const DiscountField = () => {
             ),
           }}
         />
-        {error && <div>code not exist</div>}
       </form>
     </div>
   );
