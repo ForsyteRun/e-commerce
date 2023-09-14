@@ -1,8 +1,10 @@
 import { LineItem } from '@commercetools/platform-sdk';
 import { localizedStringToString } from 'helpers';
-import { ModifyPriceType } from 'modules/Cart/types';
 import styles from './CartItem.module.scss';
-import { DeleteItemButton, ItemCounter, ItemPrice } from './components';
+import DeleteItemButton from './components/DeleteItemButton';
+import ItemCounter from './components/ItemCounter';
+import ItemPrice from './components/ItemPrice';
+import { ModifyTypesPrice } from './types';
 
 const CartItem = ({ item }: { item: LineItem }) => {
   const {
@@ -15,7 +17,7 @@ const CartItem = ({ item }: { item: LineItem }) => {
     discountedPricePerQuantity,
   } = item;
 
-  const modifyPrice: ModifyPriceType = {
+  const modifyPrice: ModifyTypesPrice = {
     ...price,
     ...discountedPricePerQuantity[0],
   };
