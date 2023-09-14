@@ -2,6 +2,7 @@ import { LoaderFunction } from 'react-router-dom';
 import fetchCategoriesList from 'store/categoriesSlice/fetchCategoriesList';
 import fetchProductsData from 'store/productsDataSlice/fetchProductsData';
 import store from 'store';
+import fetchAllProductsData from 'store/attributesSlice/fetchAllProductsData';
 import { throwRouteError } from './helpers';
 
 const getCategoryData: LoaderFunction = async ({ params }) => {
@@ -26,9 +27,11 @@ const getCategoryData: LoaderFunction = async ({ params }) => {
       const { id } = categoryData;
 
       dispatch(fetchProductsData({ categoryId: id }));
+      dispatch(fetchAllProductsData({ categoryId: id }));
     }
   } else {
     dispatch(fetchProductsData());
+    dispatch(fetchAllProductsData());
   }
 
   return { ok: true };

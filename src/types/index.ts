@@ -192,9 +192,20 @@ export interface ISearchState {
   searchValue: string;
 }
 
+export interface IFiltersState {
+  attributes: {
+    [key: string]: string;
+  };
+  isButtonActive: boolean;
+}
+
 export interface IProductsData extends IStoreBasicData {
   data: IProductData[] | null;
   counters: IProductsCounters | null;
+}
+
+export interface IAttributesData extends IStoreBasicData {
+  data: IProductData[] | null;
 }
 
 export interface ISingleProductData extends IStoreBasicData {
@@ -206,7 +217,8 @@ export type AppState =
   | IProductsData
   | ISingleProductData
   | ICategoriesState
-  | ICartState;
+  | ICartState
+  | IAttributesData;
 
 export interface IProductsQuery {
   limit?: number;
@@ -214,6 +226,7 @@ export interface IProductsQuery {
   categoryId?: string;
   sort?: string;
   searchValue?: string;
+  attributes?: { [key: string]: string };
 }
 
 export interface IQueryArgs {

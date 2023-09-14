@@ -8,7 +8,8 @@ const basicStyles: SxProps = {
   fontSize: '0.875rem',
   borderRadius: '20px',
   backgroundColor: 'transparent',
-  border: '1px solid',
+  border: '2px solid',
+  boxShadow: 'none',
   whiteSpace: 'nowrap',
   ':disabled': {
     borderColor: 'rgba(0, 0, 0, 0.26)',

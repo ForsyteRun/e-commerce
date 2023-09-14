@@ -11,6 +11,7 @@ const ProductPagination = () => {
   const { pathname } = useLocation();
   const { counters } = useAppSelector((state) => state.productsDataSlice);
   const { searchValue } = useAppSelector((state) => state.searchSlice);
+  const { attributes } = useAppSelector((state) => state.filtersSlice);
   const sort = useAppSelector((state) => state.sortSlice);
   const limit = counters?.limit;
 
@@ -26,7 +27,8 @@ const ProductPagination = () => {
         offset,
         searchValue,
         categoryId,
-        sort
+        sort,
+        attributes
       );
       dispatch(fetchProductsData(query));
     }

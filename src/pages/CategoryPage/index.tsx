@@ -5,6 +5,7 @@ import ProductsList from './components/ProductsList';
 import Sort from './components/Sort';
 import SearchBar from './components/SearchBar';
 import styles from './CategoryPage.module.scss';
+import Filters from './components/Filters';
 
 const CategoryPage = () => {
   const { loading } = useAppSelector((state) => state.productsDataSlice);
@@ -14,7 +15,10 @@ const CategoryPage = () => {
     <section className={styles.category}>
       <div className={styles.container}>
         <div className={styles.control}>
-          <Sort />
+          <div className={styles.panel}>
+            <Filters />
+            <Sort />
+          </div>
           <SearchBar />
         </div>
         <div className={styles.productsList}>
