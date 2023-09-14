@@ -1,8 +1,10 @@
 import { LineItem } from '@commercetools/platform-sdk';
 import { localizedStringToString } from 'helpers';
-import { ModifyPriceType } from 'modules/Cart/types';
 import styles from './CartItem.module.scss';
-import { DeleteItemButton, ItemCounter, ItemPrice } from './components';
+import DeleteItemButton from './components/DeleteItemButton';
+import ItemCounter from './components/ItemCounter';
+import ItemPrice from './components/ItemPrice';
+import { ModifyTypesPrice } from './types';
 
 const CartItem = ({ item }: { item: LineItem }) => {
   const {
@@ -14,8 +16,17 @@ const CartItem = ({ item }: { item: LineItem }) => {
     id,
     discountedPricePerQuantity,
   } = item;
+  const {
+    name,
+    variant,
+    productId,
+    price,
+    quantity,
+    id,
+    discountedPricePerQuantity,
+  } = item;
 
-  const modifyPrice: ModifyPriceType = {
+  const modifyPrice: ModifyTypesPrice = {
     ...price,
     ...discountedPricePerQuantity[0],
   };
@@ -33,9 +44,11 @@ const CartItem = ({ item }: { item: LineItem }) => {
       <section className={styles.item_price_section}>
         <p className={styles.item_label}>Single price</p>
         <ItemPrice price={modifyPrice} />
+        <ItemPrice price={modifyPrice} />
       </section>
       <section className={styles.item_price_section}>
         <p className={styles.item_label}>Total price</p>
+        <ItemCounter price={modifyPrice} quantity={quantity} id={id} />
         <ItemCounter price={modifyPrice} quantity={quantity} id={id} />
       </section>
     </article>
