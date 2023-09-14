@@ -3,6 +3,7 @@ import { useAppSelector } from 'hooks/useRedux';
 import { useEffect, useState } from 'react';
 import { DiscountField, PriceItem } from './components';
 import getCommonPrice from './helpers/getCommonPrice';
+import getSumSeparatePrice from './helpers/getSumSeparatePrice';
 
 const PriceBlock = () => {
   const { data } = useAppSelector((state) => state.cartSlice);
@@ -14,15 +15,8 @@ const PriceBlock = () => {
     if (data) {
       const commonPrice = getCommonPrice(data);
 
-      const withDiscount = commonPrice.reduce(
-        (acc, item) => acc + item.discountPrice,
-        0
-      );
-
-      const withOutDiscount = commonPrice.reduce(
-        (acc, item) => acc + item.price,
-        0
-      );
+      const withDiscount = getSumSeparatePrice(commonPrice, 'discountPrice');
+      const withOutDiscount = getSumSeparatePrice(commonPrice, 'price');
 
       setSummeryPrice(withOutDiscount);
       setSummeryDiscountPrice(withDiscount);
