@@ -15,16 +15,16 @@ const removeFromCartHandler = async (productId: string): Promise<void> => {
 
   await dispatch(updateCart(action));
 
-  const updateCartResult = getState().cartSlice.loading;
+  const { loading } = getState().cartSlice;
 
-  if (updateCartResult === 'succeeded') {
+  if (loading === 'succeeded') {
     showSnackbarMessage({
       status: 'success',
       message: 'Product was removed from cart!',
     });
   }
 
-  if (updateCartResult === 'failed') {
+  if (loading === 'failed') {
     showSnackbarMessage({
       status: 'error',
       message: 'Failed to remove product from cart! Please, try again.',

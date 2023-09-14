@@ -9,11 +9,16 @@ import getCartData from '../helpers/getCartData';
 
 const updateCart = createAsyncThunk(
   'cart/update',
-  async (action: MyCartUpdateAction, { rejectWithValue }) => {
+  async (
+    action: MyCartUpdateAction | MyCartUpdateAction[],
+    { rejectWithValue }
+  ) => {
     const api = createRefreshTokenClientApi();
 
     const { getState } = store;
     const { id: ID, version } = getState().cartSlice.data!;
+
+    const actions = Array.isArray(action) ? action : [action];
 
     const response = await api
       .me()
@@ -22,7 +27,7 @@ const updateCart = createAsyncThunk(
       .post({
         body: {
           version,
-          actions: [action],
+          actions,
         },
       })
       .execute()

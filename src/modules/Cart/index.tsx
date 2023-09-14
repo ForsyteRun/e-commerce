@@ -2,7 +2,7 @@ import { Paper, Stack, Typography } from '@mui/material';
 import { LineItem } from '@commercetools/platform-sdk';
 import { useAppSelector } from 'hooks/useRedux';
 import calculatePriceByFraction from 'helpers/calculatePriceByFraction';
-import { PriceBlock, CartItem } from './components';
+import { PriceBlock, CartItem, ClearCartButton } from './components';
 import { container, mainBlock, title } from './styles';
 import { ICart } from './types';
 
@@ -24,6 +24,7 @@ const Cart = ({ lineItems }: ICart) => {
         {lineItems.map((item: LineItem) => (
           <CartItem key={item.id} item={item} />
         ))}
+        <ClearCartButton />
       </Paper>
       <PriceBlock totalPrice={convertedPrice} />
     </Stack>
