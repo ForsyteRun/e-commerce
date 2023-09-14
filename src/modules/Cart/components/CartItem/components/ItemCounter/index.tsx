@@ -25,12 +25,12 @@ const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
       setOpen(false);
       showSnackbarMessage({
         status: 'error',
-        message: 'Failed to change product quantity. Please try again',
+        message: error.message,
       });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading]);
+  }, [loading, error]);
 
   useEffect(() => {
     if (+count !== quantity) {
