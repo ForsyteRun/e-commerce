@@ -25,8 +25,16 @@ const PriceBlock = () => {
 
   return (
     <Paper sx={{ p: '1rem 1.5rem', flexBasis: '30%', height: 'fit-content' }}>
-      <PriceItem title="sum" price={summeryPrice} />
-      <PriceItem title="discount" discount={summeryDiscountPrice} />
+      <PriceItem
+        title="sum"
+        price={summeryPrice}
+        isDiscounted={summeryDiscountPrice > 0}
+      />
+      <PriceItem
+        title="discount"
+        discount={summeryDiscountPrice}
+        isDiscounted={summeryDiscountPrice > 0}
+      />
       <Divider sx={{ mb: '1rem' }} />
       <PriceItem
         title="order price"

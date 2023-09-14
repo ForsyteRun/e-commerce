@@ -16,3 +16,11 @@ export const priceStyle: SxProps = {
     fontSize: '0.7rem',
   },
 };
+
+export const discounted: SxProps = {
+  color: '#e5006d',
+};
+
+export const fullPriceDiscount: SxProps = {
+  textDecoration: 'line-through',
+};
