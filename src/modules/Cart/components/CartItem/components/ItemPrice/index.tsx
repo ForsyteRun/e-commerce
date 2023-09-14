@@ -1,10 +1,10 @@
-import { ModifyTypesPrice } from '../../types';
+import { ModifyPriceType } from 'modules/Cart/types';
 import DiscountedPrice from './DiscountedPrice';
 import styles from './ItemPrice.module.scss';
 import NetPrice from './NetPrice';
 
 interface IItemPrice {
-  price: ModifyTypesPrice;
+  price: ModifyPriceType;
   quantity?: number;
 }
 

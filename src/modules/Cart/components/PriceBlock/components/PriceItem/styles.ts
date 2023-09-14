@@ -1,7 +1,13 @@
 import { SxProps } from '@mui/material';
 import theme from 'theme';
 
-const priceStyle: SxProps = {
+export const container: SxProps = {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  mb: '1rem',
+};
+
+export const priceStyle: SxProps = {
   fontWeight: 700,
   [theme.breakpoints.down('smPlus')]: {
     fontSize: '1rem',
@@ -10,5 +16,3 @@ const priceStyle: SxProps = {
     fontSize: '0.7rem',
   },
 };
-
-export default priceStyle;
