@@ -1,11 +1,26 @@
-import { LineItem } from '@commercetools/platform-sdk';
+import {
+  LineItem,
+  DiscountedLineItemPriceForQuantity,
+  Price,
+} from '@commercetools/platform-sdk';
 
 export interface IPriceItem {
   title: string;
   price?: number;
-  address?: string;
+  discount?: number;
 }
 
 export interface ICart {
   lineItems: LineItem[];
+}
+
+export type ModifyPriceType = Omit<
+  DiscountedLineItemPriceForQuantity,
+  'quantity'
+> &
+  Price;
+
+export interface ICommonDiscount {
+  price: number;
+  discountPrice: number;
 }
