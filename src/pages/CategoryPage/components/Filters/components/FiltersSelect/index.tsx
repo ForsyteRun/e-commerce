@@ -27,10 +27,9 @@ const FiltersSelect = ({ by }: { by: string }) => {
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     const newValue = event.target.value;
-    const attributeName = by.toLowerCase();
     dispatch(
       setFilters({
-        attributeName,
+        attributeName: by,
         attributeValue: newValue,
       })
     );
