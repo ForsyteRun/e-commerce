@@ -1,7 +1,7 @@
-import { ModifyTypesPrice } from '../../types';
+import { ModifyPriceType } from 'modules/Cart/types';
 
 export interface ItemCounterProps {
-  price: ModifyTypesPrice;
+  price: ModifyPriceType;
   quantity: number;
   id: string;
 }
