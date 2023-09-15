@@ -23,7 +23,7 @@ const DiscountField = () => {
 
   useEffect(() => {
     if (loading === 'succeeded') {
-      showSnackbar('success', 'activated!');
+      showSnackbar('success', 'activated');
     } else if (loading === 'failed') {
       showSnackbar('error', 'code not valid');
     }
