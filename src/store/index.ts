@@ -8,6 +8,8 @@ import singleProductDataSlice from './singleProductDataSlice';
 import cartSlice from './cartSlice';
 import snackbarSlice from './snackbarSlice';
 import searchSlice from './searchSlice';
+import attributesSlice from './attributesSlice';
+import filtersSlice from './filtersSlice';
 
 const reducer = {
   registrationAccessCodeSlice,
@@ -19,6 +21,8 @@ const reducer = {
   searchSlice,
   cartSlice,
   snackbarSlice,
+  attributesSlice,
+  filtersSlice,
 };
 
 const store = configureStore({

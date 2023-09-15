@@ -11,6 +11,7 @@ const ProductPagination = () => {
   const { pathname } = useLocation();
   const { counters } = useAppSelector((state) => state.productsDataSlice);
   const { searchValue } = useAppSelector((state) => state.searchSlice);
+  const { attributes } = useAppSelector((state) => state.filtersSlice);
   const sort = useAppSelector((state) => state.sortSlice);
   const limit = counters?.limit;
 
@@ -20,16 +21,18 @@ const ProductPagination = () => {
 
   const handlePageChange = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e.preventDefault();
-    if (limit) {
-      const offset: number = (newPage - 1) * limit;
-      const query: IProductsQuery = createQuery(
-        offset,
-        searchValue,
-        categoryId,
-        sort
-      );
-      dispatch(fetchProductsData(query));
+    if (!limit) {
+      return;
     }
+    const offset: number = (newPage - 1) * limit;
+    const query: IProductsQuery = createQuery(
+      offset,
+      searchValue,
+      categoryId,
+      sort,
+      attributes
+    );
+    dispatch(fetchProductsData(query));
   };
 
   return (

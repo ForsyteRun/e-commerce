@@ -16,22 +16,23 @@ const SearchBar = () => {
   const { pathname } = useLocation();
   const { searchValue } = useAppSelector((state) => state.searchSlice);
   const sort = useAppSelector((state) => state.sortSlice);
+  const { attributes } = useAppSelector((state) => state.filtersSlice);
+
+  const formattedPathname = pathname.replace(/\*$/, '');
+  const slug = formattedPathname.slice(formattedPathname.lastIndexOf('/') + 1);
+  const categoryId = getCategoryIdBySlug(slug);
+
+  const offset = 0;
+  const query: IProductsQuery = createQuery(
+    offset,
+    searchValue,
+    categoryId,
+    sort,
+    attributes
+  );
 
   const submitHandler = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
-    const formattedPathname = pathname.replace(/\*$/, '');
-    const slug = formattedPathname.slice(
-      formattedPathname.lastIndexOf('/') + 1
-    );
-    const categoryId = getCategoryIdBySlug(slug);
-
-    const offset = 0;
-    const query: IProductsQuery = createQuery(
-      offset,
-      searchValue,
-      categoryId,
-      sort
-    );
     dispatch(fetchProductsData(query));
   };
 

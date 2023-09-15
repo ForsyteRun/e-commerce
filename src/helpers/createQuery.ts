@@ -5,10 +5,11 @@ import {
 import { IProductsQuery, ISortState, SortBy, SortDirections } from 'types';
 
 const createQuery = (
-  offset: number,
-  searchValue: string,
+  offset: number | undefined,
+  searchValue: string | undefined,
   categoryId: string | undefined,
-  sort: ISortState
+  sort: ISortState,
+  attributes: { [key: string]: string } | undefined
 ): IProductsQuery => {
   const isSortActive = sort.name !== false || sort.price !== false;
   const query: IProductsQuery = {};
@@ -31,6 +32,10 @@ const createQuery = (
       sort[currentSortBy]
     );
     query.sort = getSortQuery(currentSortBy, currentDirection);
+  }
+
+  if (attributes) {
+    query.attributes = attributes;
   }
 
   return query;

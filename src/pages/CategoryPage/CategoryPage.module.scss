@@ -24,9 +24,14 @@
   flex-wrap: wrap;
 }
 
-.productsList {
+.content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
+}
+
+.panel {
+  display: flex;
+  gap: 1rem;
 }
