@@ -24,6 +24,7 @@ export type ModifyPriceType = Omit<
 export interface ICommonDiscount {
   price: number;
   discountPrice: number;
+}
 
 export interface CartClearModalProps {
   open: boolean;
