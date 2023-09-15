@@ -24,4 +24,19 @@ export type ModifyPriceType = Omit<
 export interface ICommonDiscount {
   price: number;
   discountPrice: number;
+
+export interface CartClearModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export enum Answers {
+  yes = 'Yes',
+  no = 'No',
+}
+
+export interface AnswerButtonProps {
+  disabled: boolean;
+  children: Answers;
+  onClick: () => void | Promise<void>;
 }
