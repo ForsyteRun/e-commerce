@@ -14,15 +14,6 @@ const CartItem = ({ item }: { item: LineItem }) => {
     id,
     discountedPricePerQuantity,
   } = item;
-  const {
-    name,
-    variant,
-    productId,
-    price,
-    quantity,
-    id,
-    discountedPricePerQuantity,
-  } = item;
 
   const modifyPrice: ModifyPriceType = {
     ...price,
@@ -42,11 +33,9 @@ const CartItem = ({ item }: { item: LineItem }) => {
       <section className={styles.item_price_section}>
         <p className={styles.item_label}>Single price</p>
         <ItemPrice price={modifyPrice} />
-        <ItemPrice price={modifyPrice} />
       </section>
       <section className={styles.item_price_section}>
         <p className={styles.item_label}>Total price</p>
-        <ItemCounter price={modifyPrice} quantity={quantity} id={id} />
         <ItemCounter price={modifyPrice} quantity={quantity} id={id} />
       </section>
     </article>
