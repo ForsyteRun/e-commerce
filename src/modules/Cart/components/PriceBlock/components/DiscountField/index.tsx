@@ -1,12 +1,33 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { MyCartUpdateAction } from '@commercetools/platform-sdk';
-import { Button, InputAdornment, TextField } from '@mui/material';
+import { AlertColor, Button, InputAdornment, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { useAppDispatch } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { updateCart } from 'store/cartSlice/thunks';
+import { useEffect, useState } from 'react';
+import showSnackbarMessage from 'helpers/showSnackbarMessage';
 import styles from './DiscountField.module.scss';
 
 const DiscountField = () => {
   const dispatch = useAppDispatch();
+  const { loading } = useAppSelector((state) => state.cartSlice);
+
+  const [open, setOpen] = useState(false);
+
+  const showSnackbar = (status: AlertColor, message: string) => {
+    if (open) {
+      showSnackbarMessage({ status, message });
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (loading === 'succeeded') {
+      showSnackbar('success', 'activated!');
+    } else if (loading === 'failed') {
+      showSnackbar('error', 'code not valid');
+    }
+  }, [loading]);
 
   const formik = useFormik({
     initialValues: { code: '' },
@@ -18,6 +39,7 @@ const DiscountField = () => {
 
       dispatch(updateCart(action));
       resetForm();
+      setOpen(true);
     },
   });
 
