@@ -3,7 +3,7 @@ import { IFiltersState } from 'types';
 
 const initialState: IFiltersState = {
   attributes: {},
-  isButtonActive: false,
+  isFiltersActive: false,
 };
 
 const filtersSlice = createSlice({
@@ -18,11 +18,11 @@ const filtersSlice = createSlice({
     ) => {
       const { attributeName, attributeValue } = payload;
       state.attributes[attributeName] = attributeValue;
-      state.isButtonActive = true;
+      state.isFiltersActive = true;
     },
     resetFilters: (state) => {
       state.attributes = {};
-      state.isButtonActive = false;
+      state.isFiltersActive = false;
     },
   },
 });

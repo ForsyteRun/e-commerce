@@ -3,7 +3,8 @@ import fetchCategoriesList from 'store/categoriesSlice/fetchCategoriesList';
 import fetchProductsData from 'store/productsDataSlice/fetchProductsData';
 import store from 'store';
 import { findDataItemBySlug } from 'helpers';
-import fetchAllProductsData from 'store/attributesSlice/fetchAllProductsData';
+import fetchAttributesData from 'store/attributesSlice/fetchAttributesData';
+import { resetFilters } from 'store/filtersSlice';
 import { throwRouteError, mapSplatArray, checkProductExists } from './helpers';
 
 const checkCatalogPath: LoaderFunction = async ({ params }) => {
@@ -17,6 +18,7 @@ const checkCatalogPath: LoaderFunction = async ({ params }) => {
   const splatArray = splat.replace(/\/$/, '').split('/');
 
   await dispatch(fetchCategoriesList());
+  dispatch(resetFilters());
 
   const { data: categoriesData } = getState().categoriesSlice;
 
@@ -35,7 +37,7 @@ const checkCatalogPath: LoaderFunction = async ({ params }) => {
 
         if (categoryId) {
           dispatch(fetchProductsData({ categoryId }));
-          dispatch(fetchAllProductsData({ categoryId }));
+          dispatch(fetchAttributesData({ categoryId }));
 
           return 'category';
         }

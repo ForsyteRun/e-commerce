@@ -3,14 +3,9 @@ import ResetFiltersButton from './components/ResetFiltersButton';
 import FiltersSelect from '../FiltersSelect';
 import filtersModalStyles from './filtersModalStyles';
 import CloseModalButton from './components/CloseModalButton';
+import { IFilterModalProps } from './types';
 
-const FiltersModalWindow = ({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) => {
+const FiltersModalWindow = ({ open, onClose }: IFilterModalProps) => {
   return (
     <Modal
       open={open}

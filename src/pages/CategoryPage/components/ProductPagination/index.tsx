@@ -21,17 +21,18 @@ const ProductPagination = () => {
 
   const handlePageChange = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e.preventDefault();
-    if (limit) {
-      const offset: number = (newPage - 1) * limit;
-      const query: IProductsQuery = createQuery(
-        offset,
-        searchValue,
-        categoryId,
-        sort,
-        attributes
-      );
-      dispatch(fetchProductsData(query));
+    if (!limit) {
+      return;
     }
+    const offset: number = (newPage - 1) * limit;
+    const query: IProductsQuery = createQuery(
+      offset,
+      searchValue,
+      categoryId,
+      sort,
+      attributes
+    );
+    dispatch(fetchProductsData(query));
   };
 
   return (

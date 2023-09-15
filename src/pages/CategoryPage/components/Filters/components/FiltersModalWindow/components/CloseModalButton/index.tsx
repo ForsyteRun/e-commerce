@@ -1,8 +1,9 @@
 import { IconButton } from '@mui/material';
 import { CloseRounded } from '@mui/icons-material';
 import buttonStyles from './buttonStyles';
+import { ICloseModalButtonProps } from './types';
 
-const CloseModalButton = ({ onClose }: { onClose: () => void }) => {
+const CloseModalButton = ({ onClose }: ICloseModalButtonProps) => {
   return (
     <IconButton
       aria-label="Close"

@@ -159,6 +159,10 @@ export interface IAttributes {
   [key: string]: AttributeValue;
 }
 
+export interface IAttributesData extends IStoreBasicData {
+  data: Array<IAttributes | undefined> | null;
+}
+
 export interface IProductData {
   id: string;
   name: string;
@@ -196,16 +200,12 @@ export interface IFiltersState {
   attributes: {
     [key: string]: string;
   };
-  isButtonActive: boolean;
+  isFiltersActive: boolean;
 }
 
 export interface IProductsData extends IStoreBasicData {
   data: IProductData[] | null;
   counters: IProductsCounters | null;
-}
-
-export interface IAttributesData extends IStoreBasicData {
-  data: IProductData[] | null;
 }
 
 export interface ISingleProductData extends IStoreBasicData {

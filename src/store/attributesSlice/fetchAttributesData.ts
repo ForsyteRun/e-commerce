@@ -3,8 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
 import { IProductsQuery, IQueryArgs } from 'types';
 
-const fetchAllProductsData = createAsyncThunk(
-  'productsData/fetchAllProducts',
+const fetchAttributesData = createAsyncThunk(
+  'attributesData/fetchAttributes',
   async (_query: IProductsQuery | undefined, { rejectWithValue }) => {
     const api = createRefreshTokenClientApi();
 
@@ -35,4 +35,4 @@ const fetchAllProductsData = createAsyncThunk(
   }
 );
 
-export default fetchAllProductsData;
+export default fetchAttributesData;

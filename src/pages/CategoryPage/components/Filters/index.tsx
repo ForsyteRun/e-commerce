@@ -3,7 +3,6 @@ import { Button } from '@mui/material';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { useLocation } from 'react-router-dom';
-import { resetFilters } from 'store/filtersSlice';
 import { getCategoryIdBySlug } from 'pages/CategoryPage/helpers/getCategoryParams';
 import createQuery from 'helpers/createQuery';
 import { IProductsQuery } from 'types';
@@ -14,11 +13,11 @@ const Filters = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
-  const { isButtonActive } = useAppSelector((state) => state.filtersSlice);
   const { searchValue } = useAppSelector((state) => state.searchSlice);
   const sort = useAppSelector((state) => state.sortSlice);
-  const { attributes } = useAppSelector((state) => state.filtersSlice);
-  const hasAttributes = Object.keys(attributes).length > 0;
+  const { attributes, isFiltersActive } = useAppSelector(
+    (state) => state.filtersSlice
+  );
 
   const formattedPathname = pathname.replace(/\*$/, '');
   const slug = formattedPathname.slice(formattedPathname.lastIndexOf('/') + 1);
@@ -34,21 +33,16 @@ const Filters = () => {
   );
 
   useEffect(() => {
-    if (hasAttributes) {
+    if (isFiltersActive) {
       dispatch(fetchProductsData(query));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [attributes]);
-
-  useEffect(() => {
-    dispatch(resetFilters());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [isFiltersActive, attributes]);
 
   return (
     <>
       <Button
-        variant={isButtonActive ? 'contained' : 'outlined'}
+        variant={isFiltersActive ? 'contained' : 'outlined'}
         onClick={() => setOpen(true)}
       >
         <TuneRoundedIcon />
