@@ -14,7 +14,7 @@ import { IFiltersSelectProps } from './types';
 
 const FiltersSelect = ({ by }: IFiltersSelectProps) => {
   const dispatch = useAppDispatch();
-  const attributesData = useAppSelector((state) => state.attributesSlice.data);
+  const { data } = useAppSelector((state) => state.attributesSlice);
 
   const formattedAttributeName = capitalizeAll(by);
   const defaultValue = '';
@@ -22,7 +22,7 @@ const FiltersSelect = ({ by }: IFiltersSelectProps) => {
     (state) => state.filtersSlice.attributes[by] || defaultValue
   );
 
-  const attributeValues = attributesData?.map(
+  const attributeValues = data?.map(
     (attribute) => attribute?.[formattedAttributeName]
   );
   const uniqueAttributeValues = [...new Set(attributeValues)];
