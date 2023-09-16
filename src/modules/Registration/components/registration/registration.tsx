@@ -176,10 +176,10 @@ const Registration: React.FC = () => {
             >
               Register
             </button>
-            <AlertSnackBar open={open} setOpen={setOpen} />
           </Form>
         )}
       </Formik>
+      <AlertSnackBar open={open} setOpen={setOpen} />
       <NavigateToLogin />
     </div>
   );
