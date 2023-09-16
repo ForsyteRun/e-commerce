@@ -83,7 +83,7 @@ const Registration: React.FC = () => {
             <div className={styles.name__container}>
               <div className={styles.input__container}>
                 <label htmlFor="firstName" className={styles.label}>
-                  FirstName
+                  First Name
                 </label>
                 <Field
                   id="firstName"
@@ -96,7 +96,9 @@ const Registration: React.FC = () => {
                 )}
               </div>
               <div className={styles.input__container}>
-                <label htmlFor="lastName">LastName</label>
+                <label htmlFor="lastName" className={styles.label}>
+                  Last Name
+                </label>
                 <Field
                   id="lastName"
                   name="lastName"
@@ -110,7 +112,9 @@ const Registration: React.FC = () => {
             </div>
             <div className={styles.name__container}>
               <div className={styles.input__container}>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email" className={styles.label}>
+                  Email
+                </label>
                 <Field
                   id="email"
                   name="email"
@@ -122,7 +126,9 @@ const Registration: React.FC = () => {
                 )}
               </div>
               <div className={styles.input__container}>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" className={styles.label}>
+                  Password
+                </label>
                 <Field
                   id="password"
                   type="password"
@@ -163,13 +169,17 @@ const Registration: React.FC = () => {
               />
               <span>same shipping and billing addresses</span>
             </div>
-            <button type="submit" onClick={() => setOpen(true)}>
+            <button
+              type="submit"
+              onClick={() => setOpen(true)}
+              className={styles.button}
+            >
               Register
             </button>
-            <AlertSnackBar open={open} setOpen={setOpen} />
           </Form>
         )}
       </Formik>
+      <AlertSnackBar open={open} setOpen={setOpen} />
       <NavigateToLogin />
     </div>
   );
