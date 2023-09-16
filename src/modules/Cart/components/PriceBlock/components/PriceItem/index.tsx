@@ -1,19 +1,17 @@
 import { Stack, Typography } from '@mui/material';
 import { IPriceItem } from 'modules/Cart/types';
-import priceStyle from './styles';
+import { container, fullPriceDiscount, priceStyle, discounted } from './styles';
 
-const PriceItem = ({ title, price, address }: IPriceItem) => {
+const PriceItem = ({ title, price, discount, isDiscounted }: IPriceItem) => {
+  const style = isDiscounted ? fullPriceDiscount : priceStyle;
+
   return (
-    <Stack
-      flexDirection="row"
-      justifyContent="space-between"
-      sx={{ mb: '1rem' }}
-    >
+    <Stack sx={container}>
       <Typography variant="h6" sx={priceStyle}>
         {title}
       </Typography>
-      <Typography variant="h6" sx={priceStyle}>
-        {price || address}
+      <Typography variant="h6" sx={discount ? discounted : style}>
+        {price || discount}
       </Typography>
     </Stack>
   );

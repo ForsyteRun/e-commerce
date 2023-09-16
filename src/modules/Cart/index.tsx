@@ -1,7 +1,7 @@
-import { Paper, Stack, Typography } from '@mui/material';
 import { LineItem } from '@commercetools/platform-sdk';
-import { useAppSelector } from 'hooks/useRedux';
+import { Paper, Stack, Typography } from '@mui/material';
 import calculatePriceByFraction from 'helpers/calculatePriceByFraction';
+import { useAppSelector } from 'hooks/useRedux';
 import { PriceBlock, CartItem, ClearCartButton } from './components';
 import { container, mainBlock, title } from './styles';
 import { ICart } from './types';
@@ -26,7 +26,7 @@ const Cart = ({ lineItems }: ICart) => {
         ))}
         <ClearCartButton />
       </Paper>
-      <PriceBlock totalPrice={convertedPrice} />
+      <PriceBlock />
     </Stack>
   );
 };

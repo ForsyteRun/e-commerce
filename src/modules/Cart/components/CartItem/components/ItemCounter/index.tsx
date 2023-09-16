@@ -12,14 +12,17 @@ import CounterButton from './CounterButton';
 const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.cartSlice);
+
   const [count, setCount] = useState<string>(`${quantity}`);
+  const [open, setOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     setIsDisabled(loading === 'pending');
 
-    if (loading === 'failed') {
+    if (loading === 'failed' && open) {
       setCount(`${quantity}`);
+      setOpen(false);
       showSnackbarMessage({
         status: 'error',
         message: 'Failed to change product quantity. Please try again',
@@ -38,6 +41,7 @@ const ItemCounter = ({ quantity, id, price }: ItemCounterProps) => {
           quantity: +count ? +count : 1,
         };
         dispatch(updateCart(action));
+        setOpen(true);
       }, 300);
       return () => clearTimeout(debounce);
     }
