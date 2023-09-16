@@ -1,35 +1,28 @@
 .select {
-  height: 40px;
   flex-grow: 1;
   border-radius: 7px;
-  &__container {
-    height: 90px;
-  }
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  padding: 10px;
+  width: 100%;
+
   &__options {
-    height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    @media (max-width: 768px) {
-      font-size: calc(0.3rem + 14 * (100vw / 890));
+    width: 100%;
+
+    @media (max-width: 648px) {
+      flex-direction: column;
     }
   }
+
   &__title {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
-    @media (max-width: 768px) {
-      font-size: calc(0.3rem + 14 * (100vw / 890));
-    }
-  }
-  @media (max-width: 425px) {
-    height: calc(1.5rem + 14 * (100vw / 890));
   }
 }
 
 .errorValid {
-  color: red;
-  @media (max-width: 1024px) {
-    font-size: calc(0.2rem + 14 * (100vw / 1024));
-  }
+  color: #d32f2f;
 }
