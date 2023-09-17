@@ -10,12 +10,7 @@ const Footer = () => {
           <p className={styles.copyright}>© 2023 LizavetaTeam</p>
           <p className={styles.storeName}>Printerix - Online Printers Store</p>
           <div className={styles.link}>
-            <a
-              href="https://rs.school/js/"
-              className="rss-link"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://rs.school/js/" target="_blank" rel="noreferrer">
               <img src={RSSLogo} alt="logo" className={styles.rssLogo} />
             </a>
           </div>
