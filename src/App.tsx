@@ -8,6 +8,7 @@ import { AppProvider } from 'context';
 import { identifyUser } from 'helpers';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+import Footer from 'components/Footer';
 import theme from './theme';
 import styles from './App.module.scss';
 
@@ -28,6 +29,7 @@ const App = () => {
               <Outlet />
             </Wrapper>
           </main>
+          <Footer />
           <AppSnackbar />
         </div>
       </ThemeProvider>
