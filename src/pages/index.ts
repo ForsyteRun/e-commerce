@@ -1,3 +1,4 @@
+import AboutPage from './AboutPage';
 import ProfilePage from './ProfilePage';
 import CategoryPage from './CategoryPage';
 import CatalogPage from './CatalogPage';
@@ -13,5 +14,6 @@ export {
   CartPage,
   CatalogPage,
   Login,
+  AboutPage,
   RoutingError,
 };

@@ -14,6 +14,7 @@ import {
   CartPage,
   ProfilePage,
   Login,
+  AboutPage,
   RoutingError,
 } from 'pages';
 import App from '../App';
@@ -89,7 +90,7 @@ const router = createBrowserRouter([
       },
       {
         path: PathNames.about,
-        element: <h1>About Us</h1>,
+        element: <AboutPage />,
       },
     ],
   },
