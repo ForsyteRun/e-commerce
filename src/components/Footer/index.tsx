@@ -1,5 +1,6 @@
-import RSSLogo from 'assets/images/svg/rss-logo.svg';
 import Wrapper from 'UI/Wrapper';
+import RSLink from 'UI/RSLink';
+import RSLogo from 'UI/RSLogo';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
@@ -10,9 +11,9 @@ const Footer = () => {
           <p className={styles.copyright}>© 2023 LizavetaTeam</p>
           <p className={styles.storeName}>Printerix - Online Printers Store</p>
           <div className={styles.link}>
-            <a href="https://rs.school/js/" target="_blank" rel="noreferrer">
-              <img src={RSSLogo} alt="logo" className={styles.rssLogo} />
-            </a>
+            <RSLink>
+              <RSLogo size="small" />
+            </RSLink>
           </div>
         </div>
       </Wrapper>

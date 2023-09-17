@@ -1,0 +1,27 @@
+@import 'styles/variables.scss';
+
+.container {
+  @media (hover: hover) {
+    &:hover {
+      color: $purple-color;
+
+      .svg {
+        fill: $purple-color;
+      }
+    }
+  }
+}
+
+.svg {
+  fill: #000;
+  transition: fill 200ms linear;
+  width: 100%;
+}
+
+.big {
+  max-width: 150px;
+}
+
+.small {
+  max-width: 96px;
+}
