@@ -22,7 +22,6 @@ const dmytro: DevelopersData = {
     'Products search',
     'Breadcrumbs path generation',
     'Icon buttons',
-    'Modify products quantity in cart',
     'Centralized navigation',
     'About us page',
     'Board managing',
