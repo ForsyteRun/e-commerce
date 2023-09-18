@@ -1,7 +1,10 @@
+import PromoCodeCard from './components/PromoCodeCard';
+import promoCodesData from './constants';
+
 const MainPage = () => {
-  return (
-    <div>PromoCode - summer. Sale 50% for order price upper 1000 Euro</div>
-  );
+  return promoCodesData.map((data) => (
+    <PromoCodeCard key={data.code} data={data} />
+  ));
 };
 
 export default MainPage;
