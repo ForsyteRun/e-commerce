@@ -15,7 +15,7 @@ import handleLoginError from './helpers/handleLoginError';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { error } = useAppSelector((state) => state.userDataSlice);
+  const { data, error } = useAppSelector((state) => state.userDataSlice);
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -36,7 +36,11 @@ const LoginForm = (): JSX.Element => {
     validationSchema,
     onSubmit: async (values: LoginFormValues, { setSubmitting }) => {
       setSubmitting(true);
-      await dispatch(fetchUserLoginData(values));
+      const userData: LoginFormValues = {
+        ...values,
+        anonymousId: data.id || undefined,
+      };
+      await dispatch(fetchUserLoginData(userData));
     },
   });
 

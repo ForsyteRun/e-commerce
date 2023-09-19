@@ -1,7 +1,10 @@
 import {
   AuthenticationMode,
+  CentPrecisionMoney,
   Customer,
+  LineItem,
   ProductProjectionPagedQueryResponse,
+  QueryParam,
   _ErrorResponse,
 } from '@commercetools/platform-sdk';
 import { CookieAttributes } from 'js-cookie';
@@ -18,6 +21,7 @@ export enum PathNames {
   profile = '/profile',
   category = '/catalog/:category',
   product = '/catalog/:category/:product',
+  cart = '/cart',
   profileInfo = 'info',
   profileAddress = 'address',
   profilePassword = 'password',
@@ -62,6 +66,7 @@ export type GetNavLinkButtonStyles = (
 export interface LoginFormValues {
   email: string;
   password: string;
+  anonymousId?: string;
 }
 
 export enum InputType {
@@ -82,7 +87,7 @@ export interface LoginErrorProps {
   message: string;
 }
 
-export interface IAnonymousUserData {
+export interface IUserData {
   authenticationMode: AuthenticationMode;
   id: string | null | undefined;
   version?: number;
@@ -112,7 +117,18 @@ interface IStoreBasicData {
 }
 
 export interface IUserState extends IStoreBasicData {
-  data: IAnonymousUserData | RegisteredUserData;
+  data: IUserData | RegisteredUserData;
+}
+
+export interface ICartData {
+  id: string;
+  version: number;
+  lineItems: LineItem[];
+  totalPrice: CentPrecisionMoney;
+}
+
+export interface ICartState extends IStoreBasicData {
+  data: ICartData | null;
 }
 
 export interface ICategoryData {
@@ -141,6 +157,10 @@ export type AttributeValue = string | number | boolean;
 
 export interface IAttributes {
   [key: string]: AttributeValue;
+}
+
+export interface IAttributesData extends IStoreBasicData {
+  data: Array<IAttributes | undefined> | null;
 }
 
 export interface IProductData {
@@ -172,6 +192,17 @@ export type SortDirections = 'asc' | 'desc' | false;
 
 export type SortBy = 'price' | 'name';
 
+export interface ISearchState {
+  searchValue: string;
+}
+
+export interface IFiltersState {
+  attributes: {
+    [key: string]: string;
+  };
+  isFiltersActive: boolean;
+}
+
 export interface IProductsData extends IStoreBasicData {
   data: IProductData[] | null;
   counters: IProductsCounters | null;
@@ -185,7 +216,9 @@ export type AppState =
   | IUserState
   | IProductsData
   | ISingleProductData
-  | ICategoriesState;
+  | ICategoriesState
+  | ICartState
+  | IAttributesData;
 
 export interface IProductsQuery {
   limit?: number;
@@ -193,6 +226,11 @@ export interface IProductsQuery {
   categoryId?: string;
   sort?: string;
   searchValue?: string;
+  attributes?: { [key: string]: string };
+}
+
+export interface IQueryArgs {
+  [key: string]: QueryParam;
 }
 
 export type OnClickHandler = (

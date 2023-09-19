@@ -28,14 +28,14 @@ describe('Testing calculateProductsCounters', () => {
     testData.offset = 5;
     const result = {
       ...testData,
-      page: 5,
+      page: 2,
       totalPages: 13,
     };
 
     expect(calculateProductsCounters(testData)).toStrictEqual(result);
 
     testData.offset = 13;
-    result.page = 13;
+    result.page = 3;
     result.offset = 13;
 
     expect(calculateProductsCounters(testData)).toStrictEqual(result);

@@ -18,6 +18,8 @@ export const sortHandler = (
 ): void => {
   const { dispatch, getState } = store;
   const sortState = getState().sortSlice;
+  const { searchValue } = getState().searchSlice;
+  const { attributes } = getState().filtersSlice;
   const sortData = {
     by,
     direction: getSortDirection(sortState[by]),
@@ -28,6 +30,8 @@ export const sortHandler = (
   const query = {
     sort: `${getSortQuery(by, sortState[by])}`,
     categoryId: categoryId || '',
+    searchValue,
+    attributes,
   };
 
   dispatch(fetchProductsData(query));

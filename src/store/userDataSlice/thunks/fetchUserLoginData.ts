@@ -1,14 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { LoginFormValues } from 'types';
-import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
+import createCredentialFlow from 'services/sdkClient/createCredentialFlow';
 import createPasswordFlowClientApi from 'services/sdkClient/createPasswordFlowClientApi';
-import { getRegisteredUserData } from '../helpers';
+import { fetchCartData } from 'store/cartSlice/thunks';
+import getRegisteredUserData from '../helpers/getRegisteredUserData';
 
 const fetchUserLoginData = createAsyncThunk(
   'userData/fetchUserLoginData',
-  async (userData: LoginFormValues, { rejectWithValue }) => {
-    const api = createRefreshTokenClientApi();
+  async (userData: LoginFormValues, { dispatch, rejectWithValue }) => {
+    const api = createCredentialFlow();
     const passwordApi = createPasswordFlowClientApi(userData);
 
     const response = await api
@@ -20,12 +21,14 @@ const fetchUserLoginData = createAsyncThunk(
           .me()
           .get()
           .execute()
-          .then((customerData) => getRegisteredUserData(customerData.body));
+          .then((customerData) => {
+            dispatch(fetchCartData());
+            return getRegisteredUserData(customerData.body);
+          });
+
         return res;
       })
-      .catch((err: _ErrorResponse) => {
-        return rejectWithValue({ ...err });
-      });
+      .catch((err: _ErrorResponse) => rejectWithValue({ ...err }));
 
     return response;
   }

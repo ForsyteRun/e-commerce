@@ -1,6 +1,6 @@
 import { Price } from '@commercetools/platform-sdk';
+import calculatePriceByFraction from 'helpers/calculatePriceByFraction';
 import { IPriceData } from 'types';
-import calculatePriceByFraction from './calculatePriceByFraction';
 
 const transformPrice = (priceData: Price): IPriceData => {
   const { currencyCode } = priceData.value;

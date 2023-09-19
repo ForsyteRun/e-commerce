@@ -1,7 +1,7 @@
 import { _ErrorResponse } from '@commercetools/platform-sdk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import createRefreshTokenClientApi from 'services/sdkClient/createRefreshTokenClientApi';
-import { IProductsQuery } from 'types';
+import { IProductsQuery, IQueryArgs } from 'types';
 
 const fetchProductsData = createAsyncThunk(
   'productsData/fetchProducts',
@@ -10,19 +10,26 @@ const fetchProductsData = createAsyncThunk(
 
     const filter: string[] = [];
 
-    if (_query) {
-      if (_query.categoryId) {
-        filter.push(`categories.id: subtree("${_query.categoryId}")`);
-      }
+    if (_query && _query.categoryId) {
+      filter.push(`categories.id: subtree("${_query.categoryId}")`);
     }
 
-    const queryArgs = {
-      limit: 9,
-      offset: 0,
+    if (_query && _query.attributes) {
+      Object.entries(_query.attributes).forEach(([name, value]) => {
+        filter.push(`variants.attributes.${name}:"${value}"`);
+      });
+    }
+
+    const queryArgs: IQueryArgs = {
+      limit: 3,
+      offset: _query?.offset || 0,
       filter,
       sort: _query?.sort,
-      'text.en-US': _query?.searchValue,
     };
+
+    if (_query && _query.searchValue) {
+      queryArgs['text.en-US'] = _query.searchValue;
+    }
 
     const response = await api
       .productProjections()

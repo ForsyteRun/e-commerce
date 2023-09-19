@@ -10,12 +10,10 @@ const cardStyles: SxProps = {
   width: '100%',
   padding: '1rem',
   backgroundColor: '#ffffff',
-  border: '1px solid #eaebed',
   borderRadius: '10px',
-  boxShadow: 'none',
   transition: 'box-shadow 0.2s ease-in-out',
   textDecoration: 'none',
-  cursor: 'pointer',
+  userSelect: 'none',
   '@media (hover: hover)': {
     '&:hover': {
       boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',

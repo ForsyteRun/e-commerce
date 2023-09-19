@@ -1,6 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Login from 'pages/LoginPage';
-import RoutingError from 'pages/RoutingError';
 import { Registration } from 'modules/Registration';
 import { PathNames } from 'types';
 import {
@@ -9,12 +7,20 @@ import {
   Password,
   UserInfo,
 } from 'modules/UserProfile';
-import ProfilePage from 'pages/ProfilePage';
-import CategoryPage from 'pages/CategoryPage';
-import CatalogPage from 'pages/CatalogPage';
+import {
+  CatalogPage,
+  CategoryPage,
+  MainPage,
+  CartPage,
+  ProfilePage,
+  Login,
+  AboutPage,
+  RoutingError,
+} from 'pages';
 import App from '../App';
 import DynamicRoute from './components/DynamicRoute';
 import { getCategoryData, checkCatalogPath } from './loaders';
+import cartLoader from './loaders/cartLoader';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Main Page</h1>,
+        element: <MainPage />,
       },
       {
         path: PathNames.register,
@@ -78,8 +84,13 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: PathNames.cart,
+        element: <CartPage />,
+        loader: cartLoader,
+      },
+      {
         path: PathNames.about,
-        element: <h1>About Us</h1>,
+        element: <AboutPage />,
       },
     ],
   },

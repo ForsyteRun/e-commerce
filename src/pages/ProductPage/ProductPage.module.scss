@@ -1,10 +1,11 @@
+@import 'styles/variables.scss';
+
 .product {
   flex: 1;
   padding: 1rem 2rem;
   border-radius: 10px;
   margin-top: 1rem;
   background-color: #fff;
-  border: 1px solid #EAEBED;
 
   @media screen and (max-width: 1024px) {
     padding: 1rem;
@@ -40,7 +41,7 @@
 .sku {
   background-color: rgba(103, 58, 183, 0.2);
   border-radius: 5px;
-  border-left: 5px solid #673ab7;
+  border-left: 5px solid $purple-color;
   color: #000;
   margin-top: 0.5rem;
   max-width: max-content;

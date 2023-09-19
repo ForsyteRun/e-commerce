@@ -36,89 +36,91 @@ const Address: React.FC<IAddress> = ({
   const fieldState = `addresses[${field}].state`;
 
   return (
-    <Box sx={{ border: '1px solid #999' }}>
-      <div className={styles.container}>
-        <div className={styles.input__container}>
-          <Field
-            name={fieldName}
-            validate={validateCity}
-            placeholder="City*"
-            className={styles.input}
-          />
-          {errorAddresses &&
-            touchedAddresses &&
-            touchedAddresses[field]?.city && (
-              <div className={styles.errorValid}>
-                {errorAddresses[field]?.city as ReactNode}
-              </div>
-            )}
-        </div>
-        <div className={styles.input__container}>
-          <Field
-            name={fieldStreetName}
-            validate={validateStreet}
-            placeholder="Street*"
-            className={styles.input}
-          />
-          {errorAddresses &&
-            touchedAddresses &&
-            touchedAddresses[field]?.streetName && (
-              <div className={styles.errorValid}>
-                {errorAddresses[field]?.streetName as ReactNode}
-              </div>
-            )}
-        </div>
-        <div className={styles.input__container}>
-          <Field
-            as="select"
-            name={fieldCountry}
-            placeholder="Country*"
-            className={styles.input}
-          >
-            {validCountries.map((day: string) => (
-              <option value={day} key={day}>
-                {day}
-              </option>
-            ))}
-          </Field>
-        </div>
-        <div className={styles.input__container}>
-          <Field
-            name={fieldState}
-            validate={validateState}
-            placeholder="State*"
-            className={styles.input}
-          />
-
-          {errorAddresses &&
-            touchedAddresses &&
-            touchedAddresses[field]?.state && (
-              <div className={styles.errorValid}>
-                {errorAddresses[field]?.state as ReactNode}
-              </div>
-            )}
-        </div>
-        <div className={styles.input__container}>
-          <Field
-            name={fieldPostalCode}
-            validate={validatePostCode}
-            placeholder="postalCode*"
-            className={styles.input}
-          />
-
-          {errorAddresses &&
-            touchedAddresses &&
-            touchedAddresses[field]?.postalCode && (
-              <div className={styles.errorValid}>
-                {errorAddresses[field]?.postalCode as ReactNode}
-              </div>
-            )}
-        </div>
-      </div>
+    <Box sx={{ height: '100%' }}>
       <div className={styles.title}>{blockTitle}</div>
-      <div className={styles.checkbox}>
-        <input type="checkbox" onChange={() => setAddress(!address)} />
-        <span>default {blockTitle}</span>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.input__container}>
+            <Field
+              name={fieldName}
+              validate={validateCity}
+              placeholder="City*"
+              className={styles.input}
+            />
+            {errorAddresses &&
+              touchedAddresses &&
+              touchedAddresses[field]?.city && (
+                <div className={styles.errorValid}>
+                  {errorAddresses[field]?.city as ReactNode}
+                </div>
+              )}
+          </div>
+          <div className={styles.input__container}>
+            <Field
+              name={fieldStreetName}
+              validate={validateStreet}
+              placeholder="Street*"
+              className={styles.input}
+            />
+            {errorAddresses &&
+              touchedAddresses &&
+              touchedAddresses[field]?.streetName && (
+                <div className={styles.errorValid}>
+                  {errorAddresses[field]?.streetName as ReactNode}
+                </div>
+              )}
+          </div>
+          <div className={styles.input__container}>
+            <Field
+              as="select"
+              name={fieldCountry}
+              placeholder="Country*"
+              className={styles.input}
+            >
+              {validCountries.map((day: string) => (
+                <option value={day} key={day}>
+                  {day}
+                </option>
+              ))}
+            </Field>
+          </div>
+          <div className={styles.input__container}>
+            <Field
+              name={fieldState}
+              validate={validateState}
+              placeholder="State*"
+              className={styles.input}
+            />
+
+            {errorAddresses &&
+              touchedAddresses &&
+              touchedAddresses[field]?.state && (
+                <div className={styles.errorValid}>
+                  {errorAddresses[field]?.state as ReactNode}
+                </div>
+              )}
+          </div>
+          <div className={styles.input__container}>
+            <Field
+              name={fieldPostalCode}
+              validate={validatePostCode}
+              placeholder="postalCode*"
+              className={styles.input}
+            />
+
+            {errorAddresses &&
+              touchedAddresses &&
+              touchedAddresses[field]?.postalCode && (
+                <div className={styles.errorValid}>
+                  {errorAddresses[field]?.postalCode as ReactNode}
+                </div>
+              )}
+          </div>
+        </div>
+        <div className={styles.checkbox}>
+          <input type="checkbox" onChange={() => setAddress(!address)} />
+          <span>default {blockTitle}</span>
+        </div>
       </div>
     </Box>
   );

@@ -2,7 +2,8 @@ import { LoaderFunction } from 'react-router-dom';
 import fetchCategoriesList from 'store/categoriesSlice/fetchCategoriesList';
 import fetchProductsData from 'store/productsDataSlice/fetchProductsData';
 import store from 'store';
-import { resetSort } from 'store/sortSlice';
+import fetchAttributesData from 'store/attributesSlice/fetchAttributesData';
+import { resetFilters } from 'store/filtersSlice';
 import { throwRouteError } from './helpers';
 
 const getCategoryData: LoaderFunction = async ({ params }) => {
@@ -10,6 +11,8 @@ const getCategoryData: LoaderFunction = async ({ params }) => {
   const { dispatch, getState } = store;
 
   await dispatch(fetchCategoriesList());
+  dispatch(resetFilters());
+
   const { data, error } = getState().categoriesSlice;
 
   if (error) {
@@ -27,12 +30,12 @@ const getCategoryData: LoaderFunction = async ({ params }) => {
       const { id } = categoryData;
 
       dispatch(fetchProductsData({ categoryId: id }));
+      dispatch(fetchAttributesData({ categoryId: id }));
     }
   } else {
     dispatch(fetchProductsData());
+    dispatch(fetchAttributesData());
   }
-
-  dispatch(resetSort());
 
   return { ok: true };
 };

@@ -1,27 +1,24 @@
-import { useAppSelector } from 'hooks/useRedux';
-// import FilterSideBar from './components/FilterSideBar';
-import ProductCard from './components/ProductCard';
+import ProductPagination from 'pages/CategoryPage/components/ProductPagination';
 import Sort from './components/Sort';
 import SearchBar from './components/SearchBar';
+import Filters from './components/Filters';
+import Content from './components/Content';
 import styles from './CategoryPage.module.scss';
 
 const CategoryPage = () => {
-  const { data } = useAppSelector((state) => state.productsDataSlice);
-
   return (
     <section className={styles.category}>
       <div className={styles.container}>
-        {/* <FilterSideBar /> */}
-        <div className={styles.content}>
-          <div className={styles.control}>
+        <div className={styles.control}>
+          <div className={styles.panel}>
+            <Filters />
             <Sort />
-            <SearchBar />
           </div>
-          <div className={styles.productsContainer}>
-            {data?.map((product) => (
-              <ProductCard key={product.id} data={product} />
-            ))}
-          </div>
+          <SearchBar />
+        </div>
+        <div className={styles.content}>
+          <Content />
+          <ProductPagination />
         </div>
       </div>
     </section>

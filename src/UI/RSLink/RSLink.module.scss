@@ -1,0 +1,14 @@
+@import 'styles/variables.scss';
+
+.rs_link {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 200ms linear;
+
+  @media (hover: hover) {
+    &:hover {
+      color: $purple-color;
+    }
+  }
+}

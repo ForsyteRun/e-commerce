@@ -1,8 +1,8 @@
 import { IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import { createAnonymousUser } from 'store/userDataSlice/thunks';
 import useIconButtonColorTheme from 'helpers/useIconButtonColorTheme';
+import { createAnonymousCart } from 'store/cartSlice/thunks';
 
 const LogOutButton = () => {
   const dispatch = useAppDispatch();
@@ -10,7 +10,7 @@ const LogOutButton = () => {
   const isPending = loading === 'pending';
 
   const logoutHandler = (): void => {
-    dispatch(createAnonymousUser());
+    dispatch(createAnonymousCart());
   };
 
   return (
