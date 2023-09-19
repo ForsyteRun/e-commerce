@@ -1,0 +1,23 @@
+.catalog {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+}
+
+.navigation_panel {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}

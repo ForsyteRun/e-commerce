@@ -1,0 +1,13 @@
+@import 'styles/mixins.scss';
+
+.container {
+  @include flex(column, center, center);
+  width: 100%;
+}
+
+.title {
+  padding: 20px 0;
+  margin: 0;
+  text-align: center;
+  font-size: 26px;
+}

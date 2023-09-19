@@ -1,0 +1,29 @@
+@import 'styles/variables.scss';
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6666cc;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+  user-select: none;
+
+  @media #{$mq-mobile} {
+    font-size: 1.25rem;
+    justify-content: flex-start;
+  }
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+}
+
+.logoText {
+  @media screen and (max-width: 425px) {
+    display: none;
+  }
+}

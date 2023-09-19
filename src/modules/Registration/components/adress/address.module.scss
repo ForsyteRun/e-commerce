@@ -1,0 +1,45 @@
+.container {
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  padding: 20px 10px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+  height: 100%;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 7px;
+  padding: 10px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+
+  @media (max-width: 648px) {
+    font-size: 0.875rem;
+  }
+}
+
+.errorValid {
+  color: #d32f2f;
+}

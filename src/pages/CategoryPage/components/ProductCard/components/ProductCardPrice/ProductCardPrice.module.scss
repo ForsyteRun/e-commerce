@@ -1,0 +1,17 @@
+.cardActions {
+  flex-direction: column;
+  justify-content: flex-end;
+  row-gap: 10px;
+  flex: 1;
+  width: 100%;
+  height: max-content;
+}
+
+.priceInfo {
+  align-items: flex-end;
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+  width: 100%;
+  padding: 0 0.5rem;
+}

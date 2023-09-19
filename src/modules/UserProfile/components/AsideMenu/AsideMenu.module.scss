@@ -1,0 +1,28 @@
+.aside {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.disable {
+  pointer-events: none;
+  color: #999 !important;
+}
+
+.links__block {
+  @include flex(column, flex-start, flex-start);
+  gap: 50px;
+  font-size: 1.3rem;
+  padding-left: 20px;
+  margin: 1.5rem 0;
+  a {
+    color: #000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+}
